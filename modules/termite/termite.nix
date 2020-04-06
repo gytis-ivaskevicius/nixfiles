@@ -4,6 +4,6 @@
 
 	fonts.fonts = [ pkgs.nerdfonts ];
 	environment.etc = {
-		"xdg/termite/config".source = ./config;
+		"xdg/termite/config".source = ./termite.conf;
 	};
 }
