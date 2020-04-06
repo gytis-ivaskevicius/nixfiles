@@ -24,26 +24,25 @@
 
 
   environment.systemPackages = with pkgs; [
-      jetbrains.webstorm
-      jetbrains.idea-community
       gitkraken
       insomnia
+      jetbrains.idea-community
+      jetbrains.webstorm
 
-      google-chrome
-      firefox 
       discord
+      firefox 
       gnome3.nautilus
+      google-chrome
+      obs-studio
+      vlc
+
+      linux-steam-integration
+      steam 
+      steam-run
 
       arandr
       autorandr
-      mpv 
-      obs-studio
       pavucontrol 
-      steam 
-      steam-run
-      linux-steam-integration
-      tlp
-      vlc
       ];
 
 

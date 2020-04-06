@@ -21,7 +21,6 @@
 	};
 
 	nix.autoOptimiseStore = true;
-	powerManagement.cpuFreqGovernor = "ondemand";
 	powerManagement.powertop.enable = true; 
 	system.stateVersion = "19.09";
 	time.timeZone = "Europe/Vilnius";
@@ -33,9 +32,10 @@
 	};
 
 	services = {
-		printing.enable = true;
 		avahi.enable = true; 
 		avahi.nssmdns = true;
+		printing.enable = true;
+		tlp.enable = true; 
 	};
 
 
