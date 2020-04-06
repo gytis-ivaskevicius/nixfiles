@@ -19,7 +19,6 @@
   };
 
 environment.systemPackages = with pkgs; [
-    gitAndTools.diff-so-fancy
     ack
     binutils
     curl
@@ -30,6 +29,7 @@ environment.systemPackages = with pkgs; [
     file
     fzf
     git
+    gitAndTools.diff-so-fancy
     htop
     iftop
     inetutils
@@ -47,6 +47,7 @@ environment.systemPackages = with pkgs; [
     pciutils
     psmisc
     psmisc # killall
+    ranger
     ripgrep
     ripgrep
     telnet

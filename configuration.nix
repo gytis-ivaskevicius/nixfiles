@@ -26,27 +26,22 @@
   environment.systemPackages = with pkgs; [
       jetbrains.webstorm
       jetbrains.idea-community
+
       arandr
       autorandr
       discord
       flameshot
       gnome3.nautilus
       lightdm
-      mplayer firefox 
+      firefox 
       mpv 
-      numix-gtk-theme
       obs-studio
-      papirus-icon-theme
       pavucontrol 
-      ranger
       steam 
       steam-run
       linux-steam-integration
       tlp
       vlc
-      wmctrl
-      xclip
-      xdotool
       ];
 
 

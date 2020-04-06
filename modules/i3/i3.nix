@@ -11,5 +11,13 @@
   services.xserver.layout = "us";
   services.xserver.xkbOptions = "terminate:ctrl_alt_bksp;caps:escape;altwin:swap_alt_win";
   services.xserver.libinput.enable = true;
+  xdg.mime.enable = true;
+
+  environment.systemPackages = with pkgs; [
+      wmctrl
+      xclip
+      xdotool
+  ];
+
 
 }
