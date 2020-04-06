@@ -1,12 +1,12 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [ ../base-systemd/applicationsTarget.nix ];
+  imports = [ ../autostart-systemd/autostart-systemd.nix ];
       environment.systemPackages = [ pkgs.sxhkd ];
 
 
   systemd.user.services.sxhkd = {
     description = "Simple X hotkey daemon";
-    wantedBy = ["applications.target"];
+    wantedBy = ["autostart.target"];
     serviceConfig = {
       Restart = "always";
 #      ExecStart = "/run/current-system/sw/bin/echo $PATH";

@@ -1,12 +1,12 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [ ../base-systemd/applicationsTarget.nix ];
+  imports = [ ../autostart-systemd/autostart-systemd.nix ];
 
   environment.systemPackages = [ pkgs.ulauncher ];
 
   systemd.user.services.ulauncher = {
     description = "Ulauncher";
-    wantedBy = ["applications.target"];
+    wantedBy = ["autostart.target"];
     script = ''unset __NIXOS_SET_ENVIRONMENT_DONE; source /etc/profile; exec "${pkgs.ulauncher}/bin/ulauncher" '';
     serviceConfig = {
       Restart = "always";

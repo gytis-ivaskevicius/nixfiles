@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [ ../base-systemd/applicationsTarget.nix ];
+  imports = [ ../autostart-systemd/autostart-systemd.nix ];
 
   environment.systemPackages = [
     pkgs.feh
@@ -8,7 +8,7 @@
 
   systemd.user.services.feh = {
     description = "Feh";
-    wantedBy = ["applications.target"];
+    wantedBy = ["autostart.target"];
     serviceConfig = {
       Type = "oneshot";
       ExecStart = "/bin/sh -c '/usr/bin/feh --randomize --bg-fill $HOME/Pictures/wallpaper/*'";
