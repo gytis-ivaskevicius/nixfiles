@@ -1,5 +1,4 @@
 
-exec --no-startup-id ~/startup.sh
 # VARIABLES
 set $mod Mod4
 
@@ -63,6 +62,8 @@ bindsym $mod+Shift+$right move right
 # layout manipulation
 bindsym $mod+c horizontal h
 bindsym $mod+v vertical
+bindsym $mod+c split h
+bindsym $mod+v split v
 
 bindsym $mod+f fullscreen toggle
 
@@ -114,9 +115,6 @@ bindsym $mod+Ctrl+k move workspace to output up
 bindsym $mod+Ctrl+l move workspace to output left
 
 for_window [title="win0"] floating enable
-
-exec_always --no-startup-id setxkbmap -option caps:escape
-exec_always --no-startup-id setxkbmap -option altwin:swap_alt_win
 
 ## MODES ##
 

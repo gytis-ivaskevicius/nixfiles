@@ -9,8 +9,7 @@
     wantedBy = ["autostart.target"];
     serviceConfig = {
       Restart = "always";
-#      ExecStart = "/run/current-system/sw/bin/echo $PATH";
-      ExecStart = "/bin/sh -c \"${pkgs.sxhkd}/bin/sxhkd -c ${./sxhkd.conf}\"";
+      ExecStart = "/run/current-system/sw/bin/execWithEnv ${pkgs.sxhkd}/bin/sxhkd -c ${./sxhkd.conf}";
     };
   };
 
