@@ -29,7 +29,6 @@
       arandr
       autorandr
       discord
-      dunst
       flameshot
       gnome3.nautilus
       lightdm

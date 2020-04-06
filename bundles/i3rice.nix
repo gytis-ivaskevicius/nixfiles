@@ -6,6 +6,7 @@
     [
       ../modules/compton/compton2.nix
       ../modules/feh/feh.nix
+      ../modules/dunst/dunst.nix
       ../modules/fonts/fonts.nix
       ../modules/i3/i3.nix
       ../modules/nm-applet/nm-applet.nix
