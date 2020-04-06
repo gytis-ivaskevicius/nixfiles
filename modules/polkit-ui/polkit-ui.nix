@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 {
   imports = [ ../base-systemd/applicationsTarget.nix ];
+    environment.systemPackages = [ pkgs.pantheon.pantheon-agent-polkit ];
+
 
   systemd.user.services.polkit-ui = {
     description = "Polkit UI popup";

@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 {
   imports = [ ../base-systemd/applicationsTarget.nix ];
+      environment.systemPackages = [ pkgs.sxhkd ];
+
 
   systemd.user.services.sxhkd = {
     description = "Simple X hotkey daemon";

@@ -1,6 +1,8 @@
 { config, pkgs, lib, ... }:
 {
   imports = [ ../base-systemd/applicationsTarget.nix ];
+  environment.systemPackages = with pkgs; [networkmanagerapplet];
+
 
   systemd.user.services.nm-applet = {
     description = "Network Manager Applet";

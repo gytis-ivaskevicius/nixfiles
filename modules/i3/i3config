@@ -1,5 +1,5 @@
 
-#exec --no-startup-id  /home/gytis/autostart.sh
+exec --no-startup-id ~/startup.sh
 # VARIABLES
 set $mod Mod4
 
@@ -61,14 +61,14 @@ bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
 # layout manipulation
-bindsym $mod+c split h
-bindsym $mod+v split
+bindsym $mod+c horizontal h
+bindsym $mod+v vertical
 
 bindsym $mod+f fullscreen toggle
 
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+e layout toggle toggle
 
 bindsym $mod+Shift+x floating toggle
 bindsym $mod+x focus mode_toggle
