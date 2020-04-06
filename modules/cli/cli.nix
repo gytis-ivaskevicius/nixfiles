@@ -23,6 +23,7 @@ environment.systemPackages = with pkgs; [
     binutils
     curl
     docker_compose
+    entr
     exa
     fasd
     fd

@@ -26,14 +26,16 @@
   environment.systemPackages = with pkgs; [
       jetbrains.webstorm
       jetbrains.idea-community
+      gitkraken
+      insomnia
+
+      google-chrome
+      firefox 
+      discord
+      gnome3.nautilus
 
       arandr
       autorandr
-      discord
-      flameshot
-      gnome3.nautilus
-      lightdm
-      firefox 
       mpv 
       obs-studio
       pavucontrol 
