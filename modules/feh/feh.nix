@@ -11,7 +11,7 @@
     wantedBy = ["autostart.target"];
     serviceConfig = {
       Type = "oneshot";
-      ExecStart = "/bin/sh -c '/usr/bin/feh --randomize --bg-fill $HOME/Pictures/wallpaper/*'";
+      ExecStart = "${pkgs.feh}/bin/feh --randomize --bg-fill $HOME/Pictures/wallpaper/*";
     };
   };
 
