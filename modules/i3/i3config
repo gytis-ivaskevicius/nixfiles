@@ -1,4 +1,5 @@
 
+exec systemctl --user restart autostart.target
 # VARIABLES
 set $mod Mod4
 
@@ -60,8 +61,6 @@ bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
 # layout manipulation
-bindsym $mod+c horizontal h
-bindsym $mod+v vertical
 bindsym $mod+c split h
 bindsym $mod+v split v
 

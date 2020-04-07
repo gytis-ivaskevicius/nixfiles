@@ -9,7 +9,7 @@
 
   services.xserver.enable = true;
   services.xserver.layout = "us";
-  services.xserver.xkbOptions = "terminate:ctrl_alt_bksp;caps:escape;altwin:swap_alt_win";
+  services.xserver.xkbOptions = "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
   services.xserver.libinput.enable = true;
   xdg.mime.enable = true;
 services.xserver.displayManager.lightdm.enable = true;

@@ -1,7 +1,11 @@
 { config, pkgs, lib, ... }:
 {
 
-	environment.variables = { EDITOR = "nvim"; VISUAL = "nvim"; BROWSER = "firefox"; };
+	environment.variables = {
+		EDITOR = "nvim";
+		VISUAL = "nvim";
+		BROWSER = "firefox";
+	};
 
 	programs.zsh = {
 		autosuggestions.enable = true;

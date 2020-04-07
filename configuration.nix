@@ -24,6 +24,8 @@
 
 
   environment.systemPackages = with pkgs; [
+      home-manager
+
       gitkraken
       insomnia
       jetbrains.idea-community
@@ -41,7 +43,6 @@
       steam-run
 
       arandr
-      autorandr
       pavucontrol 
       ];
 

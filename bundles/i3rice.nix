@@ -7,6 +7,7 @@
       ../modules/compton/compton2.nix
       ../modules/dunst/dunst.nix
       ../modules/feh/feh.nix
+      ../modules/autorandr/autorandr.nix
       ../modules/flameshot/flameshot.nix
       ../modules/i3/i3.nix
       ../modules/nm-applet/nm-applet.nix

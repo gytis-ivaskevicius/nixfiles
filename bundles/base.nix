@@ -21,9 +21,10 @@
 	};
 
 	nix.autoOptimiseStore = true;
-	powerManagement.powertop.enable = true; 
+	#powerManagement.powertop.enable = true; 
 	system.stateVersion = "19.09";
 	time.timeZone = "Europe/Vilnius";
+	networking.networkmanager.enable = true;
 
 	nix.gc = {
 		automatic = true;
@@ -57,11 +58,6 @@
 		cpu.intel.updateMicrocode = true;
 	};
 
-	networking = {
-		extraHosts = ''127.0.0.1 localhost'';
-		hostName = "gytis-os";
-		networkmanager.enable = true;
-	};
 
 
 }
