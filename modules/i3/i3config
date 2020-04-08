@@ -1,6 +1,4 @@
 
-exec systemctl --user restart autostart.target
-# VARIABLES
 set $mod Mod4
 
 set $left h
@@ -68,7 +66,8 @@ bindsym $mod+f fullscreen toggle
 
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle toggle
+bindsym $mod+e layout toggle split
+
 
 bindsym $mod+Shift+x floating toggle
 bindsym $mod+x focus mode_toggle

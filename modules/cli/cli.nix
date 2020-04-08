@@ -118,6 +118,7 @@
 		wget
 		which
 		youtube-dl
+		nmap
 	];
 
 
