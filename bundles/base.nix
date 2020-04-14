@@ -38,6 +38,8 @@
 	services = {
 		avahi.enable = true; 
 		avahi.nssmdns = true;
+		logind.killUserProcesses = true;
+		openssh.enable = true;
 		openssh.passwordAuthentication = false;
 		printing.enable = true;
 		tlp.enable = true; 
