@@ -1,4 +1,6 @@
 
+exec systemctl --user import-environment; systemctl --user restart autostart.target
+
 set $mod Mod4
 
 set $left h

@@ -9,7 +9,7 @@
     wantedBy = ["autostart.target"];
     serviceConfig = {
       Restart = "always";
-      ExecStart = "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.pantheon-agent-polkit";
+      ExecStart = "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit";
     };
   };
 
