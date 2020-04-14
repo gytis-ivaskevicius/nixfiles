@@ -5,6 +5,7 @@
 		EDITOR = "nvim";
 		VISUAL = "nvim";
 		BROWSER = "firefox";
+		TERM = "xterm-256color";
 	};
 
 	programs.zsh = {
@@ -19,19 +20,19 @@
 
 		setOptions = [
 			"noautomenu"
-				"nomenucomplete"
-				"AUTO_CD" 
-				"BANG_HIST" 
-				"EXTENDED_HISTORY"
-				"HIST_EXPIRE_DUPS_FIRST" 
-				"HIST_FIND_NO_DUPS"
-				"HIST_IGNORE_ALL_DUPS" 
-				"HIST_IGNORE_DUPS" 
-				"HIST_IGNORE_SPACE"
-				"HIST_REDUCE_BLANKS" 
-				"HIST_SAVE_NO_DUPS" 
-				"INC_APPEND_HISTORY" 
-				"SHARE_HISTORY" 
+			"nomenucomplete"
+			"AUTO_CD" 
+			"BANG_HIST" 
+			"EXTENDED_HISTORY"
+			"HIST_EXPIRE_DUPS_FIRST" 
+			"HIST_FIND_NO_DUPS"
+			"HIST_IGNORE_ALL_DUPS" 
+			"HIST_IGNORE_DUPS" 
+			"HIST_IGNORE_SPACE"
+			"HIST_REDUCE_BLANKS" 
+			"HIST_SAVE_NO_DUPS" 
+			"INC_APPEND_HISTORY" 
+			"SHARE_HISTORY" 
 		];
 
 
@@ -40,37 +41,29 @@
 	environment.shellAliases.grep="grep --color=auto";
 	environment.shellAliases.diff="diff --color=auto";
 
-	environment.shellAliases.svi="sudo $EDITOR";
-	environment.shellAliases.vi="$EDITOR";
-	environment.shellAliases.vim="$EDITOR";
-
-	environment.shellAliases.cls="clear";
+	environment.shellAliases.burn="pkill -9";
+	environment.shellAliases.external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
+	environment.shellAliases.f="find . | grep ";
+	environment.shellAliases.killall="pkill";
+	environment.shellAliases.less="$PAGER";
 	environment.shellAliases.q="exit";
-	environment.shellAliases.sudo="sudo ";
+	environment.shellAliases.sc="sudo systemctl";
+	environment.shellAliases.scu="systemctl --user ";
+	environment.shellAliases.svi="sudo $EDITOR";
+	environment.shellAliases.ufw="sudo ufw";
 
 	environment.shellAliases.cp="cp -i";
-	environment.shellAliases.less="$PAGER";
 	environment.shellAliases.ln="ln -i";
 	environment.shellAliases.mkdir="mkdir -p";
 	environment.shellAliases.mv="mv -i";
 	environment.shellAliases.rm="rm -Iv --preserve-root";
-	environment.shellAliases.ufw="sudo ufw";
 	environment.shellAliases.wget="wget -c";
-
-	environment.shellAliases.burn="pkill -9";
-	environment.shellAliases.external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
-	environment.shellAliases.f="find . | grep ";
-	environment.shellAliases.mem="free -hlt";
-	environment.shellAliases.p="ps aux | grep ";
-	environment.shellAliases.ports="netstat -tlpn";
-	environment.shellAliases.font-refresh="fc-cache -fv";
-
-
-	environment.shellAliases.ls="exa -h --git --color=auto --group-directories-first -s extension";
-	environment.shellAliases.lstree="ls --tree";
 
 	environment.shellAliases.l="ls -lF --time-style=long-iso";
 	environment.shellAliases.la="l -a";
+	environment.shellAliases.ls="exa -h --git --color=auto --group-directories-first -s extension";
+	environment.shellAliases.lstree="ls --tree";
+	environment.shellAliases.tree="lstree";
 
 	environment.shellAliases.".."="cd ..";
 	environment.shellAliases."..."="cd ../../";
@@ -82,6 +75,7 @@
 		ack
 		binutils
 		curl
+		dmidecode
 		docker_compose
 		entr
 		exa
@@ -104,6 +98,9 @@
 		neovim
 		nettools
 		nix-index
+		nmap
+		ntfs3g
+		parted
 		pciutils
 		psmisc
 		psmisc # killall
@@ -118,7 +115,6 @@
 		wget
 		which
 		youtube-dl
-		nmap
 	];
 
 
