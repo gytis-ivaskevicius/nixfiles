@@ -1,6 +1,26 @@
 { config, pkgs, lib, ... }:
 {
 
+	nix.maxJobs = 8;
+	nix.autoOptimiseStore = true;
+	#powerManagement.powertop.enable = true; 
+	system.stateVersion = "19.09";
+	time.timeZone = "Europe/Vilnius";
+	networking.networkmanager.enable = true;
+	networking.firewall.allowPing = false;
+	fileSystems."/boot".label = "BOOT";
+
+	nixpkgs.config = {
+		allowUnfree = true;
+		oraclejdk.accept_license = true;
+	};
+
+	nix.gc = {
+		automatic = true;
+		options = "--delete-older-than 20d";
+		dates = "Mon 12:00:00";
+	};
+
 	boot = {
 		cleanTmpDir = true;
 		kernelPackages = pkgs.linuxPackages_latest;
@@ -15,26 +35,10 @@
 	};
 
 
-	nixpkgs.config = {
-		allowUnfree = true;
-		oraclejdk.accept_license = true;
-	};
-
-	nix.autoOptimiseStore = true;
-	#powerManagement.powertop.enable = true; 
-	system.stateVersion = "19.09";
-	time.timeZone = "Europe/Vilnius";
-	networking.networkmanager.enable = true;
-
-	nix.gc = {
-		automatic = true;
-		options = "--delete-older-than 20d";
-		dates = "Mon 12:00:00";
-	};
-
 	services = {
 		avahi.enable = true; 
 		avahi.nssmdns = true;
+		openssh.passwordAuthentication = false;
 		printing.enable = true;
 		tlp.enable = true; 
 	};
@@ -54,10 +58,9 @@
 			enable = true;
 			support32Bit = true;
 		};
+		bluetooth.enable = false;
 		cpu.amd.updateMicrocode = true;
 		cpu.intel.updateMicrocode = true;
 	};
-
-
 
 }
