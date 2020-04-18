@@ -59,6 +59,9 @@
 	environment.shellAliases.rm="rm -Iv --preserve-root";
 	environment.shellAliases.wget="wget -c";
 
+
+	environment.shellAliases.c="xclip -selection clipboard";
+	environment.shellAliases.cm="xclip"; # Copy to middle click clipboard
 	environment.shellAliases.l="ls -lF --time-style=long-iso";
 	environment.shellAliases.la="l -a";
 	environment.shellAliases.ls="exa -h --git --color=auto --group-directories-first -s extension";
@@ -81,6 +84,7 @@
 		exa
 		fasd
 		fd
+		ffmpeg
 		file
 		fzf
 		git
@@ -115,6 +119,7 @@
 		wget
 		which
 		youtube-dl
+		mediainfo
 	];
 
 
