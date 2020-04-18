@@ -4,7 +4,7 @@
 {
   imports =
     [
-      ../modules/compton/compton2.nix
+      ../modules/compton/compton.nix
       ../modules/dunst/dunst.nix
       ../modules/feh/feh.nix
       ../modules/autorandr/autorandr.nix
