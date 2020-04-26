@@ -3,6 +3,7 @@
 {
   imports =
     [
+      /home/gytis/personal.nix
       ./bundles/base.nix
       ./bundles/i3rice.nix
       ./hardware-configuration.nix
@@ -12,19 +13,26 @@
       ./modules/virtualisation/virtualbox.nix
     ];
 
-  services.openssh.enable = false;
-
   users.extraUsers.gytis = {
+    shell = pkgs.zsh;
     isNormalUser = true;
     description = "Gytis Ivaskevicius";
     extraGroups = [ "wheel" "networkmanager" "docker" "vboxusers" ];
     initialPassword = "toor";
     uid = 1000;
   };
+  
+services.flatpak.enable = true;
+xdg.portal.enable = true;
+xdg.portal.gtkUsePortal = true;
+xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
 
   environment.systemPackages = with pkgs; [
+      multimc
       home-manager
+      cura
+      kdeApplications.kdenlive
 
       gitkraken
       insomnia
@@ -37,11 +45,6 @@
       google-chrome
       obs-studio
       vlc
-
-      linux-steam-integration
-      steam 
-      steam-run
-
       arandr
       pavucontrol 
       ];
