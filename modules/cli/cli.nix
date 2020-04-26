@@ -50,6 +50,7 @@
 	environment.shellAliases.sc="sudo systemctl";
 	environment.shellAliases.scu="systemctl --user ";
 	environment.shellAliases.svi="sudo $EDITOR";
+	environment.shellAliases.vi="$EDITOR";
 	environment.shellAliases.ufw="sudo ufw";
 
 	environment.shellAliases.cp="cp -i";
