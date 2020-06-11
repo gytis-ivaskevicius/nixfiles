@@ -10,7 +10,7 @@
       ./modules/cli/cli.nix
       ./modules/runtimes/runtimes.nix
       ./modules/virtualisation/docker.nix
-      ./modules/virtualisation/virtualbox.nix
+#      ./modules/virtualisation/virtualbox.nix
     ];
 
   users.extraUsers.gytis = {
@@ -40,6 +40,7 @@ xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       jetbrains.webstorm
 
       discord
+      brave
       firefox 
       gnome3.nautilus
       google-chrome
