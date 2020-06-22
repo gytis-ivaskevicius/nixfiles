@@ -4,7 +4,6 @@
 	environment.variables = {
 		EDITOR = "nvim";
 		VISUAL = "nvim";
-		BROWSER = "firefox";
 		TERM = "xterm-256color";
 	};
 
