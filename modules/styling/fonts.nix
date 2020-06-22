@@ -27,7 +27,7 @@
 	};
 
 
-	boot.earlyVconsoleSetup = true;
+	console.earlySetup = true;
 
 #fonts.fontconfig.defaultFonts.emoji
 }

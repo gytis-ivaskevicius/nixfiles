@@ -76,6 +76,7 @@
 
 	environment.systemPackages = with pkgs; [
 		ack
+		appimage-run
 		binutils
 		curl
 		dmidecode
@@ -98,6 +99,7 @@
 		lm_sensors
 		lshw
 		man
+		mediainfo
 		neofetch
 		neovim
 		nettools
@@ -109,6 +111,7 @@
 		psmisc
 		psmisc # killall
 		ranger
+		rclone
 		ripgrep
 		ripgrep
 		telnet
@@ -119,7 +122,7 @@
 		wget
 		which
 		youtube-dl
-		mediainfo
+		zip
 	];
 
 

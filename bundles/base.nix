@@ -1,14 +1,17 @@
 { config, pkgs, lib, ... }:
 {
 
-	nix.maxJobs = 8;
-	nix.autoOptimiseStore = true;
 	#powerManagement.powertop.enable = true; 
-	system.stateVersion = "19.09";
-	time.timeZone = "Europe/Vilnius";
-	networking.networkmanager.enable = true;
-	networking.firewall.allowPing = false;
+	console.font = "Lat2-Terminus16";
+	console.keyMap = "us";
 	fileSystems."/boot".label = "BOOT";
+	i18n.defaultLocale = "en_US.UTF-8";
+	networking.firewall.allowPing = false;
+	networking.networkmanager.enable = true;
+	nix.autoOptimiseStore = true;
+	nix.maxJobs = 8;
+	system.stateVersion = "20.03";
+	time.timeZone = "Europe/Vilnius";
 
 	nixpkgs.config = {
 		allowUnfree = true;
@@ -28,13 +31,6 @@
 		tmpOnTmpfs = true;
 	};
 
-	i18n = {
-		consoleFont = "Lat2-Terminus16";
-		consoleKeyMap = "us";
-		defaultLocale = "en_US.UTF-8";
-	};
-
-
 	services = {
 		avahi.enable = true; 
 		avahi.nssmdns = true;
@@ -44,7 +40,6 @@
 		printing.enable = true;
 		tlp.enable = true; 
 	};
-
 
 	zramSwap = {
 		enable = true;
