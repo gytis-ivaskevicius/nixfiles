@@ -12,6 +12,7 @@
 	nix.maxJobs = 8;
 	system.stateVersion = "20.03";
 	time.timeZone = "Europe/Vilnius";
+	systemd.extraConfig = "DefaultMemoryAccounting=yes";
 
 	nixpkgs.config = {
 		allowUnfree = true;
