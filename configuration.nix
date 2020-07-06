@@ -5,6 +5,7 @@
     [
       /home/gytis/personal.nix
       ./bundles/base.nix
+      ./bundles/clean_home.nix
       ./bundles/i3rice.nix
       ./bundles/apps.nix
       ./hardware-configuration.nix
