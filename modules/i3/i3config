@@ -1,5 +1,6 @@
 
 exec systemctl --user import-environment; systemctl --user restart autostart.target
+exec --no-startup-id /etc/i3/autotiling.sh
 
 set $mod Mod4
 
