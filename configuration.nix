@@ -10,8 +10,9 @@
       ./hardware-configuration.nix
       ./modules/cli/cli.nix
       ./modules/runtimes/runtimes.nix
-#      ./modules/virtualisation/docker.nix
-#      ./modules/virtualisation/kubernetes.nix
+      ./modules/emacs/emacs.nix
+      ./modules/virtualisation/docker.nix
+      ./modules/virtualisation/minikube.nix
 #      ./modules/virtualisation/virtualbox.nix
     ];
 
