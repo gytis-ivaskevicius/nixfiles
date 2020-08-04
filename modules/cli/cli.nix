@@ -126,6 +126,7 @@
         cargo
         lf
         openssl
+        sshfs
         sshpass
 	];
 }
