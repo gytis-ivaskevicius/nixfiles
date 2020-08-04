@@ -14,17 +14,15 @@
   };
 
   environment.systemPackages = with pkgs; [
-      arandr
-      brave
-      discord
-      firefox 
-      gnome3.nautilus
-      home-manager
-      pavucontrol 
-      vlc
+	cinnamon.nemo
+    arandr
+    brave
+    discord
+    firefox 
+    home-manager
+    pavucontrol 
+    vlc
   ];
-
-
 
 }
 
