@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-  environment.systemPackages = with pkgs; [ nodejs ]; 
+  environment.systemPackages = with pkgs; [ nodejs-13_x ]; 
   programs.npm.enable = true;
   programs.npm.npmrc = ''
 prefix=''${XDG_DATA_HOME}/npm
