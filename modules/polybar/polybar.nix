@@ -4,7 +4,6 @@
 
   environment.systemPackages = [
     pkgs.polybar
-    pkgs.nerdfonts 
   ];
 
   systemd.user.services.polybar = {

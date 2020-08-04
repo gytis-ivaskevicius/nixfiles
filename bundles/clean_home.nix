@@ -8,6 +8,7 @@
 		XDG_DATA_HOME="$HOME/.local/share";
 
 		ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android";
+		ANDROID_AVD_HOME="$XDG_CONFIG_HOME/android";
 		ANSIBLE_CONFIG="$XDG_CONFIG_HOME/ansible/ansible.cfg";
 		CARGO_HOME="$XDG_DATA_HOME/cargo";
 		ERRFILE="$XDG_CACHE_HOME/.xsession-errors";

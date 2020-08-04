@@ -45,7 +45,7 @@ focus_follows_mouse no
 ## KEYBINDINGS ##
 floating_modifier $mod
 
-bindsym Ctrl+Shift+l exec i3lock-fancy-rapid 3 2
+bindsym Ctrl+Shift+l exec i3lock-pixeled
 
 set $movemouse "sh -c 'eval `xdotool getactivewindow getwindowgeometry --shell`; xdotool mousemove $((X+WIDTH/2)) $((Y+HEIGHT/2))'"
 

@@ -7,6 +7,7 @@
 		TERM = "xterm-256color";
 	};
 
+    programs.adb.enable = true;
 	programs.zsh = {
 		autosuggestions.enable = true;
 		enable = true;
@@ -33,8 +34,6 @@
 			"INC_APPEND_HISTORY" 
 			"SHARE_HISTORY" 
 		];
-
-
 	};
 
 	environment.shellAliases.grep="grep --color=auto";
@@ -123,7 +122,10 @@
 		which
 		youtube-dl
 		zip
+        android-file-transfer
+        cargo
+        lf
+        openssl
+        sshpass
 	];
-
-
 }
