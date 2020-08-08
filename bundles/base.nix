@@ -6,10 +6,8 @@
 	console.keyMap = "us";
 	fileSystems."/boot".label = "BOOT";
 	i18n.defaultLocale = "en_US.UTF-8";
-	networking.firewall.allowPing = false;
-	networking.networkmanager.enable = true;
 	nix.autoOptimiseStore = true;
-	nix.maxJobs = 8;
+	nix.maxJobs = 16;
 	system.stateVersion = "20.03";
 	time.timeZone = "Europe/Vilnius";
 	systemd.extraConfig = "DefaultMemoryAccounting=yes";
@@ -18,6 +16,12 @@
 		allowUnfree = true;
 		oraclejdk.accept_license = true;
 	};
+
+	networking = {
+	    nameservers = [ "1.1.1.1" "8.8.8.8" "8.8.4.4" ];
+	    firewall.allowPing = false;
+	    networkmanager.enable = true;
+	};      
 
 	nix.gc = {
 		automatic = true;
