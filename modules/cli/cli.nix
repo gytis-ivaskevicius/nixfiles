@@ -36,42 +36,46 @@
 		];
 	};
 
-	environment.shellAliases.grep="grep --color=auto";
-	environment.shellAliases.diff="diff --color=auto";
+	environment.shellAliases = {
+		grep="grep --color=auto";
+		diff="diff --color=auto";
+		nixos-rebuild="sudo nixos-rebuild";
+		personal="$EDITOR ~/personal.nix";
 
-	environment.shellAliases.burn="pkill -9";
-	environment.shellAliases.external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
-	environment.shellAliases.f="find . | grep ";
-	environment.shellAliases.killall="pkill";
-	environment.shellAliases.less="$PAGER";
-	environment.shellAliases.q="exit";
-	environment.shellAliases.sc="sudo systemctl";
-	environment.shellAliases.scu="systemctl --user ";
-	environment.shellAliases.svi="sudo $EDITOR";
-	environment.shellAliases.vi="$EDITOR";
-	environment.shellAliases.ufw="sudo ufw";
+		burn="pkill -9";
+		external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
+		f="find . | grep ";
+		killall="pkill";
+		less="$PAGER";
+		q="exit";
+		sc="sudo systemctl";
+		scu="systemctl --user ";
+		svi="sudo $EDITOR";
+		vi="$EDITOR";
+		ufw="sudo ufw";
 
-	environment.shellAliases.cp="cp -i";
-	environment.shellAliases.ln="ln -i";
-	environment.shellAliases.mkdir="mkdir -p";
-	environment.shellAliases.mv="mv -i";
-	environment.shellAliases.rm="rm -Iv --preserve-root";
-	environment.shellAliases.wget="wget -c";
+		cp="cp -i";
+		ln="ln -i";
+		mkdir="mkdir -p";
+		mv="mv -i";
+		rm="rm -Iv --preserve-root";
+		wget="wget -c";
 
 
-	environment.shellAliases.c="xclip -selection clipboard";
-	environment.shellAliases.cm="xclip"; # Copy to middle click clipboard
-	environment.shellAliases.l="ls -lF --time-style=long-iso";
-	environment.shellAliases.la="l -a";
-	environment.shellAliases.ls="exa -h --git --color=auto --group-directories-first -s extension";
-	environment.shellAliases.lstree="ls --tree";
-	environment.shellAliases.tree="lstree";
+		c="xclip -selection clipboard";
+		cm="xclip"; # Copy to middle click clipboard
+		l="ls -lF --time-style=long-iso";
+		la="l -a";
+		ls="exa -h --git --color=auto --group-directories-first -s extension";
+		lstree="ls --tree";
+		tree="lstree";
 
-	environment.shellAliases.".."="cd ..";
-	environment.shellAliases."..."="cd ../../";
-	environment.shellAliases."...."="cd ../../../";
-	environment.shellAliases."....."="cd ../../../../";
-	environment.shellAliases."......"="cd ../../../../../";
+		".."="cd ..";
+		"..."="cd ../../";
+		"...."="cd ../../../";
+		"....."="cd ../../../../";
+		"......"="cd ../../../../../";
+	};
 
 	environment.systemPackages = with pkgs; [
 		ack
