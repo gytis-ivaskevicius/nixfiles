@@ -5,7 +5,10 @@
 		EDITOR = "nvim";
 		VISUAL = "nvim";
 		TERM = "xterm-256color";
+		LC_ALL = "en_US.UTF-8";
 	};
+	#LANG=en_US.UTF-8
+	#LANGUAGE=en_US:en_GB:en
 
     programs.adb.enable = true;
 	programs.zsh = {
@@ -14,9 +17,13 @@
 		enableCompletion = true;
 		histFile = "$HOME/.cache/.zsh_history";
 		histSize = 1000000;
-		ohMyZsh.enable = true;
-		ohMyZsh.theme = "avit";
 		syntaxHighlighting.enable = true;
+		ohMyZsh.enable = true;
+
+		promptInit = ''
+			autoload -U promptinit; promptinit
+			prompt pure
+			'';
 
 		setOptions = [
 			"noautomenu"
@@ -79,8 +86,11 @@
 
 	environment.systemPackages = with pkgs; [
 		ack
+		android-file-transfer
 		appimage-run
 		binutils
+		cargo
+		cmake
 		curl
 		dmidecode
 		docker_compose
@@ -91,13 +101,16 @@
 		ffmpeg
 		file
 		fzf
+		gcc
 		git
 		gitAndTools.diff-so-fancy
+		gnumake
 		htop
 		iftop
 		inetutils
 		iotop
 		jq
+		lf
 		libnotify
 		lm_sensors
 		lshw
@@ -109,28 +122,30 @@
 		nix-index
 		nmap
 		ntfs3g
+		openssl
 		parted
+		patchelf
 		pciutils
 		psmisc
 		psmisc # killall
+		python
 		ranger
 		rclone
 		ripgrep
 		ripgrep
+		sshfs
+		sshpass
+		steam-run
 		telnet
 		tmux
 		tmux
+		unstable.pure-prompt
 		unzip
 		usbutils
+		vimPlugins.vim-plug
 		wget
 		which
 		youtube-dl
 		zip
-        android-file-transfer
-        cargo
-        lf
-        openssl
-        sshfs
-        sshpass
 	];
 }
