@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 {
+	imports = [
+	      ./unstable.nix
+	];
 
 	#powerManagement.powertop.enable = true; 
 	console.font = "Lat2-Terminus16";
@@ -11,6 +14,17 @@
 	system.stateVersion = "20.03";
 	time.timeZone = "Europe/Vilnius";
 	systemd.extraConfig = "DefaultMemoryAccounting=yes";
+
+	system.activationScripts.ldso = lib.stringAfter [ "usrbinenv" ] ''                       
+	    mkdir -m 0755 -p /lib64                                                                
+	    ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2.tmp   
+	    mv -f /lib64/ld-linux-x86-64.so.2.tmp /lib64/ld-linux-x86-64.so.2 # atomically replace 
+  	'';
+
+
+        environment.systemPackages = with pkgs; [
+		glibc
+	];
 
 	nixpkgs.config = {
 		allowUnfree = true;
