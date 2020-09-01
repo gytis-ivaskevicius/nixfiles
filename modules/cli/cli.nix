@@ -16,14 +16,12 @@
 		enable = true;
 		enableCompletion = true;
 		histFile = "$HOME/.cache/.zsh_history";
-		histSize = 1000000;
+		histSize = 100000;
 		syntaxHighlighting.enable = true;
 		ohMyZsh.enable = true;
 
-		promptInit = ''
-			autoload -U promptinit; promptinit
-			prompt pure
-			'';
+		promptInit = builtins.readFile ./promptInit.zsh;
+		shellInit = builtins.readFile ./shellInit.zsh;
 
 		setOptions = [
 			"noautomenu"
