@@ -1,4 +1,3 @@
-source /run/current-system/sw/share/vim-plugins/vim-plug/plug.vim
 
 call plug#begin('~/.cache/nvim/plugged')
 
