@@ -7,8 +7,6 @@
 		TERM = "xterm-256color";
 		LC_ALL = "en_US.UTF-8";
 	};
-	#LANG=en_US.UTF-8
-	#LANGUAGE=en_US:en_GB:en
 
     programs.adb.enable = true;
 	programs.zsh = {
