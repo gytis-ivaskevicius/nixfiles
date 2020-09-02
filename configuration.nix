@@ -12,7 +12,6 @@
       ./modules/cli
       ./modules/vim
       ./modules/emacs
-      ./modules/runtimes/runtimes.nix
       ./modules/virtualisation/docker.nix
 #      ./modules/virtualisation/minikube.nix
       ./modules/virtualisation/virtualbox.nix
