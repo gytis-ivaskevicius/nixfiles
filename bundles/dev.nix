@@ -9,7 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     jetbrains.idea-ultimate
-	gitkraken
-  	insomnia
+    gitkraken
+    insomnia
   ];
 }

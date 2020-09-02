@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
-  jdk8 = pkgs.jdk;
+  jdk8 = pkgs.jdk8;
   jdk11 = pkgs.jdk11;
   default_jdk = pkgs.jdk11;
 in {

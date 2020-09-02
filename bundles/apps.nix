@@ -9,18 +9,18 @@
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
 
   environment.variables = {
-      BROWSER = "brave";
-      TERMINAL = "termite";
+    BROWSER = "brave";
+    TERMINAL = "termite";
   };
 
   environment.systemPackages = with pkgs; [
-	cinnamon.nemo
+    cinnamon.nemo
     arandr
     brave
     discord
-    firefox 
+    firefox
     home-manager
-    pavucontrol 
+    pavucontrol
     vlc
   ];
 
