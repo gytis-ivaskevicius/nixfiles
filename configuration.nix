@@ -12,9 +12,6 @@
       ./modules/cli
       ./modules/vim
       ./modules/emacs
-      ./modules/virtualisation/docker.nix
-#      ./modules/virtualisation/minikube.nix
-      ./modules/virtualisation/virtualbox.nix
       /home/gytis/personal.nix
     ];
 

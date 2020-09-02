@@ -24,18 +24,18 @@
 		setOptions = [
 			"noautomenu"
 			"nomenucomplete"
-			"AUTO_CD" 
-			"BANG_HIST" 
+			"AUTO_CD"
+			"BANG_HIST"
 			"EXTENDED_HISTORY"
-			"HIST_EXPIRE_DUPS_FIRST" 
+			"HIST_EXPIRE_DUPS_FIRST"
 			"HIST_FIND_NO_DUPS"
-			"HIST_IGNORE_ALL_DUPS" 
-			"HIST_IGNORE_DUPS" 
+			"HIST_IGNORE_ALL_DUPS"
+			"HIST_IGNORE_DUPS"
 			"HIST_IGNORE_SPACE"
-			"HIST_REDUCE_BLANKS" 
-			"HIST_SAVE_NO_DUPS" 
-			"INC_APPEND_HISTORY" 
-			"SHARE_HISTORY" 
+			"HIST_REDUCE_BLANKS"
+			"HIST_SAVE_NO_DUPS"
+			"INC_APPEND_HISTORY"
+			"SHARE_HISTORY"
 		];
 	};
 
@@ -85,21 +85,17 @@
 		android-file-transfer
 		appimage-run
 		binutils
-		cargo
 		cmake
 		curl
 		dmidecode
-		docker_compose
 		entr
 		exa
-		fasd
 		fd
 		ffmpeg
 		file
 		fzf
 		gcc
 		git
-		gitAndTools.diff-so-fancy
 		gnumake
 		htop
 		iftop
@@ -113,7 +109,6 @@
 		man
 		mediainfo
 		neofetch
-		neovim
 		nettools
 		nix-index
 		nmap
@@ -123,22 +118,18 @@
 		patchelf
 		pciutils
 		psmisc
-		psmisc # killall
 		python
 		ranger
 		rclone
-		ripgrep
 		ripgrep
 		sshfs
 		sshpass
 		steam-run
 		telnet
 		tmux
-		tmux
 		unstable.pure-prompt
 		unzip
 		usbutils
-		vimPlugins.vim-plug
 		wget
 		which
 		youtube-dl
