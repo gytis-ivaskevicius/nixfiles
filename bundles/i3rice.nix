@@ -4,20 +4,20 @@
 {
   imports =
     [
-      ../modules/compton/compton.nix
-      ../modules/dunst/dunst.nix
-      ../modules/feh/feh.nix
-      ../modules/autorandr/autorandr.nix
-      ../modules/flameshot/flameshot.nix
-      ../modules/i3/i3.nix
-      ../modules/nm-applet/nm-applet.nix
-      ../modules/polkit-ui/polkit-ui.nix
-      ../modules/polybar/polybar.nix
+      ../modules/compton
+      ../modules/dunst
+      ../modules/feh
+      ../modules/autorandr
+      ../modules/flameshot
+      ../modules/i3
+      ../modules/nm-applet
+      ../modules/polkit-ui
+      ../modules/polybar
       ../modules/styling/fonts.nix
       ../modules/styling/theme.nix
-      ../modules/sxhkd/sxhkd.nix
-      ../modules/termite/termite.nix
-      ../modules/ulauncher/ulauncher.nix
+      ../modules/sxhkd
+      ../modules/termite
+      ../modules/ulauncher
     ];
 
   }

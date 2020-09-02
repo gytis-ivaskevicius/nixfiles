@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [ ../autostart-systemd/autostart-systemd.nix ];
+  imports = [ ../autostart-systemd ];
   environment.systemPackages = [ pkgs.autorandr ];
 
 
