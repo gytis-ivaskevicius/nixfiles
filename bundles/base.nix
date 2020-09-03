@@ -42,6 +42,7 @@
     cleanTmpDir = true;
     kernelPackages = pkgs.linuxPackages_latest;
     loader.systemd-boot.enable = true;
+    loader.timeout = 2;
     tmpOnTmpfs = true;
   };
 
