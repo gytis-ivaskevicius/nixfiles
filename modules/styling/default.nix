@@ -1,7 +1,6 @@
 { config, pkgs, lib, ... }:
 {
 
-
   environment.systemPackages = with pkgs; [
     numix-gtk-theme
     papirus-icon-theme

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [ ../autostart-systemd ];
-      environment.systemPackages = [ pkgs.sxhkd pkgs.i3lock-pixeled ];
+  environment.systemPackages = [ pkgs.sxhkd pkgs.i3lock-pixeled ];
 
 
   systemd.user.services.sxhkd = {

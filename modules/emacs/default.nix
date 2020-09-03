@@ -2,5 +2,5 @@
 {
   services.emacs.enable = true;
   services.emacs.install = true;
-#  services.emacs.package = pkgs.emacsGit;
+  #services.emacs.package = pkgs.emacsGit;
 }

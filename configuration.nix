@@ -12,19 +12,19 @@
       ./modules/cli
       ./modules/vim
       ./modules/emacs
-      /home/gytis/personal.nix
+      #/home/gytis/personal.nix
     ];
 
-  users.extraUsers.gytis = {
-    shell = pkgs.zsh;
-    isNormalUser = true;
-    description = "Gytis Ivaskevicius";
-    extraGroups = [ "dialout" "adbusers" "wheel" "networkmanager" "docker" "vboxusers" ];
-    initialPassword = "toor";
-  };
+    users.extraUsers.gytis = {
+      shell = pkgs.zsh;
+      isNormalUser = true;
+      description = "Gytis Ivaskevicius";
+      extraGroups = [ "dialout" "adbusers" "wheel" "networkmanager" "docker" "vboxusers" ];
+      initialPassword = "toor";
+    };
 
-  environment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs; [
 
-  ];
+    ];
 
-}
+  }

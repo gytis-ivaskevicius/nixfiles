@@ -1,6 +1,6 @@
 { config, pkgs, lib, ... }:
 
-let execWithEnv = pkgs.writeScriptBin "execWithEnv" 
+let execWithEnv = pkgs.writeScriptBin "execWithEnv"
 ''#!${pkgs.stdenv.shell}
 
   unset __NIXOS_SET_ENVIRONMENT_DONE
@@ -13,8 +13,5 @@ in {
   };
 
   environment.systemPackages = [ execWithEnv ];
-
-
-
 
 }
