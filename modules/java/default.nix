@@ -14,8 +14,8 @@ in {
   };
 
   environment.shellAliases = {
-    java8 = "${jdk8}/lib/openjdk/bin/java";
-    java11 = "${jdk11}/lib/openjdk/bin/java";
+    java8 = "${jdk8.home}/bin/java";
+    java11 = "${jdk11.home}/bin/java";
   };
 
   environment.systemPackages = with pkgs; [
