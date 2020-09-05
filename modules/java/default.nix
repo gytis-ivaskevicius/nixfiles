@@ -9,8 +9,8 @@ in {
   programs.java.package = default_jdk;
 
   environment.variables = {
-    JAVA_HOME8 = "${jdk8}/lib/openjdk/";
-    JAVA_HOME11 = "${jdk11}/lib/openjdk/";
+    JAVA_HOME8 = jdk8.home;
+    JAVA_HOME11 = jdk11.home;
   };
 
   environment.shellAliases = {
