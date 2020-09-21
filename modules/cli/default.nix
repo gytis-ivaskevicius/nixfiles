@@ -107,6 +107,7 @@
     libnotify
     lm_sensors
     lshw
+    lsof
     man
     mediainfo
     neofetch
