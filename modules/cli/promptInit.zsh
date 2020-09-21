@@ -5,7 +5,7 @@ fi
 
 pasteinit() {
   OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
-  zle -N self-insert url-quote-magic 
+  zle -N self-insert url-quote-magic
 }
 
 pastefinish() {
@@ -14,6 +14,8 @@ pastefinish() {
 
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
+
+bindkey -r ^V
 
 autoload -U promptinit; promptinit
 prompt pure

@@ -17,6 +17,7 @@
     histSize = 100000;
     syntaxHighlighting.enable = true;
     ohMyZsh.enable = true;
+    ohMyZsh.plugins = [ ];
 
     promptInit = builtins.readFile ./promptInit.zsh;
     shellInit = builtins.readFile ./shellInit.zsh;
@@ -119,6 +120,7 @@
     pciutils
     psmisc
     python
+    python38Packages.pygments
     ranger
     rclone
     ripgrep
