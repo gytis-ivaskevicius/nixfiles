@@ -11,7 +11,8 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    jetbrains.idea-ultimate
+    #jetbrains.idea-ultimate
+    unstable.jetbrains.idea-ultimate
     gitkraken
     insomnia
   ];
