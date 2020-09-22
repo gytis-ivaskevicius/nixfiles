@@ -2,8 +2,6 @@
 {
 
   environment.variables = {
-    EDITOR = "nvim";
-    VISUAL = "nvim";
     TERM = "xterm-256color";
     LC_ALL = "en_US.UTF-8";
   };
@@ -43,7 +41,7 @@
     grep="grep --color=auto";
     diff="diff --color=auto";
     nixos-rebuild="sudo nixos-rebuild";
-    personal="$EDITOR ~/personal.nix";
+    personal="sudoedit /etc/nixos/personal.nix";
 
     burn="pkill -9";
     external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
@@ -53,8 +51,6 @@
     q="exit";
     sc="sudo systemctl";
     scu="systemctl --user ";
-    svi="sudo $EDITOR";
-    vi="$EDITOR";
     ufw="sudo ufw";
 
     cp="cp -i";

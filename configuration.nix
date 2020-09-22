@@ -10,9 +10,9 @@
       ./bundles/i3rice.nix
       ./hardware-configuration.nix
       ./modules/cli
-      ./modules/vim
       ./modules/emacs
-      #/home/gytis/personal.nix
+      ./modules/vim
+      ./personal.nix
     ];
 
     users.extraUsers.gytis = {
@@ -27,4 +27,4 @@
 
     ];
 
-  }
+}
