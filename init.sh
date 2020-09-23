@@ -1,10 +1,16 @@
 #!/bin/sh
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+if [[ $EUID -eq 0 ]]; then
+   echo "Please run this script as normal user"
+   exit 1
+fi
 
-cd $DIR
-echo Updating $DIR/personal.nix. Please use this file for PC specific changes.
+cd $(dirname "${BASH_SOURCE[0]}")
 
-git update-index --assume-unchanged $DIR/personal.nix
+echo Updating .git folder owner to $USER
+sudo chown -R $USER:wheel .git
+
+echo Disabling GIT tracking for personal.nix
+git update-index --assume-unchanged personal.nix
 
 
