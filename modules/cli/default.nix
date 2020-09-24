@@ -15,7 +15,10 @@
     histSize = 100000;
     syntaxHighlighting.enable = true;
     ohMyZsh.enable = true;
-    ohMyZsh.plugins = [ ];
+    ohMyZsh.plugins = [
+      "git"
+      "git-extras"
+    ];
 
     promptInit = builtins.readFile ./promptInit.zsh;
     shellInit = builtins.readFile ./shellInit.zsh;
