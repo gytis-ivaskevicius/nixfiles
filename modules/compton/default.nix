@@ -1,10 +1,10 @@
 { config, pkgs, lib, ... }:
 {
   services.compton = {
-    enable=true;
-    backend="glx";
-    shadow=true;
-    vSync=true;
+    enable = true;
+    backend = "glx";
+    shadow = true;
+    vSync =true;
     shadowExclude = [
       "_GTK_FRAME_EXTENTS@:c"
       "class_g = '.ulauncher-wrapped'"

@@ -6,10 +6,10 @@
     LC_ALL = "en_US.UTF-8";
   };
 
-  programs.adb.enable = true;
+  programs.adb.enable = lib.mkDefault true;
   programs.zsh = {
     autosuggestions.enable = true;
-    enable = true;
+    enable = lib.mkDefault true;
     enableCompletion = true;
     histFile = "$HOME/.cache/.zsh_history";
     histSize = 100000;
@@ -51,7 +51,6 @@
     external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
     f="find . | grep ";
     killall="pkill";
-    less="$PAGER";
     q="exit";
     sc="sudo systemctl";
     scu="systemctl --user ";

@@ -28,10 +28,10 @@
 
     fontconfig.enable = true;
     fontconfig.defaultFonts = {
-      monospace = ["RobotoMono Nerd Font" "DejaVu Sans Mono" ];
-      sansSerif = [ "Roboto" "DejaVu Sans" ];
-      serif = [ "Roboto" "DejaVu Serif" ];
-      emoji = [ "Twitter Color Emoji" ];
+      monospace = lib.mkDefault ["RobotoMono Nerd Font" "DejaVu Sans Mono" ];
+      sansSerif = lib.mkDefault [ "Roboto" "DejaVu Sans" ];
+      serif = lib.mkDefault [ "Roboto" "DejaVu Serif" ];
+      emoji = lib.mkDefault [ "Twitter Color Emoji" ];
     };
   };
 

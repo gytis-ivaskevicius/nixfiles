@@ -11,7 +11,7 @@
   nix.autoOptimiseStore = true;
   nix.maxJobs = 16;
   system.stateVersion = "20.03";
-  time.timeZone = "Europe/Vilnius";
+  time.timeZone = lib.mkDefault "Europe/Vilnius";
   systemd.extraConfig = "DefaultMemoryAccounting=yes";
 
   system.activationScripts.ldso = lib.stringAfter [ "usrbinenv" ] ''
@@ -21,11 +21,11 @@
   '';
 
   networking = {
-    enableIPv6 = false;
-    firewall.allowPing = false;
+    enableIPv6 = lib.mkDefault false;
+    firewall.allowPing = lib.mkDefault false;
     hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
-    nameservers = [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" ];
-    networkmanager.enable = true;
+    nameservers = lib.mkDefault [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" ];
+    networkmanager.enable = lib.mkDefault true;
   };
 
   nixpkgs.config = {
@@ -41,37 +41,36 @@
 
   boot = {
     cleanTmpDir = true;
-    kernelPackages = pkgs.linuxPackages_latest;
     loader.systemd-boot.enable = true;
     loader.timeout = 2;
-    tmpOnTmpfs = true;
+    tmpOnTmpfs = lib.mkDefault true;
   };
 
   services = {
-    avahi.enable = true;
-    avahi.nssmdns = true;
-    logind.killUserProcesses = true;
-    openssh.enable = true;
-    openssh.passwordAuthentication = false;
-    printing.enable = true;
-    tlp.enable = true;
+    avahi.enable = lib.mkDefault true;
+    avahi.nssmdns = lib.mkDefault true;
+    logind.killUserProcesses = lib.mkDefault true;
+    openssh.enable = lib.mkDefault true;
+    openssh.passwordAuthentication = lib.mkDefault false;
+    printing.enable = lib.mkDefault true;
+    tlp.enable = lib.mkDefault true;
   };
 
   zramSwap = {
-    enable = true;
+    enable = lib.mkDefault true;
     algorithm = "zstd";
   };
 
   hardware = {
     opengl = {
-      enable = true;
+      enable = lib.mkDefault true;
       driSupport32Bit = true;
     };
     pulseaudio = {
-      enable = true;
+      enable = lib.mkDefault true;
       support32Bit = true;
     };
-    bluetooth.enable = false;
+    bluetooth.enable = lib.mkDefault false;
     cpu.amd.updateMicrocode = true;
     cpu.intel.updateMicrocode = true;
   };

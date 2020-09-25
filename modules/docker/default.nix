@@ -4,7 +4,7 @@
     autoPrune.enable = true;
     enable = true;
     enableNvidia = true;
-    enableOnBoot = false;
+    enableOnBoot = lib.mkDefault false;
   };
 
   environment.systemPackages = with pkgs; [
