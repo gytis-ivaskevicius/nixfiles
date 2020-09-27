@@ -47,6 +47,7 @@
     nixos-rebuild="sudo nixos-rebuild";
     personal="sudoedit /etc/nixos/personal.nix";
 
+    ccat="pygmentize";
     burn="pkill -9";
     external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
     f="find . | grep ";
@@ -118,7 +119,7 @@
     patchelf
     pciutils
     psmisc
-    python
+    python3
     python38Packages.pygments
     ranger
     rclone
