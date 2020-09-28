@@ -59,11 +59,12 @@
         xdotool
 	];
 
+# TODO: Does not work well 20.09, needs to be fixed at some point
 # To make sure all local SSH sessions are closed after a laptop lid is shut.
-	powerManagement.powerDownCommands = ''
-		${pkgs.procps}/bin/pgrep ssh | IFS= read -r pid; do
-		[ "$(readlink "/proc/$pid/exe")" = "${pkgs.openssh}/bin/ssh" ] && kill "$pid"
-		done
-			'';
+    #powerManagement.powerDownCommands = ''
+		#{pkgs.procps}/bin/pgrep ssh | IFS= read -r pid; do
+		# "$(readlink "/proc/$pid/exe")" = "${pkgs.openssh}/bin/ssh" ] && kill "$pid"
+		#one
+		#'';
 
 }
