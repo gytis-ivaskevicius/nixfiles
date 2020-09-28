@@ -15,13 +15,6 @@
       ./personal.nix
     ];
 
-    users.extraUsers.gytis = {
-      shell = pkgs.zsh;
-      isNormalUser = true;
-      description = "Gytis Ivaskevicius";
-      extraGroups = [ "dialout" "adbusers" "wheel" "networkmanager" "docker" "vboxusers" ];
-      initialPassword = "toor";
-    };
 
     environment.systemPackages = with pkgs; [
 

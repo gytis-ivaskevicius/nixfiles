@@ -10,7 +10,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   nix.autoOptimiseStore = true;
   nix.maxJobs = 16;
-  system.stateVersion = "20.03";
+  system.stateVersion = "20.09";
   time.timeZone = lib.mkDefault "Europe/Vilnius";
   systemd.extraConfig = "DefaultMemoryAccounting=yes";
 
