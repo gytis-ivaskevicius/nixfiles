@@ -129,7 +129,7 @@
     steam-run
     telnet
     tmux
-    unstable.pure-prompt
+    pure-prompt
     unzip
     usbutils
     wget

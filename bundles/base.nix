@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./unstable.nix
+    #./unstable.nix
   ];
 
   #powerManagement.powertop.enable = true;
