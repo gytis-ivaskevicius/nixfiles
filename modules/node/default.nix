@@ -1,11 +1,8 @@
 { config, pkgs, lib, ... }:
 let
-  node13 = pkgs.nodejs-13_x;
-  node14 = pkgs.unstable.nodejs-14_x;
-  default_node = pkgs.unstable.nodejs-14_x;
+  node10 = pkgs.nodejs-10_x;
+  node14 = pkgs.nodejs-14_x;
 in {
-  # Does not exist yet
-  #programs.npm.package = default_node;
   programs.npm.enable = true;
   programs.npm.npmrc = lib.mkDefault ''
     prefix=''${XDG_DATA_HOME}/npm
@@ -16,14 +13,14 @@ in {
   '';
 
   environment.systemPackages = with pkgs; [
-    node13
+    node10
     node14
   ];
 
   environment.shellAliases = {
-    node13 = "${node13}/bin/node";
-    npm13 = "${node13}/bin/npm";
-    npx13 = "${node13}/bin/npx";
+    node10 = "${node10}/bin/node";
+    npm10 = "${node10}/bin/npm";
+    npx10 = "${node10}/bin/npx";
 
     node14 = "${node14}/bin/node";
     npm14 = "${node14}/bin/npm";
