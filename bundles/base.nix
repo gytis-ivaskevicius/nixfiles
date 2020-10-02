@@ -24,8 +24,15 @@
     enableIPv6 = lib.mkDefault false;
     firewall.allowPing = lib.mkDefault false;
     hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
-    nameservers = lib.mkDefault [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" ];
+    nameservers = lib.mkDefault [ "1.1.1.1" "1.0.0.1" ];
     networkmanager.enable = lib.mkDefault true;
+  };
+
+  services.resolved = {
+    enable = true;
+    extraConfig = ''
+       DNS=1.1.1.1 1.0.0.1
+    '';
   };
 
   nixpkgs.config = {
