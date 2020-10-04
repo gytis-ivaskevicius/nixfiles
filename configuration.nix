@@ -10,7 +10,6 @@
       ./bundles/i3rice.nix
       ./hardware-configuration.nix
       ./modules/cli
-      ./modules/emacs
       ./modules/vim
       ./personal.nix
     ];
