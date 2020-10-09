@@ -13,18 +13,15 @@
 		xkbOptions = lib.mkDefault "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
 		libinput = {
 			enable = lib.mkDefault true;
-
-            # Left + right click emulates middle button.
+                        # Left + right click emulates middle button.
 			middleEmulation = lib.mkDefault true;
-		    #naturalScrolling = true;
-			tapping = lib.mkDefault false;
-			tappingDragLock = lib.mkDefault false;
+                        #naturalScrolling = true;
+                        #tapping = lib.mkDefault false;
+                        #tappingDragLock = lib.mkDefault false;
 		};
-
-        # Make auto-repeat on key hold work faster.
 		displayManager.xserverArgs = [
-			"-ardelay 300"
-            "-arinterval 20"
+		  "-ardelay 300"
+                  "-arinterval 20"
 		];
 
 		displayManager.lightdm = {

@@ -8,6 +8,11 @@ let execWithEnv = pkgs.writeScriptBin "execWithEnv"
   exec "$@"'';
 in {
 
+  # Disables start limit burst which causes issues in case of rapid logout/login with units autostart
+  systemd.user.extraConfig = ''
+    DefaultStartLimitBurst=0
+  '';
+
   systemd.user.targets.autostart = {
     description = "Target to bind applications that should be started after VM";
   };

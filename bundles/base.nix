@@ -23,7 +23,8 @@
   networking = {
     enableIPv6 = lib.mkDefault false;
     firewall.allowPing = lib.mkDefault false;
-    hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
+    hostId = "12345678";
+    #hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
     nameservers = lib.mkDefault [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" ];
     networkmanager.enable = lib.mkDefault true;
   };
@@ -43,7 +44,6 @@
     cleanTmpDir = true;
     loader.systemd-boot.enable = true;
     loader.timeout = 2;
-    tmpOnTmpfs = lib.mkDefault true;
   };
 
   services = {
@@ -70,7 +70,6 @@
       enable = lib.mkDefault true;
       support32Bit = true;
     };
-    bluetooth.enable = lib.mkDefault false;
     cpu.amd.updateMicrocode = true;
     cpu.intel.updateMicrocode = true;
   };
