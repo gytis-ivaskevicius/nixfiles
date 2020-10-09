@@ -1,5 +1,8 @@
 { config, pkgs, lib, ... }:
 {
+  imports = [
+    ../lf
+  ];
 
   environment.variables = {
     TERM = "xterm-256color";
@@ -47,6 +50,7 @@
     nixos-rebuild="sudo nixos-rebuild";
     personal="sudoedit /etc/nixos/personal.nix";
 
+    ccat="pygmentize";
     burn="pkill -9";
     external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
     f="find . | grep ";
@@ -101,7 +105,6 @@
     inetutils
     iotop
     jq
-    lf
     libnotify
     lm_sensors
     lshw
@@ -111,14 +114,16 @@
     neofetch
     nettools
     nix-index
+    nixpkgs-fmt
     nmap
     ntfs3g
     openssl
+    p7zip
     parted
     patchelf
     pciutils
     psmisc
-    python
+    python3
     python38Packages.pygments
     ranger
     rclone
@@ -128,7 +133,7 @@
     steam-run
     telnet
     tmux
-    unstable.pure-prompt
+    pure-prompt
     unzip
     usbutils
     wget

@@ -1,7 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   imports = [
-    ./unstable.nix
+    #./unstable.nix
   ];
 
   #powerManagement.powertop.enable = true;
@@ -10,7 +10,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   nix.autoOptimiseStore = true;
   nix.maxJobs = 16;
-  system.stateVersion = "20.03";
+  system.stateVersion = "20.09";
   time.timeZone = lib.mkDefault "Europe/Vilnius";
   systemd.extraConfig = "DefaultMemoryAccounting=yes";
 
@@ -23,10 +23,16 @@
   networking = {
     enableIPv6 = lib.mkDefault false;
     firewall.allowPing = lib.mkDefault false;
-    hostId = "12345678";
-    #hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
-    nameservers = lib.mkDefault [ "1.1.1.1" "1.0.0.1" "8.8.8.8" "8.8.4.4" ];
+    hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
+    nameservers = lib.mkDefault [ "1.1.1.1" "1.0.0.1" ];
     networkmanager.enable = lib.mkDefault true;
+  };
+
+  services.resolved = {
+    enable = true;
+    extraConfig = ''
+       DNS=1.1.1.1 1.0.0.1
+    '';
   };
 
   nixpkgs.config = {

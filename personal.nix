@@ -2,7 +2,7 @@
 # Untracked system specific configuration file #
 ################################################
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -14,6 +14,14 @@
   #services.openssh.passwordAuthentication = false;   # Default value is 'false'
   #time.timeZone = "Europe/Vilnius";                  # Default value is 'Europe/Vilnius'
   #boot.tmpOnTmpfs = false;                           # Default value is 'false'
+
+  users.extraUsers.gytis = {
+    shell = pkgs.zsh;
+    isNormalUser = true;
+    description = "Gytis Ivaskevicius";
+    extraGroups = [ "audio" "dialout" "adbusers" "wheel" "networkmanager" "docker" "vboxusers" ];
+    initialPassword = "toor";
+  };
 
   environment.systemPackages = with pkgs; [
 

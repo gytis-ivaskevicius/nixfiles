@@ -15,7 +15,6 @@
     ../modules/styling
     ../modules/sxhkd
     ../modules/termite
-    ../modules/ulauncher
   ];
 
 }

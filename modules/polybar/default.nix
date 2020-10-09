@@ -1,9 +1,13 @@
 { config, pkgs, lib, ... }:
-{
+let polybar = pkgs.polybar.override {
+  i3GapsSupport = true;
+  alsaSupport   = true;
+};
+in {
   imports = [ ../autostart-systemd ];
 
   environment.systemPackages = [
-    pkgs.polybar
+    polybar
   ];
 
   systemd.user.services.polybar = {
@@ -11,7 +15,7 @@
     wantedBy = ["autostart.target"];
     serviceConfig = {
       Restart = "always";
-      ExecStart = "${pkgs.polybar}/bin/polybar -c ${./polybar.conf} main";
+      ExecStart = "${polybar}/bin/polybar -c ${./polybar.conf} main";
     };
   };
 
