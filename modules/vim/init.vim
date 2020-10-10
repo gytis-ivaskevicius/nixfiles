@@ -62,3 +62,6 @@ function! HLNextMovedTrigger ()
     augroup END
     call HLNext()
 endfunction
+
+au BufNewFile,BufRead /*.rasi setf css
+

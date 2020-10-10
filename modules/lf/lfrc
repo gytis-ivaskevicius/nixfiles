@@ -1,15 +1,24 @@
 
 set shell sh
 set shellopts '-eu'
-set previewer pistol
+#set previewer pistol
+set previewer /etc/lf/previewer.sh
 set icons
 set scrolloff 10
 
 # use enter for shell commands
-map <enter> shell
+#map <enter> shell
 # execute current file (must be executable)
 map x $$f
 map X !$f
+#map - clear
+map - $/etc/nixos/modules/lf/draw.sh $f
+
+cmd clear ${{
+  /etc/lf/image.sh clear
+}}
+
+
 
 cmd open ${{
     case $(file --mime-type $f -b) in

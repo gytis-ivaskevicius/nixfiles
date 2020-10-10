@@ -140,5 +140,6 @@
     which
     youtube-dl
     zip
+     w3m ffmpegthumbnailer ueberzug bc highlight
   ];
 }
