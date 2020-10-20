@@ -1,13 +1,10 @@
-name: "Cachix"
+name: Cachix
 on:
   pull_request:
   push:
   workflow_dispatch:
-    inputs:
-      tags:
-        description: 'Manually execute cachix workflow'
 jobs:
-  tests:
+  cachix:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2.3.1
