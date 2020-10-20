@@ -21,7 +21,6 @@
   '';
 
   networking = {
-    enableIPv6 = lib.mkDefault false;
     firewall.allowPing = lib.mkDefault false;
     hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
     nameservers = lib.mkDefault [ "1.1.1.1" "1.0.0.1" ];
@@ -56,6 +55,7 @@
   services = {
     avahi.enable = lib.mkDefault true;
     avahi.nssmdns = lib.mkDefault true;
+    fstrim.enable = true;
     logind.killUserProcesses = lib.mkDefault true;
     openssh.enable = lib.mkDefault true;
     openssh.passwordAuthentication = lib.mkDefault false;

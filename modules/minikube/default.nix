@@ -10,7 +10,7 @@
   # masterAddress = "localhost";
   #};
 
-  imports = [ ./virtualbox ];
+  imports = [ ../virtualbox ];
   environment.systemPackages = with pkgs; [
     minikube
     kubectl

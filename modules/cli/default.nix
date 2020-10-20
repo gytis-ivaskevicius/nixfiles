@@ -116,6 +116,7 @@
     neofetch
     nettools
     nix-index
+    nix-tree
     nixpkgs-fmt
     nmap
     ntfs3g
