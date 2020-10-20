@@ -11,8 +11,8 @@
   nix.autoOptimiseStore = true;
   nix.maxJobs = 16;
   system.stateVersion = "20.09";
-  time.timeZone = lib.mkDefault "Europe/Vilnius";
   systemd.extraConfig = "DefaultMemoryAccounting=yes";
+  time.timeZone = lib.mkDefault "Europe/Vilnius";
 
   system.activationScripts.ldso = lib.stringAfter [ "usrbinenv" ] ''
     mkdir -m 0755 -p /lib64
