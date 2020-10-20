@@ -2,6 +2,10 @@ name: "Cachix"
 on:
   pull_request:
   push:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Manually execute cachix workflow'
 jobs:
   tests:
     runs-on: ubuntu-latest
