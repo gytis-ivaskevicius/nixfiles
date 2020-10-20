@@ -53,7 +53,6 @@
 	};
 
 	environment.systemPackages = with pkgs; [
-		lightlocker
         wmctrl
         xclip
         xdotool

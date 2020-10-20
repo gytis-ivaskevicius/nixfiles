@@ -87,10 +87,12 @@
     ack
     android-file-transfer
     appimage-run
+    bat
     binutils
     cmake
     curl
     dmidecode
+    dnsutils
     entr
     exa
     fd
@@ -123,6 +125,7 @@
     patchelf
     pciutils
     psmisc
+    pure-prompt
     python3
     python38Packages.pygments
     ranger
@@ -130,16 +133,15 @@
     ripgrep
     sshfs
     sshpass
+    sshuttle
     steam-run
     telnet
     tmux
-    pure-prompt
     unzip
     usbutils
     wget
     which
     youtube-dl
     zip
-     w3m ffmpegthumbnailer ueberzug bc highlight
   ];
 }
