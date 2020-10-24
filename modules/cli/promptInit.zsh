@@ -6,7 +6,7 @@ fi
 function nix-cd(){ cd "$(nix eval -f '<nixpkgs>' --raw $1)"}
 
 function nix-args(){
-    nix eval -f '<nixpkgs>' --json $1.override | sed 's/\,"\w\+":\([,}]\)/\1/g' | jq .__functionArgs
+    nix eval -f '<nixpkgs>' --json $1.override 2> /dev/null | sed 's/\,"\w\+":\([,}]\)/\1/g' | jq .__functionArgs
 }
 
 _nix-args() {
@@ -17,7 +17,7 @@ _nix-args() {
 read -d '' query << EOF
     {
       "from": 0,
-      "size": 20,
+      "size": 50,
       "sort": [
         "_score"
       ],
@@ -66,7 +66,7 @@ read -d '' query << EOF
     }
 EOF
 
-    COMPREPLY=$(curl -s 'https://nixos-search-5886075189.us-east-1.bonsaisearch.net/latest-13-unstable/_search' \
+    COMPREPLY=$(curl -s 'https://nixos-search-5886075189.us-east-1.bonsaisearch.net/latest-13-20.09/_search' \
         -H 'authorization: Basic ejNaRko2eTJtUjpkczhDRXZBTFBmOXB1aTdYRw==' \
         -H 'content-type: application/json' \
         --data-binary "$query" \
