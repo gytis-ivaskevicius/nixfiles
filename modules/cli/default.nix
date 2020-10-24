@@ -50,7 +50,6 @@
     nixos-rebuild="sudo nixos-rebuild";
     personal="sudoedit /etc/nixos/personal.nix";
 
-    ccat="pygmentize";
     burn="pkill -9";
     external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
     f="find . | grep ";
@@ -58,7 +57,6 @@
     q="exit";
     sc="sudo systemctl";
     scu="systemctl --user ";
-    ufw="sudo ufw";
 
     cp="cp -i";
     ln="ln -i";

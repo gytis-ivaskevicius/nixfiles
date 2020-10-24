@@ -3,11 +3,16 @@ if [ -n "${commands[fzf-share]}" ]; then
   source "$(fzf-share)/completion.zsh"
 fi
 
+function nix-cd(){ cd "$(nix eval -f '<nixpkgs>' --raw $1)"}
+
 function nix-args(){
     nix eval -f '<nixpkgs>' --json $1.override | sed 's/\,"\w\+":\([,}]\)/\1/g' | jq .__functionArgs
 }
 
 _nix-args() {
+    if [[ -z ${words[2]} ]]; then
+        return
+    fi
 
 read -d '' query << EOF
     {
@@ -38,7 +43,7 @@ read -d '' query << EOF
                   {
                     "multi_match": {
                       "type": "cross_fields",
-                      "query": "jdk",
+                      "query": "${words[2]}",
                       "analyzer": "whitespace",
                       "auto_generate_synonyms_phrase_query": false,
                       "operator": "and",
@@ -69,7 +74,8 @@ EOF
         | noglob jq -r .hits.hits[]._source.package_attr_name)
 
 
-    compadd $COMPREPLY
+    IFS=$'\n' array_of_lines=("${(@f)$(printf $COMPREPLY)}")
+    compadd -d $array_of_lines
 }
 
 compdef _nix-args nix-args
