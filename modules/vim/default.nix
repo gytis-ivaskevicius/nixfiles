@@ -24,7 +24,7 @@ in {
   };
 
   environment.shellAliases = {
-    svi="sudoedit";
+    svi="sudo $EDITOR";
   };
 
   environment.systemPackages = with pkgs; [ custom_nvim ];

@@ -48,7 +48,9 @@
     grep="grep --color=auto";
     diff="diff --color=auto";
     nixos-rebuild="sudo nixos-rebuild";
-    personal="sudoedit /etc/nixos/personal.nix";
+    nix-repl="nix repl '<nixpkgs>' '<nixpkgs/nixos>'";
+    personal="sudo $EDITOR /etc/nixos/personal.nix";
+    opt="manix '' | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | fzf --ansi --preview=\"manix '{}' | sed 's/type: /> type: /g' | bat -l Markdown --color=always --plain\"";
 
     burn="pkill -9";
     external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
