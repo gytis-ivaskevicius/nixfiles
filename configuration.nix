@@ -10,10 +10,10 @@
       ./bundles/i3rice.nix
       ./hardware-configuration.nix
       ./modules/cli
-      ./modules/vim
       ./personal.nix
     ];
 
+    nixpkgs.overlays = [ (import ./pkgs) ];
 
     environment.systemPackages = with pkgs; [
 

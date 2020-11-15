@@ -59,6 +59,7 @@
     q="exit";
     sc="sudo systemctl";
     scu="systemctl --user ";
+    svi="sudo $EDITOR"
 
     cp="cp -i";
     ln="ln -i";
@@ -66,7 +67,6 @@
     mv="mv -i";
     rm="rm -Iv --preserve-root";
     wget="wget -c";
-
 
     c="xclip -selection clipboard";
     cm="xclip"; # Copy to middle click clipboard
@@ -99,6 +99,7 @@
     ffmpeg
     file
     fzf
+    g-neovim
     gcc
     git
     gnumake
