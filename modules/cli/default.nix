@@ -59,7 +59,7 @@
     q="exit";
     sc="sudo systemctl";
     scu="systemctl --user ";
-    svi="sudo $EDITOR"
+    svi="sudo $EDITOR";
 
     cp="cp -i";
     ln="ln -i";
