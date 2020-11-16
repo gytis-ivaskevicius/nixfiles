@@ -20,6 +20,11 @@
     mv -f /lib64/ld-linux-x86-64.so.2.tmp /lib64/ld-linux-x86-64.so.2 # atomically replace
   '';
 
+  # Limits start limit burst to 1sec instead of 5 since it was causing issues with rapid logout/login and units restart
+  systemd.user.extraConfig = ''
+    DefaultStartLimitBurst=1
+  '';
+
   networking = {
     firewall.allowPing = lib.mkDefault false;
     hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
