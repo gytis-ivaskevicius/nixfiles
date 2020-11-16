@@ -24,7 +24,7 @@ in {
     bc
     ffmpegthumbnailer
     imagemagick
-    pistol
+    g-pistol
     poppler
     ueberzug
     wrapped_lf

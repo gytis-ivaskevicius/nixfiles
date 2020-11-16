@@ -5,8 +5,9 @@
   ];
 
   environment.variables = {
-    TERM = "xterm-256color";
+    EDITOR = "nvim";
     LC_ALL = "en_US.UTF-8";
+    TERM = "xterm-256color";
   };
 
   programs.adb.enable = lib.mkDefault true;
