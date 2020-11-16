@@ -1,5 +1,5 @@
 {
-  stdenv, pkgs
+  stdenv, pkgs, neovim
   , enableAirline ? true
   , enableClap ? true
   , enableCoc ? true
@@ -15,7 +15,7 @@
 let
   inherit (stdenv.lib) optionals optional optionalString;
 in
-  pkgs.neovim.override {
+  neovim.override {
     viAlias = true;
     vimAlias = true;
     withNodeJs = true;
