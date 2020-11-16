@@ -14,7 +14,8 @@
     ../modules/polybar
     ../modules/styling
     ../modules/sxhkd
-    ../modules/termite
   ];
+
+  environment.systemPackages = with pkgs; [ g-termite ];
 
 }

@@ -55,6 +55,8 @@
     burn="pkill -9";
     external-ip="dig +short myip.opendns.com @resolver1.opendns.com";
     f="find . | grep ";
+    v="$EDITOR $(fzf)";
+    sv="sudo $EDITOR $(fzf)";
     killall="pkill";
     q="exit";
     sc="sudo systemctl";
