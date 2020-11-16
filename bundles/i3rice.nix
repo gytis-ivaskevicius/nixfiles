@@ -16,6 +16,4 @@
     ../modules/sxhkd
   ];
 
-  environment.systemPackages = with pkgs; [ g-termite ];
-
 }

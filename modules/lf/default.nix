@@ -16,6 +16,13 @@ let
 
     ${pkgs.lf}/bin/lf $@
   '';
+  lf = pkgs.symlinkJoin {
+    name = "lf";
+    paths = [
+      wrapped_lf
+      pkgs.lf
+    ];
+  };
 in {
 
   environment.systemPackages = with pkgs; [
@@ -27,7 +34,7 @@ in {
     g-pistol
     poppler
     ueberzug
-    wrapped_lf
+    lf
     zip
 #     pkgs.epub-thumbnailer
   ];
