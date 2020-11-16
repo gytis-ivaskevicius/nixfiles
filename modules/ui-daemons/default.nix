@@ -13,94 +13,74 @@ let
     i3GapsSupport = true;
     alsaSupport   = true;
   };
-  systemd-common = {
+  sc-base = {
     wantedBy = ["autostart.target"];
     serviceConfig = {
       Restart = "always";
     };
   };
 in {
-
-  systemd.user.services.polybar = {
-    description = "Polybar system status bar";
-    wantedBy = ["autostart.target"];
-    serviceConfig = {
-      Restart = "always";
-      ExecStart = "${polybar}/bin/polybar -c ${./polybar.conf} main";
-    };
-  };
-
-  systemd.user.services.feh = {
-    description = "Feh";
-    wantedBy = ["autostart.target"];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "${pkgs.feh}/bin/feh --randomize --no-fehbg --bg-fill ${./Wallpapers}";
-    };
-  };
+  environment.systemPackages = with pkgs; [
+    sxhkd
+    i3lock-pixeled
+    g-rofi
+  ];
 
   environment.etc = {
     "xdg/dunst/dunstrc".source = ./dunst.conf;
   };
 
-  systemd.user.services.ulauncher = {
-    description = "Ulauncher";
-    wantedBy = ["autostart.target"];
-    serviceConfig = {
-      Restart = "always";
-      ExecStart = "/run/current-system/sw/bin/execWithEnv ${pkgs.ulauncher}/bin/ulauncher --hide-window";
-    };
-  };
+
 
   systemd.user.targets.autostart = {
     description = "Target to bind applications that should be started after VM";
   };
 
-  systemd.user.services.nm-applet = {
-    description = "Network Manager Applet";
-    wantedBy = ["autostart.target"];
-    serviceConfig = {
-      Restart = "always";
-      ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
-    };
-  };
+  systemd.user.services = {
+    polybar = (sc-base // {
+      description = "Polybar system status bar";
+      serviceConfig.ExecStart = "${polybar}/bin/polybar -c ${./polybar.conf} main";
+    });
 
-  systemd.user.services.flameshot = {
-    description = "Flameshot";
-    wantedBy = ["autostart.target"];
-    serviceConfig = {
-      Restart = "always";
-      ExecStart = "/run/current-system/sw/bin/execWithEnv ${pkgs.flameshot}/bin/flameshot";
-    };
-  };
+    feh = (sc-base // {
+      description = "Feh";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${pkgs.feh}/bin/feh --randomize --no-fehbg --bg-fill ${./Wallpapers}";
+      };
+    });
 
-  systemd.user.services.polkit-ui = {
-    description = "Polkit UI popup";
-    wantedBy = ["autostart.target"];
-    serviceConfig = {
-      Restart = "always";
-      ExecStart = "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit";
-    };
-  };
+    ulauncher = (sc-base // {
+      description = "Ulauncher";
+      serviceConfig.ExecStart = "/run/current-system/sw/bin/execWithEnv ${pkgs.ulauncher}/bin/ulauncher --hide-window";
+    });
 
-  systemd.user.services.autorandr = {
-    description = "Autorandr execution hook";
-    wantedBy = ["autostart.target"];
-    serviceConfig = {
-      Type = "oneshot";
-      ExecStart = "/run/current-system/sw/bin/execWithEnv ${pkgs.autorandr}/bin/autorandr --change";
-    };
-  };
+    nm-applet = (sc-base // {
+      description = "Network Manager Applet";
+      serviceConfig.ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+    });
 
-  environment.systemPackages = with pkgs; [ sxhkd i3lock-pixeled g-rofi ];
+    flameshot = (sc-base // {
+      description = "Flameshot";
+      serviceConfig.ExecStart = "/run/current-system/sw/bin/execWithEnv ${pkgs.flameshot}/bin/flameshot";
+    });
 
-  systemd.user.services.sxhkd = {
-    description = "Simple X hotkey daemon";
-    wantedBy = ["autostart.target"];
-    serviceConfig = {
-      Restart = "always";
-      ExecStart = "/run/current-system/sw/bin/execWithEnv ${pkgs.sxhkd}/bin/sxhkd -c ${./sxhkd.conf}";
-    };
-  };
+    polkit-ui = (sc-base // {
+      description = "Polkit UI popup";
+      serviceConfig.ExecStart = "${pkgs.pantheon.pantheon-agent-polkit}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit";
+    });
 
+    autorandr = (sc-base // {
+      description = "Autorandr execution hook";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/run/current-system/sw/bin/execWithEnv ${pkgs.autorandr}/bin/autorandr --change";
+      };
+    });
+
+    sxhkd = (sc-base // {
+      description = "Simple X hotkey daemon";
+      serviceConfig.ExecStart = "/run/current-system/sw/bin/execWithEnv ${pkgs.sxhkd}/bin/sxhkd -c ${./sxhkd.conf}";
+    });
+  }
 }
