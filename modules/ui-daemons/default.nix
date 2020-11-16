@@ -3,15 +3,22 @@
 
 let
   execWithEnv = pkgs.writeScriptBin "execWithEnv" ''
-  #!${pkgs.stdenv.shell}
+    #!${pkgs.stdenv.shell}
 
     unset __NIXOS_SET_ENVIRONMENT_DONE
     source /etc/profile
-    exec "$@"'';
-    polybar = pkgs.polybar.override {
-      i3GapsSupport = true;
-      alsaSupport   = true;
+    exec "$@"
+  '';
+  polybar = pkgs.polybar.override {
+    i3GapsSupport = true;
+    alsaSupport   = true;
+  };
+  systemd-common = {
+    wantedBy = ["autostart.target"];
+    serviceConfig = {
+      Restart = "always";
     };
+  };
 in {
 
   systemd.user.services.polybar = {
