@@ -1,8 +1,5 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [
-    ../lf
-  ];
 
   environment.variables = {
     EDITOR = "nvim";
@@ -102,6 +99,7 @@
     ffmpeg
     file
     fzf
+    g-lf
     g-neovim
     gcc
     git
