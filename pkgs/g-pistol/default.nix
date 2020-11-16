@@ -1,28 +1,32 @@
-{ pkgs, pistol }:
+{ pkgs, pistol, bat, mediainfo
+, batTheme ? "base16"
+}:
 
 let
+  b = "${bat}/bin/bat --paging=never --plain --theme=${batTheme} --color=always";
+  f = "%pistol-filename%";
   pistol-config = pkgs.writeText "pistol.conf" ''
-    ^(video|image|audio)/*            mediainfo %pistol-filename%
-    application/csv                   column -s, -t %pistol-filename%
-    application/json                  bat --paging=never --plain --theme=base16 --color=always %pistol-filename%
-    text/plain                        bat --paging=never --plain --theme=base16 --color=always %pistol-filename%
+    ^(video|image|audio)/*            ${mediainfo}/bin/mediainfo ${f}
+    application/csv                   column -s, -t ${f}
+    application/json                  ${b} ${f}
+    text/plain                        ${b} ${f}
 
-    fpath .*.(kt|kts|properties)$     bat --paging=never --plain --theme=base16 --color=always %pistol-filename%
-    fpath .*.(pom|iml)$               bat --language xml --paging=never --plain --theme=base16 --color=always %pistol-filename%
-    fpath .*.(repositories|sha1)$     bat --language properties --paging=never --plain --theme=base16 --color=always %pistol-filename%
-    fpath .*.jmod                     jmod list %pistol-filename%
-    fpath gradlew                     bat --paging=never --plain --theme=base16 --color=always %pistol-filename%
+    fpath .*.(kt|kts|properties)$     ${b} ${f}
+    fpath .*.(pom|iml)$               ${b} --language xml ${f}
+    fpath .*.(repositories|sha1)$     ${b} --language properties ${f}
+    fpath .*.jmod                     jmod list ${f}
+    fpath gradlew                     ${b} ${f}
 
-    fpath .*.(7z)$                    7z l %pistol-filename%
-    fpath .*.(iso)$                   iso-info --no-header -l %pistol-filename%
-    fpath .*.(o)$                     nm %pistol-filename% | less
-    fpath .*.(rar)$                   unrar l %pistol-filename%
-    fpath .*.(tar)$                   tar tf %pistol-filename%
-    fpath .*.(tar.bz2|tbz2)$          tar tjf %pistol-filename%
-    fpath .*.(tar.txz|txz)$           xz --list %pistol-filename%
-    fpath .*.(tgz|tar.gz)$            tar tzf %pistol-filename%
-    fpath .*.(zip|jar|war|ear|oxt)$   unzip -l %pistol-filename%
-    fpath .*.[1-8]$                   man %pistol-filename% | col -b
+    fpath .*.(7z)$                    7z l ${f}
+    fpath .*.(iso)$                   iso-info --no-header -l ${f}
+    fpath .*.(o)$                     nm ${f} | less
+    fpath .*.(rar)$                   unrar l ${f}
+    fpath .*.(tar)$                   tar tf ${f}
+    fpath .*.(tar.bz2|tbz2)$          tar tjf ${f}
+    fpath .*.(tar.txz|txz)$           xz --list ${f}
+    fpath .*.(tgz|tar.gz)$            tar tzf ${f}
+    fpath .*.(zip|jar|war|ear|oxt)$   unzip -l ${f}
+    fpath .*.[1-8]$                   man ${f} | col -b
   '';
   wrapped = pkgs.writeShellScriptBin "pistol" "${pistol}/bin/pistol --config ${pistol-config} $@";
 in
