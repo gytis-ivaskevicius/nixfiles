@@ -1,10 +1,9 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, ... }:
 {
   imports = [
     ../autostart-systemd
-    ../rofi
   ];
-  environment.systemPackages = [ pkgs.sxhkd pkgs.i3lock-pixeled ];
+  environment.systemPackages = with pkgs; [ sxhkd i3lock-pixeled g-rofi ];
 
   systemd.user.services.sxhkd = {
     description = "Simple X hotkey daemon";
