@@ -2,6 +2,10 @@ name: "Cachix"
 on:
   pull_request:
   push:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Manual dispatch'
 jobs:
   builds:
     name: Build configuration
