@@ -9,10 +9,6 @@ let
     source /etc/profile
     exec "$@"
   '';
-  polybar = pkgs.polybar.override {
-    i3GapsSupport = true;
-    alsaSupport   = true;
-  };
   sc-base = {
     wantedBy = ["autostart.target"];
     serviceConfig = {
@@ -24,6 +20,7 @@ in {
     sxhkd
     i3lock-pixeled
     g-rofi
+    execWithEnv
   ];
 
   environment.etc = {
@@ -39,7 +36,7 @@ in {
   systemd.user.services = {
     polybar = (sc-base // {
       description = "Polybar system status bar";
-      serviceConfig.ExecStart = "${polybar}/bin/polybar -c ${./polybar.conf} main";
+      serviceConfig.ExecStart = "${pkgs.polybarFull}/bin/polybar -c ${./polybar.conf} main";
     });
 
     feh = (sc-base // {
@@ -82,5 +79,5 @@ in {
       description = "Simple X hotkey daemon";
       serviceConfig.ExecStart = "/run/current-system/sw/bin/execWithEnv ${pkgs.sxhkd}/bin/sxhkd -c ${./sxhkd.conf}";
     });
-  }
+  };
 }
