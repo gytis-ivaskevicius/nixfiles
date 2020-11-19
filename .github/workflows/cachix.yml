@@ -21,6 +21,6 @@ jobs:
           experimental-features = nix-command flakes
     - uses: cachix/cachix-action@v8
       with:
-        name: nobbz
+        name: gytix
         signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
     - run: nix build .#nixosConfigurations.GytisOS.config.system.build.toplevel -L
