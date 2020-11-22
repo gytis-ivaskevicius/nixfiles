@@ -2,18 +2,17 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ../modules/java
-    ../modules/node
-  ];
-
   environment.systemPackages = with pkgs; [
     docker_compose
     gitkraken
+    gradle
     insomnia
     jetbrains.idea-ultimate
+    maven
+    visualvm
   ];
 
+  ### Docker
   virtualisation.docker = {
     autoPrune.enable = true;
     enable = true;
@@ -22,6 +21,7 @@
     liveRestore = false;
   };
 
+  ### VirtualBox
   virtualisation.virtualbox = {
     host.enable = true;
 
@@ -33,5 +33,19 @@
     #virtualisation.virtualbox.guest.enable = true;
   };
 
+  ### Java
+  runtimes.java.additionalPackages = {
+    "11" = pkgs.jdk11;
+    "14" = pkgs.jdk14;
+  };
+  programs.java.enable = true;
+  programs.java.package = pkgs.jdk11;
 
+  ### Node
+  programs.npm.enable = true;
+  programs.npm.package = pkgs.nodejs-14_x;
+  runtimes.node.additionalPackages = {
+    "10" = pkgs.nodejs-10_x;
+    "14" = pkgs.nodejs-14_x;
+  };
 }

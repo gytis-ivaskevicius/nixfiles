@@ -47,6 +47,7 @@
     gc="git commit";
     gcm="git commit -m";
     gs="git status";
+    gsb="git status -sb";
 
     grep="grep --color=auto";
     diff="diff --color=auto";

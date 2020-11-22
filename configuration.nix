@@ -3,6 +3,7 @@
 {
   imports =
     [
+      ./nix-options
       ./bundles/apps.nix
       ./bundles/base.nix
       ./bundles/clean_home.nix
