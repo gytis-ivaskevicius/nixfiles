@@ -43,6 +43,11 @@
   };
 
   environment.shellAliases = {
+    ga="git add";
+    gc="git commit";
+    gcm="git commit -m";
+    gs="git status";
+
     grep="grep --color=auto";
     diff="diff --color=auto";
     nixos-rebuild="sudo nixos-rebuild";
