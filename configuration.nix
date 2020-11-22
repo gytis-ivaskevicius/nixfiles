@@ -9,7 +9,7 @@
       ./bundles/clean_home.nix
       ./bundles/dev.nix
       ./bundles/i3rice.nix
-      ./modules/cli
+      ./bundles/cli
       ./personal.nix
 (modulesPath + "/installer/scan/not-detected.nix")
     ];
