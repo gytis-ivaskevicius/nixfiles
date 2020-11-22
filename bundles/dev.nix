@@ -34,7 +34,7 @@
   };
 
   ### Java
-  runtimes.java.additionalPackages = {
+  gytix.java.additionalPackages = {
     "11" = pkgs.jdk11;
     "14" = pkgs.jdk14;
   };
@@ -44,7 +44,7 @@
   ### Node
   programs.npm.enable = true;
   programs.npm.package = pkgs.nodejs-14_x;
-  runtimes.node.additionalPackages = {
+  gytix.node.additionalPackages = {
     "10" = pkgs.nodejs-10_x;
     "14" = pkgs.nodejs-14_x;
   };

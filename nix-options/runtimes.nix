@@ -1,16 +1,16 @@
 { config, pkgs, lib, ... }:
 
 let
-  nodeCfg = config.runtimes.node;
-  javaCfg = config.runtimes.java;
+  nodeCfg = config.gytix.node;
+  javaCfg = config.gytix.java;
 in {
   options = {
 
-    runtimes.java.additionalPackages = lib.mkOption {
+    gytix.java.additionalPackages = lib.mkOption {
       description = ''
         Java packages to install. Typical values are pkgs.jdk or pkgs.jre. Example:
         ```
-          runtimes.java.additionalPackages = {
+          gytix.java.additionalPackages = {
             "11" = pkgs.jdk11;
             "14" = pkgs.jdk14;
           };
@@ -23,11 +23,11 @@ in {
     };
 
 
-    runtimes.node.additionalPackages = lib.mkOption {
+    gytix.node.additionalPackages = lib.mkOption {
       description = ''
         Node packages to install. Typical values are pkgs.nodejs-10_x or pkgs.nodejs-14_x. Example:
         ```
-          runtimes.node.additionalPackages = {
+          gytix.node.additionalPackages = {
             "10" = pkgs.nodejs-10_x;
             "14" = pkgs.nodejs-14_x;
           };
