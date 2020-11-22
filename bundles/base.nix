@@ -1,9 +1,5 @@
 { config, pkgs, lib, ... }:
 {
-  imports = [
-    #./unstable.nix
-  ];
-
   #powerManagement.powertop.enable = true;
   console.keyMap = "us";
   fileSystems."/boot".label = "BOOT";
