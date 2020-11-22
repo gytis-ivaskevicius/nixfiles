@@ -10,8 +10,7 @@ let
       default = pkg;
     };
   };
-  #mkService = enabled: desc: exec: lib.mkIf enabled {
-  mkService = enabled: desc: exec: {
+  mkService = enabled: desc: exec: lib.mkIf enabled {
     wantedBy = ["autostart.target"];
     description = desc;
     serviceConfig = {
@@ -19,8 +18,7 @@ let
       ExecStart = exec;
     };
   };
-  #mkOneshot = enabled: desc: exec: lib.mkIf enabled {
-  mkOneshot = enabled: desc: exec: {
+  mkOneshot = enabled: desc: exec: lib.mkIf enabled {
     wantedBy = ["autostart.target"];
     description = desc;
     serviceConfig = {
@@ -81,7 +79,7 @@ in {
         "Simple X hotkey daemon"
         "/run/current-system/sw/bin/execWithEnv ${cfg.sxhkd.package}/bin/sxhkd -c ${./sxhkd.conf}";
     };
-  };
 
+  };
 }
 
