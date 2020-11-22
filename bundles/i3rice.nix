@@ -3,9 +3,7 @@
 
 {
   imports = [
-    ../modules/compton
     ../modules/i3
-    ../modules/styling
   ];
 
   gytix.ui.autorandr.enable = true;

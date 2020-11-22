@@ -1,14 +1,27 @@
 { config, pkgs, lib, ... }:
-{
+
+let
+  settings = ''
+    [Settings]
+    gtk-application-prefer-dark-theme=true
+    gtk-button-images=0
+    gtk-cursor-theme-name=breeze_cursors
+    gtk-fallback-icon-theme=ePapirus
+    gtk-icon-theme-name=ePapirus
+    gtk-menu-images=0
+    gtk-primary-button-warps-slider=0
+    gtk-theme-name=Numix
+    gtk-toolbar-style=GTK_TOOLBAR_ICONS
+  '';
+in {
 
   environment.systemPackages = with pkgs; [
     numix-gtk-theme
     papirus-icon-theme
-    qt5.qtbase
   ];
 
   environment.etc = {
-    "xdg/gtk-3.0/settings.ini".source = ./settings.ini;
+    "xdg/gtk-3.0/settings.ini".text = settings;
   };
 
   fonts = {
@@ -34,8 +47,5 @@
       emoji = lib.mkDefault [ "Twitter Color Emoji" ];
     };
   };
-
-  console.packages = with pkgs; [ terminus_font ];
-  console.font = "ter-v12n";
 
 }
