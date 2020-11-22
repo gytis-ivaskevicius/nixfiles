@@ -28,7 +28,7 @@
     "super + g" = "google-chrome-stable";
     "super + i" = "idea-ultimate";
     "super + k" = "gitkraken";
-    "super + q" = "wmctrl -c :ACTIVE:";
+    "super + q" = "${pkgs.wmctrl}/bin/wmctrl -c :ACTIVE:";
     "super + shift + b" = "$BROWSER --incognito";
     "super + shift + g" = "google-chrome-stable --incognito";
     "super + w" = "$TERMINAL -e ranger";
