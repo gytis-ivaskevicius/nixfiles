@@ -8,6 +8,7 @@
   };
 
   programs.adb.enable = lib.mkDefault true;
+
   programs.zsh = {
     autosuggestions.enable = true;
     enable = lib.mkDefault true;
@@ -16,11 +17,9 @@
     histSize = 100000;
     syntaxHighlighting.enable = true;
     ohMyZsh.enable = true;
-    ohMyZsh.plugins = [
-      "git"
-      "git-extras"
-    ];
+    ohMyZsh.plugins = [ "sudo" "z" ];
 
+    interactiveShellInit = "source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh";
     promptInit = builtins.readFile ./promptInit.zsh;
     shellInit = builtins.readFile ./shellInit.zsh;
 
@@ -40,6 +39,7 @@
       "INC_APPEND_HISTORY"
       "SHARE_HISTORY"
     ];
+
   };
 
   environment.shellAliases = {
@@ -84,6 +84,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    g-lf
     ack
     android-file-transfer
     appimage-run
@@ -99,7 +100,6 @@
     ffmpeg
     file
     fzf
-    g-lf
     g-neovim
     gcc
     git
