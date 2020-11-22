@@ -1,16 +1,27 @@
 { config, pkgs, lib, ... }:
 
+with lib;
+
 let
   cfg = config.gytix.ui;
+  keybindingsStr = concatStringsSep "\n" (
+    mapAttrsToList (hotkey: command:
+      optionalString (command != null) ''
+        ${hotkey}
+          ${command}
+      ''
+    )
+    cfg.keybindings
+  );
   daemonOption = pkg: {
-    enable = lib.mkEnableOption "Enable application on starup";
-    package = lib.mkOption {
+    enable = mkEnableOption "Enable application on starup";
+    package = mkOption {
       description = "Package which will be used";
-      type = lib.types.package;
+      type = types.package;
       default = pkg;
     };
   };
-  mkService = enabled: desc: exec: lib.mkIf enabled {
+  mkService = enabled: desc: exec: mkIf enabled {
     wantedBy = ["autostart.target"];
     description = desc;
     serviceConfig = {
@@ -18,7 +29,7 @@ let
       ExecStart = exec;
     };
   };
-  mkOneshot = enabled: desc: exec: lib.mkIf enabled {
+  mkOneshot = enabled: desc: exec: mkIf enabled {
     wantedBy = ["autostart.target"];
     description = desc;
     serviceConfig = {
@@ -38,6 +49,19 @@ in {
     gytix.ui.polybar   = daemonOption pkgs.polybarFull;
     gytix.ui.sxhkd     = daemonOption pkgs.sxhkd;
     gytix.ui.ulauncher = daemonOption pkgs.ulauncher;
+
+    gytix.ui.keybindings = mkOption {
+      type = types.attrsOf (types.nullOr types.str);
+      default = {};
+      description = "An attribute set that assigns hotkeys to commands.";
+      example = literalExample ''
+          {
+          "super + shift + {r,c}" = "i3-msg {restart,reload}";
+          "super + {s,w}"         = "i3-msg {stacking,tabbed}";
+          }
+      '';
+    };
+
   };
 
   config = {
@@ -77,9 +101,9 @@ in {
 
       sxhkd = mkService cfg.sxhkd.enable
         "Simple X hotkey daemon"
-        "/run/current-system/sw/bin/execWithEnv ${cfg.sxhkd.package}/bin/sxhkd -c ${./sxhkd.conf}";
-    };
+        "/run/current-system/sw/bin/execWithEnv ${cfg.sxhkd.package}/bin/sxhkd -c ${pkgs.writeText "sxhkd.conf" keybindingsStr}";
 
+    };
   };
 }
 
