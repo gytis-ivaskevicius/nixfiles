@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
     owner = "wfxr";
     repo = "forgit";
     rev = "95526b3130c53bba22f8997b9b2f840ea3632a2f";
-    sha256 = "1xwgdd2rw47qk717d8035vfs2kspc4sha04hikz9w6si2x5hfr16";
+    sha256 = "8dpHcFiybHZYBh3Oo9QJ27M9dXe7neJcS3yvK12yD1g=";
   };
 
   installPhase = ''
