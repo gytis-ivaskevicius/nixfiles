@@ -22,22 +22,16 @@ let
     };
   };
   mkService = enabled: desc: exec: mkIf enabled {
-    wantedBy = ["autostart.target"];
+    after = [ "graphical-session-pre.target" ];
+    partOf = [ "graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
     description = desc;
     serviceConfig = {
       Restart = "always";
       ExecStart = exec;
     };
   };
-  mkOneshot = enabled: desc: exec: mkIf enabled {
-    wantedBy = ["autostart.target"];
-    description = desc;
-    serviceConfig = {
-      Restart = "always";
-      Type = "oneshot";
-      ExecStart = exec;
-    };
-  };
+  mkOneshot = enabled: desc: exec: mkIf enabled (mkService enabled desc exec // {serviceConfig.Type = "oneshot";});
 in {
 
   options = {
@@ -65,8 +59,16 @@ in {
   };
 
   config = {
+    environment.etc.xprofile.text = ''
+        systemctl --user stop graphical-session.target graphical-session-pre.target
+        systemctl --user import-environment
+        systemctl --user start autostart.target
+    '';
+
     systemd.user.targets.autostart = {
       description = "Target to bind applications that should be started after VM";
+      requires = [ "graphical-session-pre.target" ];
+      bindsTo = [ "graphical-session.target" ];
     };
 
     systemd.user.services = {
@@ -80,16 +82,15 @@ in {
 
       ulauncher = mkService cfg.ulauncher.enable
         "Ulauncher - application launcher"
-        "/run/current-system/sw/bin/execWithEnv ${cfg.ulauncher.package}/bin/ulauncher --hide-window";
+        "${cfg.ulauncher.package}/bin/ulauncher --hide-window";
 
       nm-applet = mkService cfg.nm-applet.enable
         "Network Manager Applet"
         "${cfg.nm-applet.package}/bin/nm-applet";
 
-
       flameshot = mkService cfg.flameshot.enable
         "Flameshot - desktop screenshot utility"
-        "/run/current-system/sw/bin/execWithEnv ${cfg.flameshot.package}/bin/flameshot";
+        "${cfg.flameshot.package}/bin/flameshot";
 
       polkit-ui = mkService cfg.polkit-ui.enable
         "Polkit UI popup"
@@ -97,11 +98,11 @@ in {
 
       autorandr = mkOneshot cfg.autorandr.enable
         "Autorandr - automatic monitors management"
-        "/run/current-system/sw/bin/execWithEnv ${cfg.autorandr.package}/bin/autorandr --change";
+        "${cfg.autorandr.package}/bin/autorandr --change";
 
       sxhkd = mkService cfg.sxhkd.enable
         "Simple X hotkey daemon"
-        "/run/current-system/sw/bin/execWithEnv ${cfg.sxhkd.package}/bin/sxhkd -c ${pkgs.writeText "sxhkd.conf" keybindingsStr}";
+        "${cfg.sxhkd.package}/bin/sxhkd -c ${pkgs.writeText "sxhkd.conf" keybindingsStr}";
 
     };
   };

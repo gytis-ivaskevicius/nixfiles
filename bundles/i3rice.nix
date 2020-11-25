@@ -2,7 +2,6 @@
 
 let
   i3config = ''
-    exec systemctl --user import-environment; systemctl --user restart autostart.target
     exec --no-startup-id /etc/i3/autotiling.sh
 
     set $mod Mod4
@@ -151,7 +150,6 @@ in {
     enable = true;
     configFile = pkgs.writeText "i3.conf" i3config;
     extraPackages = [];
-    extraSessionCommands = "systemd --user restart autostart.target";
     package = pkgs.i3-gaps;
   };
 
@@ -185,7 +183,7 @@ in {
     "alt + shift + l" = "${pkgs.i3lock-pixeled}/bin/i3lock-pixeled";
     "super + Return" = "$TERMINAL";
     "super + b" = "$BROWSER";
-    "super + d" = "${pkgs.rofi}/bin/rofi -show drun -modi drun";
+    "super + d" = "${pkgs.g-rofi}/bin/rofi -show drun -modi drun";
     "super + g" = "google-chrome-stable";
     "super + i" = "idea-ultimate";
     "super + k" = "gitkraken";
