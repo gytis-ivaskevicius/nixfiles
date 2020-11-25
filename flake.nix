@@ -6,6 +6,9 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable }: {
 
+    packages."x86_64-linux" = import ./pkgs;
+
+
     nixosConfigurations.GytisOS = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
