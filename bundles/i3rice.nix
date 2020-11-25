@@ -2,7 +2,7 @@
 
 let
   i3config = ''
-    exec --no-startup-id /etc/i3/autotiling.sh
+    exec --no-startup-id ${./autotiling.sh}
 
     set $mod Mod4
 
@@ -141,10 +141,6 @@ in {
   imports = [
     ./xorg.nix
   ];
-
-  environment.etc = {
-    "i3/autotiling.sh".source = ./autotiling.sh;
-  };
 
   services.xserver.windowManager.i3 = {
     enable = true;

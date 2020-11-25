@@ -21,7 +21,6 @@
 
     interactiveShellInit = "source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh";
     promptInit = builtins.readFile ./promptInit.zsh;
-    shellInit = builtins.readFile ./shellInit.zsh;
 
     setOptions = [
       "noautomenu"
