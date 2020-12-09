@@ -182,7 +182,7 @@ in {
     "super + d" = "${pkgs.g-rofi}/bin/rofi -show drun -modi drun";
     "super + g" = "google-chrome-stable";
     "super + i" = "idea-ultimate";
-    "super + k" = "gitkraken";
+    #"super + k" = "gitkraken";
     "super + q" = "${pkgs.wmctrl}/bin/wmctrl -c :ACTIVE:";
     "super + shift + b" = "$BROWSER --incognito";
     "super + shift + g" = "google-chrome-stable --incognito";
