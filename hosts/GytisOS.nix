@@ -3,18 +3,17 @@
 {
   imports =
     [
-      ./nix-options
-      ./bundles/apps.nix
-      ./bundles/base.nix
-      ./bundles/clean_home.nix
-      ./bundles/dev.nix
-      ./bundles/i3rice.nix
-      ./bundles/cli
-      ./personal.nix
+      ../bundles/apps.nix
+      ../bundles/base.nix
+      ../bundles/clean_home.nix
+      ../bundles/dev.nix
+      ../bundles/i3rice.nix
+      ../bundles/cli
+      ../personal.nix
 (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-    nixpkgs.overlays = [ (import ./pkgs) ];
+    #nixpkgs.overlays = [ (import ../pkgs) ];
 
     environment.systemPackages = with pkgs; [
 

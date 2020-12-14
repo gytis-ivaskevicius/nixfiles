@@ -1,28 +1,31 @@
 {
   "nodes": {
-    "nixpkgs": {
+    "home": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
       "locked": {
-        "lastModified": 1607432359,
-        "narHash": "sha256-hfznJ/1ikvkSQ7N1/+CWFK8XzXKOsQZA8Hsj2fnc7nE=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "78dc359abf8217da2499a6da0fcf624b139d7ac3",
+        "lastModified": 1604441492,
+        "narHash": "sha256-Wo7WqdwNQnWHmhyZuhVLrAEpCuZl88cA9ttxkiCTekY=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "63f299b3347aea183fc5088e4d6c4a193b334a41",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-20.09",
-        "repo": "nixpkgs",
+        "owner": "nix-community",
+        "ref": "release-20.09",
+        "repo": "home-manager",
         "type": "github"
       }
     },
-    "nixpkgs-unstable": {
+    "master": {
       "locked": {
-        "lastModified": 1607510526,
-        "narHash": "sha256-NBG3NlTIzKE8a1Df6YidyG8B2JeOtLIrdQpa8FvABjI=",
+        "lastModified": 1607939004,
+        "narHash": "sha256-3ivVZ5Eieex7J3JwjVACCNomxnRJEjJFl2AJLs4VyNo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "2f26107b808791e358f0af59f25b016376e08216",
+        "rev": "f3103172fdfa364f5b1e153956f77ad83d76342b",
         "type": "github"
       },
       "original": {
@@ -31,10 +34,39 @@
         "type": "indirect"
       }
     },
+    "nixos": {
+      "locked": {
+        "lastModified": 1607928887,
+        "narHash": "sha256-vbWM+JXE8rEsvRsYRYPT5CZqH+Io0QXQJoucL1HBCMk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ec4b0d3c2ad3bb5852f6513ea07f0d865607b67f",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "release-20.09",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1607892887,
+        "narHash": "sha256-52ea0DqQ3iOJ3624dGuPMPM2AvHLgaCxx8ejiuehX6M=",
+        "path": "/nix/store/n103knif3lfprk65111hb68nmzissq66-source",
+        "rev": "583a1fed52716d82e5f35ca5915d26ab96f8ccbf",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
     "root": {
       "inputs": {
-        "nixpkgs": "nixpkgs",
-        "nixpkgs-unstable": "nixpkgs-unstable"
+        "home": "home",
+        "master": "master",
+        "nixos": "nixos"
       }
     }
   },

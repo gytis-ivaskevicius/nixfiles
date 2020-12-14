@@ -1,9 +1,9 @@
-self: super: rec {
-  g-alacritty = super.callPackage ./g-alacritty { };
-  g-lf = super.callPackage ./g-lf { };
-  g-neovim = super.callPackage ./g-neovim { };
-  g-pistol = super.callPackage ./g-pistol { };
-  g-rofi = super.callPackage ./g-rofi { };
-  g-termite = super.callPackage ./g-termite { };
-  zsh-forgit = super.callPackage ./zsh-forgit { };
+final: prev: {
+  g-alacritty = prev.callPackage ./g-alacritty { };
+  g-lf = prev.callPackage ./g-lf { };
+  g-neovim = prev.callPackage ./g-neovim { };
+  g-pistol = prev.callPackage ./g-pistol { };
+  g-rofi = prev.callPackage ./g-rofi { };
+  g-termite = prev.callPackage ./g-termite { };
+  zsh-forgit = prev.callPackage ./zsh-forgit { };
 }
