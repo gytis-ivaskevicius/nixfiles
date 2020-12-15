@@ -1,5 +1,5 @@
 {
-  description = "A highly structured configuration database.";
+  description = "A highly awesome system configuration.";
 
   inputs = {
     master.url = "nixpkgs/master";
@@ -7,47 +7,39 @@
     home.url = "github:nix-community/home-manager/release-20.09";
   };
 
-  outputs = inputs@{ self, master, nixos, home }:
+  outputs = inputs@{ self, ...}:
   let
     inherit (self.inputs.nixos) lib;
-    inherit (builtins) listToAttrs;
-    inherit (lib) removeSuffix recursiveUpdate genAttrs;
+    inherit (lib) recursiveUpdate;
+    inherit (utils) pathsToImportedAttrs ;
+    utils = import ./utility-functions.nix {inherit lib;};
 
-      # Generate an attribute set by mapping a function over a list of values.
-      genAttrs' = values: f: listToAttrs (map f values);
+    pkgImport = pkgs: import pkgs {
+      inherit system;
+      config = { allowUnfree = true; };
+    };
 
-      pathsToImportedAttrs = paths: genAttrs' paths (path: {
-        name = removeSuffix ".nix" (baseNameOf path);
-        value = import path;
-      });
+    system = "x86_64-linux";
 
-      pkgImport = pkgs: import pkgs {
-        inherit system;
-        config = { allowUnfree = true; };
-      };
-
-      system = "x86_64-linux";
+    unstable-pkgs = pkgImport self.inputs.master;
+    pkgset = {
+      inherit unstable-pkgs;
       os-pkgs = pkgImport self.inputs.nixos;
-      unstable-pkgs = pkgImport self.inputs.master;
-      unstable-overrides = (final: prev: [
-        unstable-pkgs.jdk
-        #jetbrains.idea-ultimate
-      ]);
-
-      pkgset = {
-        inherit os-pkgs unstable-pkgs unstable-overrides;
-        inputs = self.inputs;
-        custom-pkgs = import ./pkgs;
-        nix-options = [
-          ./nix-options/ui.nix
-          ./nix-options/runtimes.nix
-        ];
-      };
+      package-overrides = with unstable-pkgs; [
+        manix
+      ];
+      inputs = self.inputs;
+      custom-pkgs = import ./pkgs;
+      nix-options = [
+        ./nix-options/ui.nix
+        ./nix-options/runtimes.nix
+      ];
+    };
   in
   with pkgset;
   {
     nixosConfigurations = import ./hosts (recursiveUpdate inputs {
-      inherit lib pkgset system ;
+      inherit lib pkgset system utils;
     });
 
     overlay = pkgset.custom-pkgs;
