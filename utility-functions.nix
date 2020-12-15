@@ -1,8 +1,7 @@
 { lib, ... }:
 let
-  inherit (builtins) attrNames isAttrs readDir listToAttrs;
-
-  inherit (lib) filterAttrs hasSuffix mapAttrs' nameValuePair removeSuffix;
+  inherit (builtins) attrNames pathExists isAttrs readDir listToAttrs;
+  inherit (lib) hasPrefix filterAttrs hasSuffix mapAttrs' nameValuePair removeSuffix;
 
   # mapFilterAttrs ::
   #   (name -> value -> bool )
@@ -16,6 +15,22 @@ let
 in
 {
   inherit mapFilterAttrs genAttrs';
+
+  mapModules = dir: fn:
+    mapFilterAttrs
+      (n: v:
+        v != null &&
+        !(hasPrefix "_" n))
+      (n: v:
+        let path = "${toString dir}/${n}"; in
+        if v == "directory" && pathExists "${path}/default.nix"
+        then nameValuePair n (fn path)
+        else if v == "regular" &&
+                n != "default.nix" &&
+                hasSuffix ".nix" n
+        then nameValuePair (removeSuffix ".nix" n) (fn path)
+        else nameValuePair "" null)
+      (readDir dir);
 
   overlay = pkg: final: prev: {
     "${pkg.pname}" = pkg;

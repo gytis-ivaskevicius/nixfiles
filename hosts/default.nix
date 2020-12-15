@@ -9,7 +9,7 @@
 let
   inherit (builtins) attrValues removeAttrs readDir;
   inherit (lib) filterAttrs hasSuffix mapAttrs' nameValuePair removeSuffix;
-  inherit (pkgset) os-pkgs unstable-pkgs custom-pkgs inputs package-overrides ;
+  inherit (pkgset) os-pkgs unstable-pkgs custom-pkgs inputs package-overrides nix-options;
   inherit (utils) recImport overlay;
 
   mapFilterAttrs = seive: f: attrs: filterAttrs seive (mapAttrs' f attrs);

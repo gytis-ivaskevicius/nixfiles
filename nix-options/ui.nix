@@ -74,11 +74,11 @@ in {
     systemd.user.services = {
       polybar = mkService cfg.polybar.enable
         "Polybar - system status bar"
-        "${cfg.polybar.package}/bin/polybar -c ${./polybar.conf} main";
+        "${cfg.polybar.package}/bin/polybar -c ${../pkgs/polybar.conf} main";
 
       feh = mkOneshot cfg.feh.enable
         "Feh - sets desktop wallpaper"
-        "${cfg.feh.package}/bin/feh --randomize --no-fehbg --bg-fill ${./Wallpapers}";
+        "${cfg.feh.package}/bin/feh --randomize --no-fehbg --bg-fill ${../pkgs/Wallpapers}";
 
       ulauncher = mkService cfg.ulauncher.enable
         "Ulauncher - application launcher"
