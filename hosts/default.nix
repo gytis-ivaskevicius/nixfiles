@@ -18,19 +18,22 @@ let
     lib.nixosSystem {
       inherit system;
 
+
       modules =
         let
           global = {
             networking.hostName = hostName;
-            nix.nixPath = let path = toString ../.; in
-              [
-                "nixpkgs=${inputs.master}"
-                "nixos=${inputs.nixos}"
-                "nixos-config=${path}/configuration.nix"
-                "nixpkgs-overlays=${path}/overlays"
-              ];
-
             nixpkgs = { pkgs = os-pkgs; };
+            nix.nixPath = let path = toString ../.; in [
+              "nixpkgs=${inputs.master}"
+              "nixos=${inputs.nixos}"
+              "nixos-hardware=${inputs.nixos-hardware}"
+            ];
+
+            nix.package = os-pkgs.nixUnstable;
+            nix.extraOptions = ''
+              experimental-features = nix-command flakes
+            '';
 
             nix.registry = {
               nixos.flake = inputs.nixos;

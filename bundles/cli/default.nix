@@ -90,7 +90,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    g-lf
     ack
     android-file-transfer
     appimage-run
@@ -106,6 +105,7 @@
     ffmpeg
     file
     fzf
+    g-lf
     g-neovim
     gcc
     git
@@ -120,6 +120,7 @@
     lshw
     lsof
     man
+    manix
     mediainfo
     neofetch
     nettools

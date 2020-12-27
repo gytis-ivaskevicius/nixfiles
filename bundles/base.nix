@@ -70,6 +70,7 @@
   };
 
   hardware = {
+    enableRedistributableFirmware = true;
     opengl = {
       enable = lib.mkDefault true;
       driSupport32Bit = true;
