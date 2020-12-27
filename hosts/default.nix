@@ -27,7 +27,6 @@ let
             nix.nixPath = let path = toString ../.; in [
               "nixpkgs=${inputs.master}"
               "nixos=${inputs.nixos}"
-              "nixos-hardware=${inputs.nixos-hardware}"
             ];
 
             nix.package = os-pkgs.nixUnstable;
