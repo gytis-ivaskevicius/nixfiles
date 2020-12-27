@@ -5,11 +5,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1604441492,
-        "narHash": "sha256-Wo7WqdwNQnWHmhyZuhVLrAEpCuZl88cA9ttxkiCTekY=",
+        "lastModified": 1609010567,
+        "narHash": "sha256-N6WslRAtrvCPCpQnxQqo+VlSivX/KylL9Xy/OZr0kMg=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "63f299b3347aea183fc5088e4d6c4a193b334a41",
+        "rev": "22f6736e628958f05222ddaadd7df7818fe8f59d",
         "type": "github"
       },
       "original": {
@@ -21,11 +21,11 @@
     },
     "master": {
       "locked": {
-        "lastModified": 1607939004,
-        "narHash": "sha256-3ivVZ5Eieex7J3JwjVACCNomxnRJEjJFl2AJLs4VyNo=",
+        "lastModified": 1609097670,
+        "narHash": "sha256-DJeIqlWyYNFx72FtKMN4Fzo1yRM229FS5vuaeWyJ4hk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f3103172fdfa364f5b1e153956f77ad83d76342b",
+        "rev": "05140d25dcb5f491613b0c76bd39eecd97241948",
         "type": "github"
       },
       "original": {
@@ -36,11 +36,11 @@
     },
     "nixos": {
       "locked": {
-        "lastModified": 1607928887,
-        "narHash": "sha256-vbWM+JXE8rEsvRsYRYPT5CZqH+Io0QXQJoucL1HBCMk=",
+        "lastModified": 1609067788,
+        "narHash": "sha256-qrsR5no252JOIAxcBRwWIRT7pHWNdo9rAhVCYsoU7bI=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ec4b0d3c2ad3bb5852f6513ea07f0d865607b67f",
+        "rev": "6b61c1d13a910a1f29ec20b79d4107cce67267b7",
         "type": "github"
       },
       "original": {
@@ -51,10 +51,10 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1607892887,
-        "narHash": "sha256-52ea0DqQ3iOJ3624dGuPMPM2AvHLgaCxx8ejiuehX6M=",
-        "path": "/nix/store/n103knif3lfprk65111hb68nmzissq66-source",
-        "rev": "583a1fed52716d82e5f35ca5915d26ab96f8ccbf",
+        "lastModified": 1607939004,
+        "narHash": "sha256-3ivVZ5Eieex7J3JwjVACCNomxnRJEjJFl2AJLs4VyNo=",
+        "path": "/nix/store/wdcbghgx9ys54lrjbdyh8g4ham6z5gwp-source",
+        "rev": "f3103172fdfa364f5b1e153956f77ad83d76342b",
         "type": "path"
       },
       "original": {

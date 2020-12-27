@@ -65,6 +65,7 @@
     sc="sudo systemctl";
     scu="systemctl --user ";
     svi="sudo $EDITOR";
+    net="ip -c -br addr";
 
     cp="cp -i";
     ln="ln -i";
