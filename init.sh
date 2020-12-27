@@ -10,7 +10,3 @@ cd $(dirname "${BASH_SOURCE[0]}")
 echo Updating .git folder owner to $USER
 sudo chown -R $USER:wheel .git
 
-echo Disabling GIT tracking for personal.nix
-git update-index --assume-unchanged personal.nix
-
-
