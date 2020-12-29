@@ -39,7 +39,7 @@
     "14" = pkgs.jdk14;
   };
   programs.java.enable = true;
-  programs.java.package = pkgs.jdk11;
+  programs.java.package = pkgs.unstable.adoptopenjdk-hotspot-bin-15;
 
   ### Node
   programs.npm.enable = true;
