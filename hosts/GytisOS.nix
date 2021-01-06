@@ -11,7 +11,9 @@
     ../bundles/cachix.nix
   ];
 
-  #boot.kernelPackages = pkgs.linuxPackages_latest;   # Default value is 'pkgs.linuxPackages'
+   nixpkgs.config.allowBroken = true;
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;   # Default value is 'pkgs.linuxPackages'
   #hardware.bluetooth.enable = true;                  # Default value is 'false'
   #services.openssh.passwordAuthentication = false;   # Default value is 'false'
   services.zerotierone.enable = true;                # Default value is 'false'

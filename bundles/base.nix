@@ -31,13 +31,20 @@
   services.resolved = {
     enable = true;
     extraConfig = ''
-       DNS=1.1.1.1 1.0.0.1
+       DNS=1.1.1.1 1.0.0.1 127.0.0.1:12299 127.0.0.1:12298
     '';
   };
 
   nixpkgs.config = {
     allowUnfree = true;
     oraclejdk.accept_license = true;
+  };
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableBrowserSocket = true;
+    enableExtraSocket = true;
+    enableSSHSupport = true;
   };
 
   nix.gc = {

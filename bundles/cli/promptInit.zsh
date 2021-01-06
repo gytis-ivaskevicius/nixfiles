@@ -14,6 +14,10 @@ fi
 
 function nix-cd(){ cd "$(nix eval -f '<nixpkgs>' --raw $1)"}
 
+function vpn(){
+    sshuttle --dns -r $1 0/0 --disable-ipv6 --no-latency-control
+}
+
 function nix-args(){
     nix eval -f '<nixpkgs>' --json $1.override 2> /dev/null | sed 's/\,"\w\+":\([,}]\)/\1/g' | jq .__functionArgs
 }

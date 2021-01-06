@@ -27,6 +27,7 @@
       os-pkgs = pkgImport self.inputs.nixos;
       package-overrides = with unstable-pkgs; [
         manix
+        alacritty
       ];
       inputs = self.inputs;
       custom-pkgs = import ./pkgs;
