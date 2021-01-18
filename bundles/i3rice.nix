@@ -76,6 +76,7 @@ let
 
     # exit i3 (logs you out of your X session)
     bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you wish to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
+    bindsym $mod+Shift+a exec "$TERMINAL"
 
     bindsym $mod+1 workspace $ws1
     bindsym $mod+2 workspace $ws2
@@ -148,6 +149,7 @@ in {
     extraPackages = [];
     package = pkgs.i3-gaps;
   };
+environment.etc."sway/config".text = i3config;
 
   environment.systemPackages = with pkgs; [
     xdotool

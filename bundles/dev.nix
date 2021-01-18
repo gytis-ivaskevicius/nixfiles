@@ -7,7 +7,7 @@
     gitkraken
     gradle
     insomnia
-    jetbrains.idea-ultimate
+    unstable.jetbrains.idea-ultimate
     maven
     visualvm
   ];
@@ -22,8 +22,8 @@
   };
 
   ### VirtualBox
-  virtualisation.virtualbox = {
-    host.enable = true;
+#  virtualisation.virtualbox = {
+#    host.enable = true;
 
     # Takes quite a while to compile. It adds support for:
     # USB 2.0/3.0 devices, VirtualBox RDP, disk encryption, NVMe and PXE boot for Intel cards
@@ -31,15 +31,17 @@
 
     # VirtualBox Guest additions
     #virtualisation.virtualbox.guest.enable = true;
-  };
+#  };
 
   ### Java
-  gytix.java.additionalPackages = {
-    "11" = pkgs.jdk11;
-    "14" = pkgs.jdk14;
+  gytix.java.additionalPackages = with pkgs; {
+    "8" = jdk8;
+    "11" = jdk11;
+    "14" = jdk14;
+    "15" = unstable.jdk15;
   };
   programs.java.enable = true;
-  programs.java.package = pkgs.unstable.adoptopenjdk-hotspot-bin-15;
+  programs.java.package = unstable.jdk15;
 
   ### Node
   programs.npm.enable = true;

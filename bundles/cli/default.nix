@@ -51,7 +51,7 @@
     grep="grep --color=auto";
     diff="diff --color=auto";
     nixos-rebuild="sudo nixos-rebuild";
-    nix-repl="nix repl '<nixpkgs>' '<nixpkgs/nixos>'";
+    nix-repl="nix repl '<nixpkgs>'";
     personal="sudo $EDITOR /etc/nixos/personal.nix";
     opt="manix '' | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | fzf --ansi --preview=\"manix '{}' | sed 's/type: /> type: /g' | bat -l Markdown --color=always --plain\"";
 

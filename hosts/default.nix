@@ -27,6 +27,7 @@ let
             nix.nixPath = let path = toString ../.; in [
               "nixpkgs=${inputs.master}"
               "nixos=${inputs.nixos}"
+              "nixos-config=${path}/hosts/GytisOS.nix"
             ];
 
             nix.package = os-pkgs.nixUnstable;

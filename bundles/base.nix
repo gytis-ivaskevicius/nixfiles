@@ -61,6 +61,7 @@
   };
 
   services = {
+    lorri.enable = true;
     avahi.enable = lib.mkDefault true;
     avahi.nssmdns = lib.mkDefault true;
     fstrim.enable = true;
