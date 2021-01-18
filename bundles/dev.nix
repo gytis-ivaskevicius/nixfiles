@@ -41,7 +41,7 @@
     "15" = unstable.jdk15;
   };
   programs.java.enable = true;
-  programs.java.package = unstable.jdk15;
+  programs.java.package = pkgs.unstable.jdk15;
 
   ### Node
   programs.npm.enable = true;
