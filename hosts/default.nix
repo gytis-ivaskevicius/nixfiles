@@ -59,7 +59,7 @@ let
         ];
 
       extraArgs = {
-        inherit system;
+        inherit system pkgset;
       };
     };
 
