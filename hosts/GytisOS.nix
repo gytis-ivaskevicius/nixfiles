@@ -11,13 +11,13 @@
     ../bundles/cachix.nix
   ];
 
-   nixpkgs.config.allowBroken = true;
+  nixpkgs.config.allowBroken = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;   # Default value is 'pkgs.linuxPackages'
+  boot.kernelPackages = pkgs.linuxPackages_latest; # Default value is 'pkgs.linuxPackages'
   #hardware.bluetooth.enable = true;                  # Default value is 'false'
   #services.openssh.passwordAuthentication = false;   # Default value is 'false'
-  services.zerotierone.enable = true;                # Default value is 'false'
-  services.zerotierone.joinNetworks = [ "9bee8941b5c7428a" ];           # Default value is '[]'
+  services.zerotierone.enable = true; # Default value is 'false'
+  services.zerotierone.joinNetworks = [ "9bee8941b5c7428a" ]; # Default value is '[]'
   #time.timeZone = "Europe/Vilnius";                  # Default value is 'Europe/Vilnius'
   #networking.enableIPv6 = false;                     # Default value is 'true'
 

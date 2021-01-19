@@ -5,7 +5,6 @@
 , system
 , ...
 }:
-
 let
   inherit (builtins) attrValues removeAttrs readDir;
   inherit (lib) filterAttrs hasSuffix mapAttrs' nameValuePair removeSuffix;
@@ -24,11 +23,12 @@ let
           global = {
             networking.hostName = hostName;
             nixpkgs = { pkgs = os-pkgs; };
-            nix.nixPath = let path = toString ../.; in [
-              "nixpkgs=${inputs.master}"
-              "nixos=${inputs.nixos}"
-              "nixos-config=${path}/hosts/GytisOS.nix"
-            ];
+            nix.nixPath = let path = toString ../.; in
+              [
+                "nixpkgs=${inputs.master}"
+                "nixos=${inputs.nixos}"
+                "nixos-config=${path}/hosts/GytisOS.nix"
+              ];
 
             nix.package = os-pkgs.nixUnstable;
             nix.extraOptions = ''
@@ -50,7 +50,8 @@ let
           ]
           ++ (package-overrides);
 
-        in [
+        in
+        [
           inputs.home.nixosModules.home-manager
           (import ../nix-options)
           (import "${toString ./.}/${hostName}.nix")

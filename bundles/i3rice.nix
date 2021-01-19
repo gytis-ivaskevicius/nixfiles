@@ -1,5 +1,4 @@
 { config, lib, pkgs, ... }:
-
 let
   i3config = ''
     exec --no-startup-id ${./autotiling.sh}
@@ -28,7 +27,7 @@ let
     new_window pixel
     default_border pixel 0
 
-    set $bg-color 	         #424242
+    set $bg-color            #424242
     set $inactive-bg-color   #424242
     set $text-color          #4f97d7
     set $inactive-text-color #676E7D
@@ -137,7 +136,8 @@ let
       bindsym $mod+r mode "default"
     }
   '';
-in {
+in
+{
 
   imports = [
     ./xorg.nix
@@ -146,18 +146,18 @@ in {
   services.xserver.windowManager.i3 = {
     enable = true;
     configFile = pkgs.writeText "i3.conf" i3config;
-    extraPackages = [];
+    extraPackages = [ ];
     package = pkgs.i3-gaps;
   };
-environment.etc."sway/config".text = i3config;
+  environment.etc."sway/config".text = i3config;
 
   environment.systemPackages = with pkgs; [
     xdotool
   ];
 
-# TODO: Does not work well 20.09, needs to be fixed at some point
-# To make sure all local SSH sessions are closed after a laptop lid is shut.
-#powerManagement.powerDownCommands = ''
+  # TODO: Does not work well 20.09, needs to be fixed at some point
+  # To make sure all local SSH sessions are closed after a laptop lid is shut.
+  #powerManagement.powerDownCommands = ''
   #{pkgs.procps}/bin/pgrep ssh | IFS= read -r pid; do
   # "$(readlink "/proc/$pid/exe")" = "${pkgs.openssh}/bin/ssh" ] && kill "$pid"
   #one
@@ -193,5 +193,3 @@ environment.etc."sway/config".text = i3config;
   };
 
 }
-
-

@@ -1,7 +1,9 @@
-{ pkgs, pistol, bat, mediainfo
+{ pkgs
+, pistol
+, bat
+, mediainfo
 , batTheme ? "base16"
 }:
-
 let
   b = "${bat}/bin/bat --paging=never --plain --theme=${batTheme} --color=always";
   f = "%pistol-filename%";
@@ -30,10 +32,10 @@ let
   '';
   wrapped = pkgs.writeShellScriptBin "pistol" "${pistol}/bin/pistol --config ${pistol-config} $@";
 in
-  pkgs.symlinkJoin {
-    name = "pistol";
-    paths = [
-      wrapped
-      pistol
-    ];
-  }
+pkgs.symlinkJoin {
+  name = "pistol";
+  paths = [
+    wrapped
+    pistol
+  ];
+}

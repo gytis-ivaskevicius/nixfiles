@@ -1,9 +1,9 @@
 { config, pkgs, lib, ... }:
-
 let
   nodeCfg = config.gytix.node;
   javaCfg = config.gytix.java;
-in {
+in
+{
   options = {
 
     gytix.java.additionalPackages = lib.mkOption {
@@ -19,7 +19,7 @@ in {
         1. Generates environment variables `JAVA_HOME11` and `JAVA_HOME14`
         2. Generates aliases `java11` and `java14`
       '';
-      type =  with lib.types; attrsOf package;
+      type = with lib.types; attrsOf package;
     };
 
 
@@ -36,19 +36,19 @@ in {
         1. Generates environment variables `JAVA_HOME11` and `JAVA_HOME14`
         2. Generates aliases `java11` and `java14`
       '';
-      type =  with lib.types; attrsOf package;
+      type = with lib.types; attrsOf package;
     };
   };
 
 
   config = {
-    environment.variables = lib.fold (a: b: a // b) {} (
-      lib.mapAttrsFlatten (name: pkg: {"JAVA_HOME${name}" = pkg.home; }) javaCfg.additionalPackages
+    environment.variables = lib.fold (a: b: a // b) { } (
+      lib.mapAttrsFlatten (name: pkg: { "JAVA_HOME${name}" = pkg.home; }) javaCfg.additionalPackages
     );
 
-    environment.shellAliases = lib.fold (a: b: a // b) {} (
-      lib.mapAttrsFlatten (name: pkg: {"java${name}" = "${pkg.home}/bin/java"; }) javaCfg.additionalPackages
-      ++ lib.mapAttrsFlatten (name: pkg: {"node${name}" = "${pkg.outPath}/bin/node"; }) nodeCfg.additionalPackages
+    environment.shellAliases = lib.fold (a: b: a // b) { } (
+      lib.mapAttrsFlatten (name: pkg: { "java${name}" = "${pkg.home}/bin/java"; }) javaCfg.additionalPackages
+      ++ lib.mapAttrsFlatten (name: pkg: { "node${name}" = "${pkg.outPath}/bin/node"; }) nodeCfg.additionalPackages
     );
 
     programs.npm.npmrc = lib.mkDefault ''
@@ -65,4 +65,3 @@ in {
 
   };
 }
-

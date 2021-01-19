@@ -1,17 +1,17 @@
 { config, pkgs, lib, ... }:
 
 with lib;
-
 let
   cfg = config.gytix.ui;
   keybindingsStr = concatStringsSep "\n" (
-    mapAttrsToList (hotkey: command:
-      optionalString (command != null) ''
-        ${hotkey}
-          ${command}
-      ''
-    )
-    cfg.keybindings
+    mapAttrsToList
+      (hotkey: command:
+        optionalString (command != null) ''
+          ${hotkey}
+            ${command}
+        ''
+      )
+      cfg.keybindings
   );
   daemonOption = pkg: {
     enable = mkEnableOption "Enable application on starup";
@@ -31,28 +31,29 @@ let
       ExecStart = exec;
     };
   };
-  mkOneshot = enabled: desc: exec: mkIf enabled (mkService enabled desc exec // {serviceConfig.Type = "oneshot";});
-in {
+  mkOneshot = enabled: desc: exec: mkIf enabled (mkService enabled desc exec // { serviceConfig.Type = "oneshot"; });
+in
+{
 
   options = {
     gytix.ui.autorandr = daemonOption pkgs.autorandr;
-    gytix.ui.feh       = daemonOption pkgs.feh;
+    gytix.ui.feh = daemonOption pkgs.feh;
     gytix.ui.flameshot = daemonOption pkgs.flameshot;
     gytix.ui.nm-applet = daemonOption pkgs.networkmanagerapplet;
     gytix.ui.polkit-ui = daemonOption pkgs.pkgs.pantheon.pantheon-agent-polkit;
-    gytix.ui.polybar   = daemonOption pkgs.polybarFull;
-    gytix.ui.sxhkd     = daemonOption pkgs.sxhkd;
+    gytix.ui.polybar = daemonOption pkgs.polybarFull;
+    gytix.ui.sxhkd = daemonOption pkgs.sxhkd;
     gytix.ui.ulauncher = daemonOption pkgs.ulauncher;
 
     gytix.ui.keybindings = mkOption {
       type = types.attrsOf (types.nullOr types.str);
-      default = {};
+      default = { };
       description = "An attribute set that assigns hotkeys to commands.";
       example = literalExample ''
-          {
-          "super + shift + {r,c}" = "i3-msg {restart,reload}";
-          "super + {s,w}"         = "i3-msg {stacking,tabbed}";
-          }
+        {
+        "super + shift + {r,c}" = "i3-msg {restart,reload}";
+        "super + {s,w}"         = "i3-msg {stacking,tabbed}";
+        }
       '';
     };
 
@@ -60,9 +61,9 @@ in {
 
   config = {
     environment.etc.xprofile.text = ''
-        systemctl --user stop graphical-session.target graphical-session-pre.target
-        systemctl --user import-environment
-        systemctl --user start autostart.target
+      systemctl --user stop graphical-session.target graphical-session-pre.target
+      systemctl --user import-environment
+      systemctl --user start autostart.target
     '';
 
     systemd.user.targets.autostart = {
@@ -107,4 +108,3 @@ in {
     };
   };
 }
-

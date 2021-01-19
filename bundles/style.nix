@@ -1,5 +1,4 @@
 { config, pkgs, lib, ... }:
-
 let
   settings = ''
     [Settings]
@@ -13,7 +12,8 @@ let
     gtk-theme-name=Numix
     gtk-toolbar-style=GTK_TOOLBAR_ICONS
   '';
-in {
+in
+{
 
   environment.systemPackages = with pkgs; [
     numix-gtk-theme
@@ -41,7 +41,7 @@ in {
 
     fontconfig.enable = true;
     fontconfig.defaultFonts = {
-      monospace = lib.mkDefault ["RobotoMono Nerd Font" "DejaVu Sans Mono" ];
+      monospace = lib.mkDefault [ "RobotoMono Nerd Font" "DejaVu Sans Mono" ];
       sansSerif = lib.mkDefault [ "Roboto" "DejaVu Sans" ];
       serif = lib.mkDefault [ "Roboto" "DejaVu Serif" ];
       emoji = lib.mkDefault [ "Twitter Color Emoji" ];

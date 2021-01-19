@@ -1,6 +1,4 @@
-
 { config, pkgs, ... }:
-
 let
   image = pkgs.writeScript "image" ''
     #!/usr/bin/env bash
@@ -124,13 +122,13 @@ let
   '';
 
 in
-  pkgs.symlinkJoin {
-    name = "lf";
-    paths = [
-      wrapped
-      pkgs.lf
-    ];
-  }
+pkgs.symlinkJoin {
+  name = "lf";
+  paths = [
+    wrapped
+    pkgs.lf
+  ];
+}
 
 #  {
 #  environment.systemPackages = with pkgs; [
