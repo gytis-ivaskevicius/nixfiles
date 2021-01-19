@@ -9,29 +9,18 @@
 
   outputs = inputs@{ self, ... }:
     let
-      inherit (self.inputs.nixos) lib;
+      inherit (inputs.nixos) lib;
       inherit (lib) recursiveUpdate;
       system = "x86_64-linux";
-      utils = import ./utility-functions.nix { inherit lib; };
+      my-pkgs = import ./pkgs;
 
-      pkgImport = pkgs: overlays: import pkgs {
-        inherit system overlays;
-        config = { allowUnfree = true; };
+      utils = import ./utility-functions.nix {
+        inherit lib system pkgs inputs self;
+        nixosModules = self.nixosModules;
       };
 
-      custom-pkgs = import ./pkgs;
-      unstable-pkgs = pkgImport self.inputs.master [ custom-pkgs ];
-      pkgs = pkgImport self.inputs.nixos overlays;
-
-      overlays = [
-        custom-pkgs
-        (final: prev: {
-          inherit (unstable-pkgs) manix alacritty;
-          unstable = unstable-pkgs;
-        })
-      ];
-
-      #        nix-options = readDir ./nix-options;
+      unstable-pkgs = utils.pkgImport inputs.master [ my-pkgs ];
+      pkgs = utils.pkgImport inputs.nixos self.overlays;
     in
     {
       nixosModules = [
@@ -39,13 +28,19 @@
         (import ./nix-options)
       ];
 
-      nixosConfigurations = import ./hosts (recursiveUpdate inputs {
-        inherit lib system utils pkgs inputs;
-        nixosModules = self.nixosModules;
-      });
+      nixosConfigurations = utils.buildNixosConfigurations [
+        ./hosts/GytisOS.nix
+      ];
 
-      overlay = custom-pkgs;
-      overlays = overlays;
-      packages."${system}" = (custom-pkgs null pkgs);
+      overlay = my-pkgs;
+      overlays = [
+        my-pkgs
+        (final: prev: {
+          inherit (unstable-pkgs) manix alacritty;
+          unstable = unstable-pkgs;
+        })
+      ];
+
+      packages."${system}" = (my-pkgs null pkgs);
     };
 }

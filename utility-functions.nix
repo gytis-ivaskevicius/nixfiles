@@ -1,60 +1,68 @@
-{ lib, ... }:
+{ lib
+, self
+, inputs
+, system
+, pkgs
+, nixosModules
+}:
 let
-  inherit (builtins) attrNames pathExists isAttrs readDir listToAttrs;
-  inherit (lib) hasPrefix filterAttrs hasSuffix mapAttrs' nameValuePair removeSuffix;
-
-  # mapFilterAttrs ::
-  #   (name -> value -> bool )
-  #   (name -> value -> { name = any; value = any; })
-  #   attrs
-  mapFilterAttrs = seive: f: attrs: filterAttrs seive (mapAttrs' f attrs);
-
-  # Generate an attribute set by mapping a function over a list of values.
+  inherit (lib) removeSuffix;
+  inherit (builtins) listToAttrs;
   genAttrs' = values: f: listToAttrs (map f values);
 
 in
 {
-  inherit mapFilterAttrs genAttrs';
-
-  mapModules = dir: fn:
-    mapFilterAttrs
-      (n: v:
-        v != null &&
-        !(hasPrefix "_" n))
-      (n: v:
-        let path = "${toString dir}/${n}"; in
-        if v == "directory" && pathExists "${path}/default.nix"
-        then nameValuePair n (fn path)
-        else if v == "regular" &&
-          n != "default.nix" &&
-          hasSuffix ".nix" n
-        then nameValuePair (removeSuffix ".nix" n) (fn path)
-        else nameValuePair "" null)
-      (readDir dir);
-
-  overlay = pkg: final: prev: {
-    "${pkg.pname}" = pkg;
+  pkgImport = pkgs: overlays: import pkgs {
+    inherit system overlays;
+    config = { allowUnfree = true; };
   };
 
-  recImport = { dir, _import ? base: import "${dir}/${base}.nix" }:
-    mapFilterAttrs
-      (_: v: v != null)
-      (n: v:
-        if n != "default.nix" && hasSuffix ".nix" n && v == "regular"
-        then
-          let name = removeSuffix ".nix" n; in nameValuePair (name) (_import name)
 
-        else
-          nameValuePair ("") (null))
-      (readDir dir);
+  buildNixosConfigurations = paths:
+    genAttrs' paths (path:
+      let
+        hostName = removeSuffix ".nix" (baseNameOf path);
+      in
+      {
+        name = hostName;
+        value = lib.nixosSystem {
+          inherit system;
 
-  # Convert a list to file paths to attribute set
-  # that has the filenames stripped of nix extension as keys
-  # and imported content of the file as value.
-  pathsToImportedAttrs = paths:
-    genAttrs' paths (path: {
-      name = removeSuffix ".nix" (baseNameOf path);
-      value = import path;
-    });
+          modules =
+            let
+              global = {
+                networking.hostName = hostName;
+                nixpkgs = { pkgs = pkgs; };
+                nix.nixPath = let path = toString ../.; in
+                  [
+                    "nixpkgs=${inputs.master}"
+                    "nixos=${inputs.nixos}"
+                    "nixos-config=${path}/hosts/GytisOS.nix"
+                  ];
 
+                nix.package = pkgs.nixUnstable;
+                nix.extraOptions = ''
+                  experimental-features = nix-command flakes
+                '';
+
+                nix.registry = {
+                  nixos.flake = inputs.nixos;
+                  nixflk.flake = self;
+                  nixpkgs.flake = inputs.master;
+                };
+
+                system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+              };
+
+            in
+            [
+              (import path)
+              global
+            ] ++ nixosModules;
+
+          extraArgs = {
+            inherit system inputs;
+          };
+        };
+      });
 }
