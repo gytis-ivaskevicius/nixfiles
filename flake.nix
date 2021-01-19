@@ -11,18 +11,17 @@
     let
       inherit (self.inputs.nixos) lib;
       inherit (lib) recursiveUpdate;
-      inherit (builtins) readDir;
-      inherit (utils) pathsToImportedAttrs recImport;
       system = "x86_64-linux";
       utils = import ./utility-functions.nix { inherit lib; };
 
       pkgImport = pkgs: overlays: import pkgs {
-        inherit system overlays ;
+        inherit system overlays;
         config = { allowUnfree = true; };
       };
 
       custom-pkgs = import ./pkgs;
       unstable-pkgs = pkgImport self.inputs.master [ custom-pkgs ];
+      pkgs = pkgImport self.inputs.nixos overlays;
 
       overlays = [
         custom-pkgs
@@ -32,22 +31,21 @@
         })
       ];
 
-      pkgset = {
-        os-pkgs = pkgImport self.inputs.nixos overlays;
-        inputs = self.inputs;
-        nix-options = readDir ./nix-options;
-      };
+      #        nix-options = readDir ./nix-options;
     in
-    with pkgset;
     {
+      nixosModules = [
+        inputs.home.nixosModules.home-manager
+        (import ./nix-options)
+      ];
+
       nixosConfigurations = import ./hosts (recursiveUpdate inputs {
-        inherit lib pkgset system utils;
+        inherit lib system utils pkgs inputs;
+        nixosModules = self.nixosModules;
       });
 
       overlay = custom-pkgs;
       overlays = overlays;
-      packages."${system}" = (custom-pkgs null pkgset.os-pkgs);
-
-      nixosModules = (recImport pkgset.nix-options);
+      packages."${system}" = (custom-pkgs null pkgs);
     };
 }
