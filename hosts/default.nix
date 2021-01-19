@@ -8,7 +8,7 @@
 let
   inherit (builtins) attrValues removeAttrs readDir;
   inherit (lib) filterAttrs hasSuffix mapAttrs' nameValuePair removeSuffix;
-  inherit (pkgset) os-pkgs unstable-pkgs custom-pkgs inputs package-overrides nix-options;
+  inherit (pkgset) os-pkgs inputs nix-options;
   inherit (utils) recImport overlay;
 
   mapFilterAttrs = seive: f: attrs: filterAttrs seive (mapAttrs' f attrs);
@@ -44,19 +44,12 @@ let
             system.configurationRevision = lib.mkIf (self ? rev) self.rev;
           };
 
-          overrides.nixpkgs.overlays = [
-            custom-pkgs
-            (final: prev: { unstable = unstable-pkgs; })
-          ]
-          ++ (package-overrides);
-
         in
         [
           inputs.home.nixosModules.home-manager
           (import ../nix-options)
           (import "${toString ./.}/${hostName}.nix")
           global
-          overrides
         ];
 
       extraArgs = {

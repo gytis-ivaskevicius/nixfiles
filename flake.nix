@@ -13,27 +13,28 @@
       inherit (lib) recursiveUpdate;
       inherit (builtins) readDir;
       inherit (utils) pathsToImportedAttrs recImport;
-      utils = import ./utility-functions.nix { inherit lib; };
       system = "x86_64-linux";
+      utils = import ./utility-functions.nix { inherit lib; };
 
-      pkgImport = pkgs: import pkgs {
-        inherit system;
+      pkgImport = pkgs: overlays: import pkgs {
+        inherit system overlays ;
         config = { allowUnfree = true; };
       };
 
-      unstable-pkgs = pkgImport self.inputs.master;
-      pkgset = {
-        inherit unstable-pkgs;
+      custom-pkgs = import ./pkgs;
+      unstable-pkgs = pkgImport self.inputs.master [ custom-pkgs ];
 
-        os-pkgs = pkgImport self.inputs.nixos;
-        package-overrides = [
-          (final: prev: {
-            manix = unstable-pkgs.manix;
-            alacritty = unstable-pkgs.alacritty;
-          })
-        ];
+      overlays = [
+        custom-pkgs
+        (final: prev: {
+          inherit (unstable-pkgs) manix alacritty;
+          unstable = unstable-pkgs;
+        })
+      ];
+
+      pkgset = {
+        os-pkgs = pkgImport self.inputs.nixos overlays;
         inputs = self.inputs;
-        custom-pkgs = import ./pkgs;
         nix-options = readDir ./nix-options;
       };
     in
@@ -43,8 +44,9 @@
         inherit lib pkgset system utils;
       });
 
-      overlay = pkgset.custom-pkgs;
-      packages."${system}" = self.overlay;
+      overlay = custom-pkgs;
+      overlays = overlays;
+      packages."${system}" = (custom-pkgs null pkgset.os-pkgs);
 
       nixosModules = (recImport pkgset.nix-options);
     };
