@@ -48,7 +48,7 @@ let
             custom-pkgs
             (final: prev: { unstable = unstable-pkgs; })
           ]
-          ++ (map overlay package-overrides);
+          ++ (package-overrides);
 
         in [
           inputs.home.nixosModules.home-manager

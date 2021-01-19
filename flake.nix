@@ -24,10 +24,13 @@
     unstable-pkgs = pkgImport self.inputs.master;
     pkgset = {
       inherit unstable-pkgs;
+
       os-pkgs = pkgImport self.inputs.nixos;
-      package-overrides = with unstable-pkgs; [
-        manix
-        alacritty
+      package-overrides = [
+        (final: prev: {
+          manix = unstable-pkgs.manix;
+          alacritty = unstable-pkgs.alacritty;
+        })
       ];
       inputs = self.inputs;
       custom-pkgs = import ./pkgs;

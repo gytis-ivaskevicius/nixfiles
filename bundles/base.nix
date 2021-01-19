@@ -54,6 +54,11 @@
   };
 
   boot = {
+    # Imporved networking
+    kernelModules = [ "tcp_bbr" ];
+    kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
+    kernel.sysctl."net.core.default_qdisc" = "fq";
+
     cleanTmpDir = true;
     loader.systemd-boot.enable = true;
     loader.timeout = 2;
@@ -61,6 +66,7 @@
   };
 
   services = {
+    irqbalance.enable = true;
     lorri.enable = true;
     avahi.enable = lib.mkDefault true;
     avahi.nssmdns = lib.mkDefault true;
@@ -79,6 +85,7 @@
 
   hardware = {
     enableRedistributableFirmware = true;
+    enableAllFirmware = true;
     opengl = {
       enable = lib.mkDefault true;
       driSupport32Bit = true;
