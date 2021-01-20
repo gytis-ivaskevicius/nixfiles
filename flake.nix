@@ -3,13 +3,16 @@
 
   inputs = {
     master.url = "nixpkgs/master";
-    nixos.url = "nixpkgs/release-20.09";
-    home.url = "github:nix-community/home-manager/release-20.09";
+    nixpkgs.url = "nixpkgs/release-20.09";
+    home-manager.url = "github:nix-community/home-manager/release-20.09";
+    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+    neovim-nightly-overlay.inputs.nixpkgs.follows = "master";
+
   };
 
-  outputs = inputs@{ self, ... }:
+  outputs = inputs@{ self,neovim-nightly-overlay, home-manager, nixpkgs, master, ... }:
     let
-      inherit (inputs.nixos) lib;
+      inherit (nixpkgs) lib;
       inherit (lib) recursiveUpdate;
       system = "x86_64-linux";
       my-pkgs = import ./pkgs;
@@ -19,12 +22,12 @@
         nixosModules = self.nixosModules;
       };
 
-      unstable-pkgs = utils.pkgImport inputs.master [ my-pkgs ];
-      pkgs = utils.pkgImport inputs.nixos self.overlays;
+      unstable-pkgs = utils.pkgImport master [ my-pkgs ];
+      pkgs = utils.pkgImport nixpkgs self.overlays;
     in
     {
       nixosModules = [
-        inputs.home.nixosModules.home-manager
+        home-manager.nixosModules.home-manager
         (import ./nix-options)
       ];
 
@@ -34,6 +37,7 @@
 
       overlay = my-pkgs;
       overlays = [
+        neovim-nightly-overlay.overlay
         my-pkgs
         (final: prev: {
           inherit (unstable-pkgs) manix alacritty;

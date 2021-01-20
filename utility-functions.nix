@@ -36,7 +36,7 @@ in
                 nix.nixPath = let path = toString ../.; in
                   [
                     "nixpkgs=${inputs.master}"
-                    "nixos=${inputs.nixos}"
+                    "nixpkgs=${inputs.nixpkgs}"
                     "nixos-config=${path}/hosts/GytisOS.nix"
                   ];
 
@@ -46,9 +46,9 @@ in
                 '';
 
                 nix.registry = {
-                  nixos.flake = inputs.nixos;
+                  nixpkgs.flake = inputs.nixpkgs;
                   nixflk.flake = self;
-                  nixpkgs.flake = inputs.master;
+                  master.flake = inputs.master;
                 };
 
                 system.configurationRevision = lib.mkIf (self ? rev) self.rev;

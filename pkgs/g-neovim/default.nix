@@ -1,6 +1,7 @@
 { stdenv
 , pkgs
-, neovim
+, neovim-nightly
+, wrapNeovim
 , enableAirline ? true
 , enableClap ? true
 , enableCoc ? true
@@ -15,7 +16,7 @@
 let
   inherit (stdenv.lib) optionals optional optionalString;
 in
-neovim.override {
+wrapNeovim neovim-nightly {
   viAlias = true;
   vimAlias = true;
   withNodeJs = true;
