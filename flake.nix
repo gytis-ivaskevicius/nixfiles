@@ -7,10 +7,11 @@
     home-manager.url = "github:nix-community/home-manager/release-20.09";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     neovim-nightly-overlay.inputs.nixpkgs.follows = "master";
+    nixpkgs-mozilla = { url = github:mozilla/nixpkgs-mozilla; flake = false; };
 
   };
 
-  outputs = inputs@{ self,neovim-nightly-overlay, home-manager, nixpkgs, master, ... }:
+  outputs = inputs@{ self,neovim-nightly-overlay, home-manager, nixpkgs-mozilla, nixpkgs, master, ... }:
     let
       inherit (nixpkgs) lib;
       inherit (lib) recursiveUpdate;
@@ -37,6 +38,7 @@
 
       overlay = my-pkgs;
       overlays = [
+        (import nixpkgs-mozilla)
         neovim-nightly-overlay.overlay
         my-pkgs
         (final: prev: {
