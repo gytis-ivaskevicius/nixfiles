@@ -6,7 +6,7 @@
     gitkraken
     gradle
     insomnia
-    unstable.jetbrains.idea-ultimate
+    jetbrains.idea-ultimate
     maven
     visualvm
   ];
@@ -37,10 +37,10 @@
     "8" = jdk8;
     "11" = jdk11;
     "14" = jdk14;
-    "15" = unstable.jdk15;
+    "15" = jdk15;
   };
   programs.java.enable = true;
-  programs.java.package = pkgs.unstable.jdk15;
+  programs.java.package = pkgs.jdk15;
 
   ### Node
   programs.npm.enable = true;

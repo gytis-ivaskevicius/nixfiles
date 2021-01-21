@@ -42,7 +42,7 @@
         neovim-nightly-overlay.overlay
         my-pkgs
         (final: prev: {
-          inherit (unstable-pkgs) manix alacritty;
+          inherit (unstable-pkgs) manix alacritty jetbrains jdk15 brave gitkraken gradle insomnia maven;
           unstable = unstable-pkgs;
         })
       ];
