@@ -39,12 +39,7 @@
     oraclejdk.accept_license = true;
   };
 
-  programs.gnupg.agent = {
-    enable = true;
-    enableBrowserSocket = true;
-    enableExtraSocket = true;
-    enableSSHSupport = true;
-  };
+  programs.ssh.startAgent = true;
 
   nix.gc = {
     automatic = true;

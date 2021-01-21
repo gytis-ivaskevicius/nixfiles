@@ -2,6 +2,11 @@
 let
   nodeCfg = config.gytix.node;
   javaCfg = config.gytix.java;
+  defaultEnvVarialbes = {
+    XDG_DATA_HOME = lib.mkDefault "$HOME/.local/share";
+    XDG_CACHE_HOME = lib.mkDefault "$HOME/.cache";
+    XDG_CONFIG_HOME = lib.mkDefault "$HOME/.config";
+  };
 in
 {
   options = {
@@ -42,9 +47,11 @@ in
 
 
   config = {
-    environment.variables = lib.fold (a: b: a // b) { } (
+    environment.variables = lib.fold (a: b: a // b) defaultEnvVarialbes (
       lib.mapAttrsFlatten (name: pkg: { "JAVA_HOME${name}" = pkg.home; }) javaCfg.additionalPackages
     );
+
+    systemd.tmpfiles.rules = lib.mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}" ) javaCfg.additionalPackages;
 
     environment.shellAliases = lib.fold (a: b: a // b) { } (
       lib.mapAttrsFlatten (name: pkg: { "java${name}" = "${pkg.home}/bin/java"; }) javaCfg.additionalPackages

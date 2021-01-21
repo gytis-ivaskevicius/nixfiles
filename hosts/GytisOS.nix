@@ -56,21 +56,32 @@
 
   hardware.pulseaudio.support32Bit = config.hardware.pulseaudio.enable;
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ pkgs.linuxPackages_5_9.zfsUnstable ];
   boot.zfs.enableUnstable = true;
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/d6eeba95-50d5-4517-8c9f-bc38ed88e73b";
-    fsType = "ext4";
-  };
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
+  boot.kernelModules = [ "kvm-amd" ];
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/DE06-8285";
-    fsType = "vfat";
-  };
+  fileSystems."/" =
+    { device = "zroot/locker/os";
+      fsType = "zfs";
+    };
+
+  fileSystems."/home" =
+    { device = "zroot/locker/home";
+      fsType = "zfs";
+    };
+
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/F794-3014";
+      fsType = "vfat";
+    };
+
+  fileSystems."/nix" =
+    { device = "zroot/locker/nix";
+      fsType = "zfs";
+    };
+
 
   swapDevices = [ ];
 

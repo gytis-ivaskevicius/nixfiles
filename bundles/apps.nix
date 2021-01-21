@@ -3,16 +3,18 @@
 {
 
   environment.variables = {
-    BROWSER = "brave";
+    BROWSER = "firefox";
     TERMINAL = "alacritty";
+    MOZ_X11_EGL = "1";
   };
 
   environment.systemPackages = with pkgs; [
     arandr
+    autorandr
     brave
     cinnamon.nemo
     discord
-    firefox
+    firefox-beta-bin
     g-alacritty
     gnome3.eog
     pavucontrol

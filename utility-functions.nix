@@ -33,11 +33,11 @@ in
               global = {
                 networking.hostName = hostName;
                 nixpkgs = { pkgs = pkgs; };
-                nix.nixPath = let path = toString ../.; in
+                nix.nixPath = let path = toString ./.; in
                   [
-                    "nixpkgs=${inputs.master}"
+                    "master=${inputs.master}"
                     "nixpkgs=${inputs.nixpkgs}"
-                    "nixos-config=${path}/hosts/GytisOS.nix"
+                    "nixos-config=${path}/configuration.nix"
                   ];
 
                 nix.package = pkgs.nixUnstable;
