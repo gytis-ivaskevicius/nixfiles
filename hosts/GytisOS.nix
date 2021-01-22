@@ -22,6 +22,7 @@
   #time.timeZone = "Europe/Vilnius";                  # Default value is 'Europe/Vilnius'
   #networking.enableIPv6 = false;                     # Default value is 'true'
 
+  services.xserver.displayManager.defaultSession = "none+i3";
   services.xserver.windowManager.i3 = {
     enable = true;
   };

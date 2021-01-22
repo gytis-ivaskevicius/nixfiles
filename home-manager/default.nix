@@ -33,6 +33,10 @@ in
   xsession.enable = true;
   xsession.windowManager.i3.enable = true;
   xsession.windowManager.i3 = {
+    extraConfig = ''
+      exec --no-startup-id ${./autotiling.sh}
+      set $movemouse "sh -c 'eval `${pkgs.xdotool}/bin/xdotool getactivewindow getwindowgeometry --shell`; ${pkgs.xdotool}/bin/xdotool mousemove $((X+WIDTH/2)) $((Y+HEIGHT/2))'"
+    '';
     package = pkgs.i3-gaps;
     config = {
       modifier = "Mod4";
@@ -83,10 +87,11 @@ in
         "${modifier}+q" = "kill";
         #"${modifier}+d" = "exec ${cfg.config.menu}";
 
-        "${modifier}+${left}" = "focus left";
-        "${modifier}+${down}" = "focus down";
-        "${modifier}+${up}" = "focus up";
-        "${modifier}+${right}" = "focus right";
+
+        "${modifier}+${left}" = "focus left; exec $movemouse";
+        "${modifier}+${down}" = "focus down; exec $movemouse";
+        "${modifier}+${up}" = "focus up; exec $movemouse";
+        "${modifier}+${right}" = "focus right; exec $movemouse";
 
         "${modifier}+Ctrl+${left}" = "move workspace to output left";
         "${modifier}+Ctrl+${down}" = "move workspace to output down";
