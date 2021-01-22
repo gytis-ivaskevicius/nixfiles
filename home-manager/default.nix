@@ -1,4 +1,4 @@
-{lib, pkgs, config, options, ... }:
+{ lib, pkgs, config, options, ... }:
 
 with lib;
 let
@@ -7,44 +7,79 @@ let
   down = "j";
   up = "k";
   right = "l";
-  bg-color=            "#424242";
-  inactive-bg-color=   "#424242";
-  text-color=          "#4f97d7";
-  inactive-text-color= "#676E7D";
-  urgent-bg-color=     "#E53935";
+  bg-color = "#424242";
+  inactive-bg-color = "#424242";
+  text-color = "#4f97d7";
+  inactive-text-color = "#676E7D";
+  urgent-bg-color = "#E53935";
 
-in {
+in
+{
 
   services.network-manager-applet.enable = true;
-  services.pasystray.enable = true;
-  services.blueman-applet.enable = true;
+
+  services.polybar.enable = true;
+  services.polybar.script = "polybar";
+  services.polybar.package = pkgs.g-polybar;
+
+  services.flameshot.enable = true;
+
   services.random-background = {
     enable = true;
-    imageDirectory = "%h/backgrounds";
+    interval = "1h";
+    imageDirectory = "${../pkgs/Wallpapers}";
   };
 
   xsession.enable = true;
   xsession.windowManager.i3.enable = true;
-  xsession.windowManager.i3= {
+  xsession.windowManager.i3 = {
     package = pkgs.i3-gaps;
     config = {
       modifier = "Mod4";
       floating.modifier = "Mod4";
       floating.border = 0;
       window.border = 0;
-      focus.forceWrapping =false;
-      focus.followMouse =false;
-      fonts = ["RobotoMono 9"];
+      focus.forceWrapping = false;
+      focus.followMouse = false;
+      fonts = [ "RobotoMono 9" ];
+      terminal = "$TERMINAL";
 
-      colors.focused =          { border = bg-color;         childBorder = bg-color;          background = bg-color;          text = text-color;          indicator = "#00ff00";};
-      colors.unfocused =        { border = inactive-bg-color;childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00";};
-      colors.focusedInactive =  { border = inactive-bg-color;childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00";};
-      colors.urgent =           { border = urgent-bg-color;  childBorder = urgent-bg-color;   background = urgent-bg-color;   text = text-color;indicator = "#00ff00";};
-      keybindings =  mkOptionDefault {
+      colors.focused = { border = bg-color; childBorder = bg-color; background = bg-color; text = text-color; indicator = "#00ff00"; };
+      colors.unfocused = { border = inactive-bg-color; childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00"; };
+      colors.focusedInactive = { border = inactive-bg-color; childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00"; };
+      colors.urgent = { border = urgent-bg-color; childBorder = urgent-bg-color; background = urgent-bg-color; text = text-color; indicator = "#00ff00"; };
+
+      menu = "${pkgs.g-rofi}/bin/rofi -show drun -modi drun";
+      modes.resize = {
+        Escape = "mode default";
+        Return = "mode default";
+        "${down}" = "resize grow height 10 px or 10 ppt";
+        "${left}" = "resize shrink width 10 px or 10 ppt";
+        "${right}" = "resize grow width 10 px or 10 ppt";
+        "${up}" = "resize shrink height 10 px or 10 ppt";
+      } ;
+
+      bars = mkForce [];
+      keybindings = with pkgs; mkOptionDefault {
+        Print = "exec ${flameshot}/bin/flameshot gui";
+        XF86AudioMute = "exec ${pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
+        XF86AudioPlay = "exec ${playerctl}/bin/playerctl play";
+        XF86AudioPause= "exec ${playerctl}/bin/playerctl pause";
+        XF86AudioNext = "exec ${playerctl}/bin/playerctl next";
+        XF86AudioPrev = "exec ${playerctl}/bin/playerctl prev";
+        XF86AudioRaiseVolume = "exec ${pulseaudio}/bin/pactl  set-sink-volume @DEFAULT_SINK@ +5%";
+        XF86AudioLowerVolume = "exec ${pulseaudio}/bin/pactl  set-sink-volume @DEFAULT_SINK@ -5%";
+        XF86MonBrightnessUp = "exec ${xorg.xbacklight} -inc 20";
+        XF86MonBrightnessDown = "exec ${xorg.xbacklight} -dec 20";
+
+        "${modifier}+b" = "exec $BROWSER";
+        "${modifier}+shift+b" = "exec $BROWSER --private-window";
+        "${modifier}+z" = "exec ${autorandr}/bin/autorandr -c -f";
+
         #"${modifier}+t" = ''[class="scratchterm"] scratchpad show, move position center'';
         #"${modifier}+b" = ''[class="scratchbrowser"] scratchpad show, move position center '';
 
-        #"${modifier}+Return" = "exec ${cfg.config.terminal}";
+        #"${modifier}+Return" = "exec $TERMINAL";
         "${modifier}+q" = "kill";
         #"${modifier}+d" = "exec ${cfg.config.menu}";
 

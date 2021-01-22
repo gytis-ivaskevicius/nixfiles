@@ -37,13 +37,8 @@ in
 
   options = {
     gytix.ui.autorandr = daemonOption pkgs.autorandr;
-    gytix.ui.feh = daemonOption pkgs.feh;
-    gytix.ui.flameshot = daemonOption pkgs.flameshot;
-    gytix.ui.nm-applet = daemonOption pkgs.networkmanagerapplet;
     gytix.ui.polkit-ui = daemonOption pkgs.pkgs.pantheon.pantheon-agent-polkit;
-    gytix.ui.polybar = daemonOption pkgs.polybarFull;
     gytix.ui.sxhkd = daemonOption pkgs.sxhkd;
-    gytix.ui.ulauncher = daemonOption pkgs.ulauncher;
 
     gytix.ui.keybindings = mkOption {
       type = types.attrsOf (types.nullOr types.str);
@@ -73,25 +68,6 @@ in
     };
 
     systemd.user.services = {
-      polybar = mkService cfg.polybar.enable
-        "Polybar - system status bar"
-        "${cfg.polybar.package}/bin/polybar -c ${../pkgs/polybar.conf} main";
-
-      feh = mkOneshot cfg.feh.enable
-        "Feh - sets desktop wallpaper"
-        "${cfg.feh.package}/bin/feh --randomize --no-fehbg --bg-fill ${../pkgs/Wallpapers}";
-
-      ulauncher = mkService cfg.ulauncher.enable
-        "Ulauncher - application launcher"
-        "${cfg.ulauncher.package}/bin/ulauncher --hide-window";
-
-      nm-applet = mkService cfg.nm-applet.enable
-        "Network Manager Applet"
-        "${cfg.nm-applet.package}/bin/nm-applet";
-
-      flameshot = mkService cfg.flameshot.enable
-        "Flameshot - desktop screenshot utility"
-        "${cfg.flameshot.package}/bin/flameshot";
 
       polkit-ui = mkService cfg.polkit-ui.enable
         "Polkit UI popup"
