@@ -58,6 +58,10 @@ in
             [
               (import path)
               global
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+              }
             ] ++ nixosModules;
 
           extraArgs = {

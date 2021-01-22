@@ -4,14 +4,14 @@
   inputs = {
     master.url = "nixpkgs/master";
     nixpkgs.url = "nixpkgs/release-20.09";
-    home-manager.url = "github:nix-community/home-manager/release-20.09";
-    neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    neovim-nightly-overlay.inputs.nixpkgs.follows = "master";
+
+    home-manager = { url = github:nix-community/home-manager/release-20.09; inputs.nixpkgs.follows = "nixpkgs"; };
+    neovim-nightly-overlay = { url = github:nix-community/neovim-nightly-overlay; inputs.nixpkgs.follows = "master"; };
     nixpkgs-mozilla = { url = github:mozilla/nixpkgs-mozilla; flake = false; };
 
   };
 
-  outputs = inputs@{ self,neovim-nightly-overlay, home-manager, nixpkgs-mozilla, nixpkgs, master, ... }:
+  outputs = inputs@{ self, neovim-nightly-overlay, home-manager, nixpkgs-mozilla, nixpkgs, master, ... }:
     let
       inherit (nixpkgs) lib;
       inherit (lib) recursiveUpdate;

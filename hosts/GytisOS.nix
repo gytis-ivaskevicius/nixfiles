@@ -21,6 +21,7 @@
   #time.timeZone = "Europe/Vilnius";                  # Default value is 'Europe/Vilnius'
   #networking.enableIPv6 = false;                     # Default value is 'true'
 
+  home-manager.users.gytis = import ../home-manager;
   users.extraUsers.gytis = {
     shell = pkgs.zsh;
     isNormalUser = true;
@@ -66,25 +67,10 @@
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
   boot.kernelModules = [ "kvm-amd" ];
 
-  fileSystems."/" =
-    { device = "zroot/locker/os";
-      fsType = "zfs";
-    };
-
-  fileSystems."/home" =
-    { device = "zroot/locker/home";
-      fsType = "zfs";
-    };
-
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F794-3014";
-      fsType = "vfat";
-    };
-
-  fileSystems."/nix" =
-    { device = "zroot/locker/nix";
-      fsType = "zfs";
-    };
+  fileSystems."/" = { device = "zroot/locker/os"; fsType = "zfs"; };
+  fileSystems."/home" = { device = "zroot/locker/home"; fsType = "zfs"; };
+  fileSystems."/boot" = { device = "/dev/disk/by-uuid/F794-3014"; fsType = "vfat"; };
+  fileSystems."/nix" = { device = "zroot/locker/nix"; fsType = "zfs"; };
 
 
   swapDevices = [ ];

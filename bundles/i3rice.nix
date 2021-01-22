@@ -45,7 +45,7 @@ let
 
     bindsym Ctrl+Shift+l exec i3lock-pixeled
 
-    set $movemouse "sh -c 'eval `xdotool getactivewindow getwindowgeometry --shell`; xdotool mousemove $((X+WIDTH/2)) $((Y+HEIGHT/2))'"
+    set $movemouse "sh -c 'eval `${pkgs.xdotool}/bin/xdotool getactivewindow getwindowgeometry --shell`; ${pkgs.xdotool}/bin/xdotool mousemove $((X+WIDTH/2)) $((Y+HEIGHT/2))'"
 
     bindsym $mod+$left focus left; exec $movemouse
     bindsym $mod+$down focus down; exec $movemouse
@@ -139,9 +139,10 @@ let
 in
 {
 
-  imports = [
-    ./xorg.nix
-  ];
+  imports = [ ./xorg.nix ];
+
+  services.xserver.displayManager.defaultSession = "none+i3";
+  environment.etc."i3/config".text = i3config;
 
   services.xserver.windowManager.i3 = {
     enable = true;
@@ -149,19 +150,6 @@ in
     extraPackages = [ ];
     package = pkgs.i3-gaps;
   };
-  environment.etc."sway/config".text = i3config;
-
-  environment.systemPackages = with pkgs; [
-    xdotool
-  ];
-
-  # TODO: Does not work well 20.09, needs to be fixed at some point
-  # To make sure all local SSH sessions are closed after a laptop lid is shut.
-  #powerManagement.powerDownCommands = ''
-  #{pkgs.procps}/bin/pgrep ssh | IFS= read -r pid; do
-  # "$(readlink "/proc/$pid/exe")" = "${pkgs.openssh}/bin/ssh" ] && kill "$pid"
-  #one
-  #'';
 
   gytix.ui.autorandr.enable = true;
   gytix.ui.feh.enable = true;
@@ -171,23 +159,23 @@ in
   gytix.ui.polybar.enable = true;
   gytix.ui.sxhkd.enable = true;
 
-  gytix.ui.keybindings = {
+  gytix.ui.keybindings = with pkgs; {
     "Print" = "${flameshot}/bin/flameshot gui";
     "XF86AudioMute" = "pactl set-sink-mute @DEFAULT_SINK@ toggle";
     "XF86Audio{Play,Pause,Next,Prev}" = "playerctl {play,pause,next,previous}";
     "XF86Audio{RaiseVolume,LowerVolume}" = "pactl set-sink-volume @DEFAULT_SINK@ {+5%,-5%}";
     "XF86MonBrightness{Up,Down}" = "xbacklight -{inc,dec} 20";
-    "alt + shift + l" = "${pkgs.i3lock-pixeled}/bin/i3lock-pixeled";
+    "alt + shift + l" = "${i3lock-pixeled}/bin/i3lock-pixeled";
     "super + Return" = "$TERMINAL";
     "super + b" = "$BROWSER";
-    "super + d" = "${pkgs.g-rofi}/bin/rofi -show drun -modi drun";
+    "super + d" = "${g-rofi}/bin/rofi -show drun -modi drun";
     "super + g" = "google-chrome-stable";
     "super + i" = "idea-ultimate";
-    "super + q" = "${pkgs.wmctrl}/bin/wmctrl -c :ACTIVE:";
+    "super + q" = "${wmctrl}/bin/wmctrl -c :ACTIVE:";
     "super + shift + b" = "$BROWSER --incognito";
     "super + shift + g" = "google-chrome-stable --incognito";
     "super + w" = "$TERMINAL -e ranger";
-    "super + z" = "${pkgs.autorandr}/bin/autorandr -c -f";
+    "super + z" = "${autorandr}/bin/autorandr -c -f";
   };
 
 }

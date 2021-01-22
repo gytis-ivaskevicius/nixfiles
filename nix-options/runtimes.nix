@@ -51,7 +51,7 @@ in
       lib.mapAttrsFlatten (name: pkg: { "JAVA_HOME${name}" = pkg.home; }) javaCfg.additionalPackages
     );
 
-    systemd.tmpfiles.rules = lib.mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}" ) javaCfg.additionalPackages;
+    systemd.tmpfiles.rules = lib.mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}") javaCfg.additionalPackages;
 
     environment.shellAliases = lib.fold (a: b: a // b) { } (
       lib.mapAttrsFlatten (name: pkg: { "java${name}" = "${pkg.home}/bin/java"; }) javaCfg.additionalPackages

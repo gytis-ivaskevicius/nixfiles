@@ -49,7 +49,9 @@
     },
     "home-manager": {
       "inputs": {
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1609010567,
@@ -124,14 +126,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1610977682,
-        "narHash": "sha256-mTAJQqpZVBNRyN59liSmu/I3rGuCU5iGaRXW8EEmdQE=",
-        "path": "/nix/store/xjhig815h01max4zfcclrnmbpnq5rx9v-source",
-        "rev": "8030f2191afb7c3c0448e4a1550ed21b0741aa15",
-        "type": "path"
+        "lastModified": 1611053426,
+        "narHash": "sha256-ZYcn9Jz7S3Ib3PPcPsn6lE9HGtH5ofacOYsu/puZd9o=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "646f528cce6db1f89f6e635a7589bf1be6169ffb",
+        "type": "github"
       },
       "original": {
         "id": "nixpkgs",
+        "ref": "release-20.09",
         "type": "indirect"
       }
     },
@@ -149,21 +153,6 @@
         "owner": "mozilla",
         "repo": "nixpkgs-mozilla",
         "type": "github"
-      }
-    },
-    "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1611053426,
-        "narHash": "sha256-ZYcn9Jz7S3Ib3PPcPsn6lE9HGtH5ofacOYsu/puZd9o=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "646f528cce6db1f89f6e635a7589bf1be6169ffb",
-        "type": "github"
-      },
-      "original": {
-        "id": "nixpkgs",
-        "ref": "release-20.09",
-        "type": "indirect"
       }
     },
     "pre-commit-hooks": {
@@ -187,7 +176,7 @@
         "home-manager": "home-manager",
         "master": "master",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "nixpkgs-mozilla": "nixpkgs-mozilla"
       }
     }
