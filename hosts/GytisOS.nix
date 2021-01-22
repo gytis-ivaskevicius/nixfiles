@@ -30,6 +30,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    fuse-overlayfs
+    nox
     tdesktop
     rustup
     cargo
@@ -56,7 +58,9 @@
 
   hardware.pulseaudio.support32Bit = config.hardware.pulseaudio.enable;
 
-  boot.extraModulePackages = [ pkgs.linuxPackages_5_9.zfsUnstable ];
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.zfsUnstable
+  ];
   boot.zfs.enableUnstable = true;
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
