@@ -30,6 +30,10 @@
       nixosModules = [
         home-manager.nixosModules.home-manager
         (import ./nix-options)
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
       ];
 
       nixosConfigurations = utils.buildNixosConfigurations [

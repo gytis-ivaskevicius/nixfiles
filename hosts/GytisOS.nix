@@ -6,7 +6,8 @@
     ../bundles/base.nix
     ../bundles/clean_home.nix
     ../bundles/dev.nix
-    ../bundles/i3rice.nix
+    #../bundles/i3rice.nix
+    ../bundles/xorg.nix
     ../bundles/cli
     ../bundles/cachix.nix
   ];
@@ -21,6 +22,9 @@
   #time.timeZone = "Europe/Vilnius";                  # Default value is 'Europe/Vilnius'
   #networking.enableIPv6 = false;                     # Default value is 'true'
 
+  services.xserver.windowManager.i3 = {
+    enable = true;
+  };
   home-manager.users.gytis = import ../home-manager;
   users.extraUsers.gytis = {
     shell = pkgs.zsh;
