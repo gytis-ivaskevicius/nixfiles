@@ -3,8 +3,8 @@
 {
   imports = [
     ./hosts/GytisOS.nix
-    ./nix-options
+    ./nixos-modules
   ];
 
-  nixpkgs.overlays = [ (import ./pkgs) ];
+  nixpkgs.overlays = [ (import ./overlays) ];
 }

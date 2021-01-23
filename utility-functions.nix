@@ -21,7 +21,7 @@ in
   buildNixosConfigurations = paths:
     genAttrs' paths (path:
       let
-        hostName = removeSuffix ".nix" (baseNameOf path);
+        hostName = removeSuffix ".host.nix" (baseNameOf path);
       in
       {
         name = hostName;

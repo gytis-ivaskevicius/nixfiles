@@ -93,16 +93,16 @@ in
     numix-gtk-theme
     papirus-icon-theme
 
-      dejavu_fonts
-      ubuntu_font_family
-      source-code-pro
-      noto-fonts
-      noto-fonts-extra
-      noto-fonts-cjk
-      twitter-color-emoji
-      fira-code
-      fira-code-symbols
-      nerdfonts
+    dejavu_fonts
+    ubuntu_font_family
+    source-code-pro
+    noto-fonts
+    noto-fonts-extra
+    noto-fonts-cjk
+    twitter-color-emoji
+    fira-code
+    fira-code-symbols
+    nerdfonts
   ];
 
 
@@ -125,10 +125,10 @@ in
       "name = 'polybar-noblur-noshadow'"
     ];
 
-   #services.picom.blurExclude
-   #settings.blur-background-exclude = [
-   #  "!(name = 'polybar-blur-shadow' || name = 'polybar-blur-noshadow' || name = 'polybar-backdrop' || class_g = 'URxvt' || class_g = 'Rofi' || class_g = 'Dunst' || class_g = 'Atom' || class_g = 'VSCodium' || class_g = 'Termite' || class_g = 'Conky' || name = 'Polybar tray window')"
-   #];
+    #services.picom.blurExclude
+    #settings.blur-background-exclude = [
+    #  "!(name = 'polybar-blur-shadow' || name = 'polybar-blur-noshadow' || name = 'polybar-backdrop' || class_g = 'URxvt' || class_g = 'Rofi' || class_g = 'Dunst' || class_g = 'Atom' || class_g = 'VSCodium' || class_g = 'Termite' || class_g = 'Conky' || name = 'Polybar tray window')"
+    #];
   };
 
 
@@ -143,7 +143,7 @@ in
   services.random-background = {
     enable = true;
     interval = "1h";
-    imageDirectory = "${../pkgs/Wallpapers}";
+    imageDirectory = "${./wallpapers}";
   };
 
   xsession.enable = true;

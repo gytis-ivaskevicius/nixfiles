@@ -16,7 +16,7 @@
       inherit (nixpkgs) lib;
       inherit (lib) recursiveUpdate;
       system = "x86_64-linux";
-      my-pkgs = import ./pkgs;
+      my-pkgs = import ./overlays;
 
       utils = import ./utility-functions.nix {
         inherit lib system pkgs inputs self;
@@ -29,7 +29,7 @@
     {
       nixosModules = [
         home-manager.nixosModules.home-manager
-        (import ./nix-options)
+        (import ./nixos-modules)
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -37,7 +37,7 @@
       ];
 
       nixosConfigurations = utils.buildNixosConfigurations [
-        ./hosts/GytisOS.nix
+        ./hosts/GytisOS.host.nix
       ];
 
       overlay = my-pkgs;
