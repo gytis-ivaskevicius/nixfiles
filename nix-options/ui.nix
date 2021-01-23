@@ -3,16 +3,6 @@
 with lib;
 let
   cfg = config.gytix.ui;
-  keybindingsStr = concatStringsSep "\n" (
-    mapAttrsToList
-      (hotkey: command:
-        optionalString (command != null) ''
-          ${hotkey}
-            ${command}
-        ''
-      )
-      cfg.keybindings
-  );
   daemonOption = pkg: {
     enable = mkEnableOption "Enable application on starup";
     package = mkOption {
@@ -38,20 +28,6 @@ in
   options = {
     gytix.ui.autorandr = daemonOption pkgs.autorandr;
     gytix.ui.polkit-ui = daemonOption pkgs.pkgs.pantheon.pantheon-agent-polkit;
-    gytix.ui.sxhkd = daemonOption pkgs.sxhkd;
-
-    gytix.ui.keybindings = mkOption {
-      type = types.attrsOf (types.nullOr types.str);
-      default = { };
-      description = "An attribute set that assigns hotkeys to commands.";
-      example = literalExample ''
-        {
-        "super + shift + {r,c}" = "i3-msg {restart,reload}";
-        "super + {s,w}"         = "i3-msg {stacking,tabbed}";
-        }
-      '';
-    };
-
   };
 
   config = {
@@ -76,11 +52,6 @@ in
       autorandr = mkOneshot cfg.autorandr.enable
         "Autorandr - automatic monitors management"
         "${cfg.autorandr.package}/bin/autorandr --change";
-
-      sxhkd = mkService cfg.sxhkd.enable
-        "Simple X hotkey daemon"
-        "${cfg.sxhkd.package}/bin/sxhkd -c ${pkgs.writeText "sxhkd.conf" keybindingsStr}";
-
     };
   };
 }

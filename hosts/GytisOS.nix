@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ../bundles/apps.nix
     ../bundles/base.nix
     ../bundles/clean_home.nix
     ../bundles/dev.nix
@@ -36,6 +35,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    geekbench
     fuse-overlayfs
     nox
     tdesktop
@@ -80,5 +80,5 @@
 
   swapDevices = [ ];
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkForce "performance";
 }

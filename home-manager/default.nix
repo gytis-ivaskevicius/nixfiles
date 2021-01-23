@@ -1,7 +1,37 @@
 { lib, pkgs, config, options, ... }:
 
 with lib;
+with pkgs;
 let
+  autotiling = writeShellScript "i3-autotiling.sh" ''
+    #!/usr/bin/env bash
+
+    REGEX="([0-9]+)x([0-9]+)"
+
+    update_split(){
+        OUTPUT="$(${xdotool}/bin/xdotool getwindowfocus getwindowgeometry)"
+
+        if [[ $OUTPUT =~ $REGEX ]]
+        then
+            WIDTH="''${BASH_REMATCH[1]}"
+            HEIGHT="''${BASH_REMATCH[2]}"
+            if [ $WIDTH -gt $HEIGHT ];
+            then
+                ${config.xsession.windowManager.i3.package}/bin/i3-msg "split h"
+            else
+                ${config.xsession.windowManager.i3.package}/bin/i3-msg "split v"
+            fi
+        fi
+    }
+
+    while read -r line
+    do
+        LAYOUT="$(${config.xsession.windowManager.i3.package}/bin/i3-msg -t get_tree | ${jq}/bin/jq -r 'recurse(.nodes[]; .nodes != null) | select(.nodes[].focused).layout')"
+        if [ "$LAYOUT" = "splitv" ] || [ "$LAYOUT" = "splith" ]; then
+            update_split
+        fi
+    done < <(xprop -spy -root _NET_ACTIVE_WINDOW)
+  '';
   modifier = "Mod4";
   left = "h";
   down = "j";
@@ -12,14 +42,100 @@ let
   text-color = "#4f97d7";
   inactive-text-color = "#676E7D";
   urgent-bg-color = "#E53935";
+  browser = [ "firefox.desktop" ];
+  associations = {
+    "text/html" = browser;
+    "x-scheme-handler/http" = browser;
+    "x-scheme-handler/https" = browser;
+    "x-scheme-handler/ftp" = browser;
+    "x-scheme-handler/chrome" = browser;
+    "x-scheme-handler/about" = browser;
+    "x-scheme-handler/unknown" = browser;
+    "application/x-extension-htm" = browser;
+    "application/x-extension-html" = browser;
+    "application/x-extension-shtml" = browser;
+    "application/xhtml+xml" = browser;
+    "application/x-extension-xhtml" = browser;
+    "application/x-extension-xht" = browser;
 
+    #"text/*" = [ "emacs.desktop" ];
+    "audio/*" = [ "vlc.desktop" ];
+    "video/*" = [ "vlc.dekstop" ];
+    #"image/*" = [ "ahoviewer.desktop" ];
+    #"text/calendar" = [ "thunderbird.desktop" ]; # ".ics"  iCalendar format
+    "application/json" = browser; # ".json"  JSON format
+    "application/pdf" = browser; # ".pdf"  Adobe Portable Document Format (PDF)
+  };
 in
 {
+  home.sessionVariables = {
+    BROWSER = "firefox";
+    TERMINAL = "alacritty";
+    MOZ_X11_EGL = "1";
+  };
+
+  xdg.mimeApps.enable = true;
+  xdg.mimeApps.associations.added = associations;
+  xdg.mimeApps.defaultApplications = associations;
+
+  home.packages = with pkgs; [
+    arandr
+    autorandr
+    brave
+    cinnamon.nemo
+    discord
+    firefox-beta-bin
+    g-alacritty
+    gnome3.eog
+    pavucontrol
+    vlc
+
+    numix-gtk-theme
+    papirus-icon-theme
+
+      dejavu_fonts
+      ubuntu_font_family
+      source-code-pro
+      noto-fonts
+      noto-fonts-extra
+      noto-fonts-cjk
+      twitter-color-emoji
+      fira-code
+      fira-code-symbols
+      nerdfonts
+  ];
+
+
+  services.picom = {
+    enable = true;
+    backend = "glx";
+    shadow = true;
+    vSync = true;
+    blur = true;
+    shadowExclude = [
+      "_GTK_FRAME_EXTENTS@:c"
+      "class_g = '.ulauncher-wrapped'"
+      "class_g = 'Conky'"
+      "class_g = 'Peek'"
+      "class_g = 'Ulauncher'"
+      "class_g = 'gromit-mpx'"
+      "class_g = 'i3-frame'"
+      "name = 'Polybar tray window'"
+      "name = 'polybar-blur-noshadow'"
+      "name = 'polybar-noblur-noshadow'"
+    ];
+
+   #services.picom.blurExclude
+   #settings.blur-background-exclude = [
+   #  "!(name = 'polybar-blur-shadow' || name = 'polybar-blur-noshadow' || name = 'polybar-backdrop' || class_g = 'URxvt' || class_g = 'Rofi' || class_g = 'Dunst' || class_g = 'Atom' || class_g = 'VSCodium' || class_g = 'Termite' || class_g = 'Conky' || name = 'Polybar tray window')"
+   #];
+  };
+
 
   services.network-manager-applet.enable = true;
 
   services.polybar.enable = true;
-  services.polybar.script = "polybar";
+  services.polybar.script = "polybar &";
   services.polybar.package = pkgs.g-polybar;
 
   services.flameshot.enable = true;
@@ -34,7 +150,7 @@ in
   xsession.windowManager.i3.enable = true;
   xsession.windowManager.i3 = {
     extraConfig = ''
-      exec --no-startup-id ${./autotiling.sh}
+      exec --no-startup-id ${autotiling}
       set $movemouse "sh -c 'eval `${pkgs.xdotool}/bin/xdotool getactivewindow getwindowgeometry --shell`; ${pkgs.xdotool}/bin/xdotool mousemove $((X+WIDTH/2)) $((Y+HEIGHT/2))'"
     '';
     package = pkgs.i3-gaps;
@@ -47,6 +163,9 @@ in
       focus.followMouse = false;
       fonts = [ "RobotoMono 9" ];
       terminal = "$TERMINAL";
+      startup = [
+        { command = "systemctl --user restart polybar"; always = true; notification = false; }
+      ];
 
       colors.focused = { border = bg-color; childBorder = bg-color; background = bg-color; text = text-color; indicator = "#00ff00"; };
       colors.unfocused = { border = inactive-bg-color; childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00"; };
@@ -61,14 +180,14 @@ in
         "${left}" = "resize shrink width 10 px or 10 ppt";
         "${right}" = "resize grow width 10 px or 10 ppt";
         "${up}" = "resize shrink height 10 px or 10 ppt";
-      } ;
+      };
 
-      bars = mkForce [];
+      bars = mkForce [ ];
       keybindings = with pkgs; mkOptionDefault {
         Print = "exec ${flameshot}/bin/flameshot gui";
         XF86AudioMute = "exec ${pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
         XF86AudioPlay = "exec ${playerctl}/bin/playerctl play";
-        XF86AudioPause= "exec ${playerctl}/bin/playerctl pause";
+        XF86AudioPause = "exec ${playerctl}/bin/playerctl pause";
         XF86AudioNext = "exec ${playerctl}/bin/playerctl next";
         XF86AudioPrev = "exec ${playerctl}/bin/playerctl prev";
         XF86AudioRaiseVolume = "exec ${pulseaudio}/bin/pactl  set-sink-volume @DEFAULT_SINK@ +5%";
