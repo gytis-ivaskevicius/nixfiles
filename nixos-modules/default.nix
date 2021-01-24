@@ -2,7 +2,9 @@
 
 {
   imports = [
-    ./ui.nix
+    ./cachix.nix
+    ./clean-home.nix
     ./runtimes.nix
+    ./ui.nix
   ];
 }

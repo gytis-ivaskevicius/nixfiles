@@ -2,13 +2,10 @@
 
 {
   imports = [
-    ../bundles/base.nix
-    ../bundles/clean_home.nix
-    ../bundles/dev.nix
-    #../bundles/i3rice.nix
-    ../bundles/xorg.nix
-    ../bundles/cli
-    ../bundles/cachix.nix
+    ./base.nix
+    ./dev.nix
+    ./xorg.nix
+    ./cli
   ];
 
   nixpkgs.config.allowBroken = true;

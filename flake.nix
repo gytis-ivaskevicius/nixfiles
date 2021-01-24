@@ -37,7 +37,7 @@
       ];
 
       nixosConfigurations = utils.buildNixosConfigurations [
-        ./hosts/GytisOS.host.nix
+        ./nixos-configurations/GytisOS.host.nix
       ];
 
       overlay = my-pkgs;
