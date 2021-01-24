@@ -21,12 +21,10 @@ let
       ExecStart = exec;
     };
   };
-  mkOneshot = enabled: desc: exec: mkIf enabled (mkService enabled desc exec // { serviceConfig.Type = "oneshot"; });
 in
 {
 
   options = {
-    gytix.ui.autorandr = daemonOption pkgs.autorandr;
     gytix.ui.polkit-ui = daemonOption pkgs.pkgs.pantheon.pantheon-agent-polkit;
   };
 
@@ -49,9 +47,6 @@ in
         "Polkit UI popup"
         "${cfg.polkit-ui.package}/libexec/policykit-1-pantheon/io.elementary.desktop.agent-polkit";
 
-      autorandr = mkOneshot cfg.autorandr.enable
-        "Autorandr - automatic monitors management"
-        "${cfg.autorandr.package}/bin/autorandr --change";
     };
   };
 }

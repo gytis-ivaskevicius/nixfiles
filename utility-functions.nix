@@ -14,7 +14,10 @@ in
 {
   pkgImport = pkgs: overlays: import pkgs {
     inherit system overlays;
-    config = { allowUnfree = true; };
+    config = {
+      allowUnfree = true;
+      oraclejdk.accept_license = true;
+    };
   };
 
 
@@ -32,7 +35,7 @@ in
             let
               global = {
                 networking.hostName = hostName;
-                nixpkgs = { pkgs = pkgs; };
+                nixpkgs = { inherit pkgs; config = pkgs.config; };
                 nix.nixPath = let path = toString ./.; in
                   [
                     "master=${inputs.master}"

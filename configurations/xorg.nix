@@ -8,7 +8,6 @@
   xdg.mime.enable = true;
   environment.systemPackages = with pkgs; [ xclip ];
 
-  gytix.ui.autorandr.enable = true;
   gytix.ui.polkit-ui.enable = true;
 
   services.xserver = {

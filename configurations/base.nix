@@ -37,11 +37,6 @@
     '';
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    oraclejdk.accept_license = true;
-  };
-
   programs.ssh.startAgent = true;
 
   nix.gc = {

@@ -24,7 +24,23 @@
       };
 
       unstable-pkgs = utils.pkgImport master [ my-pkgs ];
-      pkgs = utils.pkgImport nixpkgs self.overlays;
+
+
+      tmp-pkgs = (import nixpkgs { inherit system; }).pkgs;
+      nixpkgs-patched = tmp-pkgs.applyPatches {
+        name = "nixpkgs-patched";
+        src = nixpkgs;
+        patches = [
+          (tmp-pkgs.fetchpatch {
+            url = "https://github.com/NixOS/nixpkgs/pull/93832/commits/20fa0c5949604671e200062dff009516e4d8ae84.patch";
+            sha256 = "sha256-3gmtPyPgeVmF4CGdHm+ht088A++saGeeu/TBtkzypro=";
+          })
+        ];
+      };
+      #  pkgs = utils.pkgImport nixpkgs self.overlays;
+      pkgs = utils.pkgImport nixpkgs-patched self.overlays;
+
+
     in
     {
       nixosModules = [
@@ -46,7 +62,7 @@
         neovim-nightly-overlay.overlay
         my-pkgs
         (final: prev: {
-          inherit (unstable-pkgs) manix alacritty jetbrains jdk15 brave gitkraken gradle insomnia maven linuxPackages_latest;
+          inherit (unstable-pkgs) manix alacritty jdk15 brave gitkraken gradle insomnia maven linuxPackages_latest;
           unstable = unstable-pkgs;
         })
       ];
