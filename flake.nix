@@ -29,7 +29,7 @@
     {
       nixosModules = [
         home-manager.nixosModules.home-manager
-        (import ./nixos-modules)
+        (import ./modules)
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
@@ -37,7 +37,7 @@
       ];
 
       nixosConfigurations = utils.buildNixosConfigurations [
-        ./nixos-configurations/GytisOS.host.nix
+        ./configurations/GytisOS.host.nix
       ];
 
       overlay = my-pkgs;
