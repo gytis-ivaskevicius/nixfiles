@@ -4,10 +4,7 @@
   xdg.mime.enable = true;
   environment.systemPackages = with pkgs; [ xclip ];
 
-  gytix.ui.polkit-ui.enable = true;
-
   services.dbus.packages = with pkgs; [ gnome3.dconf ];
-
   services.xserver = {
     enable = true;
     layout = "us";

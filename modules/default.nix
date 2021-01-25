@@ -5,6 +5,5 @@
     ./cachix.nix
     ./clean-home.nix
     ./runtimes.nix
-    ./ui.nix
   ];
 }
