@@ -59,11 +59,6 @@
 
   services = {
     irqbalance.enable = true;
-    lorri.enable = true;
-    avahi.enable = lib.mkDefault true;
-    avahi.nssmdns = lib.mkDefault true;
-    fstrim.enable = true;
-    logind.killUserProcesses = lib.mkDefault true;
     openssh.enable = lib.mkDefault true;
     openssh.passwordAuthentication = lib.mkDefault false;
     printing.enable = lib.mkDefault true;

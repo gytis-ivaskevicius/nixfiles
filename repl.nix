@@ -6,4 +6,4 @@ in
 // flake
 // nixpkgs
 // nixpkgs.lib
-// flake.nixosConfigurations
+  // flake.nixosConfigurations

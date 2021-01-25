@@ -40,7 +40,8 @@ in
                   [
                     "master=${inputs.master}"
                     "nixpkgs=${inputs.nixpkgs}"
-                    "nixos-config=${path}/configuration.nix"
+                    "repl=${path}/repl.nix"
+                    "nixos-config=${path}/repl.nix"
                   ];
 
                 nix.package = pkgs.nixUnstable;
