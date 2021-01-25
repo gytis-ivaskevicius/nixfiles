@@ -112,6 +112,24 @@ in
   xdg.mimeApps.associations.added = associations;
   xdg.mimeApps.defaultApplications = associations;
 
+  fonts.fontconfig.enable = true;
+  gtk = {
+    enable = true;
+    iconTheme.package = pkgs.papirus-icon-theme;
+    iconTheme.name = "ePapirus";
+    theme.package = pkgs.numix-gtk-theme;
+    theme.name = "Numix";
+    font.name = "FantasqueSansMono Nerd Font Mono";
+    font.package = pkgs.nerdfonts;
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme=true;
+      gtk-button-images=false;
+      gtk-menu-images=false;
+      gtk-toolbar-style="GTK_TOOLBAR_ICONS";
+    };
+  };
+
+
   home.packages = with pkgs; [
     arandr
     autorandr
@@ -123,20 +141,6 @@ in
     gnome3.eog
     pavucontrol
     vlc
-
-    numix-gtk-theme
-    papirus-icon-theme
-
-    dejavu_fonts
-    ubuntu_font_family
-    source-code-pro
-    noto-fonts
-    noto-fonts-extra
-    noto-fonts-cjk
-    twitter-color-emoji
-    fira-code
-    fira-code-symbols
-    nerdfonts
   ];
 
 
