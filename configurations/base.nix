@@ -51,6 +51,7 @@
     kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
     kernel.sysctl."net.core.default_qdisc" = "fq";
 
+    kernelParams = [ "quiet" "loglevel=3" ];
     cleanTmpDir = true;
     loader.systemd-boot.enable = true;
     loader.timeout = 2;

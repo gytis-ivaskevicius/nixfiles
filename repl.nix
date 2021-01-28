@@ -4,6 +4,7 @@ let
 in
 { inherit flake; }
 // flake
+// builtins
 // nixpkgs
 // nixpkgs.lib
   // flake.nixosConfigurations
