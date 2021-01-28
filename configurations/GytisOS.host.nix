@@ -12,7 +12,7 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest; # Default value is 'pkgs.linuxPackages'
   #hardware.bluetooth.enable = true;                  # Default value is 'false'
-  #services.openssh.passwordAuthentication = false;   # Default value is 'false'
+  #services.openssh.passwordAuthentication = true;    # Default value is 'false'
   services.zerotierone.enable = true; # Default value is 'false'
   services.zerotierone.joinNetworks = [ "9bee8941b5c7428a" ]; # Default value is '[]'
   #time.timeZone = "Europe/Vilnius";                  # Default value is 'Europe/Vilnius'
