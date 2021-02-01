@@ -36,24 +36,20 @@ in
               global = {
                 networking.hostName = hostName;
                 nixpkgs = { inherit pkgs; config = pkgs.config; };
-                nix.nixPath = let path = toString ./.; in
-                  [
-                    "master=${inputs.master}"
-                    "nixpkgs=${inputs.nixpkgs}"
-                    "repl=${path}/repl.nix"
-                    "nixos-config=${path}/repl.nix"
-                  ];
+
+                nix.nixPath =
+                  let path = toString ./.; in
+                  (lib.mapAttrsToList (name: _v: "${name}=${inputs.${name}}") inputs) ++ [ "repl=${path}/repl.nix" ];
+
+                nix.registry =
+                  (lib.mapAttrs'
+                    (name: _v: lib.nameValuePair name ({ flake = inputs.${name}; }))
+                    inputs) // { ${hostName}.flake = self; };
 
                 nix.package = pkgs.nixUnstable;
                 nix.extraOptions = ''
                   experimental-features = nix-command flakes
                 '';
-
-                nix.registry = {
-                  nixpkgs.flake = inputs.nixpkgs;
-                  nixflk.flake = self;
-                  master.flake = inputs.master;
-                };
 
                 system.configurationRevision = lib.mkIf (self ? rev) self.rev;
               };
