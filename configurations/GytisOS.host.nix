@@ -9,6 +9,9 @@
   ];
 
   nixpkgs.config.allowBroken = true;
+  environment.variables = {
+    XKB_DEFAULT_OPTIONS="terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
+  };
 
   boot.kernelPackages = pkgs.linuxPackages_latest; # Default value is 'pkgs.linuxPackages'
   #hardware.bluetooth.enable = true;                  # Default value is 'false'
@@ -19,9 +22,8 @@
   #networking.enableIPv6 = false;                     # Default value is 'true'
 
   services.xserver.displayManager.defaultSession = "none+i3";
-  services.xserver.windowManager.i3 = {
-    enable = true;
-  };
+  services.xserver.windowManager.i3.enable = true;
+  programs.sway.enable = true;
   home-manager.users.gytis = import ../home-manager;
   users.extraUsers.gytis = {
     shell = pkgs.zsh;

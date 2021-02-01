@@ -32,12 +32,6 @@ in
 
   services.network-manager-applet.enable = true;
 
-  services.random-background = {
-    enable = true;
-    interval = "1h";
-    imageDirectory = "${./wallpapers}";
-  };
-
   home.sessionVariables = {
     BROWSER = "firefox";
     TERMINAL = "alacritty";
@@ -64,23 +58,6 @@ in
       gtk-toolbar-style = "GTK_TOOLBAR_ICONS";
     };
   };
-
-  systemd.user.services.polkit-gnome = {
-    Unit = {
-      Description = "PolicyKit Authentication Agent";
-      After = [ "graphical-session-pre.target" ];
-      PartOf = [ "graphical-session.target" ];
-    };
-
-    Service = {
-      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-    };
-
-    Install = {
-      WantedBy = [ "graphical-session.target" ];
-    };
-  };
-
 
   home.packages = with pkgs; [
     brave

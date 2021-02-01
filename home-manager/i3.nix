@@ -59,6 +59,29 @@ in
   services.polybar.package = pkgs.g-polybar;
 
 
+  services.random-background = {
+    enable = true;
+    interval = "1h";
+    imageDirectory = "${./wallpapers}";
+  };
+
+  systemd.user.services.polkit-gnome = {
+    Unit = {
+      Description = "PolicyKit Authentication Agent";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+
+    Service = {
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    };
+
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+
+
   services.picom = {
     enable = true;
     backend = "glx";

@@ -41,15 +41,17 @@ let
   text-color = "#4f97d7";
   inactive-text-color = "#676E7D";
   urgent-bg-color = "#E53935";
+  isI3 = wm == "i3";
+  isSway = wm == "sway";
 in
 {
 
   enable = true;
-  extraConfig = ''
+  extraConfig = mkIf isI3 ''
     exec --no-startup-id ${autotiling}
     set $movemouse "sh -c 'eval `${pkgs.xdotool}/bin/xdotool getactivewindow getwindowgeometry --shell`; ${pkgs.xdotool}/bin/xdotool mousemove $((X+WIDTH/2)) $((Y+HEIGHT/2))'"
   '';
-  package = if wm == "i3" then pkgs.i3-gaps else pkgs.sway;
+  package = if isI3 then pkgs.i3-gaps else pkgs.sway;
   config = {
     modifier = "Mod4";
     floating.modifier = "Mod4";
@@ -58,10 +60,11 @@ in
     focus.forceWrapping = false;
     focus.followMouse = false;
     fonts = [ "RobotoMono 9" ];
-    terminal = "$TERMINAL";
+    terminal = "${pkgs.alacritty}/bin/alacritty}";
     startup = [
       #{ command = "systemctl --user restart polybar"; always = true; notification = false; }
       #{ command = "autorandr -c"; always = true; notification = false; }
+      #{ command = "waybar"; always = true; notification = false; }
     ];
 
     colors.focused = { border = bg-color; childBorder = bg-color; background = bg-color; text = text-color; indicator = "#00ff00"; };
@@ -79,7 +82,10 @@ in
       "${up}" = "resize shrink height 10 px or 10 ppt";
     };
 
-    bars = mkForce [ ];
+#    bars = mkForce [ ];
+    bars = if isSway then [{
+        "command" = "${waybar}/bin/waybar";
+    }] else [];
     keybindings = with pkgs; mkOptionDefault {
       Print = "exec ${flameshot}/bin/flameshot gui";
       XF86AudioMute = "exec ${pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
@@ -92,14 +98,14 @@ in
       XF86MonBrightnessUp = "exec ${xorg.xbacklight} -inc 20";
       XF86MonBrightnessDown = "exec ${xorg.xbacklight} -dec 20";
 
-      "${modifier}+b" = "exec $BROWSER";
-      "${modifier}+shift+b" = "exec $BROWSER --private-window";
+      "${modifier}+b" = "exec ${firefox}/bin/firefox";
+      "${modifier}+shift+b" = "exec ${firefox}/bin/firefox --private-window";
       "${modifier}+z" = "exec ${autorandr}/bin/autorandr -c -f";
 
       #"${modifier}+t" = ''[class="scratchterm"] scratchpad show, move position center'';
       #"${modifier}+b" = ''[class="scratchbrowser"] scratchpad show, move position center '';
 
-      #"${modifier}+Return" = "exec $TERMINAL";
+      "${modifier}+Return" = "exec ${g-alacritty}/bin/alacritty";
       "${modifier}+q" = "kill";
       #"${modifier}+d" = "exec ${cfg.config.menu}";
 
@@ -145,7 +151,7 @@ in
       #"${modifier}+7" = "workspace number 7";
       #"${modifier}+8" = "workspace number 8";
       #"${modifier}+9" = "workspace number 9";
-      #"${modifier}+0" = "workspace number 10";
+      "${modifier}+0" = "workspace number 10";
 
       #"${modifier}+Shift+1" = "move container to workspace number 1";
       #"${modifier}+Shift+2" = "move container to workspace number 2";
@@ -156,10 +162,10 @@ in
       #"${modifier}+Shift+7" = "move container to workspace number 7";
       #"${modifier}+Shift+8" = "move container to workspace number 8";
       #"${modifier}+Shift+9" = "move container to workspace number 9";
-      #"${modifier}+Shift+0" = "move container to workspace number 10";
+      "${modifier}+Shift+0" = "move container to workspace number 10";
 
       #"${modifier}+Shift+c" = "reload";
-      #"${modifier}+Shift+r" = "restart";
+      "${modifier}+Shift+r" = "restart";
       #"${modifier}+Shift+e" = "exec i3-nagbar -t warning -m 'Do you want to exit i3?' -b 'Yes' 'i3-msg exit'";
 
       #"${modifier}+r" = "mode resize";
