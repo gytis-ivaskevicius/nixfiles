@@ -96,7 +96,6 @@
     appimage-run
     bat
     binutils
-    cmake
     curl
     dmidecode
     dnsutils
@@ -108,9 +107,7 @@
     fzf
     g-lf
     g-neovim
-    gcc
     git
-    gnumake
     htop
     iftop
     inetutils

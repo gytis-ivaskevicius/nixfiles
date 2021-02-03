@@ -82,10 +82,11 @@ in
       "${up}" = "resize shrink height 10 px or 10 ppt";
     };
 
-#    bars = mkForce [ ];
-    bars = if isSway then [{
+    #    bars = mkForce [ ];
+    bars =
+      if isSway then [{
         "command" = "${waybar}/bin/waybar";
-    }] else [];
+      }] else [ ];
     keybindings = with pkgs; mkOptionDefault {
       Print = "exec ${flameshot}/bin/flameshot gui";
       XF86AudioMute = "exec ${pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";

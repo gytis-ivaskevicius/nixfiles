@@ -12,11 +12,16 @@ let
 
 in
 {
-  pkgImport = pkgs: overlays: import pkgs {
+  pkgImport = nixpkgs: overlays: import nixpkgs {
     inherit system overlays;
-    config = {
-      allowUnfree = true;
-      oraclejdk.accept_license = true;
+      config = {
+        #replaceStdenv = { pkgs }: ((import nixpkgs { inherit system; config.allowUnfree = true;}).pkgs.gcc10Stdenv);
+        #replaceStdenv = { pkgs }: pkgs.gcc10Stdenv;
+        replaceStdenv = { pkgs }: pkgs.clangStdenv;
+        allowUnfree = true;
+        oraclejdk.accept_license = true;
+
+
     };
   };
 
