@@ -41,7 +41,7 @@ let
   colorScheme =
     # if builtins.pathExists ./light then colorSchemeLight else colorSchemeDark;
     colorSchemeDark;
-    font = "Roboto";
+  font = "Roboto";
 
 
   bgColor = colorScheme.primary.normal.background;

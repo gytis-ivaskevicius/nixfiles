@@ -6,12 +6,12 @@
     nixpkgs.url = "nixpkgs/release-20.09";
 
     home-manager = { url = github:nix-community/home-manager/release-20.09; inputs.nixpkgs.follows = "nixpkgs"; };
-    neovim-nightly-overlay = { url = github:nix-community/neovim-nightly-overlay; inputs.nixpkgs.follows = "master"; };
+    neovim = { url = github:neovim/neovim?dir=contrib; inputs.nixpkgs.follows = "master"; };
     nixpkgs-mozilla = { url = github:mozilla/nixpkgs-mozilla; flake = false; };
 
   };
 
-  outputs = inputs@{ self, neovim-nightly-overlay, home-manager, nixpkgs-mozilla, nixpkgs, master, ... }:
+  outputs = inputs@{ self, neovim, home-manager, nixpkgs-mozilla, nixpkgs, master, ... }:
     let
       inherit (nixpkgs) lib;
       inherit (lib) recursiveUpdate;
@@ -59,11 +59,11 @@
       overlay = my-pkgs;
       overlays = [
         (import nixpkgs-mozilla)
-        neovim-nightly-overlay.overlay
         my-pkgs
         (final: prev: {
           inherit (unstable-pkgs) manix alacritty jetbrains jdk15 brave gitkraken gradle insomnia maven linuxPackages_latest;
           unstable = unstable-pkgs;
+          neovim-nightly = neovim.defaultPackage.${system};
         })
       ];
 
