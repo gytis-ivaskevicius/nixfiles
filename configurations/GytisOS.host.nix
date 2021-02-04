@@ -10,14 +10,14 @@
 
   nixpkgs.config.allowBroken = true;
   environment.variables = {
-    XKB_DEFAULT_OPTIONS="terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
+    XKB_DEFAULT_OPTIONS = "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
   };
 
   boot.kernelPackages = pkgs.linuxPackages_latest; # Default value is 'pkgs.linuxPackages'
   #hardware.bluetooth.enable = true;                  # Default value is 'false'
   #services.openssh.passwordAuthentication = true;    # Default value is 'false'
   services.zerotierone.enable = true; # Default value is 'false'
-  services.zerotierone.joinNetworks = [ "9bee8941b5c7428a" ]; # Default value is '[]'
+  services.zerotierone.joinNetworks = [ "9bee8941b5c7428a" "12ac4a1e710088c5" ]; # Default value is '[]'
   #time.timeZone = "Europe/Vilnius";                  # Default value is 'Europe/Vilnius'
   #networking.enableIPv6 = false;                     # Default value is 'true'
 
