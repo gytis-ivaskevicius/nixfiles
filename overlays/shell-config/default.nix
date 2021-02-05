@@ -1,5 +1,7 @@
 { lib
 , writeShellScript
+, fd
+, dockerAliasEnabled ? true
 , prettyManPagesEnabled ? true
 , sshuttleEnabled ? true
 , sshuttle
@@ -38,6 +40,31 @@ let
       cd "$(nix eval -f '<nixpkgs>' --raw $1)"
     }
   '';
+  docker = ''
+    # Select a running docker container to stop
+    function docker-stop() {
+            local cid
+            cid=$(docker ps | sed 1d | fzf -q "$1" | awk '{print $1}')
+
+            [ -n "$cid" ] && docker stop "$cid"
+    }
+
+    # Select a docker container to remove
+    function docker-rm() {
+            local cid
+            cid=$(docker ps -a | sed 1d | fzf -q "$1" | awk '{print $1}')
+
+            [ -n "$cid" ] && docker rm "$cid"
+    }
+
+    # Select a container to attach onto with bash
+    function docker-bash() {
+            local cid
+            cid=$(docker ps -a | sed 1d | fzf -q "$1" | awk '{print $1}')
+
+            [ -n "$cid" ] && docker container exec -it "$cid" /bin/bash
+    }
+  '';
   zfsPasteImprovements = ''
     pasteinit() {
       OLD_SELF_INSERT=''${''${(s.:.)widgets[self-insert]}[2,3]}
@@ -60,6 +87,7 @@ writeShellScript "shellconfig.sh" ''
     source "$(fzf-share)/completion.zsh"
   fi
 
+  ${optionalString dockerAliasEnabled docker}
   ${optionalString prettyManPagesEnabled prettyManPages}
   ${optionalString sshuttleEnabled vpn}
   ${optionalString nixArgsEnabled (builtins.readFile ./nix-args.sh)}
