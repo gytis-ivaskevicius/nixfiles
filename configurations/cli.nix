@@ -11,7 +11,7 @@
 
   environment.interactiveShellInit = ''
     source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh
-    ${builtins.readFile pkgs.shell-config}
+    ${builtins.readFile (pkgs.shell-config.override { dockerAliasEnabled = config.virtualisation.docker.enable; })}
 
     autoload -U promptinit; promptinit
     prompt pure
