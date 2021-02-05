@@ -7,4 +7,5 @@ final: prev: {
   g-rofi = prev.callPackage ./g-rofi { };
   g-termite = prev.callPackage ./g-termite { };
   zsh-forgit = prev.callPackage ./zsh-forgit { };
+  shell-config = prev.callPackage ./shell-config { };
 }

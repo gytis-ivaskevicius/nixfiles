@@ -20,7 +20,13 @@
     ohMyZsh.plugins = [ "sudo" "z" ];
 
     interactiveShellInit = "source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh";
-    promptInit = builtins.readFile ./promptInit.zsh;
+    #promptInit = builtins.readFile ./promptInit.zsh;
+    promptInit = ''
+      ${builtins.readFile pkgs.shell-config}
+
+      autoload -U promptinit; promptinit
+      prompt pure
+    '';
 
     setOptions = [
       "noautomenu"

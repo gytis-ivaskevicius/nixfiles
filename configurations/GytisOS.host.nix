@@ -5,7 +5,7 @@
     ./base.nix
     ./dev.nix
     ./xorg.nix
-    ./cli
+    ./cli.nix
   ];
 
   nixpkgs.config.allowBroken = true;

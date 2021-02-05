@@ -1,22 +1,3 @@
-export LESS_TERMCAP_mb=$'\e[1;33m'
-export LESS_TERMCAP_md=$'\e[1;33m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;32m'
-
-
-if [ -n "${commands[fzf-share]}" ]; then
-  source "$(fzf-share)/key-bindings.zsh"
-  source "$(fzf-share)/completion.zsh"
-fi
-
-function nix-cd(){ cd "$(nix eval -f '<nixpkgs>' --raw $1)"}
-
-function vpn(){
-    sshuttle --dns -r $1 0/0 --disable-ipv6 --no-latency-control
-}
 
 function nix-args(){
     nix eval -f '<nixpkgs>' --json $1.override 2> /dev/null | sed 's/\,"\w\+":\([,}]\)/\1/g' | jq .__functionArgs
@@ -92,48 +73,3 @@ EOF
 }
 
 compdef _nix-args nix-args
-
-function _nix() {
-  local ifs_bk="$IFS"
-  local input=("${(Q)words[@]}")
-  IFS=$'\n'
-  local res=($(NIX_GET_COMPLETIONS=$((CURRENT - 1)) "$input[@]"))
-  IFS="$ifs_bk"
-  local tpe="${${res[1]}%%>	*}"
-  local -a suggestions
-  declare -a suggestions
-  for suggestion in ${res:1}; do
-    # FIXME: This doesn't work properly if the suggestion word contains a `:`
-    # itself
-    suggestions+="${suggestion/	/:}"
-  done
-  if [[ "$tpe" == filenames ]]; then
-    compadd -f
-  fi
-  _describe 'nix' suggestions
-}
-
-compdef _nix nix
-
-
-
-autoload bashcompinit
-bashcompinit
-
-pasteinit() {
-  OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
-  zle -N self-insert url-quote-magic
-}
-
-pastefinish() {
-  zle -N self-insert $OLD_SELF_INSERT
-}
-
-zstyle :bracketed-paste-magic paste-init pasteinit
-zstyle :bracketed-paste-magic paste-finish pastefinish
-
-bindkey -r ^V
-
-autoload -U promptinit; promptinit
-prompt pure
-

@@ -9,6 +9,9 @@
     neovim = { url = github:neovim/neovim?dir=contrib; inputs.nixpkgs.follows = "master"; };
     nixpkgs-mozilla = { url = github:mozilla/nixpkgs-mozilla; flake = false; };
 
+    #wayland = { url = "github:colemickens/nixpkgs-wayland"; };
+    #aarch-images = { url = "github:Mic92/nixos-aarch64-images"; flake = false; };
+
   };
 
   outputs = inputs@{ self, neovim, home-manager, nixpkgs-mozilla, nixpkgs, master, ... }:
