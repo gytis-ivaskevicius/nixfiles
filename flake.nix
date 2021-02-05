@@ -64,7 +64,7 @@
         (import nixpkgs-mozilla)
         my-pkgs
         (final: prev: {
-          inherit (unstable-pkgs) manix alacritty jetbrains jdk15 brave gitkraken gradle insomnia maven linuxPackages_latest;
+          inherit (unstable-pkgs) manix alacritty jetbrains jdk15 brave gitkraken gradle insomnia maven;
           unstable = unstable-pkgs;
           neovim-nightly = neovim.defaultPackage.${system};
         })

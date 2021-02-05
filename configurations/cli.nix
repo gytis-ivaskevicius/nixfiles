@@ -1,13 +1,21 @@
 { config, pkgs, lib, ... }:
 {
 
+  programs.adb.enable = lib.mkDefault true;
+
   environment.variables = {
     EDITOR = "nvim";
     LC_ALL = "en_US.UTF-8";
     TERM = "xterm-256color";
   };
 
-  programs.adb.enable = lib.mkDefault true;
+  environment.interactiveShellInit = ''
+    source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh
+    ${builtins.readFile pkgs.shell-config}
+
+    autoload -U promptinit; promptinit
+    prompt pure
+  '';
 
   programs.zsh = {
     autosuggestions.enable = true;
@@ -18,15 +26,6 @@
     syntaxHighlighting.enable = true;
     ohMyZsh.enable = true;
     ohMyZsh.plugins = [ "sudo" "z" ];
-
-    interactiveShellInit = "source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh";
-    #promptInit = builtins.readFile ./promptInit.zsh;
-    promptInit = ''
-      ${builtins.readFile pkgs.shell-config}
-
-      autoload -U promptinit; promptinit
-      prompt pure
-    '';
 
     setOptions = [
       "noautomenu"
@@ -64,7 +63,7 @@
 
     burn = "pkill -9";
     external-ip = "dig +short myip.opendns.com @resolver1.opendns.com";
-    f = "find . | grep ";
+    f = "fd";
     v = "$EDITOR $(fzf)";
     sv = "sudo $EDITOR $(fzf)";
     killall = "pkill";
@@ -97,65 +96,37 @@
   };
 
   environment.systemPackages = with pkgs; [
-    ack
-    android-file-transfer
-    appimage-run
     bat
-    binutils
     curl
-    dmidecode
-    dnsutils
     entr
     exa
     fd
-    ffmpeg
     file
     fzf
-    g-lf
     g-neovim
     git
     htop
-    iftop
     inetutils
     iotop
     jq
-    libnotify
     lm_sensors
     lshw
     lsof
     man
-    manix
-    mediainfo
-    neofetch
     nettools
-    nix-index
     nix-tree
+    nix-top
     nixpkgs-fmt
-    nmap
-    ntfs3g
-    openssl
     p7zip
     parted
-    patchelf
     pciutils
     psmisc
     pure-prompt
-    python3
-    python38Packages.pygments
     ranger
-    rclone
     ripgrep
-    sshfs
-    sshpass
-    sshuttle
-    steam-run
-    telnet
-    tmux
     unzip
-    usbutils
     wget
     which
-    youtube-dl
     zip
   ];
 }
