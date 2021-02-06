@@ -9,13 +9,6 @@
     TERM = "xterm-256color";
   };
 
-  environment.interactiveShellInit = ''
-    source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh
-    ${builtins.readFile (pkgs.shell-config.override { dockerAliasEnabled = config.virtualisation.docker.enable; })}
-
-    autoload -U promptinit; promptinit
-    prompt pure
-  '';
 
   programs.zsh = {
     autosuggestions.enable = true;
@@ -26,6 +19,13 @@
     syntaxHighlighting.enable = true;
     ohMyZsh.enable = true;
     ohMyZsh.plugins = [ "sudo" "z" ];
+    promptInit = ''
+      source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh
+      ${builtins.readFile (pkgs.shell-config.override { dockerAliasEnabled = config.virtualisation.docker.enable; })}
+
+      autoload -U promptinit; promptinit
+      prompt pure
+    '';
 
     setOptions = [
       "noautomenu"

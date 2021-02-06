@@ -67,6 +67,9 @@
     printing.enable = lib.mkDefault true;
     tlp.enable = lib.mkDefault true;
   };
+  services.xserver.deviceSection = ''
+    Option "VariableRefresh" "true"
+  '';
 
   zramSwap = {
     enable = lib.mkDefault true;
