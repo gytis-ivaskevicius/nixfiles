@@ -1,74 +1,76 @@
 { config, pkgs, lib, ... }:
+with lib;
 let
   nodeCfg = config.gytix.node;
   javaCfg = config.gytix.java;
   defaultEnvVarialbes = {
-    XDG_DATA_HOME = lib.mkDefault "$HOME/.local/share";
-    XDG_CACHE_HOME = lib.mkDefault "$HOME/.cache";
-    XDG_CONFIG_HOME = lib.mkDefault "$HOME/.config";
+    XDG_DATA_HOME = mkDefault "$HOME/.local/share";
+    XDG_CACHE_HOME = mkDefault "$HOME/.cache";
+    XDG_CONFIG_HOME = mkDefault "$HOME/.config";
   };
 in
 {
   options = {
 
-    gytix.java.additionalPackages = lib.mkOption {
+    gytix.java.additionalPackages = mkOption {
       description = ''
         Java packages to install. Typical values are pkgs.jdk or pkgs.jre. Example:
         ```
           gytix.java.additionalPackages = {
-            "11" = pkgs.jdk11;
-            "14" = pkgs.jdk14;
+            inherit (pkgs) jdk11 jdk14 jdk15;
           };
         ```
         This snippet:
         1. Generates environment variables `JAVA_HOME11` and `JAVA_HOME14`
         2. Generates aliases `java11` and `java14`
       '';
-      type = with lib.types; attrsOf package;
+      type = with types; attrsOf package;
     };
 
 
-    gytix.node.additionalPackages = lib.mkOption {
+    gytix.node.additionalPackages = mkOption {
       description = ''
         Node packages to install. Typical values are pkgs.nodejs-10_x or pkgs.nodejs-14_x. Example:
         ```
           gytix.node.additionalPackages = {
-            "10" = pkgs.nodejs-10_x;
-            "14" = pkgs.nodejs-14_x;
+            inherit (pkgs) nodejs-14_x;
           };
         ```
         This snippet:
         1. Generates environment variables `JAVA_HOME11` and `JAVA_HOME14`
         2. Generates aliases `java11` and `java14`
       '';
-      type = with lib.types; attrsOf package;
+      type = with types; attrsOf package;
     };
   };
 
 
-  config = {
-    environment.variables = lib.fold (a: b: a // b) defaultEnvVarialbes (
-      lib.mapAttrsFlatten (name: pkg: { "JAVA_HOME${name}" = pkg.home; }) javaCfg.additionalPackages
-    );
+  config =
+    let
+      javaPkgs = javaCfg.additionalPackages;
+      javaAliases = mapAttrs' (name: value: nameValuePair "java_${name}" "${value.home}/bin/java") javaPkgs;
+      javaTmpfiles = mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}") javaPkgs;
+      javaEnvVariables = mapAttrs' (name: value: nameValuePair "JAVA_HOME_${toUpper name}" value.home) javaPkgs;
 
-    systemd.tmpfiles.rules = lib.mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}") javaCfg.additionalPackages;
+      nodePkgs = nodeCfg.additionalPackages;
+      nodeAliases = mapAttrs' (name: value: nameValuePair name "${value}/bin/node") nodePkgs;
+    in
+    {
+      environment.variables = javaEnvVariables;
+      environment.shellAliases = javaAliases // nodeAliases;
+      systemd.tmpfiles.rules = javaTmpfiles;
 
-    environment.shellAliases = lib.fold (a: b: a // b) { } (
-      lib.mapAttrsFlatten (name: pkg: { "java${name}" = "${pkg.home}/bin/java"; }) javaCfg.additionalPackages
-      ++ lib.mapAttrsFlatten (name: pkg: { "node${name}" = "${pkg.outPath}/bin/node"; }) nodeCfg.additionalPackages
-    );
+      programs.npm.npmrc = mkIf config.programs.npm.enable (mkDefault ''
+        prefix=''${XDG_DATA_HOME}/npm
+        cache=''${XDG_CACHE_HOME}/npm
+        init-module=''${XDG_CONFIG_HOME}/npm/config/npm-init.js
+        init-license=MIT
+        color=true
+      '');
 
-    programs.npm.npmrc = lib.mkDefault ''
-      prefix=''${XDG_DATA_HOME}/npm
-      cache=''${XDG_CACHE_HOME}/npm
-      init-module=''${XDG_CONFIG_HOME}/npm/config/npm-init.js
-      init-license=MIT
-      color=true
-    '';
+      environment.shellInit = mkIf config.programs.npm.enable ''
+        export PATH=$PATH:$XDG_DATA_HOME/npm/bin
+      '';
 
-    environment.shellInit = lib.mkIf config.programs.npm.enable ''
-      export PATH=$PATH:$XDG_DATA_HOME/npm/bin
-    '';
-
-  };
+    };
 }

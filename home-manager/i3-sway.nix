@@ -61,9 +61,9 @@ in
     focus.followMouse = false;
     fonts = [ "RobotoMono 9" ];
     terminal = "${pkgs.alacritty}/bin/alacritty}";
-    startup = [
-      #{ command = "systemctl --user restart polybar"; always = true; notification = false; }
-      #{ command = "autorandr -c"; always = true; notification = false; }
+    startup = mkIf isI3 [
+      { command = "systemctl --user restart polybar"; always = true; notification = false; }
+      { command = "autorandr -c"; always = true; notification = false; }
       #{ command = "waybar"; always = true; notification = false; }
     ];
 

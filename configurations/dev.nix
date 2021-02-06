@@ -33,11 +33,8 @@
   #  };
 
   ### Java
-  gytix.java.additionalPackages = with pkgs; {
-    "8" = jdk8;
-    "11" = jdk11;
-    "14" = jdk14;
-    "15" = jdk15;
+  gytix.java.additionalPackages = {
+    inherit (pkgs) jdk11 jdk14 jdk15;
   };
   programs.java.enable = true;
   programs.java.package = pkgs.jdk15;
@@ -46,7 +43,6 @@
   programs.npm.enable = true;
   programs.npm.package = pkgs.nodejs-14_x;
   gytix.node.additionalPackages = {
-    "10" = pkgs.nodejs-10_x;
-    "14" = pkgs.nodejs-14_x;
+    inherit (pkgs) nodejs-14_x;
   };
 }
