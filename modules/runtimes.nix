@@ -24,6 +24,7 @@ in
         1. Generates environment variables `JAVA_HOME11` and `JAVA_HOME14`
         2. Generates aliases `java11` and `java14`
       '';
+      default = {};
       type = with types; attrsOf package;
     };
 
@@ -40,6 +41,7 @@ in
         1. Generates environment variables `JAVA_HOME11` and `JAVA_HOME14`
         2. Generates aliases `java11` and `java14`
       '';
+      default = {};
       type = with types; attrsOf package;
     };
   };

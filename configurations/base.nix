@@ -61,7 +61,6 @@
   services = {
     zfs.autoSnapshot.enable = true;
     zfs.autoScrub.enable = true;
-    irqbalance.enable = true;
     openssh.enable = lib.mkDefault true;
     openssh.passwordAuthentication = lib.mkDefault false;
     printing.enable = lib.mkDefault true;
