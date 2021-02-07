@@ -50,7 +50,7 @@ in
       javaPkgs = javaCfg.additionalPackages;
       javaAliases = mapAttrs' (name: value: nameValuePair "java_${name}" "${value.home}/bin/java") javaPkgs;
       javaTmpfiles = mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}") javaPkgs;
-      javaEnvVariables = mapAttrs' (name: value: nameValuePair "JAVA_HOME_${toUpper name}" value.home) javaPkgs;
+      javaEnvVariables = mapAttrs' (name: value: nameValuePair "JAVA_HOME_${toUpper name}" "${value.home}") javaPkgs;
 
       nodePkgs = nodeCfg.additionalPackages;
       nodeAliases = mapAttrs' (name: value: nameValuePair name "${value}/bin/node") nodePkgs;

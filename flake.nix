@@ -3,7 +3,7 @@
 
   inputs = {
     master.url = "nixpkgs/master";
-    nixpkgs.url = "nixpkgs/release-20.09";
+    nixpkgs.url = "nixpkgs/master";
 
     home-manager = { url = github:nix-community/home-manager/release-20.09; inputs.nixpkgs.follows = "nixpkgs"; };
     neovim = { url = github:neovim/neovim?dir=contrib; inputs.nixpkgs.follows = "master"; };
@@ -27,23 +27,14 @@
       };
 
       unstable-pkgs = utils.pkgImport master [ my-pkgs ];
+      nixpkgs-patched = utils.patchChannel nixpkgs [
+        (unstable-pkgs.fetchpatch {
+          url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/112268.patch";
+          sha256 = "sha256-qB4lt3xhKzOeY0JGkvZKu5k2HyliujYV6yYcEGfQd8A=";
+        })
+      ];
 
-
-      tmp-pkgs = (import nixpkgs { inherit system; }).pkgs;
-      nixpkgs-patched = tmp-pkgs.applyPatches {
-        name = "nixpkgs-patched";
-        src = nixpkgs;
-        patches = [
-          (tmp-pkgs.fetchpatch {
-            url = "https://github.com/NixOS/nixpkgs/pull/93832/commits/20fa0c5949604671e200062dff009516e4d8ae84.patch";
-            sha256 = "sha256-3gmtPyPgeVmF4CGdHm+ht088A++saGeeu/TBtkzypro=";
-          })
-        ];
-      };
-      #  pkgs = utils.pkgImport nixpkgs self.overlays;
       pkgs = utils.pkgImport nixpkgs-patched self.overlays;
-
-
     in
     {
       nixosModules = [
@@ -64,8 +55,6 @@
         (import nixpkgs-mozilla)
         my-pkgs
         (final: prev: {
-          inherit (unstable-pkgs) manix alacritty jetbrains jdk15 brave gitkraken gradle insomnia maven;
-          unstable = unstable-pkgs;
           neovim-nightly = neovim.defaultPackage.${system};
         })
       ];

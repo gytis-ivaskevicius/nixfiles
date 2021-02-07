@@ -12,6 +12,12 @@ let
 
 in
 {
+  patchChannel = channel: patches: (import channel { inherit system; }).pkgs.applyPatches {
+    name = "nixpkgs-patched-${channel.shortRev}";
+    src = channel;
+    patches = patches;
+  };
+
   pkgImport = pkgs: overlays: import pkgs {
     inherit system overlays;
     config = {
