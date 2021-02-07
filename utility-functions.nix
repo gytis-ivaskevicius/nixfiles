@@ -21,6 +21,7 @@ in
   pkgImport = pkgs: overlays: import pkgs {
     inherit system overlays;
     config = {
+      allowBroken = true;
       allowUnfree = true;
       oraclejdk.accept_license = true;
     };
