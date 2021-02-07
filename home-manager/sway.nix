@@ -59,20 +59,6 @@ let
 in
 {
   imports = [ ./common.nix ];
-  #    wayland.windowManager.sway.extraSessionCommands= ''
-  #    export SDL_VIDEODRIVER=wayland
-  #    # needs qt5.qtwayland in systemPackages
-  #    export QT_QPA_PLATFORM=wayland
-  #    export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-  #    # Fix for some Java AWT applications (e.g. Android Studio),
-  #    # use this if they aren't displayed properly:
-  #    export _JAVA_AWT_WM_NONREPARENTING=1
-  #    # firefox on wayland
-  #    export MOZ_ENABLE_WAYLAND=1 firefox
-  #    # gtk applications on wayland
-  #    # export GDK_BACKEND=wayland
-  #    '';
-
   home.packages = with pkgs; [
   ];
 
