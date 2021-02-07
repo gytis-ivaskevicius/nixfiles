@@ -47,7 +47,7 @@ in
 
   config =
     let
-      escapeDashes = it: replaceStrings [ "-"] ["_"] it;
+      escapeDashes = it: replaceStrings [ "-" ] [ "_" ] it;
 
       javaPkgs = javaCfg.additionalPackages;
       javaAliases = mapAttrs' (name: value: nameValuePair "java_${name}" "${value.home}/bin/java") javaPkgs;

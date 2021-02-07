@@ -14,7 +14,7 @@
 , trimSpacesOnWrite ? true
 }:
 let
-  inherit (stdenv.lib) optionals optional optionalString;
+  inherit (pkgs.lib) optionals optional optionalString;
 in
 wrapNeovim neovim-nightly {
   viAlias = true;
