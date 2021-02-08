@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  virtualisation.podman.enable = true;
+
   environment.systemPackages = with pkgs; [
     docker_compose
     gitkraken
@@ -9,6 +11,7 @@
     jetbrains.idea-ultimate
     maven
     visualvm
+    podman-compose
   ];
 
   ### Docker

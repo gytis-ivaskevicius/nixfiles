@@ -47,10 +47,6 @@ element {
   padding: 16px;
 }
 
-element-text {
-  background-color: #FFF;
-}
-
 element selected {
   background-color: #2e343f;
 }

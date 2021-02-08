@@ -3,6 +3,16 @@
 with lib;
 with pkgs;
 let
+  left = "h";
+  down = "j";
+  up = "k";
+  right = "l";
+  bg-color = "#424242";
+  inactive-bg-color = "#424242";
+  text-color = "#4f97d7";
+  inactive-text-color = "#676E7D";
+  urgent-bg-color = "#E53935";
+
   colorSchemeDark = rec {
     primary = {
       normal = {
@@ -50,26 +60,77 @@ let
   acColor2 = colorScheme.normal.yellow;
 
   monospaced = text: ''<span font_family="RobotoMono">'' + text + "</span>";
-  input = {
-    "*" = {
-      "xkb_layout" = "us,ru";
-      "xkb_options" = "grp:caps_toggle,grp_led:caps";
-    };
-  };
 in
 {
   imports = [ ./common.nix ];
   home.packages = with pkgs; [
   ];
 
-  home.sessionVariables = {
-    XKB_DEFAULT_OPTIONS = "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
-  };
-  xsession.initExtra = ''
-    unset __NIXOS_SET_ENVIRONMENT_DONE
-  '';
+  wayland.windowManager.sway = {
 
-  wayland.windowManager.sway = (import ./i3-sway.nix { inherit lib pkgs config; wm = "sway"; });
+    extraSessionCommands = ''
+
+      export WLC_REPEAT_RATE=25
+      export WLC_REPEAT_DELAY=250
+      unset __NIXOS_SET_ENVIRONMENT_DONE
+      export XKB_DEFAULT_OPTIONS=terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win
+      export SDL_VIDEODRIVER=wayland
+      # needs qt5.qtwayland in systemPackages
+      export QT_QPA_PLATFORM=wayland
+      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+      # Fix for some Java AWT applications (e.g. Android Studio),
+      # use this if they aren't displayed properly:
+      export _JAVA_AWT_WM_NONREPARENTING=1
+      # firefox on wayland
+      export MOZ_ENABLE_WAYLAND=1 firefox
+      # gtk applications on wayland
+      # export GDK_BACKEND=wayland
+    '';
+
+
+    enable = true;
+    config = {
+      #input = {
+      #"*" = {
+      #"repeat_delay" = "230";
+      #"repeat_rate" = "23";
+      #};
+      #};
+      modifier = "Mod4";
+      floating.modifier = "Mod4";
+      floating.border = 0;
+      window.border = 0;
+      focus.forceWrapping = false;
+      focus.followMouse = false;
+      fonts = [ "RobotoMono 9" ];
+      terminal = "${pkgs.alacritty}/bin/alacritty}";
+      startup = [
+        #{ command = "waybar"; always = true; notification = false; }
+      ];
+
+      colors.focused = { border = bg-color; childBorder = bg-color; background = bg-color; text = text-color; indicator = "#00ff00"; };
+      colors.unfocused = { border = inactive-bg-color; childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00"; };
+      colors.focusedInactive = { border = inactive-bg-color; childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00"; };
+      colors.urgent = { border = urgent-bg-color; childBorder = urgent-bg-color; background = urgent-bg-color; text = text-color; indicator = "#00ff00"; };
+
+      menu = "${pkgs.g-rofi}/bin/rofi -show drun -modi drun";
+      modes.resize = {
+        Escape = "mode default";
+        Return = "mode default";
+        "${down}" = "resize grow height 10 px or 10 ppt";
+        "${left}" = "resize shrink width 10 px or 10 ppt";
+        "${right}" = "resize grow width 10 px or 10 ppt";
+        "${up}" = "resize shrink height 10 px or 10 ppt";
+      };
+
+      #    bars = mkForce [ ];
+      bars = [{
+        "command" = "${waybar}/bin/waybar";
+      }];
+      keybindings = mkOptionDefault (import ./keybindings.nix { inherit pkgs; });
+    };
+  };
+
 
   programs.waybar =
     let

@@ -52,6 +52,10 @@
     kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
     kernel.sysctl."net.core.default_qdisc" = "fq";
 
+    kernel.sysctl = {
+      "vm.swappiness" = 5;
+      "fs.inotify.max_user_watches" = 524288;
+    };
     zfs.enableUnstable = true;
     kernelParams = [ "quiet" "loglevel=3" ];
     cleanTmpDir = true;
@@ -77,6 +81,13 @@
     algorithm = "zstd";
   };
 
+  fonts = {
+    enableDefaultFonts = true;
+    fonts = with pkgs; [
+      nerdfonts
+    ];
+  };
+
   hardware = {
     enableRedistributableFirmware = true;
     enableAllFirmware = true;
@@ -84,10 +95,10 @@
       enable = lib.mkDefault true;
       driSupport32Bit = config.hardware.opengl.enable;
     };
-    pulseaudio = {
-      enable = lib.mkDefault true;
-      support32Bit = config.hardware.pulseaudio.enable;
-    };
+    #pulseaudio = {
+    #  enable = lib.mkDefault true;
+    #  support32Bit = config.hardware.pulseaudio.enable;
+    #};
     bluetooth.enable = lib.mkDefault false;
     cpu.amd.updateMicrocode = true;
     cpu.intel.updateMicrocode = true;

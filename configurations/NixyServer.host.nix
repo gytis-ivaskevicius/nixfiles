@@ -1,9 +1,9 @@
-{ config,lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
-      ./cli.nix
-    ];
+    ./cli.nix
+  ];
 
   users.extraUsers.gytis = {
     shell = pkgs.zsh;
@@ -19,7 +19,7 @@
   fileSystems."/boot" = { device = "/dev/disk/by-uuid/8BCE-4FF4"; fsType = "vfat"; };
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" ];
-  boot.kernelModules = [ "kvm-intel" "tcp_bbr"  ];
+  boot.kernelModules = [ "kvm-intel" "tcp_bbr" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Rest of this file is tweaked/slimed down base.nix copy-paste
@@ -71,4 +71,3 @@
 
   hardware.cpu.intel.updateMicrocode = true;
 }
-

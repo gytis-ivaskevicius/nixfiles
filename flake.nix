@@ -57,9 +57,28 @@
         (import nixpkgs-mozilla)
         my-pkgs
         nur.overlay
-        (final: prev: {
+        (final: prev: with prev; {
           neovim-nightly = neovim.defaultPackage.${system};
-          firefox = prev.g-firefox;
+          firefox = g-firefox;
+
+          #podman-compose = podman-compose.overrideAttrs (old: {
+          #  src = fetchFromGitHub {
+          #    owner = "containers";
+          #    repo = "podman-compose";
+          #    rev = "6289d25a42cfdb5dfcac863b1b1b4ace32ce31b7";
+          #    sha256 = "0cy842wlyasxlxnwxkwhwgj148s30kfxnhgxa6ar26fly432aa68";
+          #  };
+          #});
+
+
+          podman = podman.overrideAttrs (old: {
+            src = fetchFromGitHub {
+              owner = "containers";
+              repo = "podman";
+              rev = "v2.2.1";
+              sha256 = "0cy842wlyasxlxnwxkwhwgj148s30kfxnhgxa6ar26fly432aa68";
+            };
+          });
         })
       ];
 
