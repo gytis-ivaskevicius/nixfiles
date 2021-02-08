@@ -63,7 +63,7 @@ in
     brave
     cinnamon.nemo
     discord
-    firefox-beta-bin
+    firefox
     g-alacritty
     gnome3.eog
     vlc

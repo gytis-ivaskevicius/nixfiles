@@ -4,6 +4,7 @@
   inputs = {
     master.url = "nixpkgs/master";
     nixpkgs.url = "nixpkgs/master";
+    nur.url = github:nix-community/NUR;
 
     home-manager = { url = github:nix-community/home-manager/release-20.09; inputs.nixpkgs.follows = "nixpkgs"; };
     neovim = { url = github:neovim/neovim?dir=contrib; inputs.nixpkgs.follows = "master"; };
@@ -14,7 +15,7 @@
 
   };
 
-  outputs = inputs@{ self, neovim, home-manager, nixpkgs-mozilla, nixpkgs, master, ... }:
+  outputs = inputs@{ self, nur, neovim, home-manager, nixpkgs-mozilla, nixpkgs, master, ... }:
     let
       inherit (nixpkgs) lib;
       inherit (lib) recursiveUpdate;
@@ -55,8 +56,10 @@
       overlays = [
         (import nixpkgs-mozilla)
         my-pkgs
+        nur.overlay
         (final: prev: {
           neovim-nightly = neovim.defaultPackage.${system};
+          firefox = prev.g-firefox;
         })
       ];
 

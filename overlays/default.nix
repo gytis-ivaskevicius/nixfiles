@@ -6,6 +6,7 @@ final: prev: {
   g-pistol = prev.callPackage ./g-pistol { };
   g-rofi = prev.callPackage ./g-rofi { };
   g-termite = prev.callPackage ./g-termite { };
+  g-firefox = prev.callPackage ./g-firefox { };
   zsh-forgit = prev.callPackage ./zsh-forgit { };
   shell-config = prev.callPackage ./shell-config { };
 }

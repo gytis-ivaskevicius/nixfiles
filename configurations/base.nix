@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   #powerManagement.powertop.enable = true;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   console.keyMap = "us";
   fileSystems."/boot".label = "BOOT";
   i18n.defaultLocale = "en_US.UTF-8";
@@ -51,6 +52,7 @@
     kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
     kernel.sysctl."net.core.default_qdisc" = "fq";
 
+    zfs.enableUnstable = true;
     kernelParams = [ "quiet" "loglevel=3" ];
     cleanTmpDir = true;
     loader.systemd-boot.enable = true;
@@ -80,11 +82,11 @@
     enableAllFirmware = true;
     opengl = {
       enable = lib.mkDefault true;
-      driSupport32Bit = true;
+      driSupport32Bit = config.hardware.opengl.enable;
     };
     pulseaudio = {
       enable = lib.mkDefault true;
-      support32Bit = true;
+      support32Bit = config.hardware.pulseaudio.enable;
     };
     bluetooth.enable = lib.mkDefault false;
     cpu.amd.updateMicrocode = true;
