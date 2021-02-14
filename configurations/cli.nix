@@ -128,5 +128,6 @@
     wget
     which
     zip
+    starship
   ];
 }

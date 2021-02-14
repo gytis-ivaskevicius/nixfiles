@@ -15,13 +15,13 @@
   ];
 
   ### Docker
-  virtualisation.docker = {
-    autoPrune.enable = true;
-    enable = true;
-    #enableNvidia = true;
-    enableOnBoot = false;
-    liveRestore = false;
-  };
+  #virtualisation.docker = {
+  #  autoPrune.enable = true;
+  #  enable = true;
+  #  #enableNvidia = true;
+  #  enableOnBoot = false;
+  #  liveRestore = false;
+  #};
 
   ### VirtualBox
   #  virtualisation.virtualbox = {

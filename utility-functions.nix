@@ -24,6 +24,9 @@ in
       allowBroken = true;
       allowUnfree = true;
       oraclejdk.accept_license = true;
+      permittedInsecurePackages = [
+        "openssl-1.0.2u"
+      ];
     };
   };
 

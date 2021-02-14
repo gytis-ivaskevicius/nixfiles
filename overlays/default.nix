@@ -9,5 +9,5 @@ final: prev: {
   g-firefox = prev.callPackage ./g-firefox { };
   zsh-forgit = prev.callPackage ./zsh-forgit { };
   shell-config = prev.callPackage ./shell-config { };
-  lightcord = prev.callPackage ./lightcord {};
+  lightcord = prev.callPackage ./lightcord { };
 }

@@ -60,20 +60,47 @@ let
   acColor2 = colorScheme.normal.yellow;
 
   monospaced = text: ''<span font_family="RobotoMono">'' + text + "</span>";
+  xdg-fix = pkgs.writeScriptBin "xdg-fix.sh" ''
+    #!${pkgs.bash}/bin/sh
+    ${pkgs.systemd}/bin/systemctl --user stop xdg-desktop-portal
+    ${pkgs.procps}/bin/pkill xdg-desktop-portal
+    ${pkgs.procps}/bin/pkill xdg-desktop-portal-gtk
+    ${pkgs.procps}/bin/pkill xdg-desktop-portal-wlr
+    ${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal -v -r &
+    ${pkgs.xdg-desktop-portal-gtk}/libexec/xdg-desktop-portal-gtk --replace --verbose &
+    ${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr -l DEBUG -o DP-2 &
+  '';
 in
 {
   imports = [ ./common.nix ];
   home.packages = with pkgs; [
+    xdg-fix
   ];
 
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
+    MOZ_USE_XINPUT2 = "1";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_CURRENT_DESKTOP = "sway";
+  };
   wayland.windowManager.sway = {
 
     extraSessionCommands = ''
 
+      unset __NIXOS_SET_ENVIRONMENT_DONE
+
+      export MOZ_ENABLE_WAYLAND=1;
+      export MOZ_USE_XINPUT2=1;
+      export XDG_SESSION_TYPE=wayland;
+      export XDG_CURRENT_DESKTOP=sway;
+
+      # Add appropriate key repeat delays
       export WLC_REPEAT_RATE=25
       export WLC_REPEAT_DELAY=250
-      unset __NIXOS_SET_ENVIRONMENT_DONE
+
+      # Switch few keys around
       export XKB_DEFAULT_OPTIONS=terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win
+
       export SDL_VIDEODRIVER=wayland
       # needs qt5.qtwayland in systemPackages
       export QT_QPA_PLATFORM=wayland
@@ -81,10 +108,12 @@ in
       # Fix for some Java AWT applications (e.g. Android Studio),
       # use this if they aren't displayed properly:
       export _JAVA_AWT_WM_NONREPARENTING=1
-      # firefox on wayland
-      export MOZ_ENABLE_WAYLAND=1 firefox
       # gtk applications on wayland
       # export GDK_BACKEND=wayland
+    '';
+
+    extraConfig = ''
+      exec_always /run/current-system/sw/bin/xdg-fix.sh
     '';
 
 

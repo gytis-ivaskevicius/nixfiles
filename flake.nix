@@ -5,8 +5,13 @@
     master.url = "nixpkgs/master";
     nixpkgs.url = "nixpkgs/master";
     nur.url = github:nix-community/NUR;
+    sops = { url = github:Mic92/sops-nix; inputs.nixpkgs.follows = "nixpkgs"; };
+    nix-ld = { url = "github:Mic92/nix-ld"; inputs.nixpkgs.follows = "nixpkgs"; };
 
-    home-manager = { url = github:nix-community/home-manager/release-20.09; inputs.nixpkgs.follows = "nixpkgs"; };
+    ion = { url = github:redox-os/ion; flake = false; };
+    podman = { url = github:containers/podman; flake = false; };
+
+    home-manager = { url = github:nix-community/home-manager/master; inputs.nixpkgs.follows = "nixpkgs"; };
     neovim = { url = github:neovim/neovim?dir=contrib; inputs.nixpkgs.follows = "master"; };
     nixpkgs-mozilla = { url = github:mozilla/nixpkgs-mozilla; flake = false; };
 
@@ -15,7 +20,7 @@
 
   };
 
-  outputs = inputs@{ self, nur, neovim, home-manager, nixpkgs-mozilla, nixpkgs, master, ... }:
+  outputs = inputs@{ self, nur, sops, neovim, home-manager, nixpkgs-mozilla, nixpkgs, master, ... }:
     let
       inherit (nixpkgs) lib;
       inherit (lib) recursiveUpdate;
@@ -40,6 +45,7 @@
     {
       nixosModules = [
         home-manager.nixosModules.home-manager
+        sops.nixosModules.sops
         (import ./modules)
         {
           home-manager.useGlobalPkgs = true;
@@ -59,29 +65,48 @@
         nur.overlay
         (final: prev: with prev; {
           neovim-nightly = neovim.defaultPackage.${system};
-          firefox = g-firefox;
 
-          #podman-compose = podman-compose.overrideAttrs (old: {
-          #  src = fetchFromGitHub {
-          #    owner = "containers";
-          #    repo = "podman-compose";
-          #    rev = "6289d25a42cfdb5dfcac863b1b1b4ace32ce31b7";
-          #    sha256 = "0cy842wlyasxlxnwxkwhwgj148s30kfxnhgxa6ar26fly432aa68";
-          #  };
-          #});
+          ion = ion.overrideAttrs (old: rec {
+            srcs = inputs.ion;
+            cargoDeps = old.cargoDeps.overrideAttrs (_: {
+              src = srcs;
+              outputHash = "sha256-BmcPlyJBWDWwWZzpP8PGbjxhrNpQxkk5nC0eG8JB7dA=";
+            });
+          });
 
+          firefox = g-firefox.override {
+            pipewireSupport = true;
+            waylandSupport = true;
+            webrtcSupport = true;
+          };
 
           podman = podman.overrideAttrs (old: {
-            src = fetchFromGitHub {
-              owner = "containers";
-              repo = "podman";
-              rev = "v2.2.1";
-              sha256 = "0cy842wlyasxlxnwxkwhwgj148s30kfxnhgxa6ar26fly432aa68";
-            };
+            src = inputs.podman;
+            #src = fetchFromGitHub {
+            #  owner = "containers";
+            #  repo = "podman";
+            #  rev = "5b2585f5e91ca148f068cefa647c23f8b1ade622";
+            #  sha256 = "0rs9bxxrw4wscf4a8yl776a8g880m5gcm75q06yx2cn3lw2b7v22";
+            #};
           });
         })
       ];
 
       packages."${system}" = (my-pkgs null pkgs);
+
+      devShell.${system} = with pkgs; mkShell rec  {
+        # imports all files ending in .asc/.gpg and sets $SOPS_PGP_FP.
+        sopsPGPKeyDirs = [
+          "./secrets"
+        ];
+        shellHook = ''
+          echo NIX SHELL!!!
+          zsh
+          exit
+        '';
+        nativeBuildInputs = [
+          (pkgs.callPackage sops { }).sops-pgp-hook
+        ];
+      };
     };
 }

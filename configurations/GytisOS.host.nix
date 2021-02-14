@@ -9,9 +9,11 @@
     ./cli-extras.nix
   ];
 
+  services.gnome3.gnome-keyring.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_latest; # Default value is 'pkgs.linuxPackages'
   #hardware.bluetooth.enable = true;                  # Default value is 'false'
+  services.tailscale.enable = true;
   services.zerotierone.enable = true; # Default value is 'false'
   services.zerotierone.joinNetworks = [ "9bee8941b5c7428a" "12ac4a1e710088c5" ]; # Default value is '[]'
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -63,22 +65,26 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "Gytis Ivaskevicius";
-    extraGroups = [ "audio" "dialout" "adbusers" "wheel" "networkmanager" "docker" "vboxusers" ];
+    extraGroups = [ "audio" "video" "dialout" "adbusers" "wheel" "networkmanager" "docker" "vboxusers" ];
     initialPassword = "toor";
   };
 
   environment.systemPackages = with pkgs; [
     wofi
+    ion
+    gnupg
+    chromium
+    lightcord
   ];
 
   services.flatpak.enable = true;
   xdg.portal = {
     enable = true;
+    gtkUsePortal = true;
     extraPortals = with pkgs; [
       xdg-desktop-portal-wlr
       xdg-desktop-portal-gtk
     ];
-    gtkUsePortal = true;
   };
 
   networking.extraHosts = ''
