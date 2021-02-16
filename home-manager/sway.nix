@@ -60,22 +60,9 @@ let
   acColor2 = colorScheme.normal.yellow;
 
   monospaced = text: ''<span font_family="RobotoMono">'' + text + "</span>";
-  xdg-fix = pkgs.writeScriptBin "xdg-fix.sh" ''
-    #!${pkgs.bash}/bin/sh
-    ${pkgs.systemd}/bin/systemctl --user stop xdg-desktop-portal
-    ${pkgs.procps}/bin/pkill xdg-desktop-portal
-    ${pkgs.procps}/bin/pkill xdg-desktop-portal-gtk
-    ${pkgs.procps}/bin/pkill xdg-desktop-portal-wlr
-    ${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal -v -r &
-    ${pkgs.xdg-desktop-portal-gtk}/libexec/xdg-desktop-portal-gtk --replace --verbose &
-    ${pkgs.xdg-desktop-portal-wlr}/libexec/xdg-desktop-portal-wlr -l DEBUG -o DP-2 &
-  '';
 in
 {
   imports = [ ./common.nix ];
-  home.packages = with pkgs; [
-    xdg-fix
-  ];
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
@@ -110,10 +97,6 @@ in
       export _JAVA_AWT_WM_NONREPARENTING=1
       # gtk applications on wayland
       # export GDK_BACKEND=wayland
-    '';
-
-    extraConfig = ''
-      exec_always /run/current-system/sw/bin/xdg-fix.sh
     '';
 
 
