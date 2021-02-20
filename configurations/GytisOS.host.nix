@@ -10,7 +10,7 @@
   ];
 
   services.gnome3.gnome-keyring.enable = true;
-  services.tailscale.enable = true;
+  #services.tailscale.enable = true;
   services.zerotierone.enable = true;
   services.zerotierone.joinNetworks = [ "9bee8941b5c7428a" "12ac4a1e710088c5" ];
 

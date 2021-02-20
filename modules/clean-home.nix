@@ -19,7 +19,6 @@ in
         ANSIBLE_CONFIG = "${XDG_CONFIG_HOME}/ansible/ansible.cfg";
         CARGO_HOME = "${XDG_DATA_HOME}/cargo";
         ERRFILE = "${XDG_CACHE_HOME}/.xsession-errors";
-        GNUPGHOME = "${XDG_DATA_HOME}/gnupg";
         GOPATH = "${XDG_DATA_HOME}/go";
         GRADLE_USER_HOME = "${XDG_DATA_HOME}/gradle";
         GTK2_RC_FILES = "${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0";

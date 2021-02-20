@@ -48,9 +48,7 @@ let
     };
   };
 
-  colorScheme =
-    # if builtins.pathExists ./light then colorSchemeLight else colorSchemeDark;
-    colorSchemeDark;
+  colorScheme = colorSchemeDark;
   font = "Roboto";
 
 
@@ -81,10 +79,6 @@ in
       export XDG_SESSION_TYPE=wayland;
       export XDG_CURRENT_DESKTOP=sway;
 
-      # Add appropriate key repeat delays
-      export WLC_REPEAT_RATE=25
-      export WLC_REPEAT_DELAY=250
-
       # Switch few keys around
       export XKB_DEFAULT_OPTIONS=terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win
 
@@ -97,6 +91,13 @@ in
       export _JAVA_AWT_WM_NONREPARENTING=1
       # gtk applications on wayland
       # export GDK_BACKEND=wayland
+    '';
+
+    extraConfig = ''
+      input * {
+          repeat_delay 250
+          repeat_rate 35
+      }
     '';
 
 

@@ -60,14 +60,32 @@ in
   };
 
   home.packages = with pkgs; [
+    xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
     brave
     cinnamon.nemo
     discord
     firefox
     g-alacritty
     gnome3.eog
+    pavucontrol
     vlc
   ];
 
+
+  systemd.user.services.polkit-gnome = {
+    Unit = {
+      Description = "PolicyKit Authentication Agent";
+      After = [ "graphical-session-pre.target" ];
+      PartOf = [ "graphical-session.target" ];
+    };
+
+    Service = {
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    };
+
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
 
 }

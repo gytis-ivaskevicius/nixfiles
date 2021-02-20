@@ -6,13 +6,15 @@
 , nixosModules
 }:
 let
-  inherit (lib) removeSuffix;
+  inherit (lib) removeSuffix count;
   inherit (builtins) listToAttrs;
   genAttrs' = values: f: listToAttrs (map f values);
 
 in
 {
-  patchChannel = channel: patches: (import channel { inherit system; }).pkgs.applyPatches {
+  patchChannel = channel: patches:
+  if (count patches) == 0 then channel else
+  (import channel { inherit system; }).pkgs.applyPatches {
     name = "nixpkgs-patched-${channel.shortRev}";
     src = channel;
     patches = patches;
