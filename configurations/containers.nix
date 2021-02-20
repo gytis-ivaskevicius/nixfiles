@@ -11,11 +11,12 @@
 
 
   nix-compose.test-stack2.compose = {
-    version = "3";
 
-    services.nginx = {
-      image = "nginx";
-      ports = [ "8081:80" ];
+    services.hello.image = pkgs.dockerTools.buildImage {
+      name = "hello-docker";
+      config = {
+        Cmd = [ "${pkgs.hello}/bin/hello" ];
+      };
     };
 
     services.nginx2 = {
@@ -29,8 +30,9 @@
     };
 
     volumes = {
-      gytistest = { };
+      test = { };
     };
 
   };
+
 }
