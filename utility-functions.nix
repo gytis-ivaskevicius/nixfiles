@@ -13,12 +13,12 @@ let
 in
 {
   patchChannel = channel: patches:
-  if (count patches) == 0 then channel else
-  (import channel { inherit system; }).pkgs.applyPatches {
-    name = "nixpkgs-patched-${channel.shortRev}";
-    src = channel;
-    patches = patches;
-  };
+    if (count patches) == 0 then channel else
+    (import channel { inherit system; }).pkgs.applyPatches {
+      name = "nixpkgs-patched-${channel.shortRev}";
+      src = channel;
+      patches = patches;
+    };
 
   pkgImport = pkgs: overlays: import pkgs {
     inherit system overlays;

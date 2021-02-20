@@ -3,6 +3,7 @@
 {
   imports = [
     ./cli.nix
+    ./containers.nix
   ];
 
   users.extraUsers.gytis = {

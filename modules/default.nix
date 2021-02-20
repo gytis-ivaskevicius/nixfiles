@@ -5,5 +5,6 @@
     ./cachix.nix
     ./clean-home.nix
     ./runtimes.nix
+    ./nix-compose.nix
   ];
 }
