@@ -5,20 +5,19 @@
 , pkgs
 , nixosModules
 }:
+with lib;
+with builtins;
 let
-  inherit (lib) removeSuffix count;
-  inherit (builtins) listToAttrs;
   genAttrs' = values: f: listToAttrs (map f values);
-
 in
 {
   patchChannel = channel: patches:
-  if (count patches) == 0 then channel else
-  (import channel { inherit system; }).pkgs.applyPatches {
-    name = "nixpkgs-patched-${channel.shortRev}";
-    src = channel;
-    patches = patches;
-  };
+    if (count patches) == 0 then channel else
+    (import channel { inherit system; }).pkgs.applyPatches {
+      name = "nixpkgs-patched-${channel.shortRev}";
+      src = channel;
+      patches = patches;
+    };
 
   pkgImport = pkgs: overlays: import pkgs {
     inherit system overlays;
@@ -40,7 +39,7 @@ in
       in
       {
         name = hostName;
-        value = lib.nixosSystem {
+        value = nixosSystem {
           inherit system;
 
           modules =
@@ -50,20 +49,19 @@ in
                 nixpkgs = { inherit pkgs; config = pkgs.config; };
 
                 nix.nixPath =
-                  let path = toString ./.; in
-                  (lib.mapAttrsToList (name: _v: "${name}=${inputs.${name}}") inputs) ++ [ "repl=${path}/repl.nix" ];
+                  (mapAttrsToList (name: _: "${name}=${inputs.${name}}") inputs)
+                  ++ [ "repl=${toString ./.}/repl.nix" ];
 
                 nix.registry =
-                  (lib.mapAttrs'
-                    (name: _v: lib.nameValuePair name ({ flake = inputs.${name}; }))
-                    inputs) // { ${hostName}.flake = self; };
+                  (mapAttrs' (name: _v: nameValuePair name { flake = inputs.${name}; }) inputs)
+                  // { ${hostName}.flake = self; };
 
                 nix.package = pkgs.nixUnstable;
                 nix.extraOptions = ''
                   experimental-features = nix-command flakes
                 '';
 
-                system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+                system.configurationRevision = mkIf (self ? rev) self.rev;
               };
 
             in

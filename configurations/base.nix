@@ -94,6 +94,8 @@
     opengl = {
       enable = lib.mkDefault true;
       driSupport32Bit = config.hardware.opengl.enable;
+      extraPackages = with pkgs; [ amdvlk ];
+      extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
     };
     #pulseaudio = {
     #  enable = lib.mkDefault true;
