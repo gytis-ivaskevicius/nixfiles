@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
   workflow_dispatch:
-  
+
 jobs:
   builds:
     name: Build configuration
@@ -21,5 +21,5 @@ jobs:
     - uses: cachix/cachix-action@v8
       with:
         name: gytix
-        signingKey: '${{ secrets.CACHIX_SIGNING_KEY }}'
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
     - run: nix build .#nixosConfigurations.GytisOS.config.system.build.toplevel -L
