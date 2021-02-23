@@ -9,6 +9,8 @@
     liveRestore = false;
   };
 
+  virtualisation.podman.enable = true;
+  virtualisation.containers.registries.search = [ "docker.io" ];
 
   nix-compose.test-stack2.compose = {
 

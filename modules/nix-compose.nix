@@ -10,16 +10,23 @@ let
 
   mkContainer = name: compose:
     let
-      servicesWithDeriviations = filterAttrs (_: it: isDerivation it.image) compose.services;
-      imageDeriviations = mapAttrsFlatten (_: it: it.image) servicesWithDeriviations;
+      imageDeriviations = mapAttrsFlatten
+        (_: it: it.image)
+        (filterAttrs (_: it: isDerivation it.image) compose.services);
       services = mapAttrs (_: service: service // { image = getImageName service; }) compose.services;
 
-      resultCompose = compose // { inherit services; };
+      docker-compose = writeText name
+        (toJSON (compose // { inherit services; }));
     in
     {
       enable = true;
-      preStart = concatStringsSep "\n" (map (it: "${docker}/bin/docker load -i ${it};") imageDeriviations);
-      serviceConfig.ExecStart = "${docker-compose}/bin/docker-compose -f ${writeText name (toJSON resultCompose)} up";
+      preStart = concatStringsSep "\n" (map (it: "${podman}/bin/podman load -i ${it}") imageDeriviations);
+      path = [ podman shadow ];
+      serviceConfig = {
+        ExecStart = "${podman-compose}/bin/podman-compose --transform_policy=identity -f ${docker-compose} up";
+        ExecStopPost = "${podman-compose}/bin/podman-compose -f ${docker-compose} down";
+        Restart = "on-failure";
+      };
       wantedBy = [ "multi-user.target" ];
     };
 
@@ -31,8 +38,6 @@ let
         type = types.attrs;
         default = { };
         example = {
-          version = "3";
-
           services.nginx = {
             image = "nginx";
             ports = [ "8080:80" ];
