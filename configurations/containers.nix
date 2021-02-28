@@ -12,7 +12,7 @@
   virtualisation.podman.enable = true;
   virtualisation.containers.registries.search = [ "docker.io" ];
 
-  nix-compose.test-stack2.compose = {
+  nix-compose.definitions.test-stack2.compose = {
 
     services.hello.image = pkgs.dockerTools.buildImage {
       name = "hello-docker";
@@ -21,14 +21,28 @@
       };
     };
 
-    services.nginx2 = {
-      image = "nginx";
-      ports = [ "8082:80" ];
-    };
-
     services.nginx3 = {
       image = "nginx";
       ports = [ "8083:80" ];
+      volumes = [
+        {
+          source = pkgs.writeText "index.html" "Man, SCREW WORLD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!";
+          target = "/usr/share/nginx/html/index.html";
+        }
+        {
+          volumeName = "test-volume";
+          target = "/my-volume";
+        }
+        {
+          volumeName = "test-volume2";
+          target = "/my-volume2";
+        }
+        {
+          volumeName = "test-volume3";
+          target = "/my-volume3";
+        }
+      ];
+
     };
 
     volumes = {
