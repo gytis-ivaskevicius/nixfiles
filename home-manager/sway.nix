@@ -94,6 +94,8 @@ in
     '';
 
     extraConfig = ''
+      output DP-2 mode 3840x1600@143.998001Hz
+
       input * {
           repeat_delay 250
           repeat_rate 35

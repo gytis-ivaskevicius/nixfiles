@@ -3,7 +3,7 @@
 
 [character]
 use_symbol_for_status = true
-success_symbol = "[❯](bold purple) "
+success_symbol = "[❯](bold purple)"
 error_symbol = "[✗](bold red) "
 
 [directory]
