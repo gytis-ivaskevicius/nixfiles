@@ -44,6 +44,7 @@
 
       nixosConfigurations = utils.buildNixosConfigurations [
         ./configurations/GytisOS.host.nix
+        ./configurations/Morty.host.nix
         ./configurations/NixyServer.host.nix
       ];
 
