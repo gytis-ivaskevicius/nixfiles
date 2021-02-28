@@ -22,9 +22,6 @@
     promptInit = ''
       source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh
       ${builtins.readFile (pkgs.shell-config.override { dockerAliasEnabled = config.virtualisation.docker.enable; })}
-
-      autoload -U promptinit; promptinit
-      prompt pure
     '';
 
     setOptions = [
@@ -121,13 +118,11 @@
     parted
     pciutils
     psmisc
-    pure-prompt
     ranger
     ripgrep
     unzip
     wget
     which
     zip
-    starship
   ];
 }

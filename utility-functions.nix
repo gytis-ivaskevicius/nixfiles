@@ -12,7 +12,7 @@ let
 in
 {
   patchChannel = channel: patches:
-    if (count patches) == 0 then channel else
+    if patches == [ ] then channel else
     (import channel { inherit system; }).pkgs.applyPatches {
       name = "nixpkgs-patched-${channel.shortRev}";
       src = channel;

@@ -1,6 +1,7 @@
 { lib
 , writeShellScript
 , fd
+, g-starship
 , dockerAliasEnabled ? true
 , prettyManPagesEnabled ? true
 , sshuttleEnabled ? true
@@ -9,6 +10,7 @@
 , nixCdEnabled ? true
 , nixAutocompleteFixEnabled ? true
 , zshPasteImprovementsEnabled ? true
+, promptEnabled ? true
 }:
 
 
@@ -65,7 +67,7 @@ let
             [ -n "$cid" ] && docker container exec -it "$cid" /bin/bash
     }
   '';
-  zfsPasteImprovements = ''
+  zshPasteImprovements = ''
     pasteinit() {
       OLD_SELF_INSERT=''${''${(s.:.)widgets[self-insert]}[2,3]}
       zle -N self-insert url-quote-magic
@@ -93,5 +95,6 @@ writeShellScript "shellconfig.sh" ''
   ${optionalString nixArgsEnabled (builtins.readFile ./nix-args.sh)}
   ${optionalString nixCdEnabled nix-cd}
   ${optionalString nixAutocompleteFixEnabled (builtins.readFile ./nix-completions.sh)}
-  ${optionalString zshPasteImprovementsEnabled zfsPasteImprovements}
+  ${optionalString zshPasteImprovementsEnabled zshPasteImprovements}
+  ${optionalString promptEnabled "source ${g-starship}"}
 ''
