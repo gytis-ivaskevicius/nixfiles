@@ -10,7 +10,7 @@ with builtins;
 let
   genAttrs' = values: f: listToAttrs (map f values);
 in
-{
+rec {
   patchChannel = channel: patches:
     if patches == [ ] then channel else
     (import channel { inherit system; }).pkgs.applyPatches {
@@ -32,51 +32,43 @@ in
   };
 
 
-  buildNixosConfigurations = paths:
-    genAttrs' paths (path:
-      let
-        hostName = removeSuffix ".host.nix" (baseNameOf path);
-      in
+  buildNixosSystem = hostName: path: nixosSystem {
+    inherit system;
+
+    modules = [
       {
-        name = hostName;
-        value = nixosSystem {
-          inherit system;
+        networking.hostName = hostName;
+        nixpkgs = { inherit pkgs; config = pkgs.config; };
 
-          modules =
-            let
-              global = {
-                networking.hostName = hostName;
-                nixpkgs = { inherit pkgs; config = pkgs.config; };
+        nix.nixPath =
+          (mapAttrsToList (name: _: "${name}=${inputs.${name}}") inputs)
+            ++ [ "repl=${toString ./.}/repl.nix" ];
 
-                nix.nixPath =
-                  (mapAttrsToList (name: _: "${name}=${inputs.${name}}") inputs)
-                  ++ [ "repl=${toString ./.}/repl.nix" ];
+        nix.registry =
+          (mapAttrs' (name: _v: nameValuePair name { flake = inputs.${name}; }) inputs)
+            // { ${hostName}.flake = self; };
 
-                nix.registry =
-                  (mapAttrs' (name: _v: nameValuePair name { flake = inputs.${name}; }) inputs)
-                  // { ${hostName}.flake = self; };
+        nix.package = pkgs.nixUnstable;
+        nix.extraOptions = ''
+          experimental-features = nix-command flakes
+        '';
 
-                nix.package = pkgs.nixUnstable;
-                nix.extraOptions = ''
-                  experimental-features = nix-command flakes
-                '';
+        system.configurationRevision = mkIf (self ? rev) self.rev;
 
-                system.configurationRevision = mkIf (self ? rev) self.rev;
-              };
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      }
+      (import path)
+    ] ++ nixosModules;
 
-            in
-            [
-              (import path)
-              global
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-              }
-            ] ++ nixosModules;
+    extraArgs = {
+      inherit system inputs;
+    };
+  };
 
-          extraArgs = {
-            inherit system inputs;
-          };
-        };
-      });
+  buildNixosConfigurations = paths:
+    genAttrs' paths (path: rec {
+      name = removeSuffix ".host.nix" (baseNameOf path);
+      value = buildNixosSystem name path;
+    });
 }

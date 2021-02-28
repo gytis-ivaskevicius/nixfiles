@@ -62,6 +62,10 @@ in
 {
   imports = [ ./common.nix ];
 
+  home.packages = with pkgs; [
+    wl-clipboard
+  ];
+
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";
     MOZ_USE_XINPUT2 = "1";
