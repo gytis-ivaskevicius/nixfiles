@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, ... }:
 {
 
   programs.adb.enable = lib.mkDefault true;
@@ -124,5 +124,6 @@
     wget
     which
     zip
+    (import inputs.comma {inherit pkgs;})
   ];
 }

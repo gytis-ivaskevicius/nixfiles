@@ -5,6 +5,7 @@
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nur.url = github:nix-community/NUR;
     sops = { url = github:Mic92/sops-nix; inputs.nixpkgs.follows = "nixpkgs"; };
+    comma = { url = github:Shopify/comma; flake = false; };
 
     home-manager = { url = github:nix-community/home-manager/master; inputs.nixpkgs.follows = "nixpkgs"; };
     neovim = { url = github:neovim/neovim?dir=contrib; inputs.nixpkgs.follows = "nixpkgs"; };
