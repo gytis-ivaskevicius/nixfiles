@@ -60,7 +60,7 @@ let
   monospaced = text: ''<span font_family="RobotoMono">'' + text + "</span>";
 in
 {
-  imports = [ ./common.nix ];
+  imports = [ ./common.nix ./dunst.nix ];
 
   home.packages = with pkgs; [
     wl-clipboard
@@ -98,7 +98,19 @@ in
     '';
 
     extraConfig = ''
-      output DP-2 mode 3840x1600@143.998001Hz
+
+      #output HDMI-A-1 {
+      #  mode 1920x1080@74.973Hz
+      #  pos 0 0
+      #  scale 0.75
+      #  scale_filter nearest
+      #  adaptive_sync on
+      #}
+
+      output DP-2 {
+        mode 3840x1600@143.998001Hz
+        #pos 2560 0
+      }
 
       input * {
           repeat_delay 250
