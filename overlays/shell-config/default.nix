@@ -1,16 +1,17 @@
 { lib
 , writeShellScript
 , fd
-, g-starship
 , dockerAliasEnabled ? true
+, nixArgsEnabled ? true
+, nixAutocompleteFixEnabled ? true
+, nixCdEnabled ? true
 , prettyManPagesEnabled ? true
+, promptEnabled ? true
 , sshuttleEnabled ? true
 , sshuttle
-, nixArgsEnabled ? true
-, nixCdEnabled ? true
-, nixAutocompleteFixEnabled ? true
+, starshipEnabled ? true
+, starship
 , zshPasteImprovementsEnabled ? true
-, promptEnabled ? true
 }:
 
 
@@ -82,6 +83,10 @@ let
 
     bindkey -r ^V
   '';
+  starshipPrompt = ''
+    export STARSHIP_CONFIG=${./starship.toml}
+    eval "$(${starship}/bin/starship init zsh)"
+  '';
 in
 writeShellScript "shellconfig.sh" ''
   if [ -n "''${commands[fzf-share]}" ]; then
@@ -96,5 +101,5 @@ writeShellScript "shellconfig.sh" ''
   ${optionalString nixCdEnabled nix-cd}
   ${optionalString nixAutocompleteFixEnabled (builtins.readFile ./nix-completions.sh)}
   ${optionalString zshPasteImprovementsEnabled zshPasteImprovements}
-  ${optionalString promptEnabled "source ${g-starship}"}
+  ${optionalString starshipEnabled starshipPrompt}
 ''
