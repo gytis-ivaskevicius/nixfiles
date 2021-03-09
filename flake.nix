@@ -4,19 +4,35 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nur.url = github:nix-community/NUR;
-    sops = { url = github:Mic92/sops-nix; inputs.nixpkgs.follows = "nixpkgs"; };
-    comma = { url = github:Shopify/comma; flake = false; };
 
-    home-manager = { url = github:nix-community/home-manager/master; inputs.nixpkgs.follows = "nixpkgs"; };
-    neovim = { url = github:neovim/neovim?dir=contrib; inputs.nixpkgs.follows = "nixpkgs"; };
-    nixpkgs-mozilla = { url = github:mozilla/nixpkgs-mozilla; flake = false; };
+    nixpkgs-wayland = {
+      url = "github:colemickens/nixpkgs-wayland";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.unstableSmall.follows = "nixpkgs";
+    };
 
-    #wayland = { url = "github:colemickens/nixpkgs-wayland"; };
+    home-manager = {
+      url = github:nix-community/home-manager/master;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    neovim = {
+      url = github:neovim/neovim?dir=contrib;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixpkgs-mozilla = {
+      url = github:mozilla/nixpkgs-mozilla;
+      flake = false;
+    };
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     #aarch-images = { url = "github:Mic92/nixos-aarch64-images"; flake = false; };
 
   };
 
-  outputs = inputs@{ self, nur, sops, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
+  outputs = inputs@{ self, nur, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
     let
       inherit (nixpkgs) lib;
       inherit (lib) recursiveUpdate;
@@ -35,7 +51,7 @@
     {
       nixosModules = [
         home-manager.nixosModules.home-manager
-        sops.nixosModules.sops
+        inputs.agenix.nixosModules.age
         (import ./modules)
         {
           home-manager.useGlobalPkgs = true;
@@ -55,6 +71,7 @@
         my-pkgs
         nur.overlay
         (final: prev: with prev; {
+          agenix = inputs.agenix.defaultPackage.x86_64-linux;
           neovim-nightly = inputs.neovim.defaultPackage.${system};
           firefox = g-firefox.override {
             pipewireSupport = true;
@@ -66,20 +83,6 @@
 
       packages."${system}" = (my-pkgs null pkgs);
 
-      devShell.${system} = with pkgs; mkShell rec  {
-        # imports all files ending in .asc/.gpg and sets $SOPS_PGP_FP.
-        sopsPGPKeyDirs = [
-          "./secrets"
-        ];
-        shellHook = ''
-          echo NIX SHELL!!!
-          zsh
-          exit
-        '';
-        nativeBuildInputs = [
-          (pkgs.callPackage sops { }).sops-pgp-hook
-        ];
-      };
     };
 }
 

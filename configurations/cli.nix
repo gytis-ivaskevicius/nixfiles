@@ -124,6 +124,6 @@
     wget
     which
     zip
-    (import inputs.comma {inherit pkgs;})
+    nushell
   ];
 }

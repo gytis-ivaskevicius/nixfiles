@@ -7,7 +7,6 @@ final: prev: {
   g-rofi = prev.callPackage ./g-rofi { };
   g-termite = prev.callPackage ./g-termite { };
   g-firefox = prev.callPackage ./g-firefox { };
-  g-starship = prev.callPackage ./g-starship { };
   zsh-forgit = prev.callPackage ./zsh-forgit { };
   shell-config = prev.callPackage ./shell-config { };
   lightcord = prev.callPackage ./lightcord { };
