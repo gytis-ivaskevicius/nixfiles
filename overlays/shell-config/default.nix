@@ -1,6 +1,8 @@
 { lib
 , writeShellScript
 , fd
+, pure-prompt
+, sshuttle
 , dockerAliasEnabled ? true
 , nixArgsEnabled ? true
 , nixAutocompleteFixEnabled ? true
@@ -8,9 +10,7 @@
 , prettyManPagesEnabled ? true
 , promptEnabled ? true
 , sshuttleEnabled ? true
-, sshuttle
-, starshipEnabled ? true
-, starship
+, purePromptEnabled ? true
 , zshPasteImprovementsEnabled ? true
 }:
 
@@ -83,9 +83,9 @@ let
 
     bindkey -r ^V
   '';
-  starshipPrompt = ''
-    export STARSHIP_CONFIG=${./starship.toml}
-    eval "$(${starship}/bin/starship init zsh)"
+  purePrompt = ''
+    source ${pure-prompt}/share/zsh/site-functions/async
+    source ${pure-prompt}/share/zsh/site-functions/prompt_pure_setup
   '';
 in
 writeShellScript "shellconfig.sh" ''
@@ -101,5 +101,5 @@ writeShellScript "shellconfig.sh" ''
   ${optionalString nixCdEnabled nix-cd}
   ${optionalString nixAutocompleteFixEnabled (builtins.readFile ./nix-completions.sh)}
   ${optionalString zshPasteImprovementsEnabled zshPasteImprovements}
-  ${optionalString starshipEnabled starshipPrompt}
+  ${optionalString purePromptEnabled purePrompt}
 ''
