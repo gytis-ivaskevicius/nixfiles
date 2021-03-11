@@ -24,10 +24,6 @@
       flake = false;
     };
 
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     #aarch-images = { url = "github:Mic92/nixos-aarch64-images"; flake = false; };
 
   };
@@ -51,7 +47,6 @@
     {
       nixosModules = [
         home-manager.nixosModules.home-manager
-        inputs.agenix.nixosModules.age
         (import ./modules)
         {
           home-manager.useGlobalPkgs = true;
@@ -71,7 +66,6 @@
         my-pkgs
         nur.overlay
         (final: prev: with prev; {
-          agenix = inputs.agenix.defaultPackage.x86_64-linux;
           neovim-nightly = inputs.neovim.defaultPackage.${system};
           firefox = g-firefox.override {
             pipewireSupport = true;
