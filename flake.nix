@@ -2,11 +2,12 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-unstable";
+    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
     nur.url = github:nix-community/NUR;
+    utils.url = github:numtide/flake-utils;
 
     nixpkgs-wayland = {
-      url = "github:colemickens/nixpkgs-wayland";
+      url = github:colemickens/nixpkgs-wayland;
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.unstableSmall.follows = "nixpkgs";
     };
@@ -15,55 +16,43 @@
       url = github:nix-community/home-manager/master;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     neovim = {
       url = github:neovim/neovim?dir=contrib;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixpkgs-mozilla = {
       url = github:mozilla/nixpkgs-mozilla;
       flake = false;
     };
 
-    #aarch-images = { url = "github:Mic92/nixos-aarch64-images"; flake = false; };
-
   };
 
-  outputs = inputs@{ self, nur, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
+  outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
     let
-      inherit (nixpkgs) lib;
-      inherit (lib) recursiveUpdate;
-      system = "x86_64-linux";
-      my-pkgs = import ./overlays;
+      pkgs = self.pkgs.nixpkgs;
+      nixPath = (pkgs.lib.mapAttrsToList (name: _: "${name}=${inputs.${name}}") inputs);
+      nixRegistry = pkgs.lib.mapAttrs (name: v: { flake = v; }) inputs;
+    in
+    import ./utils.nix {
 
-      utils = import ./utility-functions.nix {
-        inherit lib system pkgs inputs self;
-        nixosModules = self.nixosModules;
+      inherit self inputs utils;
+
+      pkgs.nixpkgs.input = nixpkgs;
+
+      pkgsConfig = {
+        allowBroken = true;
+        allowUnfree = true;
+        oraclejdk.accept_license = true;
+        permittedInsecurePackages = [ "openssl-1.0.2u" ];
       };
 
-      nixpkgs-patched = utils.patchChannel nixpkgs [ ];
+      overlay = import ./overlays;
 
-      pkgs = utils.pkgImport nixpkgs-patched self.overlays;
-    in
-    {
-      nixosModules = [
-        home-manager.nixosModules.home-manager
-        (import ./modules)
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
-      ];
-
-      nixosConfigurations = utils.buildNixosConfigurations [
-        ./configurations/GytisOS.host.nix
-        ./configurations/Morty.host.nix
-        ./configurations/NixyServer.host.nix
-      ];
-
-      overlay = my-pkgs;
-      overlays = [
+      sharedOverlays = [
         (import nixpkgs-mozilla)
-        my-pkgs
+        self.overlay
         nur.overlay
         (final: prev: with prev; {
           neovim-nightly = inputs.neovim.defaultPackage.${system};
@@ -75,8 +64,37 @@
         })
       ];
 
-      packages."${system}" = (my-pkgs null pkgs);
+      sharedModules =
+        [
+          home-manager.nixosModules.home-manager
+          (import ./modules)
+          {
+            nix.extraOptions = "experimental-features = nix-command flakes";
+            nix.nixPath = nixPath ++ [ "repl=${toString ./.}/repl.nix" ];
+            nix.package = pkgs.nixUnstable;
+            nix.registry = nixRegistry;
+
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+          }
+        ];
+
+
+      nixosProfiles = {
+        GytisOS.modules = [ (import ./configurations/GytisOS.host.nix) ];
+
+        Morty.modules = [ (import ./configurations/Morty.host.nix) ];
+
+        NixyServer.modules = [ (import ./configurations/NixyServer.host.nix) ];
+      };
+
 
     };
 }
+
+
+
+
+
+
 

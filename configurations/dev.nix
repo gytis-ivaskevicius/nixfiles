@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  virtualisation.podman.enable = true;
+  #virtualisation.podman.enable = true;
 
   environment.systemPackages = with pkgs; [
     docker_compose
@@ -11,17 +11,17 @@
     jetbrains.idea-ultimate
     maven
     visualvm
-    podman-compose
+    #podman-compose
   ];
 
-  ### Docker
-  #virtualisation.docker = {
-  #  autoPrune.enable = true;
-  #  enable = true;
-  #  #enableNvidia = true;
-  #  enableOnBoot = false;
-  #  liveRestore = false;
-  #};
+  ## Docker
+  virtualisation.docker = {
+    autoPrune.enable = true;
+    enable = true;
+    #enableNvidia = true;
+    enableOnBoot = false;
+    liveRestore = false;
+  };
 
   ### VirtualBox
   #  virtualisation.virtualbox = {
@@ -40,7 +40,7 @@
     inherit (pkgs) jdk11 adoptopenjdk-hotspot-bin-14 jdk15;
   };
   programs.java.enable = true;
-  programs.java.package = pkgs.jdk15;
+  programs.java.package = pkgs.jdk11;
 
   ### Node
   programs.npm.enable = true;

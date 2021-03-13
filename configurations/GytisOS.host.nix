@@ -24,8 +24,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    gnupg
-    chromium
+    tio
   ];
 
   networking.extraHosts = ''
