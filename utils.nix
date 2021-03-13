@@ -21,13 +21,9 @@
 , extraArgs ? { inherit inputs; }
 , ...
 }@args:
-let
-  maybeImport = obj:
-    if (builtins.typeOf obj == "path") || (builtins.typeOf obj == "string") then
-      import obj
-    else
-      obj;
 
+
+let
   otherArguments = builtins.removeAttrs args [
     "self"
     "inputs"
@@ -40,14 +36,13 @@ let
     "sharedOverlays"
     "extraArgs"
   ];
-
 in
 otherArguments //
 {
 
   pkgs = builtins.mapAttrs
     (name: value: import value.input {
-      inherit system;
+      system = (if (value ? system) then value.system else system);
       overlays = sharedOverlays;
       config = pkgsConfig // (if (value ? config) then value.config else { });
     })
@@ -56,9 +51,7 @@ otherArguments //
   nixosConfigurations = builtins.mapAttrs
     (name: value:
       let
-        #nixpkgs = import pkgs.nixpkgs.input { inherit system; };
         nixpkgs = if (value ? nixpkgs) then value.nixpkgs else self.pkgs.nixpkgs;
-
       in
       inputs.nixpkgs.lib.nixosSystem
         (
@@ -67,7 +60,7 @@ otherArguments //
             inherit system;
             modules = [
               {
-                networking.hostName = mkDefault name;
+                networking.hostName = name;
                 nixpkgs = { pkgs = nixpkgs; config = nixpkgs.config; };
                 system.configurationRevision = mkIf (self ? rev) self.rev;
               }
