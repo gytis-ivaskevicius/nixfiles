@@ -2,8 +2,7 @@
   # pass an instance of self
   self
 , inputs
-, utils
-, system ? "x86_64-linux"
+, defaultSystem ? "x86_64-linux"
 
 , nixosProfiles ? { }
 
@@ -25,16 +24,15 @@
 
 let
   otherArguments = builtins.removeAttrs args [
-    "self"
+    "defaultSystem"
+    "extraArgs"
     "inputs"
-    "utils"
-    "system"
     "nixosProfiles"
     "pkgs"
     "pkgsConfig"
+    "self"
     "sharedModules"
     "sharedOverlays"
-    "extraArgs"
   ];
 in
 otherArguments //
@@ -42,7 +40,7 @@ otherArguments //
 
   pkgs = builtins.mapAttrs
     (name: value: import value.input {
-      system = (if (value ? system) then value.system else system);
+      system = (if (value ? system) then value.system else defaultSystem);
       overlays = sharedOverlays;
       config = pkgsConfig // (if (value ? config) then value.config else { });
     })
@@ -51,31 +49,25 @@ otherArguments //
   nixosConfigurations = builtins.mapAttrs
     (name: value:
       let
-        nixpkgs = if (value ? nixpkgs) then value.nixpkgs else self.pkgs.nixpkgs;
+        selectedNixpkgs = if (value ? nixpkgs) then value.nixpkgs else self.pkgs.nixpkgs;
       in
-      inputs.nixpkgs.lib.nixosSystem
-        (
-          with nixpkgs.lib;
-          {
-            inherit system;
-            modules = [
-              {
-                networking.hostName = name;
-                nixpkgs = { pkgs = nixpkgs; config = nixpkgs.config; };
-                system.configurationRevision = mkIf (self ? rev) self.rev;
-              }
-            ]
-            ++ sharedModules
-            ++ (optionals (value ? modules) value.modules);
-            extraArgs = extraArgs // optionalAttrs (value ? extraArgs) value.extraArgs;
-          }
-        ))
+      inputs.nixpkgs.lib.nixosSystem (
+        with selectedNixpkgs.lib;
+        {
+          system = selectedNixpkgs.system;
+          modules = [
+            {
+              networking.hostName = name;
+              nixpkgs = rec { pkgs = selectedNixpkgs; config = pkgs.config; };
+              system.configurationRevision = mkIf (self ? rev) self.rev;
+            }
+          ]
+          ++ sharedModules
+          ++ (optionals (value ? modules) value.modules);
+          extraArgs = extraArgs // optionalAttrs (value ? extraArgs) value.extraArgs;
+        }
+      ))
     nixosProfiles;
 
-
 }
-
-
-
-
 

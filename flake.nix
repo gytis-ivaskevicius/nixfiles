@@ -32,7 +32,7 @@
   outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
     let
       pkgs = self.pkgs.nixpkgs;
-      nixPath = (pkgs.lib.mapAttrsToList (name: _: "${name}=${inputs.${name}}") inputs);
+      nixPath = pkgs.lib.mapAttrsToList (name: _: "${name}=${inputs.${name}}") inputs;
       nixRegistry = pkgs.lib.mapAttrs (name: v: { flake = v; }) inputs;
     in
     import ./utils.nix {
@@ -46,6 +46,14 @@
         allowUnfree = true;
         oraclejdk.accept_license = true;
         permittedInsecurePackages = [ "openssl-1.0.2u" ];
+      };
+
+      nixosProfiles = {
+        GytisOS.modules = [ (import ./configurations/GytisOS.host.nix) ];
+
+        Morty.modules = [ (import ./configurations/Morty.host.nix) ];
+
+        NixyServer.modules = [ (import ./configurations/NixyServer.host.nix) ];
       };
 
       overlay = import ./overlays;
@@ -64,30 +72,19 @@
         })
       ];
 
-      sharedModules =
-        [
-          home-manager.nixosModules.home-manager
-          (import ./modules)
-          {
-            nix.extraOptions = "experimental-features = nix-command flakes";
-            nix.nixPath = nixPath ++ [ "repl=${toString ./.}/repl.nix" ];
-            nix.package = pkgs.nixUnstable;
-            nix.registry = nixRegistry;
+      sharedModules = [
+        home-manager.nixosModules.home-manager
+        (import ./modules)
+        {
+          nix.extraOptions = "experimental-features = nix-command flakes";
+          nix.nixPath = nixPath ++ [ "repl=${toString ./.}/repl.nix" ];
+          nix.package = pkgs.nixUnstable;
+          nix.registry = nixRegistry;
 
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-          }
-        ];
-
-
-      nixosProfiles = {
-        GytisOS.modules = [ (import ./configurations/GytisOS.host.nix) ];
-
-        Morty.modules = [ (import ./configurations/Morty.host.nix) ];
-
-        NixyServer.modules = [ (import ./configurations/NixyServer.host.nix) ];
-      };
-
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+        }
+      ];
 
     };
 }
