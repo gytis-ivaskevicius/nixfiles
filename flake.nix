@@ -5,6 +5,7 @@
     nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
     nur.url = github:nix-community/NUR;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
+    #utils.url = "/home/gytis/Projects/flake-utils-plus";
 
     nixpkgs-wayland = {
       url = github:colemickens/nixpkgs-wayland;
@@ -32,16 +33,14 @@
   outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
     let
       pkgs = self.pkgs.nixpkgs;
-      nixPath = pkgs.lib.mapAttrsToList (name: _: "${name}=${inputs.${name}}") inputs;
-      nixRegistry = pkgs.lib.mapAttrs (name: v: { flake = v; }) inputs;
     in
     utils.lib.systemFlake {
 
-      inherit self inputs utils;
+      inherit self inputs;
 
-      pkgs.nixpkgs.input = nixpkgs;
+      channels.nixpkgs.input = nixpkgs;
 
-      pkgsConfig = {
+      channelsConfig = {
         allowBroken = true;
         allowUnfree = true;
         oraclejdk.accept_license = true;
@@ -82,7 +81,7 @@
           home-manager.useUserPackages = true;
         }
         {
-          nix.nixPath = nixPath ++ [ "repl=${toString ./.}/repl.nix" ];
+          nix.nixPath = [ "repl=${toString ./.}/repl.nix" ];
         }
       ];
 
