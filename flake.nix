@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
     nur.url = github:nix-community/NUR;
-    utils.url = github:numtide/flake-utils;
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus;
 
     nixpkgs-wayland = {
       url = github:colemickens/nixpkgs-wayland;
@@ -35,7 +35,7 @@
       nixPath = pkgs.lib.mapAttrsToList (name: _: "${name}=${inputs.${name}}") inputs;
       nixRegistry = pkgs.lib.mapAttrs (name: v: { flake = v; }) inputs;
     in
-    import ./utils.nix {
+    utils.lib.systemFlake {
 
       inherit self inputs utils;
 
@@ -76,21 +76,18 @@
         home-manager.nixosModules.home-manager
         (import ./modules)
         {
-          nix.extraOptions = "experimental-features = nix-command flakes";
-          nix.nixPath = nixPath ++ [ "repl=${toString ./.}/repl.nix" ];
-          nix.package = pkgs.nixUnstable;
-          nix.registry = nixRegistry;
+          nix = utils.lib.nixDefaultsFromInputs inputs;
 
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+        }
+        {
+          nix.nixPath = nixPath ++ [ "repl=${toString ./.}/repl.nix" ];
         }
       ];
 
     };
 }
-
-
-
 
 
 
