@@ -31,6 +31,21 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1614513358,
+        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -61,11 +76,11 @@
       },
       "locked": {
         "dir": "contrib",
-        "lastModified": 1615564325,
-        "narHash": "sha256-Ddxcg6tp/aXQAI0fZcuoDVa0gqINmNnfkUpmck40+Cw=",
+        "lastModified": 1615707348,
+        "narHash": "sha256-DFJzeDTJBis2TzfztRkg/uJYnVBUIZunRW6XLoj6TuI=",
         "owner": "neovim",
         "repo": "neovim",
-        "rev": "d38508d88ab78415368bce350072f9f0f73c15d2",
+        "rev": "3c8583e43bcb644d75c17c072ddf6f067439fde1",
         "type": "github"
       },
       "original": {
@@ -133,11 +148,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1615634893,
-        "narHash": "sha256-Xm7oWjsMndyXqG5oweV/q3aAgFyw9xI4Fxj1AGemYMQ=",
+        "lastModified": 1615719117,
+        "narHash": "sha256-hbDkZxYNfagBjTB7uKGf3bUFTQbigOW3BTIGiJSjEUo=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "4eddd7ce2360b16c4632e5c97fbe71419a531a5d",
+        "rev": "9a2be1893dc3325a8da525d57a08b3995aa7e040",
         "type": "github"
       },
       "original": {
@@ -158,18 +173,18 @@
       }
     },
     "utils": {
+      "inputs": {
+        "flake-utils": "flake-utils_2"
+      },
       "locked": {
-        "lastModified": 1615661972,
-        "narHash": "sha256-A1ONHTFIu55BY6LlVxOqEH19UpgkMGXi31S1uqERVOA=",
-        "owner": "gytis-ivaskevicius",
-        "repo": "flake-utils-plus",
-        "rev": "4cd6361d6882625fa02f15c81062ac996889bdf1",
-        "type": "github"
+        "lastModified": 1615724789,
+        "narHash": "sha256-uXaWA5dVqvKYhuiByM460ismsFoKIp8BV//dAyZn13s=",
+        "type": "git",
+        "url": "file:///home/gytis/Projects/flake-utils-plus"
       },
       "original": {
-        "owner": "gytis-ivaskevicius",
-        "repo": "flake-utils-plus",
-        "type": "github"
+        "path": "/home/gytis/Projects/flake-utils-plus",
+        "type": "path"
       }
     }
   },

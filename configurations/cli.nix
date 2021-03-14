@@ -19,9 +19,12 @@
     syntaxHighlighting.enable = true;
     ohMyZsh.enable = true;
     ohMyZsh.plugins = [ "sudo" "z" ];
-    promptInit = ''
+    shellInit = ''
       source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh
+    '';
+    promptInit = ''
       ${builtins.readFile (pkgs.shell-config.override { dockerAliasEnabled = config.virtualisation.docker.enable; })}
+      autoload -U promptinit && promptinit && prompt pure
     '';
 
     setOptions = [
@@ -111,19 +114,20 @@
     lsof
     man
     nettools
-    nix-tree
     nix-top
+    nix-tree
     nixpkgs-fmt
+    nushell
     p7zip
     parted
     pciutils
     psmisc
+    pure-prompt
     ranger
     ripgrep
     unzip
     wget
     which
     zip
-    nushell
   ];
 }

@@ -10,7 +10,6 @@
 , prettyManPagesEnabled ? true
 , promptEnabled ? true
 , sshuttleEnabled ? true
-, purePromptEnabled ? true
 , zshPasteImprovementsEnabled ? true
 }:
 
@@ -83,10 +82,6 @@ let
 
     bindkey -r ^V
   '';
-  purePrompt = ''
-    source ${pure-prompt}/share/zsh/site-functions/async
-    source ${pure-prompt}/share/zsh/site-functions/prompt_pure_setup
-  '';
 in
 writeShellScript "shellconfig.sh" ''
   if [ -n "''${commands[fzf-share]}" ]; then
@@ -101,5 +96,4 @@ writeShellScript "shellconfig.sh" ''
   ${optionalString nixCdEnabled nix-cd}
   ${optionalString nixAutocompleteFixEnabled (builtins.readFile ./nix-completions.sh)}
   ${optionalString zshPasteImprovementsEnabled zshPasteImprovements}
-  ${optionalString purePromptEnabled purePrompt}
 ''
