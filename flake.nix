@@ -32,7 +32,7 @@
 
   outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
     let
-      pkgs = self.pkgs.nixpkgs;
+      mkApp = utils.lib.mkApp;
     in
     utils.lib.systemFlake {
 
@@ -84,6 +84,23 @@
           nix.nixPath = [ "repl=${toString ./.}/repl.nix" ];
         }
       ];
+
+      packagesFunc = (pkgs: {
+        inherit (pkgs)
+          g-alacritty
+          g-firefox
+          g-lf
+          g-neovim
+          g-pistol
+          g-polybar
+          g-rofi
+          g-termite
+          lightcord
+          shell-config
+          zsh-forgit
+          ;
+      });
+      defaultPackageFunc = (pkgs: pkgs.g-neovim);
 
     };
 }
