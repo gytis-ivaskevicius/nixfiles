@@ -61,9 +61,9 @@
         (import nixpkgs-mozilla)
         self.overlay
         nur.overlay
-        (final: prev: with prev; {
-          neovim-nightly = inputs.neovim.defaultPackage.${system};
-          firefox = g-firefox.override {
+        (final: prev: {
+          neovim-nightly = inputs.neovim.defaultPackage.${prev.system};
+          firefox = prev.g-firefox.override {
             pipewireSupport = true;
             waylandSupport = true;
             webrtcSupport = true;
@@ -85,8 +85,8 @@
         }
       ];
 
-      packagesFunc = (pkgs: {
-        inherit (pkgs)
+      packagesFunc = chanels: {
+        inherit (chanels.nixpkgs)
           g-alacritty
           g-firefox
           g-lf
@@ -99,8 +99,8 @@
           shell-config
           zsh-forgit
           ;
-      });
-      defaultPackageFunc = (pkgs: pkgs.g-neovim);
+      };
+      defaultPackageFunc = (chanels: chanels.nixpkgs.g-neovim);
 
     };
 }
