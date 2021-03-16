@@ -102,6 +102,10 @@
       };
       defaultPackageFunc = (chanels: chanels.nixpkgs.g-neovim);
 
+      devShellFunc = channels: with channels.nixpkgs.pkgs; mkShell {
+        buildInputs = [ transcript ];
+      };
+
     };
 }
 

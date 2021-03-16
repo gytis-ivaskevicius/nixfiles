@@ -7,6 +7,7 @@
     ./cli.nix
     ./cli-extras.nix
     ./sway.nix
+    ./work.secret.nix
   ];
 
   services.gnome3.gnome-keyring.enable = true;
@@ -33,6 +34,7 @@
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
 
+  #boot.kernelParams = [ "idle=nomwait" "processor.max_cstate=5" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-amd" ];
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
