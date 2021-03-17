@@ -28,6 +28,15 @@
       flake = false;
     };
 
+    forgit-git = {
+      url = github:wfxr/forgit;
+      flake = false;
+    };
+
+    lightcord-git = {
+      url = github:Lightcord/Lightcord;
+      flake = false;
+    };
   };
 
   outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
@@ -62,6 +71,7 @@
         self.overlay
         nur.overlay
         (final: prev: {
+          inherit inputs;
           neovim-nightly = inputs.neovim.defaultPackage.${prev.system};
           firefox = prev.g-firefox.override {
             pipewireSupport = true;
