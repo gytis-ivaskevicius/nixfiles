@@ -33,8 +33,8 @@
 
   networking.firewall.allowedTCPPorts = [ ];
   networking.firewall.allowedUDPPorts = [ ];
-
-  #boot.kernelParams = [ "idle=nomwait" "processor.max_cstate=5" ];
+  #"processor.max_cstate=5"
+  boot.kernelParams = [ "idle=nomwait" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = [ "kvm-amd" ];
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];

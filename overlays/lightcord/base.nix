@@ -45,7 +45,7 @@
 , systemd
 , libappindicator-gtk3
 , libdbusmenu
-, openssl_1_0_2
+, openssl
 , gcc-unwrapped
 , curl
 }:
@@ -73,10 +73,11 @@ stdenv.mkDerivation rec {
     nss
     wrapGAppsHook
 
-    openssl_1_0_2
+    openssl
     gcc-unwrapped
   ];
 
+  autoPatchelfIgnoreMissingDeps = true;
   dontWrapGApps = true;
 
   libPath = stdenv.lib.makeLibraryPath [
@@ -117,8 +118,7 @@ stdenv.mkDerivation rec {
     libXScrnSaver
     libappindicator-gtk3
     libdbusmenu
-
-    openssl_1_0_2
+    openssl
     gcc-unwrapped
   ];
 
