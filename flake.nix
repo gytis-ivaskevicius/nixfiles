@@ -64,12 +64,16 @@
             cli
             cli-extras
             sway
-            xorg
+            ({pkgs, ...}: {
+              home-manager.users.gytis = import ./home-manager/sway.nix;
+              boot.kernelPackages = pkgs.linuxPackages_latest;
+            })
           ];
         in
         with self.nixosModules; {
 
           GytisOS.modules = [
+            aarch64Dev
             dev
             (import ./profiles/work.secret.nix)
             (import ./profiles/GytisOS.host.nix)
@@ -92,11 +96,7 @@
         (final: prev: {
           inherit inputs;
           neovim-nightly = inputs.neovim.defaultPackage.${prev.system};
-          firefox = prev.g-firefox.override {
-            pipewireSupport = true;
-            waylandSupport = true;
-            webrtcSupport = true;
-          };
+          firefox = prev.g-firefox;
         })
       ];
 
@@ -105,6 +105,7 @@
         clean-home
         runtimes
         nix-compose
+        personal
 
         home-manager.nixosModules.home-manager
         utils.nixosModules.saneFlakeDefaults
@@ -130,6 +131,7 @@
           zsh-forgit
           ;
       };
+
       defaultPackageBuilder = (chanels: chanels.nixpkgs.g-neovim);
 
       devShellBuilder = channels: with channels.nixpkgs.pkgs; mkShell {
@@ -144,11 +146,13 @@
         ./modules/nix-compose.nix
         ./modules/runtimes.nix
 
+        ./configurations/aarch64Dev.nix
         ./configurations/base-desktop.nix
         ./configurations/cli-extras.nix
         ./configurations/cli.nix
         ./configurations/containers.nix
         ./configurations/dev.nix
+        ./configurations/personal.nix
         ./configurations/sway.nix
         ./configurations/xorg.nix
       ];

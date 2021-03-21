@@ -2,13 +2,6 @@
 
 {
 
-  users.extraUsers.gytis = {
-    shell = pkgs.zsh;
-    isNormalUser = true;
-    description = "Gytis Ivaskevicius";
-    extraGroups = [ "wheel" "docker" ];
-    initialPassword = "toor";
-  };
 
   fileSystems."/" = { device = "zroot/locker/os"; fsType = "zfs"; };
   fileSystems."/home" = { device = "zroot/locker/home"; fsType = "zfs"; };
