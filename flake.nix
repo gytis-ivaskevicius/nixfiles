@@ -129,10 +129,27 @@
           ;
       };
 
-      defaultPackageBuilder = (chanels: chanels.nixpkgs.g-neovim);
+
+      appsBuilder = channels: with channels.nixpkgs; {
+        g-neovim = mkApp {
+          drv = g-neovim;
+          exePath = "/bin/nvim";
+        };
+        g-termite = mkApp {
+          drv = g-termite;
+          exePath = "/bin/termite";
+        };
+      };
+
+      defaultPackageBuilder = chanels: chanels.nixpkgs.g-neovim;
+
+      defaultAppBuilder = channels: mkApp {
+        drv = channels.nixpkgs.g-neovim;
+        exePath = "/bin/nvim";
+      };
 
       devShellBuilder = channels: with channels.nixpkgs.pkgs; mkShell {
-        buildInputs = [ transcript ];
+        buildInputs = [ git transcript ];
       };
 
       overlay = import ./overlays;
