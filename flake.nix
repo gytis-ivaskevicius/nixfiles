@@ -42,9 +42,19 @@
   outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
     let
       mkApp = utils.lib.mkApp;
+
+      desktopModules = with self.nixosModules; [
+        base-desktop
+        cli
+        cli-extras
+        sway
+        ({ pkgs, ... }: {
+          home-manager.users.gytis = import ./home-manager/sway.nix;
+          boot.kernelPackages = pkgs.linuxPackages_latest;
+        })
+      ];
     in
     utils.lib.systemFlake {
-
       inherit self inputs;
 
       supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
@@ -57,37 +67,24 @@
         oraclejdk.accept_license = true;
       };
 
-      nixosProfiles =
-        let
-          desktopModules = with self.nixosModules; [
-            base-desktop
-            cli
-            cli-extras
-            sway
-            ({pkgs, ...}: {
-              home-manager.users.gytis = import ./home-manager/sway.nix;
-              boot.kernelPackages = pkgs.linuxPackages_latest;
-            })
-          ];
-        in
-        with self.nixosModules; {
+      nixosProfiles = with self.nixosModules; {
 
-          GytisOS.modules = [
-            aarch64Dev
-            dev
-            (import ./profiles/work.secret.nix)
-            (import ./profiles/GytisOS.host.nix)
-          ] ++ desktopModules;
+        GytisOS.modules = [
+          aarch64Dev
+          dev
+          (import ./profiles/work.secret.nix)
+          (import ./profiles/GytisOS.host.nix)
+        ] ++ desktopModules;
 
-          Morty.modules = [
-            (import ./profiles/Morty.host.nix)
-          ] ++ desktopModules;
+        Morty.modules = [
+          (import ./profiles/Morty.host.nix)
+        ] ++ desktopModules;
 
-          NixyServer.modules = [
-            containers
-            (import ./profiles/NixyServer.host.nix)
-          ];
-        };
+        NixyServer.modules = [
+          containers
+          (import ./profiles/NixyServer.host.nix)
+        ];
+      };
 
       sharedOverlays = [
         (import nixpkgs-mozilla)
