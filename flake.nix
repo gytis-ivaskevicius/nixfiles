@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
     nur.url = github:nix-community/NUR;
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus;
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
 
     nixpkgs-wayland = {
@@ -47,24 +47,43 @@
 
       inherit self inputs;
 
+      supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
+
       channels.nixpkgs.input = nixpkgs;
 
       channelsConfig = {
         allowBroken = true;
         allowUnfree = true;
         oraclejdk.accept_license = true;
-        permittedInsecurePackages = [ "openssl-1.0.2u" ];
       };
 
-      nixosProfiles = {
-        GytisOS.modules = [ (import ./configurations/GytisOS.host.nix) ];
+      nixosProfiles =
+        let
+          desktopModules = with self.nixosModules; [
+            base-desktop
+            cli
+            cli-extras
+            sway
+            xorg
+          ];
+        in
+        with self.nixosModules; {
 
-        Morty.modules = [ (import ./configurations/Morty.host.nix) ];
+          GytisOS.modules = [
+            dev
+            (import ./profiles/work.secret.nix)
+            (import ./profiles/GytisOS.host.nix)
+          ] ++ desktopModules;
 
-        NixyServer.modules = [ (import ./configurations/NixyServer.host.nix) ];
-      };
+          Morty.modules = [
+            (import ./profiles/Morty.host.nix)
+          ] ++ desktopModules;
 
-      overlay = import ./overlays;
+          NixyServer.modules = [
+            containers
+            (import ./profiles/NixyServer.host.nix)
+          ];
+        };
 
       sharedOverlays = [
         (import nixpkgs-mozilla)
@@ -81,21 +100,22 @@
         })
       ];
 
-      sharedModules = [
-        home-manager.nixosModules.home-manager
-        (import ./modules)
-        {
-          nix = utils.lib.nixDefaultsFromInputs inputs;
+      sharedModules = with self.nixosModules; [
+        cachix
+        clean-home
+        runtimes
+        nix-compose
 
+        home-manager.nixosModules.home-manager
+        utils.nixosModules.saneFlakeDefaults
+        {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-        }
-        {
           nix.nixPath = [ "repl=${toString ./.}/repl.nix" ];
         }
       ];
 
-      packagesFunc = chanels: {
+      packagesBuilder = chanels: {
         inherit (chanels.nixpkgs)
           g-alacritty
           g-firefox
@@ -110,11 +130,28 @@
           zsh-forgit
           ;
       };
-      defaultPackageFunc = (chanels: chanels.nixpkgs.g-neovim);
+      defaultPackageBuilder = (chanels: chanels.nixpkgs.g-neovim);
 
-      devShellFunc = channels: with channels.nixpkgs.pkgs; mkShell {
+      devShellBuilder = channels: with channels.nixpkgs.pkgs; mkShell {
         buildInputs = [ transcript ];
       };
+
+      overlay = import ./overlays;
+
+      nixosModules = utils.lib.modulesFromList [
+        ./modules/cachix.nix
+        ./modules/clean-home.nix
+        ./modules/nix-compose.nix
+        ./modules/runtimes.nix
+
+        ./configurations/base-desktop.nix
+        ./configurations/cli-extras.nix
+        ./configurations/cli.nix
+        ./configurations/containers.nix
+        ./configurations/dev.nix
+        ./configurations/sway.nix
+        ./configurations/xorg.nix
+      ];
 
     };
 }

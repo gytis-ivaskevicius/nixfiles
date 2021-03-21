@@ -1,12 +1,6 @@
 { config, builtins, lib, pkgs, modulesPath, ... }:
 
 {
-  imports = [
-    ./base.nix
-    ./cli.nix
-    ./cli-extras.nix
-    ./sway.nix
-  ];
 
   services.gnome3.gnome-keyring.enable = true;
   #services.tailscale.enable = true;

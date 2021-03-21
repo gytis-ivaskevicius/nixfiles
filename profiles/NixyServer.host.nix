@@ -1,10 +1,6 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [
-    ./cli.nix
-    ./containers.nix
-  ];
 
   users.extraUsers.gytis = {
     shell = pkgs.zsh;
