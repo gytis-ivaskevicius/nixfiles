@@ -64,7 +64,6 @@
       channelsConfig = {
         allowBroken = true;
         allowUnfree = true;
-        oraclejdk.accept_license = true;
       };
 
       nixosProfiles = with self.nixosModules; {
@@ -109,7 +108,6 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          nix.nixPath = [ "repl=${toString ./.}/repl.nix" ];
         }
       ];
 
@@ -141,13 +139,9 @@
         };
       };
 
-      defaultPackageBuilder = chanels: chanels.nixpkgs.g-neovim;
+      defaultPackageBuilder = channels: channels.nixpkgs.g-neovim;
 
-      defaultAppBuilder = channels: mkApp {
-        drv = channels.nixpkgs.g-neovim;
-        exePath = "/bin/nvim";
-      };
-
+      defaultAppBuilder = channels: utils.lib.replApp channels.nixpkgs;
       devShellBuilder = channels: with channels.nixpkgs.pkgs; mkShell {
         buildInputs = [ git transcript ];
       };
@@ -173,7 +167,5 @@
 
     };
 }
-
-
 
 

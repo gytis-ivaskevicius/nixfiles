@@ -2,8 +2,7 @@
 
 {
 
-  #"processor.max_cstate=5"
-  boot.kernelParams = [ "idle=nomwait" ];
+  boot.kernelParams = [ "idle=nomwait" "processor.max_cstate=5"];
   boot.kernelModules = [ "kvm-amd" ];
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
 
