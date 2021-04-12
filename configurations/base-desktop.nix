@@ -28,8 +28,13 @@
     firewall.allowPing = lib.mkDefault false;
     hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
     nameservers = lib.mkDefault [ "1.1.1.1" "1.0.0.1" ];
-    networkmanager.enable = lib.mkDefault true;
+    useDHCP = false;
+    interfaces."enp39s0".useDHCP = true;
+    useNetworkd = true;
   };
+
+  systemd.network.enable = true;
+  environment.systemPackages = [pkgs.bluez];
 
   services.resolved = {
     enable = true;
@@ -101,7 +106,6 @@
     #  enable = lib.mkDefault true;
     #  support32Bit = config.hardware.pulseaudio.enable;
     #};
-    bluetooth.enable = lib.mkDefault false;
     cpu.amd.updateMicrocode = true;
     cpu.intel.updateMicrocode = true;
   };

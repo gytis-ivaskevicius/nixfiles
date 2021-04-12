@@ -2,7 +2,7 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
+    nixpkgs.url = github:nixos/nixpkgs;
     nur.url = github:nix-community/NUR;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
@@ -14,7 +14,7 @@
     };
 
     home-manager = {
-      url = github:nix-community/home-manager/master;
+      url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -141,7 +141,6 @@
 
       defaultPackageBuilder = channels: channels.nixpkgs.g-neovim;
 
-      defaultAppBuilder = channels: utils.lib.replApp channels.nixpkgs;
       devShellBuilder = channels: with channels.nixpkgs.pkgs; mkShell {
         buildInputs = [ git transcript ];
       };

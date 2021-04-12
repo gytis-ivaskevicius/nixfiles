@@ -37,7 +37,7 @@
 
   ### Java
   gytix.java.additionalPackages = {
-    inherit (pkgs) jdk11 adoptopenjdk-hotspot-bin-14 jdk15;
+    inherit (pkgs) jdk11  jdk15;
   };
   programs.java.enable = true;
   programs.java.package = pkgs.jdk11;
