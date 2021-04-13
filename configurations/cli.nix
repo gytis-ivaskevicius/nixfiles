@@ -56,7 +56,7 @@
     grep = "grep --color=auto";
     diff = "diff --color=auto";
     nixos-rebuild = "sudo nixos-rebuild";
-    nix-repl = "nix run /etc/nixos";
+    nix-repl = "nix repl ${inputs.utils.lib.repl}";
     auto-nix-rebuild = "ls /etc/nixos/**/*.nix | entr sudo bash -c 'nixos-rebuild switch && printf \"DONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n\"'";
     personal = "sudo $EDITOR /etc/nixos/personal.nix";
     opt = "manix '' | grep '^# ' | sed 's/^# \(.*\) (.*/\1/;s/ (.*//;s/^# //' | fzf --ansi --preview=\"manix '{}' | sed 's/type: /> type: /g' | bat -l Markdown --color=always --plain\"";
