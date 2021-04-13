@@ -14,7 +14,7 @@
 # ZFS Cheatsheet
 
 ## Create pool
-```
+```bash
 zpool create -o ashift=12 -o autotrim=on -O compression=zstd -O acltype=posixacl -O xattr=sa -O atime=off -O mountpoint=legacy zroot sdx2
 
 # with two mirrored drives
@@ -26,7 +26,7 @@ zpool create -o ashift=12 -o autotrim=on -O compression=zstd -O acltype=posixacl
 
 
 ## Setup partitions
-```
+```bash
 mkfs.vfat -n BOOT -F32 /dev/sdx1
 parted /dev/sdx set 1 boot on
 
@@ -62,6 +62,6 @@ mount /dev/sdx1 /mnt/boot
 
 
 ## unmount and export all zfs stuff before leaving the live installer!!!
-```
+```bash
 zpool export zroot
 ```
