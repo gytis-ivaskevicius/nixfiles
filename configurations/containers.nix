@@ -22,15 +22,15 @@
     };
 
 
-    services.nginx3 = {
-      image = "nginx";
-      ports = [ "8083:80" ];
-      volumes = [
-        (bind "/usr/share/nginx/html/index.html" (pkgs.writeText "index.html" "Man, SCREW WORLD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"))
-        (volume "test-volume" "/my-volume")
-        (volume "test-volume2" "/my-volume2")
-      ];
-    };
+    #services.nginx3 = {
+    #  image = "nginx";
+    #  ports = [ "8083:80" ];
+    #  volumes = [
+    #    (bind "/usr/share/nginx/html/index.html" (pkgs.writeText "index.html" "Man, SCREW WORLD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"))
+    #    (volume "test-volume" "/my-volume")
+    #    (volume "test-volume2" "/my-volume2")
+    #  ];
+    #};
 
 
 

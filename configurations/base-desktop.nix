@@ -34,7 +34,7 @@
   };
 
   systemd.network.enable = true;
-  environment.systemPackages = [pkgs.bluez];
+  environment.systemPackages = [ pkgs.bluez ];
 
   services.resolved = {
     enable = true;

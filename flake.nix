@@ -41,6 +41,7 @@
 
   outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
     let
+      pkgs = self.pkgs.x86_64-linux.nixpkgs;
       mkApp = utils.lib.mkApp;
 
       desktopModules = with self.nixosModules; [
@@ -121,12 +122,14 @@
           g-polybar
           g-rofi
           g-termite
-          lightcord
           shell-config
           zsh-forgit
           ;
       };
 
+      packages.x86_64-linux = {
+        inherit (pkgs) lightcord;
+      };
 
       appsBuilder = channels: with channels.nixpkgs; {
         g-neovim = mkApp {
@@ -142,7 +145,7 @@
       defaultPackageBuilder = channels: channels.nixpkgs.g-neovim;
 
       devShellBuilder = channels: with channels.nixpkgs.pkgs; mkShell {
-        buildInputs = [ git transcript ];
+        buildInputs = [ git transcrypt ];
       };
 
       overlay = import ./overlays;
