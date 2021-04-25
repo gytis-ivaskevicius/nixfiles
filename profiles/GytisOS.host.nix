@@ -11,4 +11,6 @@
   fileSystems."/boot" = { device = "/dev/disk/by-uuid/F794-3014"; fsType = "vfat"; };
   fileSystems."/nix" = { device = "zroot/locker/nix"; fsType = "zfs"; };
 
+  environment.systemPackages = [ pkgs.chromium ];
+
 }

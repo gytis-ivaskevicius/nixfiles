@@ -3,8 +3,9 @@
 
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs;
+    nixpkgs-2009.url = github:nixos/nixpkgs/nixos-20.09;
     nur.url = github:nix-community/NUR;
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus/;
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
 
     nixpkgs-wayland = {
@@ -43,46 +44,40 @@
     let
       pkgs = self.pkgs.x86_64-linux.nixpkgs;
       mkApp = utils.lib.mkApp;
-
-      desktopModules = with self.nixosModules; [
-        base-desktop
-        cli
-        cli-extras
-        sway
-        ({ pkgs, ... }: {
-          home-manager.users.gytis = import ./home-manager/sway.nix;
-          boot.kernelPackages = pkgs.linuxPackages_latest;
-        })
-      ];
+      suites = import ./suites.nix { inherit utils; };
     in
     utils.lib.systemFlake {
       inherit self inputs;
+      inherit (suites) nixosModules;
 
       supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
+      channelsConfig.allowUnfree = true;
 
-      channels.nixpkgs.input = nixpkgs;
-
-      channelsConfig = {
-        allowBroken = true;
-        allowUnfree = true;
+      channels.nixpkgs = {
+        input = nixpkgs;
+        overlaysBuilder = channels: [
+          (final: prev: { jetbrains = channels.nixpkgs-2009.jetbrains; })
+        ];
       };
 
-      nixosProfiles = with self.nixosModules; {
+      channels.nixpkgs-2009.input = inputs.nixpkgs-2009;
 
-        GytisOS.modules = [
+
+      hosts = with suites.nixosModules; {
+        GytisOS.modules = suites.desktopModules ++ [
           aarch64Dev
           dev
-          (import ./profiles/work.secret.nix)
-          (import ./profiles/GytisOS.host.nix)
-        ] ++ desktopModules;
+          ./profiles/work.secret.nix
+          ./profiles/GytisOS.host.nix
+        ];
 
-        Morty.modules = [
-          (import ./profiles/Morty.host.nix)
-        ] ++ desktopModules;
+        Morty.modules = suites.desktopModules ++ [
+          ./profiles/Morty.host.nix
+        ];
 
         NixyServer.modules = [
           containers
-          (import ./profiles/NixyServer.host.nix)
+          ./profiles/NixyServer.host.nix
         ];
       };
 
@@ -97,20 +92,14 @@
         })
       ];
 
-      sharedModules = with self.nixosModules; [
-        cachix
-        clean-home
-        runtimes
-        nix-compose
-        personal
-
+      hostDefaults.modules = [
         home-manager.nixosModules.home-manager
-        utils.nixosModules.saneFlakeDefaults
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        }
-      ];
+      ] ++ suites.sharedModules;
+
+
+      #############################
+      ### Flake package outputs ###
+      #############################
 
       packagesBuilder = chanels: {
         inherit (chanels.nixpkgs)
@@ -150,22 +139,6 @@
 
       overlay = import ./overlays;
 
-      nixosModules = utils.lib.modulesFromList [
-        ./modules/cachix.nix
-        ./modules/clean-home.nix
-        ./modules/nix-compose.nix
-        ./modules/runtimes.nix
-
-        ./configurations/aarch64Dev.nix
-        ./configurations/base-desktop.nix
-        ./configurations/cli-extras.nix
-        ./configurations/cli.nix
-        ./configurations/containers.nix
-        ./configurations/dev.nix
-        ./configurations/personal.nix
-        ./configurations/sway.nix
-        ./configurations/xorg.nix
-      ];
 
     };
 }
