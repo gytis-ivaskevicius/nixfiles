@@ -46,6 +46,7 @@
       mkApp = utils.lib.mkApp;
       suites = import ./suites.nix { inherit utils; };
     in
+    with suites.nixosModules;
     utils.lib.systemFlake {
       inherit self inputs;
       inherit (suites) nixosModules;
@@ -63,23 +64,21 @@
       channels.nixpkgs-2009.input = inputs.nixpkgs-2009;
 
 
-      hosts = with suites.nixosModules; {
-        GytisOS.modules = suites.desktopModules ++ [
-          aarch64Dev
-          dev
-          ./profiles/work.secret.nix
-          ./profiles/GytisOS.host.nix
-        ];
+      hosts.GytisOS.modules = suites.desktopModules ++ [
+        aarch64Dev
+        dev
+        ./hosts/work.secret.nix
+        ./hosts/GytisOS.host.nix
+      ];
 
-        Morty.modules = suites.desktopModules ++ [
-          ./profiles/Morty.host.nix
-        ];
+      hosts.Morty.modules = suites.desktopModules ++ [
+        ./hosts/Morty.host.nix
+      ];
 
-        NixyServer.modules = [
-          containers
-          ./profiles/NixyServer.host.nix
-        ];
-      };
+      hosts.NixyServer.modules = [
+        containers
+        ./hosts/NixyServer.host.nix
+      ];
 
       sharedOverlays = [
         (import nixpkgs-mozilla)
