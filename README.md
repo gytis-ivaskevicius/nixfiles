@@ -3,11 +3,11 @@
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
 ### File structure
-1. `configurations` - Main system configuration. `base-desktop.nix` contains lots of useful defaults.
+1. `config` - Main system configuration. `base-desktop.nix` contains lots of useful defaults.
 2. `home-manager` - Holds most of the desktop configuration.
 3. `modules` - A couple of custom options.
 4. `overlays` - Contains riced and custom packages. Riced packages have the name prefix `g-`.
-5. `profiles` - Contains host specific configuration.
+5. `hosts` - Contains host specific configuration.
 6. `flake.nix` - Kickass flake config ;)
 
 
