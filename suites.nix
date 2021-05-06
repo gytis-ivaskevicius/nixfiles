@@ -6,15 +6,15 @@ let
     ./modules/nix-compose.nix
     ./modules/runtimes.nix
 
-    ./configurations/aarch64Dev.nix
-    ./configurations/base-desktop.nix
-    ./configurations/cli-extras.nix
-    ./configurations/cli.nix
-    ./configurations/containers.nix
-    ./configurations/dev.nix
-    ./configurations/personal.nix
-    ./configurations/sway.nix
-    ./configurations/xorg.nix
+    ./config/aarch64Dev.nix
+    ./config/base-desktop.nix
+    ./config/cli-extras.nix
+    ./config/cli.nix
+    ./config/containers.nix
+    ./config/dev.nix
+    ./config/personal.nix
+    ./config/sway.nix
+    ./config/xorg.nix
   ];
   sharedModules = with nixosModules; [
     cachix
