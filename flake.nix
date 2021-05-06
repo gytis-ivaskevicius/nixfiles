@@ -86,7 +86,6 @@
         self.overlay
         nur.overlay
         (final: prev: {
-          inherit inputs;
           neovim-nightly = inputs.neovim.defaultPackage.${prev.system};
           firefox = prev.g-firefox;
         })
