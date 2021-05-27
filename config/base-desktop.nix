@@ -6,8 +6,7 @@
   fileSystems."/boot".label = "BOOT";
   i18n.defaultLocale = "en_US.UTF-8";
   nix.autoOptimiseStore = true;
-  system.stateVersion = "20.09";
-  systemd.extraConfig = "DefaultMemoryAccounting=yes";
+  system.stateVersion = "21.05";
   time.timeZone = lib.mkDefault "Europe/Vilnius";
 
   gytix.cachix.enable = true;
@@ -81,16 +80,11 @@
     Option "VariableRefresh" "true"
   '';
 
-  zramSwap = {
-    enable = lib.mkDefault true;
-    algorithm = "zstd";
-  };
+  zramSwap.enable = true;
 
   fonts = {
     enableDefaultFonts = true;
-    fonts = with pkgs; [
-      nerdfonts
-    ];
+    fonts = [ pkgs.nerdfonts ];
   };
 
   hardware = {

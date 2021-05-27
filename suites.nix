@@ -23,7 +23,7 @@ let
     nix-compose
     personal
 
-    utils.nixosModules.saneFlakeDefaults
+    #utils.nixosModules.saneFlakeDefaults
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
@@ -35,6 +35,7 @@ let
     cli-extras
     sway
     ({ pkgs, ... }: {
+      nix.generateRegistryFromInputs = true;
       home-manager.users.gytis = import ./home-manager/sway.nix;
       boot.kernelPackages = pkgs.linuxPackages_latest;
       nixpkgs.config.allowBroken = false;

@@ -5,12 +5,10 @@
 
   environment.systemPackages = with pkgs; [
     docker_compose
-    gitkraken
     gradle
     insomnia
     jetbrains.idea-ultimate
     maven
-    visualvm
     #podman-compose
   ];
 

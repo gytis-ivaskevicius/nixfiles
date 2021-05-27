@@ -2,10 +2,11 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs;
+    nixpkgs.url = github:nixos/nixpkgs/release-21.05;
+    unstable.url = github:nixos/nixpkgs;
     nixpkgs-2009.url = github:nixos/nixpkgs/nixos-20.09;
     nur.url = github:nix-community/NUR;
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus/;
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
 
     nixpkgs-wayland = {
@@ -40,7 +41,7 @@
     };
   };
 
-  outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, nixpkgs, ... }:
+  outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, ... }:
     let
       pkgs = self.pkgs.x86_64-linux.nixpkgs;
       mkApp = utils.lib.mkApp;
@@ -54,19 +55,17 @@
       supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
       channelsConfig.allowUnfree = true;
 
-      channels.nixpkgs = {
-        input = nixpkgs;
-        overlaysBuilder = channels: [
-          (final: prev: { jetbrains = channels.nixpkgs-2009.jetbrains; })
-        ];
-      };
-
-      channels.nixpkgs-2009.input = inputs.nixpkgs-2009;
-
+      channels.nixpkgs.overlaysBuilder = channels: [
+        (final: prev: { inherit (channels.unstable) discord; })
+      ];
 
       hosts.GytisOS.modules = suites.desktopModules ++ [
         aarch64Dev
         dev
+        {
+          security.apparmor.enable = true;
+        }
+
         ./hosts/work.secret.nix
         ./hosts/GytisOS.host.nix
       ];

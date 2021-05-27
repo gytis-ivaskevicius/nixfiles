@@ -47,7 +47,6 @@ wrapNeovim neovim-nightly {
     packages.myVimPackage = with pkgs.vimPlugins; {
 
       start = [
-        csv
         vim-devicons
         vim-nix
       ]

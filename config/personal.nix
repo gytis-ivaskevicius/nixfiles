@@ -12,4 +12,12 @@
     extraGroups = [ "audio" "video" "dialout" "adbusers" "wheel" "networkmanager" "docker" "vboxusers" ];
     initialPassword = "toor";
   };
+
+  users.extraUsers.guest = {
+    shell = pkgs.zsh;
+    isNormalUser = true;
+    description = "Guest user";
+    extraGroups = [ "wheel" ];
+    initialPassword = "toor";
+  };
 }

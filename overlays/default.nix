@@ -10,4 +10,5 @@ final: prev: {
   lightcord = prev.callPackage ./lightcord { };
   shell-config = prev.callPackage ./shell-config { };
   zsh-forgit = prev.callPackage ./zsh-forgit { };
+  discord-electron12 = prev.callPackage ./discord-electron12 { };
 }
