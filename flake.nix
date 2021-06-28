@@ -60,7 +60,7 @@
       ];
 
       hosts.GytisOS.modules = suites.desktopModules ++ [
-        aarch64Dev
+        #aarch64Dev
         dev
         {
           security.apparmor.enable = true;

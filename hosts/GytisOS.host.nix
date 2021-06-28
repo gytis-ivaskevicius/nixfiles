@@ -13,4 +13,9 @@
 
   environment.systemPackages = [ pkgs.chromium ];
 
+  services.tailscale.enable = true;
+  services.searx.enable = true;
+  services.searx.settings = {
+    server.secret_key = "";
+  };
 }
