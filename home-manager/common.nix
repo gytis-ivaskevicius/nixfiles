@@ -63,7 +63,7 @@ in
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
     brave
     cinnamon.nemo
-    discord-electron12
+    discord
     firefox
     g-alacritty
     gnome3.eog

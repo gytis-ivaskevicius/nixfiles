@@ -11,6 +11,7 @@
 , promptEnabled ? true
 , sshuttleEnabled ? true
 , zshPasteImprovementsEnabled ? true
+, exePathEnabled ? true
 }:
 
 
@@ -40,6 +41,11 @@ let
   nix-cd = ''
     function nix-cd() {
       cd "$(nix eval -f '<nixpkgs>' --raw $1)"
+    }
+  '';
+  exe-path = ''
+    function exe-path() {
+      readlink $(which $1)
     }
   '';
   docker = ''
@@ -96,4 +102,5 @@ writeShellScript "shellconfig.sh" ''
   ${optionalString nixCdEnabled nix-cd}
   ${optionalString nixAutocompleteFixEnabled (builtins.readFile ./nix-completions.sh)}
   ${optionalString zshPasteImprovementsEnabled zshPasteImprovements}
+  ${optionalString exePathEnabled exe-path}
 ''
