@@ -13,4 +13,5 @@
 
   environment.systemPackages = [ pkgs.chromium ];
 
+  services.tailscale.enable = true;
 }

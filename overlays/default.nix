@@ -11,4 +11,22 @@ final: prev: {
   shell-config = prev.callPackage ./shell-config { };
   zsh-forgit = prev.callPackage ./zsh-forgit { };
   discord-electron12 = prev.callPackage ./discord-electron12 { };
+
+  yuescript = final.stdenv.mkDerivation {
+    pname = "yuescript";
+    version = "0.5.0-1";
+
+    installPhase = ''
+      cp -R bin/release/ $out
+
+    '';
+
+    src = final.fetchFromGitHub {
+      owner = "pigpigyyy";
+      repo = "Yuescript";
+      rev = "6d290f08181a543778c75748b66c513bb8e33423";
+      sha256 = "sha256-LLIXNkoDxe43IqghA42q6c/o5SWuI/n7A6qy7XxMn30=";
+    };
+
+  };
 }
