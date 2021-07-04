@@ -7,10 +7,9 @@ final: prev: {
   g-polybar = prev.callPackage ./g-polybar { };
   g-rofi = prev.callPackage ./g-rofi { };
   g-termite = prev.callPackage ./g-termite { };
-  lightcord = prev.callPackage ./lightcord { };
   shell-config = prev.callPackage ./shell-config { };
   zsh-forgit = prev.callPackage ./zsh-forgit { };
-  discord-electron12 = prev.callPackage ./discord-electron12 { };
+
 
   yuescript = final.stdenv.mkDerivation {
     pname = "yuescript";

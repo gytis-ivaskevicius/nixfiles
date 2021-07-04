@@ -6,8 +6,8 @@
     unstable.url = github:nixos/nixpkgs;
     nixpkgs-2009.url = github:nixos/nixpkgs/nixos-20.09;
     nur.url = github:nix-community/NUR;
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
-    #utils.url = "/home/gytis/Projects/flake-utils-plus";
+    #utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
+    utils.url = "/home/gytis/Projects/flake-utils-plus";
 
     nixpkgs-wayland = {
       url = github:colemickens/nixpkgs-wayland;
@@ -35,10 +35,6 @@
       flake = false;
     };
 
-    lightcord-git = {
-      url = github:Lightcord/Lightcord;
-      flake = false;
-    };
   };
 
   outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, ... }:
