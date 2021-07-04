@@ -3,7 +3,8 @@
 {
 
   programs.sway.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
+  programs.sway.wrapperFeatures.gtk = true;
+  programs.sway.extraPackages = [ ];
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -15,8 +16,13 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-wlr ];
+    gtkUsePortal = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr  xdg-desktop-portal-gtk ];
   };
 
+  environment.variables = {
+    XDG_SESSION_TYPE = "wayland";
+    XDG_CURRENT_DESKTOP = "sway";
+  };
 
 }

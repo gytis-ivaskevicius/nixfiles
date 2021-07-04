@@ -1,4 +1,5 @@
 { lib
+, system
 , writeShellScript
 , fd
 , pure-prompt
@@ -40,7 +41,7 @@ let
   '';
   nix-cd = ''
     function nix-cd() {
-      cd "$(nix eval -f '<nixpkgs>' --raw $1)"
+      cd $(nix eval --expr "(builtins.getFlake "flake:self").outputs.pkgs.${system}.nixpkgs.$1.outPath" --impure --raw)
     }
   '';
   exe-path = ''

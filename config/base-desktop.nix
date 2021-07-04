@@ -12,11 +12,9 @@
   gytix.cachix.enable = true;
   gytix.cleanHome.enable = true;
 
-  system.activationScripts.ldso = lib.stringAfter [ "usrbinenv" ] ''
-    mkdir -m 0755 -p /lib64
-    ln -sfn ${pkgs.glibc.out}/lib64/ld-linux-x86-64.so.2 /lib64/ld-linux-x86-64.so.2.tmp
-    mv -f /lib64/ld-linux-x86-64.so.2.tmp /lib64/ld-linux-x86-64.so.2 # atomically replace
-  '';
+  systemd.tmpfiles.rules = [
+    "L+ /lib64/ld-linux-x86-64.so.2 - - - - ${pkgs.stdenv.glibc}/lib64/ld-linux-x86-64.so.2"
+  ];
 
   # Limits start limit burst to 1sec instead of 5 since it was causing issues with rapid logout/login and units restart
   systemd.user.extraConfig = ''
@@ -46,8 +44,8 @@
 
   nix.gc = {
     automatic = true;
-    options = "--delete-older-than 20d";
-    dates = "04:00";
+    options = "--delete-older-than 40d";
+    dates = "weekly";
   };
 
   boot = {

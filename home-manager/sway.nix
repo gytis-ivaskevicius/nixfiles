@@ -133,7 +133,7 @@ in
       window.border = 0;
       focus.forceWrapping = false;
       focus.followMouse = false;
-      fonts = { names = [ "RobotoMono" ]; size = 9.0;};
+      fonts = { names = [ "RobotoMono" ]; size = 9.0; };
       terminal = "${pkgs.alacritty}/bin/alacritty}";
       startup = [
         #{ command = "waybar"; always = true; notification = false; }

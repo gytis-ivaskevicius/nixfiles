@@ -3,8 +3,7 @@
 
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/release-21.05;
-    unstable.url = github:nixos/nixpkgs;
-    nixpkgs-2009.url = github:nixos/nixpkgs/nixos-20.09;
+    #unstable.url = github:nixos/nixpkgs;
     nur.url = github:nix-community/NUR;
     #utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
     utils.url = "/home/gytis/Projects/flake-utils-plus";
@@ -52,7 +51,7 @@
       channelsConfig.allowUnfree = true;
 
       channels.nixpkgs.overlaysBuilder = channels: [
-        (final: prev: { inherit (channels.unstable) discord; })
+        #(final: prev: { inherit (channels.unstable) discord; })
       ];
 
       hosts.GytisOS.modules = suites.desktopModules ++ [

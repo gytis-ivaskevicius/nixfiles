@@ -39,7 +39,10 @@ let
       home-manager.users.gytis = import ./home-manager/sway.nix;
       boot.kernelPackages = pkgs.linuxPackages_latest;
       nixpkgs.config.allowBroken = false;
-      nix.extraOptions = "experimental-features = nix-command ca-references flakes test";
+      nix.extraOptions = ''
+        experimental-features = nix-command flakes
+        warn-dirty = false
+      '';
     })
   ];
 in
