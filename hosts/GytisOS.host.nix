@@ -14,4 +14,8 @@
   environment.systemPackages = [ pkgs.chromium ];
 
   services.tailscale.enable = true;
+
+  environment.shellAliases = {
+    vv = "${pkgs.neovim-unwrapped}/bin/nvim";
+  };
 }

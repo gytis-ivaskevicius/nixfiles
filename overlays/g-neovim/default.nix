@@ -1,6 +1,8 @@
 { stdenv
-, pkgs
-, neovim-nightly
+, lib
+, vimPlugins
+, universal-ctags
+, neovim-unwrapped
 , wrapNeovim
 , enableAirline ? true
 , enableClap ? true
@@ -14,14 +16,15 @@
 , trimSpacesOnWrite ? true
 }:
 let
-  inherit (pkgs.lib) optionals optional optionalString;
+  inherit (lib) optionals optional optionalString;
 in
-wrapNeovim neovim-nightly {
+wrapNeovim neovim-unwrapped {
   viAlias = true;
   vimAlias = true;
   withNodeJs = true;
   withPython = false;
   withPython3 = true;
+  withRuby = false;
 
   configure = {
 
@@ -41,10 +44,10 @@ wrapNeovim neovim-nightly {
       map <space> <leader>
       au BufNewFile,BufRead /*.rasi setf css  " Add rofi config file highlighting
       au FocusLost * stopinsert | wall!       " Back to normal mode on focus lost
-      let g:tagbar_ctags_bin = "${pkgs.universal-ctags}/bin/ctags"
+      let g:tagbar_ctags_bin = "${universal-ctags}/bin/ctags"
     '';
 
-    packages.myVimPackage = with pkgs.vimPlugins; {
+    packages.myVimPackage = with vimPlugins; {
 
       start = [
         vim-devicons

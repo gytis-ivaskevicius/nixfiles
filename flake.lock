@@ -18,21 +18,6 @@
     },
     "flake-utils": {
       "locked": {
-        "lastModified": 1610051610,
-        "narHash": "sha256-U9rPz/usA1/Aohhk7Cmc2gBrEEKRzcW4nwPWMPwja4Y=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "3982c9903e93927c2164caa727cd3f6a0e6d14cc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_2": {
-      "locked": {
         "lastModified": 1623875721,
         "narHash": "sha256-A8BU7bjS5GirpAUv4QA+QnJ4CceLHkcXdRp4xITDB0s=",
         "owner": "numtide",
@@ -79,29 +64,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "home-manager",
-        "type": "github"
-      }
-    },
-    "neovim": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "dir": "contrib",
-        "lastModified": 1625328542,
-        "narHash": "sha256-N1RlJOybMTI4jB0clwDXhvMzSUFVF6Ldb59SxesLDZQ=",
-        "owner": "neovim",
-        "repo": "neovim",
-        "rev": "75f758b993b842c4afd03fdaa0063b573fdf8751",
-        "type": "github"
-      },
-      "original": {
-        "dir": "contrib",
-        "owner": "neovim",
-        "repo": "neovim",
         "type": "github"
       }
     },
@@ -177,17 +139,32 @@
       "inputs": {
         "forgit-git": "forgit-git",
         "home-manager": "home-manager",
-        "neovim": "neovim",
         "nixpkgs": "nixpkgs",
         "nixpkgs-mozilla": "nixpkgs-mozilla",
         "nixpkgs-wayland": "nixpkgs-wayland",
         "nur": "nur",
+        "unstable": "unstable",
         "utils": "utils"
+      }
+    },
+    "unstable": {
+      "locked": {
+        "lastModified": 1625412965,
+        "narHash": "sha256-FqMZmNdeEjW5zMzPJ788k+q7CK/fK5EZlFAXxhghMPk=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "8001cd5ac0bf13765a9b05e094d64d307ea53b5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "utils": {
       "inputs": {
-        "flake-utils": "flake-utils_2"
+        "flake-utils": "flake-utils"
       },
       "locked": {
         "narHash": "sha256-Xb0Q0xQI3XxuGMe+GFYCj5g5q5GA5VH7zgzhJlsLeio=",

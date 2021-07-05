@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/release-21.05;
-    #unstable.url = github:nixos/nixpkgs;
+    unstable.url = github:nixos/nixpkgs;
     nur.url = github:nix-community/NUR;
     #utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
     utils.url = "/home/gytis/Projects/flake-utils-plus";
@@ -16,11 +16,6 @@
 
     home-manager = {
       url = github:nix-community/home-manager;
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    neovim = {
-      url = github:neovim/neovim?dir=contrib;
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -51,7 +46,7 @@
       channelsConfig.allowUnfree = true;
 
       channels.nixpkgs.overlaysBuilder = channels: [
-        #(final: prev: { inherit (channels.unstable) discord; })
+        (final: prev: { inherit (channels.unstable) neovim-unwrapped; })
       ];
 
       hosts.GytisOS.modules = suites.desktopModules ++ [
@@ -79,7 +74,6 @@
         self.overlay
         nur.overlay
         (final: prev: {
-          neovim-nightly = inputs.neovim.defaultPackage.${prev.system};
           firefox = prev.g-firefox;
         })
       ];
