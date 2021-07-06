@@ -13,6 +13,7 @@
 , sshuttleEnabled ? true
 , zshPasteImprovementsEnabled ? true
 , exePathEnabled ? true
+, superSecretScriptsEnabled ? false
 }:
 
 
@@ -89,6 +90,15 @@ let
 
     bindkey -r ^V
   '';
+  superSecretScripts = ''
+    # For the record, as of writing this I am a proud, legal intelij user.
+    # Its just that this might come in handy in the fugure ;)
+    intellijResetEvaluationPeriod() {
+      rm -rf ~/.config/JetBrains/IntelliJIdea*/eval
+      sed -i -E 's/<property name=\"evl.*\".*\/>//' ~/.config/JetBrains/IntelliJIdea*/options/other.xml
+      rm -rf ~/.java/.userPrefs/jetbrains/idea
+    }
+  '';
 in
 writeShellScript "shellconfig.sh" ''
   if [ -n "''${commands[fzf-share]}" ]; then
@@ -104,4 +114,5 @@ writeShellScript "shellconfig.sh" ''
   ${optionalString nixAutocompleteFixEnabled (builtins.readFile ./nix-completions.sh)}
   ${optionalString zshPasteImprovementsEnabled zshPasteImprovements}
   ${optionalString exePathEnabled exe-path}
+  ${optionalString superSecretScriptsEnabled superSecretScripts}
 ''
