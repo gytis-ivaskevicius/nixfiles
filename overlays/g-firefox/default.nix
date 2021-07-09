@@ -1,4 +1,4 @@
-{ pkgs, lib, wrapFirefox, firefox-bin-unwrapped, ... }:
+{ pkgs, lib, wrapFirefox, firefox-unwrapped, ... }:
 with lib;
 with builtins;
 let
@@ -171,7 +171,7 @@ let
   ];
 
 in
-wrapFirefox firefox-bin-unwrapped {
+wrapFirefox firefox-unwrapped {
   browserName = "firefox";
 
   #nixExtensions = extensions;

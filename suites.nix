@@ -40,7 +40,6 @@ let
       boot.kernelPackages = pkgs.linuxPackages_latest;
       nixpkgs.config.allowBroken = false;
       nix.extraOptions = ''
-        experimental-features = nix-command flakes
         warn-dirty = false
       '';
     })

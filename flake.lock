@@ -167,7 +167,7 @@
         "flake-utils": "flake-utils"
       },
       "locked": {
-        "narHash": "sha256-Xb0Q0xQI3XxuGMe+GFYCj5g5q5GA5VH7zgzhJlsLeio=",
+        "narHash": "sha256-o7Bt6cLXHi4xGBC/eje5aL6wl3clhHBybfEoAAJCcZg=",
         "path": "/home/gytis/Projects/flake-utils-plus",
         "type": "path"
       },
