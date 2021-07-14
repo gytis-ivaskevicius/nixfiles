@@ -2,11 +2,11 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/release-21.05;
-    unstable.url = github:nixos/nixpkgs;
+    nixpkgs.url = github:nixos/nixpkgs;
+    #unstable.url = github:nixos/nixpkgs;
     nur.url = github:nix-community/NUR;
-    #utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
-    utils.url = "/home/gytis/Projects/flake-utils-plus";
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
+    #utils.url = "/home/gytis/Projects/flake-utils-plus";
 
     nixpkgs-wayland = {
       url = github:colemickens/nixpkgs-wayland;
@@ -42,11 +42,42 @@
       inherit self inputs;
       inherit (suites) nixosModules;
 
+
       supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
       channelsConfig.allowUnfree = true;
 
+      channels.nixpkgs.config.replaceStdenv = { pkgs }: pkgs.gcc11Stdenv;
       channels.nixpkgs.overlaysBuilder = channels: [
-        (final: prev: { inherit (channels.unstable) neovim-unwrapped; })
+        (final: prev:
+          let
+          in
+          prev.lib.mapAttrs
+            (_: v: v.override { stdenv = final.gcc10Stdenv; })
+            {
+              inherit (prev)
+                aws-c-common
+                libebml
+                exempi
+                llvmPackages_11
+                llvmPackages_7
+                s2n-tls
+                eog
+                tracker
+                ;
+       #                > Testing Time: 172.86s
+       #>   Unsupported      :  1339
+       #>   Passed           : 40495
+       #>   Expectedly Failed:   145
+       #>   Failed           :    78
+       #>
+
+              gtk3 = prev.gtk3.overrideAttrs (old: {
+                mesonFlags = old.mesonFlags ++ ["-Dgtk:werror=false"];
+                #configureFlags = old.configureFlags ++ [    "--disable-werror" ];
+              });
+
+            })
+        #(final: prev: { inherit (channels.unstable) neovim-unwrapped linuxPackages_latest gcc11Stdenv; })
       ];
 
       hosts.GytisOS.modules = suites.desktopModules ++ [
@@ -100,10 +131,6 @@
           shell-config
           zsh-forgit
           ;
-      };
-
-      packages.x86_64-linux = {
-        inherit (pkgs) lightcord;
       };
 
       appsBuilder = channels: with channels.nixpkgs; {

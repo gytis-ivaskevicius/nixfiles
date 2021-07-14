@@ -11,7 +11,7 @@ in
 
   config = mkIf cfg.enable {
 
-    environment.systemPackages = with pkgs; [ cachix ];
+    #environment.systemPackages = with pkgs; [ cachix ];
 
     nix = {
       extraOptions = "gc-keep-outputs = true";

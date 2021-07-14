@@ -40,6 +40,9 @@ let
       boot.kernelPackages = pkgs.linuxPackages_latest;
       nixpkgs.config.allowBroken = false;
       nix.extraOptions = ''
+        http-connections = 50
+        keep-failed = true
+        log-lines = 50
         warn-dirty = false
       '';
     })
