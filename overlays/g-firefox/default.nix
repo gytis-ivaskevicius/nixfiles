@@ -124,7 +124,6 @@ let
           "alltabs-button"
         ];
         "PersonalToolbar" = [
-          "import-button"
           "personal-bookmarks"
         ];
       };

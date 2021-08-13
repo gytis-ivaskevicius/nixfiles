@@ -39,7 +39,10 @@ let
       home-manager.users.gytis = import ./home-manager/sway.nix;
       boot.kernelPackages = pkgs.linuxPackages_latest;
       nixpkgs.config.allowBroken = false;
+      hardware.bluetooth.enable = true;
       nix.extraOptions = ''
+        http-connections = 50
+        log-lines = 50
         warn-dirty = false
       '';
     })
