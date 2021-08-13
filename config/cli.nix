@@ -9,14 +9,17 @@
     TERM = "xterm-256color";
   };
 
+  users.defaultUserShell = "${pkgs.zsh}/bin/zsh";
 
   programs.zsh = {
     autosuggestions.enable = true;
+    autosuggestions.extraConfig.ZSH_AUTOSUGGEST_USE_ASYNC = "y";
     enable = lib.mkDefault true;
     enableCompletion = true;
     histFile = "$HOME/.cache/.zsh_history";
     histSize = 100000;
     syntaxHighlighting.enable = true;
+    syntaxHighlighting.highlighters = [ "main" "brackets" "pattern" "root" "line" ];
     ohMyZsh.enable = true;
     ohMyZsh.plugins = [ "sudo" "z" ];
     shellInit = ''
