@@ -171,7 +171,6 @@ let
 
 in
 wrapFirefox firefox-unwrapped {
-  browserName = "firefox";
 
   #nixExtensions = extensions;
   extraPolicies = {

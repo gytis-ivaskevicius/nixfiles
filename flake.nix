@@ -42,9 +42,11 @@
       inherit self inputs;
       inherit (suites) nixosModules;
 
+
       supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
       channelsConfig.allowUnfree = true;
 
+      channels.nixpkgs.config.replaceStdenv = { pkgs }: pkgs.gcc11Stdenv;
       channels.nixpkgs.overlaysBuilder = channels: [
         (final: prev: { inherit (channels.unstable) pure-prompt neovim-unwrapped linuxPackages_latest gcc11Stdenv; })
       ];
