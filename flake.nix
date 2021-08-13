@@ -56,7 +56,6 @@
           security.apparmor.enable = true;
         }
 
-        ./hosts/work.secret.nix
         ./hosts/GytisOS.host.nix
       ];
 
