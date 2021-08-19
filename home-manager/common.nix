@@ -48,8 +48,8 @@ in
     enable = true;
     iconTheme.package = pkgs.papirus-icon-theme;
     iconTheme.name = "ePapirus";
-    theme.package = pkgs.numix-gtk-theme;
-    theme.name = "Numix";
+    theme.package = pkgs.layan-gtk-theme;
+    theme.name = "Layan-light-solid";
     font.name = "Roboto";
     font.package = pkgs.noto-fonts;
     gtk3.extraConfig = {
@@ -63,7 +63,7 @@ in
   home.packages = with pkgs; [
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
     brave
-    cinnamon.nemo
+    gnome3.nautilus
     discord
     firefox
     g-alacritty

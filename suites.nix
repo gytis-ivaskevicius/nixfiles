@@ -44,6 +44,7 @@ let
         http-connections = 50
         log-lines = 50
         warn-dirty = false
+        http2 = true
       '';
     })
   ];
