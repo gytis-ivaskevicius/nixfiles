@@ -3,7 +3,8 @@
 with lib;
 with pkgs;
 let
-  browser = [ "firefox.desktop" ];
+  #browser = [ "firefox.desktop" ];
+  browser = [ "chromium-browser.desktop" ];
   associations = {
     "text/html" = browser;
     "x-scheme-handler/http" = browser;
@@ -33,7 +34,7 @@ in
   services.network-manager-applet.enable = true;
 
   home.sessionVariables = {
-    BROWSER = "firefox";
+    BROWSER = "chromium";
     TERMINAL = "alacritty";
   };
 

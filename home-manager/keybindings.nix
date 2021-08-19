@@ -20,8 +20,8 @@ in
   XF86MonBrightnessUp = "exec ${xorg.xbacklight} -inc 20";
   XF86MonBrightnessDown = "exec ${xorg.xbacklight} -dec 20";
 
-  "${modifier}+b" = "exec ${firefox}/bin/firefox";
-  "${modifier}+shift+b" = "exec ${firefox}/bin/firefox --private-window";
+  "${modifier}+b" = "exec ${chromium}/bin/chromium";
+  "${modifier}+shift+b" = "exec ${chromium}/bin/chromium --incognito";
   "${modifier}+z" = "exec ${autorandr}/bin/autorandr -c -f";
 
   #"${modifier}+t" = ''[class="scratchterm"] scratchpad show, move position center'';
