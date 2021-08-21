@@ -11,7 +11,12 @@
   fileSystems."/boot" = { device = "/dev/disk/by-uuid/F794-3014"; fsType = "vfat"; };
   fileSystems."/nix" = { device = "zroot/locker/nix"; fsType = "zfs"; };
 
-  environment.systemPackages = [ pkgs.chromium ];
+
+  environment.systemPackages = [
+    pkgs.chromium
+    pkgs.discord-for-poor-people
+    pkgs.element-for-poor-people
+  ];
 
   services.tailscale.enable = true;
 
