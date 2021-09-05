@@ -36,6 +36,8 @@ let
     sway
     ({ pkgs, ... }: {
       nix.generateRegistryFromInputs = true;
+      nix.linkInputs = true;
+      #nix.generateNixPathFromInputs = true;
       home-manager.users.gytis = import ./home-manager/sway.nix;
       boot.kernelPackages = pkgs.linuxPackages_latest;
       nixpkgs.config.allowBroken = false;

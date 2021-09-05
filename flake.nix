@@ -5,8 +5,9 @@
     nixpkgs.url = github:nixos/nixpkgs;
     unstable.url = github:nixos/nixpkgs;
     nur.url = github:nix-community/NUR;
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus/staging;
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus/1.3.0;
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
+    devshell.url = github:numtide/devshell;
 
     nixpkgs-wayland = {
       url = github:colemickens/nixpkgs-wayland;
