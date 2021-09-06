@@ -1,6 +1,6 @@
 { utils }:
 let
-  nixosModules = utils.lib.modulesFromList [
+  nixosModules = utils.lib.exportModules [
     ./modules/cachix.nix
     ./modules/clean-home.nix
     ./modules/nix-compose.nix

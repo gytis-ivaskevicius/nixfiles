@@ -5,7 +5,7 @@
     nixpkgs.url = github:nixos/nixpkgs;
     unstable.url = github:nixos/nixpkgs;
     nur.url = github:nix-community/NUR;
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus/1.3.0;
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus/release-1.2.0-without-deprecated-code;
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
     devshell.url = github:numtide/devshell;
 
@@ -39,7 +39,7 @@
       suites = import ./suites.nix { inherit utils; };
     in
     with suites.nixosModules;
-    utils.lib.systemFlake {
+    utils.lib.mkFlake {
       inherit self inputs;
       inherit (suites) nixosModules;
 
