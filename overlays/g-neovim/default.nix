@@ -5,7 +5,7 @@
 , neovim-unwrapped
 , wrapNeovim
 , enableAirline ? true
-, enableClap ? true
+, enableClap ? false
 , enableCoc ? true
 , enableNerdtree ? true
 , enableSignify ? true

@@ -19,7 +19,7 @@ final: prev: {
     type = "Application";
     categories = "Network;InstantMessaging;";
     terminal = "false";
-    mimeType="x-scheme-handler/discord";
+    mimeType = "x-scheme-handler/discord";
   };
 
   element-for-poor-people = with prev; makeDesktopItem {

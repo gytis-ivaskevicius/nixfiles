@@ -87,40 +87,41 @@
       ### Flake package outputs ###
       #############################
 
-      packagesBuilder = chanels: {
-        inherit (chanels.nixpkgs)
-          g-alacritty
-          g-firefox
-          g-lf
-          g-neovim
-          g-pistol
-          g-polybar
-          g-rofi
-          g-termite
-          shell-config
-          zsh-forgit
-          ;
-      };
+      outputsBuilder = channels: with channels.nixpkgs;{
+        defaultPackage = g-neovim;
 
-      appsBuilder = channels: with channels.nixpkgs; {
-        g-neovim = mkApp {
-          drv = g-neovim;
-          exePath = "/bin/nvim";
+        packages = {
+          inherit
+            g-alacritty
+            g-firefox
+            g-lf
+            g-neovim
+            g-pistol
+            g-polybar
+            g-rofi
+            g-termite
+            shell-config
+            zsh-forgit
+            ;
         };
-        g-termite = mkApp {
-          drv = g-termite;
-          exePath = "/bin/termite";
+
+        apps = {
+          g-neovim = mkApp {
+            drv = g-neovim;
+            exePath = "/bin/nvim";
+          };
+          g-termite = mkApp {
+            drv = g-termite;
+            exePath = "/bin/termite";
+          };
         };
-      };
 
-      defaultPackageBuilder = channels: channels.nixpkgs.g-neovim;
-
-      devShellBuilder = channels: with channels.nixpkgs.pkgs; mkShell {
-        buildInputs = [ git transcrypt ];
+        devShell = mkShell {
+          buildInputs = [ git transcrypt ];
+        };
       };
 
       overlay = import ./overlays;
-
 
     };
 }
