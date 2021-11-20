@@ -59,7 +59,7 @@
       "vm.swappiness" = 5;
       "fs.inotify.max_user_watches" = 524288;
     };
-    zfs.enableUnstable = true;
+    #zfs.enableUnstable = true;
     kernelParams = [ "quiet" "loglevel=3" ];
     cleanTmpDir = true;
     loader.systemd-boot.enable = true;
@@ -92,7 +92,11 @@
     opengl = {
       enable = lib.mkDefault true;
       driSupport32Bit = config.hardware.opengl.enable;
-      extraPackages = with pkgs; [ amdvlk ];
+      extraPackages = with pkgs; [
+        rocm-opencl-icd
+        rocm-opencl-runtime
+        amdvlk
+      ];
       extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
     };
     #pulseaudio = {

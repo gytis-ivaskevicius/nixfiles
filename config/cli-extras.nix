@@ -27,6 +27,6 @@
     telnet
     tmux
     usbutils
-    youtube-dl
+    yt-dlp
   ];
 }

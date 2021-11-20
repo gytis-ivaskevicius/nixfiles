@@ -5,7 +5,7 @@
     nixpkgs.url = github:nixos/nixpkgs;
     unstable.url = github:nixos/nixpkgs;
     nur.url = github:nix-community/NUR;
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus/release-1.2.0-without-deprecated-code;
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus;
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
     devshell.url = github:numtide/devshell;
 
@@ -57,6 +57,7 @@
           security.apparmor.enable = true;
         }
 
+        ./hosts/work.secret.nix
         ./hosts/GytisOS.host.nix
       ];
 

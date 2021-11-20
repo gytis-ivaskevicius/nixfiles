@@ -34,12 +34,13 @@ let
     cli
     cli-extras
     sway
-    ({ pkgs, ... }: {
+    ({ pkgs, lib, ... }: {
       nix.generateRegistryFromInputs = true;
       nix.linkInputs = true;
       #nix.generateNixPathFromInputs = true;
       home-manager.users.gytis = import ./home-manager/sway.nix;
-      boot.kernelPackages = pkgs.linuxPackages_latest;
+      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_5_14;
+      #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
       nixpkgs.config.allowBroken = false;
       hardware.bluetooth.enable = true;
       nix.extraOptions = ''
@@ -47,6 +48,7 @@ let
         log-lines = 50
         warn-dirty = false
         http2 = true
+        allow-import-from-derivation = true
       '';
     })
   ];

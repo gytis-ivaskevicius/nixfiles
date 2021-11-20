@@ -98,15 +98,16 @@
   };
 
   environment.systemPackages = with pkgs; [
-    fup-repl
     bat
     curl
     entr
     exa
     fd
     file
+    fup-repl
     fzf
     g-neovim
+    gcc
     git
     htop
     inetutils
@@ -115,19 +116,21 @@
     lm_sensors
     lshw
     lsof
+    luajit
     man
     nettools
     nix-top
     nix-tree
     nixpkgs-fmt
-    nushell
     p7zip
     parted
     pciutils
     psmisc
     pure-prompt
+    python3
     ranger
     ripgrep
+    rustup
     unzip
     wget
     which

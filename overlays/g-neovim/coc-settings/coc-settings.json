@@ -67,6 +67,14 @@
 		"typescript",
 		"typescriptreact"
 	],
+    "languageserver": {
+        "nix": {
+          "command": "rnix-lsp",
+          "filetypes": [
+            "nix"
+          ]
+        }
+    },
 
 
 	"snippets.priority": 100,

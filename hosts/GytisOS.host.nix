@@ -12,17 +12,22 @@
   fileSystems."/nix" = { device = "zroot/locker/nix"; fsType = "zfs"; };
 
 
-  environment.systemPackages = [
-    pkgs.chromium
-    pkgs.discord-for-poor-people
-    pkgs.element-for-poor-people
+  environment.systemPackages = with pkgs; [
+    chromium
+    exodus
+    discord-for-poor-people
+    element-for-poor-people
+    rnix-lsp
   ];
 
   services.tailscale.enable = true;
+  programs.steam.enable = true;
+  services.flatpak.enable = true;
 
   environment.shellAliases = {
     vv = "${pkgs.neovim-unwrapped}/bin/nvim";
   };
+  programs.noisetorch.enable = true;
 
 
   security.chromiumSuidSandbox.enable = true;
@@ -50,7 +55,6 @@
       "kljmejbpilkadikecejccebmccagifhl" # Image search options
       "lckanjgmijmafbedllaakclkaicjfmnk" # ClearURLs
       "lifgeihcfpkmmlfjbailfpfhbahhibba" # Smart TOC
-      "mgijmajocgfcbeboacabfgobmjgjcoja" # Google Dictionary (by Google)
       "opokoaglpekkimldnlggpoagmjegichg" # ViolentMonkey
     ];
 
