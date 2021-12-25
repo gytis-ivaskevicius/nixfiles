@@ -34,13 +34,14 @@ let
     cli
     cli-extras
     sway
-    ({ pkgs, lib, ... }: {
+    ({ pkgs, lib, config, ... }: {
       nix.generateRegistryFromInputs = true;
       nix.linkInputs = true;
       #nix.generateNixPathFromInputs = true;
       home-manager.users.gytis = import ./home-manager/sway.nix;
-      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_5_14;
+      #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_5_14;
       #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+      boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
       nixpkgs.config.allowBroken = false;
       hardware.bluetooth.enable = true;
       nix.extraOptions = ''
