@@ -300,13 +300,13 @@ in
         '';
     };
 
-    xdg.configFile."xdg-desktop-portal-wlr/config".text = ''
-      [screencast]
-      output_name=
-      max_fps=30
-      chooser_cmd=${pkgs.slurp}/bin/slurp -f %o -or
-      chooser_type=simple
-    '';
+  xdg.configFile."xdg-desktop-portal-wlr/config".text = ''
+    [screencast]
+    output_name=
+    max_fps=30
+    chooser_cmd=${pkgs.slurp}/bin/slurp -f %o -or
+    chooser_type=simple
+  '';
 
 
 
