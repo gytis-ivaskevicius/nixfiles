@@ -13,11 +13,15 @@
 
 
   environment.systemPackages = with pkgs; [
+    pulseaudio
     chromium
     exodus
     discord-for-poor-people
     element-for-poor-people
     rnix-lsp
+    distrobox
+    obs-studio
+    tdesktop
   ];
 
   services.tailscale.enable = true;
@@ -27,7 +31,7 @@
   environment.shellAliases = {
     vv = "${pkgs.neovim-unwrapped}/bin/nvim";
   };
-  programs.noisetorch.enable = true;
+  #programs.noisetorch.enable = true;
 
 
   security.chromiumSuidSandbox.enable = true;
@@ -46,10 +50,10 @@
       #"eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
       "fdjamakpfbbddfjaooikfcpapjohcfmg" # Dashlane
       "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
-      "gcbommkclmclpchllfjekcdonpmejbdp" # Https everywhere
+      #"gcbommkclmclpchllfjekcdonpmejbdp" # Https everywhere
       "gneobebnilffgkejpfhlgkmpkipgbcno" # Death To _blank
       "hokcepcfcicnhalinladgknhaljndhpc" # Witchcraft
-      "iipjdmnoigaobkamfhnojmglcdbnfaaf" # Clutter Free - Prevent duplicate tabs
+      #"iipjdmnoigaobkamfhnojmglcdbnfaaf" # Clutter Free - Prevent duplicate tabs
       "jfnifeihccihocjbfcfhicmmgpjicaec" # https://chrome.google.com/webstore/detail/gsconnect/jfnifeihccihocjbfcfhicmmgpjicaec
       "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
       "kljmejbpilkadikecejccebmccagifhl" # Image search options

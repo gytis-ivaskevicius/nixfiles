@@ -4,7 +4,7 @@
   #virtualisation.podman.enable = true;
 
   environment.systemPackages = with pkgs; [
-    docker_compose
+    docker-compose
     gradle
     insomnia
     jetbrains.idea-ultimate
@@ -21,24 +21,24 @@
     liveRestore = false;
   };
 
-  ### VirtualBox
-  #  virtualisation.virtualbox = {
-  #    host.enable = true;
+  ## VirtualBox
+  virtualisation.virtualbox = {
+    host.enable = false;
 
-  # Takes quite a while to compile. It adds support for:
-  # USB 2.0/3.0 devices, VirtualBox RDP, disk encryption, NVMe and PXE boot for Intel cards
-  #host.enableExtensionPack = true;
+    # Takes quite a while to compile. It adds support for:
+    # USB 2.0/3.0 devices, VirtualBox RDP, disk encryption, NVMe and PXE boot for Intel cards
+    host.enableExtensionPack = true;
 
-  # VirtualBox Guest additions
-  #virtualisation.virtualbox.guest.enable = true;
-  #  };
+    # VirtualBox Guest additions
+    #virtualisation.virtualbox.guest.enable = true;
+  };
 
   ### Java
   gytix.java.additionalPackages = {
-    inherit (pkgs) jdk11 jdk17;
+    inherit (pkgs) jdk11 jdk8;
   };
   programs.java.enable = true;
-  programs.java.package = pkgs.jdk11;
+  programs.java.package = pkgs.jdk8;
 
   ### Node
   programs.npm.enable = true;

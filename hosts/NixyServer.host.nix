@@ -24,6 +24,9 @@
     useDHCP = false;
     interfaces.enp3s0.useDHCP = true;
     firewall.allowPing = lib.mkDefault false;
+    firewall.allowedTCPPorts = [ 3000 4200 8080 8081 8082 8083 ];
+
+
     hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
     nameservers = lib.mkDefault [ "1.1.1.1" "1.0.0.1" ];
   };

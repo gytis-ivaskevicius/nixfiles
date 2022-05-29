@@ -4,49 +4,58 @@ configuration {
     display-drun: "Apps";
     show-icons: true;
     hide-scrollbar: true;
+    font: "Iosevka Nerd Font 12";
+    fixed-num-lines: true;
+    lines: 12;
 }
 
 * {
-  background-color: #282C33;
+  background-color: #00000000;
   border-color: #2e343f;
-  text-color: #8ca0aa;
+  text-color: #8c90aa;
   spacing: 0;
+}
+
+window {
+  background-color: #282C33F0;
   width: 50%;
-  height: 50%;
+}
+
+overlay {
+  background-color: magenta;
 }
 
 inputbar {
+  padding: 8px;
   border: 0 0 1px 0;
   children: [prompt,entry];
 }
 
 prompt {
-  padding: 16px;
+  padding: 0px 8px;
   border: 0 1px 0 0;
 }
 
 textbox {
-  background-color: #2e343f;
   border: 0 0 1px 0;
   border-color: #282C33;
   padding: 8px 16px;
 }
 
 entry {
-  padding: 16px;
-}
-
-listview {
-  cycle: false;
-  margin: 0 0 -1px 0;
-  scrollbar: false;
+  padding: 0px 8px;
 }
 
 element {
   border: 0 0 1px 0;
-  padding: 16px;
+  padding: 8px 16px;
+}
+
+element-icon {
+  size: 1em;
 }
 
 element selected {
-  background-color: #2e343f;
+  background-color: #FFFFFF10;
+  text-color: #9da0bb;
 }

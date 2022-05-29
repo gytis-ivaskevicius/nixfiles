@@ -54,7 +54,6 @@ wrapNeovim neovim-unwrapped {
         vim-nix
       ]
       ++ optional enableClap vim-clap
-      ++ optional enableCoc coc-nvim
       ++ optional enableNerdtree nerdtree
       ++ optional enableSignify vim-signify
       ++ optional enableTagbar tagbar
@@ -64,22 +63,22 @@ wrapNeovim neovim-unwrapped {
         #coc-cmake
         #coc-cssmodules
         #coc-xml
-        coc-css
-        coc-emmet
-        coc-eslint
-        coc-highlight
-        coc-html
-        coc-java
-        coc-json
-        coc-prettier
-        coc-python
-        coc-rls
-        coc-snippets
-        coc-tslint-plugin
-        coc-tsserver
-        coc-vimlsp
-        coc-yaml
-        coc-yank
+        #coc-css
+        #coc-emmet
+        #coc-eslint
+        #coc-highlight
+        #coc-html
+        #coc-java
+        #coc-json
+        ##coc-prettier
+        #coc-python
+        #coc-rls
+        #coc-snippets
+        #coc-tslint-plugin
+        #coc-tsserver
+        #coc-vimlsp
+        #coc-yaml
+        #coc-yank
       ];
 
       opt = [ ];

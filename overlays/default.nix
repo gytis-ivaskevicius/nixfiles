@@ -17,9 +17,9 @@ final: prev: {
     exec = "${chromium}/bin/chromium --app=\"https://discord.com/channels/@me\"";
     icon = "discord";
     type = "Application";
-    categories = "Network;InstantMessaging;";
-    terminal = "false";
-    mimeType = "x-scheme-handler/discord";
+    categories = [ "Network" "InstantMessaging" ];
+    terminal = false;
+    mimeTypes = [ "x-scheme-handler/discord" ];
   };
 
   element-for-poor-people = with prev; makeDesktopItem {
@@ -29,8 +29,8 @@ final: prev: {
     exec = "${chromium}/bin/chromium --app=\"https://app.element.io/#/home\"";
     icon = "element";
     type = "Application";
-    categories = "Network;InstantMessaging;";
-    terminal = "false";
+    categories = [ "Network" "InstantMessaging" ];
+    terminal = false;
   };
 
   yuescript = prev.stdenv.mkDerivation {
@@ -50,4 +50,21 @@ final: prev: {
     };
 
   };
+
+  distrobox = prev.stdenvNoCC.mkDerivation
+    rec {
+      pname = "distrobox";
+      version = "1.2.11";
+
+      src = prev.fetchgit {
+        url = "https://github.com/89luca89/${pname}";
+        rev = "${version}";
+        hash = "sha256-jK92D81HPSTdCMO7xh+DOBc8IM9VfmCmHOG5MLvqCH4=";
+      };
+
+      installPhase = ''
+        mkdir -p $out/bin
+        ./install -p $_
+      '';
+    };
 }

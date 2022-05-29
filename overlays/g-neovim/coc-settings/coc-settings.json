@@ -11,7 +11,7 @@
 //  "tslint.jsEnable": true,
 //  "tslint.autoFixOnSave": true,
 //  "tslint.alwaysShowRuleFailuresAsWarnings": false,
-	"eslint.autoFixOnSave": true,
+	//"eslint.autoFixOnSave": true,
 
 	"codeLens.enable": true,
 	"html.autoClosingTags": true,
@@ -24,7 +24,7 @@
 	"tsserver.implicitProjectConfig.experimentalDecorators": true,
 	"tsserver.enable": true,
 
-	"prettier.eslintIntegration": true,
+	//"prettier.eslintIntegration": true,
 	"prettier.printWidth": 120,
 	"prettier.requireConfig": false,
 	"prettier.semi": false,

@@ -2,12 +2,16 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs;
-    unstable.url = github:nixos/nixpkgs;
+    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
+    unstable.url = github:nixos/nixpkgs/nixos-unstable;
+
     nur.url = github:nix-community/NUR;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
     devshell.url = github:numtide/devshell;
+
+    nix2vim.url = "/home/gytis/Projects/nix2vim";
+    #nix2vim.url = github:gytis-ivaskevicius/nix2vim;
 
     nixpkgs-wayland = {
       url = github:colemickens/nixpkgs-wayland;
@@ -32,7 +36,7 @@
 
   };
 
-  outputs = inputs@{ self, utils, nur, home-manager, nixpkgs-mozilla, ... }:
+  outputs = inputs@{ self, nix2vim, utils, nur, home-manager, nixpkgs-mozilla, ... }:
     let
       pkgs = self.pkgs.x86_64-linux.nixpkgs;
       mkApp = utils.lib.mkApp;
@@ -47,7 +51,9 @@
       channelsConfig.allowUnfree = true;
 
       channels.nixpkgs.overlaysBuilder = channels: [
-        (final: prev: { inherit (channels.unstable) pure-prompt neovim-unwrapped linuxPackages_latest gcc11Stdenv layan-gtk-theme; })
+        (final: prev: {
+          #inherit (channels.unstable) pure-prompt neovim-unwrapped linuxPackages_latest gcc11Stdenv layan-gtk-theme;
+        })
       ];
 
       hosts.GytisOS.modules = suites.desktopModules ++ [
@@ -74,7 +80,9 @@
         (import nixpkgs-mozilla)
         self.overlay
         nur.overlay
+        nix2vim.overlay
         (final: prev: {
+          #nix2vimDemo = prev.g-neovim;
           firefox = prev.g-firefox;
         })
       ];
@@ -104,17 +112,6 @@
             shell-config
             zsh-forgit
             ;
-        };
-
-        apps = {
-          g-neovim = mkApp {
-            drv = g-neovim;
-            exePath = "/bin/nvim";
-          };
-          g-termite = mkApp {
-            drv = g-termite;
-            exePath = "/bin/termite";
-          };
         };
 
         devShell = mkShell {

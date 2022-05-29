@@ -7,8 +7,15 @@ let
   down = "j";
   up = "k";
   right = "l";
+  _ = pkgs.lib.getExe;
+
+  ocrScript = pkgs.writeShellScript "ocr.sh" ''
+    ${_ pkgs.grim} -g "$(${_ slurp})" -t ppm - | ${_ tesseract} - - | ${wl-clipboard}/bin/wl-copy
+    ${_ libnotify} "$(${wl-clipboard}/bin/wl-paste)"
+  '';
 in
 {
+  "${modifier}+p" = ''exec /bin/sh -c "cat /home/gytis/notes | ${pkgs.g-rofi}/bin/rofi -dmenu | ${pkgs.findutils}/bin/xargs ${pkgs.wtype}/bin/wtype"'';
   Print = ''exec ${grim}/bin/grim -g "$(${slurp}/bin/slurp -d)" - | ${wl-clipboard}/bin/wl-copy -t image/png'';
   XF86AudioMute = "exec ${pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
   XF86AudioPlay = "exec ${playerctl}/bin/playerctl play";
@@ -20,8 +27,9 @@ in
   XF86MonBrightnessUp = "exec ${xorg.xbacklight} -inc 20";
   XF86MonBrightnessDown = "exec ${xorg.xbacklight} -dec 20";
 
-  "${modifier}+b" = "exec ${chromium}/bin/chromium";
-  "${modifier}+shift+b" = "exec ${chromium}/bin/chromium --incognito";
+  "${modifier}+o" = "exec ${ocrScript}";
+  "${modifier}+b" = "exec ${brave}/bin/brave";
+  "${modifier}+shift+b" = "exec ${brave}/bin/brave --incognito";
   "${modifier}+z" = "exec ${autorandr}/bin/autorandr -c -f";
 
   #"${modifier}+t" = ''[class="scratchterm"] scratchpad show, move position center'';

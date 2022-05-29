@@ -11,6 +11,7 @@
     dnsutils
     ffmpeg
     g-lf
+    inetutils
     manix
     mediainfo
     neofetch
@@ -24,7 +25,6 @@
     sshpass
     sshuttle
     steam-run
-    telnet
     tmux
     usbutils
     yt-dlp

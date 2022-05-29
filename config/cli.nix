@@ -75,10 +75,7 @@
     svi = "sudo $EDITOR";
     net = "ip -c -br addr";
 
-    cp = "cp -i";
-    ln = "ln -i";
     mkdir = "mkdir -p";
-    mv = "mv -i";
     rm = "rm -Iv --preserve-root";
     wget = "wget -c";
 
@@ -106,9 +103,10 @@
     file
     fup-repl
     fzf
-    g-neovim
+    nix2vimDemo
     gcc
     git
+    git-lfs
     htop
     inetutils
     iotop

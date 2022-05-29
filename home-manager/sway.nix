@@ -116,6 +116,7 @@ in
           repeat_delay 250
           repeat_rate 35
       }
+      exec wl-paste -t text --watch ${pkgs.clipman} store
     '';
 
 
@@ -177,20 +178,21 @@ in
         modules-right =
           [ "pulseaudio" "cpu" "memory" "temperature" "clock" "tray" ];
         modules = {
+          clock.format = "{:%Y-%m-%d %H:%M}";
           "tray" = { spacing = 8; };
-          "cpu" = { format = "/cpu {usage}/"; };
-          "memory" = { format = "/mem {}/"; };
+          "cpu" = { format = "cpu {usage}"; };
+          "memory" = { format = "mem {}"; };
           "temperature" = {
             hwmon-path = "/sys/class/hwmon/hwmon1/temp2_input";
-            format = "/tmp {temperatureC}C/";
+            format = "tmp {temperatureC}C";
           };
           "pulseaudio" = {
-            format = "/vol {volume}/ {format_source}";
-            format-bluetooth = "/volb {volume}/ {format_source}";
-            format-bluetooth-muted = "/volb/ {format_source}";
-            format-muted = "/vol/ {format_source}";
-            format-source = "/mic {volume}/";
-            format-source-muted = "/mic/";
+            format = "vol {volume} {format_source}";
+            format-bluetooth = "volb {volume} {format_source}";
+            format-bluetooth-muted = "volb {format_source}";
+            format-muted = "vol {format_source}";
+            format-source = "mic {volume}";
+            format-source-muted = "mic";
           };
         };
       }];
@@ -298,6 +300,13 @@ in
         '';
     };
 
+    xdg.configFile."xdg-desktop-portal-wlr/config".text = ''
+      [screencast]
+      output_name=
+      max_fps=30
+      chooser_cmd=${pkgs.slurp}/bin/slurp -f %o -or
+      chooser_type=simple
+    '';
 
 
 
