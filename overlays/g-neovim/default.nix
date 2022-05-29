@@ -14,9 +14,16 @@
 , preserveCursorLocation ? true
 , qualityOfLifeBindings ? true
 , trimSpacesOnWrite ? true
+, vimUtils
+, srcs
 }:
 let
   inherit (lib) optionals optional optionalString;
+  vim-camelsnek = vimUtils.buildVimPluginFrom2Nix {
+    pname = "vim-camelsnek";
+    version = "master";
+    src = srcs.vim-camelsnek;
+  };
 in
 wrapNeovim neovim-unwrapped {
   viAlias = true;
@@ -38,8 +45,7 @@ wrapNeovim neovim-unwrapped {
       ${optionalString qualityOfLifeBindings (builtins.readFile ./qualityOfLifeBindings.vim)}
       ${optionalString trimSpacesOnWrite (builtins.readFile ./trimSpacesOnWrite.vim)}
 
-      let g:coc_config_home='${./coc-settings}'
-
+      nmap <leader>c :CamelB
       highlight Pmenu             guibg=#222222
       map <space> <leader>
       au BufNewFile,BufRead /*.rasi setf css  " Add rofi config file highlighting
@@ -50,6 +56,7 @@ wrapNeovim neovim-unwrapped {
     packages.myVimPackage = with vimPlugins; {
 
       start = [
+        vim-camelsnek
         vim-devicons
         vim-nix
       ]

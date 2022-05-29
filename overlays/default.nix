@@ -50,21 +50,4 @@ final: prev: {
     };
 
   };
-
-  distrobox = prev.stdenvNoCC.mkDerivation
-    rec {
-      pname = "distrobox";
-      version = "1.2.11";
-
-      src = prev.fetchgit {
-        url = "https://github.com/89luca89/${pname}";
-        rev = "${version}";
-        hash = "sha256-jK92D81HPSTdCMO7xh+DOBc8IM9VfmCmHOG5MLvqCH4=";
-      };
-
-      installPhase = ''
-        mkdir -p $out/bin
-        ./install -p $_
-      '';
-    };
 }

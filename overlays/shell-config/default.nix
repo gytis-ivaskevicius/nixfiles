@@ -14,11 +14,19 @@
 , zshPasteImprovementsEnabled ? true
 , exePathEnabled ? true
 , superSecretScriptsEnabled ? false
+, enableMemeScript ? true
 }:
 
 
 with lib;
 let
+  meme = ''
+    function meme(){
+      cd $HOME/memes
+      yt-dlp $@
+      cd -
+    }
+  '';
   prettyManPages = ''
     export LESS_TERMCAP_mb=$(tput bold; tput setaf 2)
     export LESS_TERMCAP_md=$(tput bold; tput setaf 3)
@@ -115,4 +123,5 @@ writeShellScript "shellconfig.sh" ''
   ${optionalString zshPasteImprovementsEnabled zshPasteImprovements}
   ${optionalString exePathEnabled exe-path}
   ${optionalString superSecretScriptsEnabled superSecretScripts}
+  ${optionalString enableMemeScript meme}
 ''

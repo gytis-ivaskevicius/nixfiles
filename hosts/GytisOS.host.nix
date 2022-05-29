@@ -59,6 +59,7 @@
       "kljmejbpilkadikecejccebmccagifhl" # Image search options
       "lckanjgmijmafbedllaakclkaicjfmnk" # ClearURLs
       "lifgeihcfpkmmlfjbailfpfhbahhibba" # Smart TOC
+      "mgijmajocgfcbeboacabfgobmjgjcoja" # Google Dictionary (by Google)
       "opokoaglpekkimldnlggpoagmjegichg" # ViolentMonkey
     ];
 
