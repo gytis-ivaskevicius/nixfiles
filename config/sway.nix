@@ -29,7 +29,6 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    jack.enable = false;
   };
 
   xdg.portal = {

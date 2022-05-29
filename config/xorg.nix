@@ -9,14 +9,14 @@
   services.xserver = {
     enable = true;
     layout = "us";
-    xkbOptions = lib.mkDefault "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
+    xkbOptions = "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
     libinput = {
-      enable = lib.mkDefault true;
+      enable = true;
       # Left + right click emulates middle button.
-      middleEmulation = lib.mkDefault true;
+      middleEmulation = true;
       #naturalScrolling = true;
-      tapping = lib.mkDefault false;
-      tappingDragLock = lib.mkDefault false;
+      tapping = false;
+      tappingDragLock = false;
     };
 
     # Make auto-repeat on key hold work faster.
@@ -27,9 +27,9 @@
 
     displayManager.lightdm = {
       enable = true;
-      greeters.enso.enable = lib.mkDefault true;
-      greeters.enso.theme.name = lib.mkDefault "Numix";
-      greeters.enso.theme.package = lib.mkDefault pkgs.numix-gtk-theme;
+      greeters.enso.enable = true;
+      greeters.enso.theme.name = "Numix";
+      greeters.enso.theme.package = pkgs.numix-gtk-theme;
 
       #background
       #greeters.enso.blur

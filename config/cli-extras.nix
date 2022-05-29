@@ -1,7 +1,7 @@
 { pkgs, lib, ... }:
 {
 
-  programs.adb.enable = lib.mkDefault true;
+  programs.adb.enable = true;
 
   environment.systemPackages = with pkgs; [
     android-file-transfer
@@ -11,7 +11,6 @@
     dnsutils
     ffmpeg
     g-lf
-    inetutils
     manix
     mediainfo
     neofetch

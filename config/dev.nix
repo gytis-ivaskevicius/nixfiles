@@ -4,7 +4,6 @@
   #virtualisation.podman.enable = true;
 
   environment.systemPackages = with pkgs; [
-    docker-compose
     gradle
     insomnia
     jetbrains.idea-ultimate

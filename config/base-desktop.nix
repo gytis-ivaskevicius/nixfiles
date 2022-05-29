@@ -1,13 +1,13 @@
 { config, pkgs, lib, ... }:
 {
   #powerManagement.powertop.enable = true;
-  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
+  powerManagement.cpuFreqGovernor = "performance";
   console.keyMap = "us";
   fileSystems."/boot".label = "BOOT";
   i18n.defaultLocale = "en_US.UTF-8";
   nix.autoOptimiseStore = true;
   system.stateVersion = "21.11";
-  time.timeZone = lib.mkDefault "Europe/Vilnius";
+  time.timeZone = "Europe/Vilnius";
 
   gytix.cachix.enable = true;
   gytix.cleanHome.enable = true;
@@ -22,18 +22,15 @@
   '';
 
   networking = {
-    firewall.allowPing = lib.mkDefault false;
+    #firewall.enable = false;
+    #firewall.allowedTCPPorts = [ 8080 9090 ];
+    firewall.allowPing = false;
     hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
     nameservers = [ "192.168.30.11" "192.168.30.12" ];
-
-    #nameservers = lib.mkDefault [ "1.1.1.1" "1.0.0.1" ];
     useDHCP = false;
-    #  interfaces."enp39s0".useDHCP = true;
-    #  useNetworkd = true;
     networkmanager.enable = true;
   };
 
-  #systemd.network.enable = true;
   environment.systemPackages = [ pkgs.bluez ];
 
   #services.resolved = {
@@ -66,16 +63,16 @@
     cleanTmpDir = true;
     loader.systemd-boot.enable = true;
     loader.timeout = 2;
-    tmpOnTmpfs = lib.mkDefault true;
+    tmpOnTmpfs = true;
   };
 
   services = {
     zfs.autoSnapshot.enable = true;
     zfs.autoScrub.enable = true;
-    openssh.enable = lib.mkDefault true;
-    openssh.passwordAuthentication = lib.mkDefault false;
-    printing.enable = lib.mkDefault true;
-    tlp.enable = lib.mkDefault true;
+    openssh.enable = true;
+    openssh.passwordAuthentication = false;
+    printing.enable = true;
+    tlp.enable = true;
   };
   services.xserver.deviceSection = ''
     Option "VariableRefresh" "true"
@@ -102,6 +99,6 @@
       extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
     };
     cpu.amd.updateMicrocode = true;
-    cpu.intel.updateMicrocode = true;
+    #cpu.intel.updateMicrocode = true;
   };
 }

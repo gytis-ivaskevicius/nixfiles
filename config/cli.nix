@@ -1,20 +1,18 @@
 { config, pkgs, lib, inputs, ... }:
 {
 
-  programs.adb.enable = lib.mkDefault true;
-
   environment.variables = {
     EDITOR = "nvim";
     LC_ALL = "en_US.UTF-8";
     TERM = "xterm-256color";
   };
 
-  users.defaultUserShell = "${pkgs.zsh}/bin/zsh";
+  users.defaultUserShell = lib.getExe pkgs.zsh;
 
   programs.zsh = {
     autosuggestions.enable = true;
     autosuggestions.extraConfig.ZSH_AUTOSUGGEST_USE_ASYNC = "y";
-    enable = lib.mkDefault true;
+    enable = true;
     enableCompletion = true;
     histFile = "$HOME/.cache/.zsh_history";
     histSize = 100000;
@@ -31,8 +29,6 @@
     '';
 
     setOptions = [
-      "noautomenu"
-      "nomenucomplete"
       "AUTO_CD"
       "BANG_HIST"
       "EXTENDED_HISTORY"
@@ -44,6 +40,8 @@
       "HIST_REDUCE_BLANKS"
       "HIST_SAVE_NO_DUPS"
       "INC_APPEND_HISTORY"
+      "NOAUTOMENU"
+      "NOMENUCOMPLETE"
       "SHARE_HISTORY"
     ];
 
@@ -65,7 +63,6 @@
 
     burn = "pkill -9";
     external-ip = "dig +short myip.opendns.com @resolver1.opendns.com";
-    f = "fd";
     v = "$EDITOR $(fzf)";
     sv = "sudo $EDITOR $(fzf)";
     killall = "pkill";
@@ -103,7 +100,6 @@
     file
     fup-repl
     fzf
-    nix2vimDemo
     gcc
     git
     git-lfs
@@ -114,18 +110,18 @@
     lm_sensors
     lshw
     lsof
-    luajit
     man
     nettools
     nix-top
     nix-tree
+    nix2vimDemo
     nixpkgs-fmt
+    nushell
     p7zip
     parted
     pciutils
     psmisc
     pure-prompt
-    python3
     ranger
     ripgrep
     rustup
