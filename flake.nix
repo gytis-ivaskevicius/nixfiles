@@ -67,6 +67,11 @@
         ./hosts/GytisOS.host.nix
       ];
 
+      hosts."gytis-ivaskevicius".modules = suites.desktopModules ++ [
+        dev
+        ./hosts/gytis-ivaskevicius.host.nix
+      ];
+
       hosts.Morty.modules = suites.desktopModules ++ [
         ./hosts/Morty.host.nix
       ];
