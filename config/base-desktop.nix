@@ -85,18 +85,29 @@
     fonts = [ pkgs.nerdfonts ];
   };
 
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
   hardware = {
     enableRedistributableFirmware = true;
     enableAllFirmware = true;
     opengl = {
       enable = lib.mkDefault true;
       driSupport32Bit = config.hardware.opengl.enable;
-      extraPackages = with pkgs; [
-        rocm-opencl-icd
-        rocm-opencl-runtime
-        amdvlk
-      ];
-      extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+      #extraPackages = with pkgs; [
+      #  rocm-opencl-icd
+      #  rocm-opencl-runtime
+      #  amdvlk
+      #];
+      #extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
     };
     cpu.amd.updateMicrocode = true;
     #cpu.intel.updateMicrocode = true;

@@ -33,7 +33,7 @@ let
     base-desktop
     cli
     cli-extras
-    sway
+    #sway
     ({ pkgs, lib, config, ... }: {
       nix.generateRegistryFromInputs = true;
       nix.linkInputs = true;

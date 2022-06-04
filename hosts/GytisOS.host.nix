@@ -11,8 +11,30 @@
   fileSystems."/boot" = { device = "/dev/disk/by-uuid/F794-3014"; fsType = "vfat"; };
   fileSystems."/nix" = { device = "zroot/locker/nix"; fsType = "zfs"; };
 
+  imports = [
+    ./work/modules.nix
+    ./work/i3rice.nix
+  ];
+
+  programs.ssh.startAgent = true;
+  programs.dconf.enable = true;
+
+
+  hardware.bluetooth.enable = true;
+  environment.variables = {
+    BROWSER = "brave";
+    TERMINAL = "alacritty";
+  };
 
   environment.systemPackages = with pkgs; [
+    brave
+    discord
+    firefox
+    g-alacritty
+    gnome3.eog
+    pavucontrol
+    vlc
+    xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
     pulseaudio
     chromium
     exodus
