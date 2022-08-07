@@ -177,23 +177,21 @@ in
         modules-center = if swayEnabled then [ "sway/window" ] else [ ];
         modules-right =
           [ "pulseaudio" "cpu" "memory" "temperature" "clock" "tray" ];
-        modules = {
-          clock.format = "{:%Y-%m-%d %H:%M}";
-          "tray" = { spacing = 8; };
-          "cpu" = { format = "cpu {usage}"; };
-          "memory" = { format = "mem {}"; };
-          "temperature" = {
-            hwmon-path = "/sys/class/hwmon/hwmon1/temp2_input";
-            format = "tmp {temperatureC}C";
-          };
-          "pulseaudio" = {
-            format = "vol {volume} {format_source}";
-            format-bluetooth = "volb {volume} {format_source}";
-            format-bluetooth-muted = "volb {format_source}";
-            format-muted = "vol {format_source}";
-            format-source = "mic {volume}";
-            format-source-muted = "mic";
-          };
+        clock.format = "{:%Y-%m-%d %H:%M}";
+        "tray" = { spacing = 8; };
+        "cpu" = { format = "cpu {usage}"; };
+        "memory" = { format = "mem {}"; };
+        "temperature" = {
+          hwmon-path = "/sys/class/hwmon/hwmon1/temp2_input";
+          format = "tmp {temperatureC}C";
+        };
+        "pulseaudio" = {
+          format = "vol {volume} {format_source}";
+          format-bluetooth = "volb {volume} {format_source}";
+          format-bluetooth-muted = "volb {format_source}";
+          format-muted = "vol {format_source}";
+          format-source = "mic {volume}";
+          format-source-muted = "mic";
         };
       }];
       style =
@@ -307,8 +305,5 @@ in
     chooser_cmd=${pkgs.slurp}/bin/slurp -f %o -or
     chooser_type=simple
   '';
-
-
-  home.stateVersion = "21.11";
 
 }

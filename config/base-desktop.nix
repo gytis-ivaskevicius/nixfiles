@@ -6,7 +6,7 @@
   fileSystems."/boot".label = "BOOT";
   i18n.defaultLocale = "en_US.UTF-8";
   nix.settings.auto-optimise-store = true;
-  system.stateVersion = "21.11";
+  system.stateVersion = "22.05";
   time.timeZone = "Europe/Vilnius";
 
   gytix.cachix.enable = true;
@@ -67,6 +67,7 @@
   };
 
   services = {
+    dbus.packages = with pkgs; [ dconf ];
     zfs.autoSnapshot.enable = true;
     zfs.autoScrub.enable = true;
     openssh.enable = true;

@@ -5,7 +5,6 @@
   environment.systemPackages = with pkgs; [ xclip ];
 
   fonts.fonts = with pkgs; [ nerdfonts noto-fonts-emoji noto-fonts ];
-  #services.dbus.packages = with pkgs; [ gnome3.dconf ];
   services.xserver = {
     enable = true;
     layout = "us";
