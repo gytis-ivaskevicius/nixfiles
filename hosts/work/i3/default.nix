@@ -10,15 +10,13 @@
 
     enable = true;
     layout = "us";
-    xkbOptions = lib.mkDefault "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
+    xkbOptions = "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
     libinput = {
-      enable = lib.mkDefault true;
+      enable = true;
 
       # Left + right click emulates middle button.
-      middleEmulation = lib.mkDefault true;
+      touchpad.middleEmulation = true;
       #naturalScrolling = true;
-      tapping = lib.mkDefault false;
-      tappingDragLock = lib.mkDefault false;
     };
 
     # Make auto-repeat on key hold work faster.

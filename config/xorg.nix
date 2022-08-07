@@ -5,7 +5,7 @@
   environment.systemPackages = with pkgs; [ xclip ];
 
   fonts.fonts = with pkgs; [ nerdfonts noto-fonts-emoji noto-fonts ];
-  services.dbus.packages = with pkgs; [ gnome3.dconf ];
+  #services.dbus.packages = with pkgs; [ gnome3.dconf ];
   services.xserver = {
     enable = true;
     layout = "us";
@@ -15,8 +15,6 @@
       # Left + right click emulates middle button.
       middleEmulation = true;
       #naturalScrolling = true;
-      tapping = false;
-      tappingDragLock = false;
     };
 
     # Make auto-repeat on key hold work faster.

@@ -59,26 +59,50 @@ in
     focus.forceWrapping = false;
     focus.followMouse = false;
     fonts = [ "RobotoMono 9" ];
-    terminal = "${pkgs.alacritty}/bin/alacritty}";
+    terminal = lib.getExe pkgs.alacritty;
     startup = mkIf isI3 [
       { command = "systemctl --user restart polybar"; always = true; notification = false; }
       { command = "autorandr -c"; always = true; notification = false; }
       #{ command = "waybar"; always = true; notification = false; }
     ];
 
-    colors.focused = { border = bg-color; childBorder = bg-color; background = bg-color; text = text-color; indicator = "#00ff00"; };
-    colors.unfocused = { border = inactive-bg-color; childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00"; };
-    colors.focusedInactive = { border = inactive-bg-color; childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00"; };
-    colors.urgent = { border = urgent-bg-color; childBorder = urgent-bg-color; background = urgent-bg-color; text = text-color; indicator = "#00ff00"; };
+    colors.focused = {
+      border = bg-color;
+      childBorder = bg-color;
+      background = bg-color;
+      text = text-color;
+      indicator = "#00ff00";
+    };
+    colors.unfocused = {
+      border = inactive-bg-color;
+      childBorder = inactive-bg-color;
+      background = inactive-bg-color;
+      text = inactive-text-color;
+      indicator = "#00ff00";
+    };
+    colors.focusedInactive = {
+      border = inactive-bg-color;
+      childBorder = inactive-bg-color;
+      background = inactive-bg-color;
+      text = inactive-text-color;
+      indicator = "#00ff00";
+    };
+    colors.urgent = {
+      border = urgent-bg-color;
+      childBorder = urgent-bg-color;
+      background = urgent-bg-color;
+      text = text-color;
+      indicator = "#00ff00";
+    };
 
     menu = "${pkgs.g-rofi}/bin/rofi -show drun -modi drun";
     modes.resize = {
       Escape = "mode default";
       Return = "mode default";
-      "${down}" = "resize grow height 10 px or 10 ppt";
-      "${left}" = "resize shrink width 10 px or 10 ppt";
-      "${right}" = "resize grow width 10 px or 10 ppt";
-      "${up}" = "resize shrink height 10 px or 10 ppt";
+      ${down} = "resize grow height 10 px or 10 ppt";
+      ${left} = "resize shrink width 10 px or 10 ppt";
+      ${right} = "resize grow width 10 px or 10 ppt";
+      ${up} = "resize shrink height 10 px or 10 ppt";
     };
 
     #    bars = mkForce [ ];

@@ -12,8 +12,8 @@
   fileSystems."/nix" = { device = "zroot/locker/nix"; fsType = "zfs"; };
 
   imports = [
-    ./work/modules.nix
-    ./work/i3rice.nix
+    #./work/modules.nix
+    #./work/i3rice.nix
   ];
 
   programs.ssh.startAgent = true;

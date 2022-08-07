@@ -7,10 +7,12 @@
     android-file-transfer
     appimage-run
     binutils
+    direnv
     dmidecode
     dnsutils
     ffmpeg
     g-lf
+    ijq
     manix
     mediainfo
     neofetch
@@ -19,6 +21,7 @@
     ntfs3g
     openssl
     patchelf
+    python3
     rclone
     sshfs
     sshpass

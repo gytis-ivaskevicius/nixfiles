@@ -1,6 +1,7 @@
 { lib
 , system
 , writeShellScript
+, direnv
 , fd
 , pure-prompt
 , sshuttle
@@ -113,6 +114,8 @@ writeShellScript "shellconfig.sh" ''
     source "$(fzf-share)/key-bindings.zsh"
     source "$(fzf-share)/completion.zsh"
   fi
+  eval "$(${direnv}/bin/direnv hook zsh)"
+
 
   ${optionalString dockerAliasEnabled docker}
   ${optionalString prettyManPagesEnabled prettyManPages}

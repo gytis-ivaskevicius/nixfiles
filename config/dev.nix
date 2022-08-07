@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   #virtualisation.podman.enable = true;
@@ -9,7 +9,12 @@
     jetbrains.idea-ultimate
     maven
     #podman-compose
+    nomad
+    wander
   ];
+  programs.zsh.promptInit = ''
+    complete -o nospace -C nomad nomad
+  '';
 
   ## Docker
   virtualisation.docker = {
@@ -34,15 +39,15 @@
 
   ### Java
   gytix.java.additionalPackages = {
-    inherit (pkgs) jdk11 jdk8;
+    #inherit (pkgs) jdk11 jdk8;
   };
   programs.java.enable = true;
-  programs.java.package = pkgs.jdk8;
+  programs.java.package = pkgs.jdk;
 
   ### Node
   programs.npm.enable = true;
-  programs.npm.package = pkgs.nodejs-16_x;
+  programs.npm.package = pkgs.nodejs;
   gytix.node.additionalPackages = {
-    inherit (pkgs) nodejs-16_x;
+    #inherit (pkgs) nodejs-16_x;
   };
 }

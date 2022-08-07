@@ -10,6 +10,7 @@
   users.defaultUserShell = lib.getExe pkgs.zsh;
 
   programs.zsh = {
+    enableBashCompletion = true;
     autosuggestions.enable = true;
     autosuggestions.extraConfig.ZSH_AUTOSUGGEST_USE_ASYNC = "y";
     enable = true;

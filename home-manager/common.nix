@@ -28,15 +28,20 @@ let
     #"text/calendar" = [ "thunderbird.desktop" ]; # ".ics"  iCalendar format
     "application/json" = browser; # ".json"  JSON format
     "application/pdf" = browser; # ".pdf"  Adobe Portable Document Format (PDF)
+    "x-scheme-handler/tg" = "userapp-Telegram Desktop-95VAQ1.desktop";
   };
 in
 {
+  home.stateVersion = "21.11";
+  home.keyboard.options = [ "terminate:ctrl_alt_bksp" "caps:escape" "altwin:swap_alt_win" ];
+
 
   services.network-manager-applet.enable = true;
 
   home.sessionVariables = {
     BROWSER = "chromium";
     TERMINAL = "alacritty";
+    NIXPKGS_ALLOW_UNFREE = 1;
   };
 
   xdg.mimeApps.enable = true;

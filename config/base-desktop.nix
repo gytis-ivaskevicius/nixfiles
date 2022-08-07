@@ -85,8 +85,6 @@
     fonts = [ pkgs.nerdfonts ];
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -94,6 +92,12 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+  };
+
+  xdg.portal = {
+    enable = true;
+    #gtkUsePortal = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
   };
 
   hardware = {
