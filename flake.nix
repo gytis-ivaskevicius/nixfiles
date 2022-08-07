@@ -3,30 +3,22 @@
 
   inputs = {
     nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
-    unstable.url = github:nixos/nixpkgs/nixos-unstable;
+    unstable.follows = "nixpkgs";
 
-    nur.url = github:nix-community/NUR;
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
     devshell.url = github:numtide/devshell;
+    devshell.inputs.nixpkgs.follows = "nixpkgs";
+    devshell.inputs.flake-utils.follows = "utils";
 
-    nix2vim.url = "/home/gytis/Projects/nix2vim";
-    #nix2vim.url = github:gytis-ivaskevicius/nix2vim;
-
-    nixpkgs-wayland = {
-      url = github:colemickens/nixpkgs-wayland;
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.unstableSmall.follows = "nixpkgs";
-    };
+    #nix2vim.url = "/home/gytis/Projects/nix2vim";
+    nix2vim.url = github:gytis-ivaskevicius/nix2vim;
+    nix2vim.inputs.nixpkgs.follows = "nixpkgs";
+    nix2vim.inputs.flake-utils.follows = "utils";
 
     home-manager = {
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixpkgs-mozilla = {
-      url = github:mozilla/nixpkgs-mozilla;
-      flake = false;
     };
 
     forgit-git = {
@@ -36,7 +28,7 @@
 
   };
 
-  outputs = inputs@{ self, nix2vim, utils, nur, home-manager, nixpkgs-mozilla, ... }:
+  outputs = inputs@{ self, nix2vim, utils, home-manager, ... }:
     let
       pkgs = self.pkgs.x86_64-linux.nixpkgs;
       mkApp = utils.lib.mkApp;
@@ -63,7 +55,6 @@
           security.apparmor.enable = true;
         }
 
-        ./hosts/work.secret.nix
         ./hosts/GytisOS.host.nix
       ];
 
@@ -82,9 +73,7 @@
       ];
 
       sharedOverlays = [
-        (import nixpkgs-mozilla)
         self.overlay
-        nur.overlay
         nix2vim.overlay
         (final: prev: {
           #nix2vimDemo = prev.g-neovim;

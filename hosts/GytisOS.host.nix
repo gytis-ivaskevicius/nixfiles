@@ -25,6 +25,7 @@
   ];
 
   services.tailscale.enable = true;
+  networking.firewall.checkReversePath = "loose";
   programs.steam.enable = true;
   services.flatpak.enable = true;
 

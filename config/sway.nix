@@ -33,7 +33,7 @@
 
   xdg.portal = {
     enable = true;
-    gtkUsePortal = true;
+    #gtkUsePortal = true;
     extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
   };
 

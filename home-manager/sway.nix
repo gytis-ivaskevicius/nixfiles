@@ -60,7 +60,7 @@ let
   monospaced = text: ''<span font_family="RobotoMono">'' + text + "</span>";
 in
 {
-  imports = [ ./common.nix ./dunst.nix ];
+  imports = [ ./git.nix ./common.nix ./dunst.nix ];
 
   home.packages = with pkgs; [
     wl-clipboard
@@ -309,5 +309,6 @@ in
   '';
 
 
+  home.stateVersion = "21.11";
 
 }
