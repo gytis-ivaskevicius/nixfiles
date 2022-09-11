@@ -29,7 +29,6 @@ wrapNeovim neovim-unwrapped {
   viAlias = true;
   vimAlias = true;
   withNodeJs = true;
-  withPython = false;
   withPython3 = true;
   withRuby = false;
 

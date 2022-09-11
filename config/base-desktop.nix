@@ -59,7 +59,8 @@
       "fs.inotify.max_user_watches" = 524288;
     };
     #zfs.enableUnstable = true;
-    kernelParams = [ "quiet" "loglevel=3" ];
+    #kernelParams = [ "quiet" "loglevel=3" ];
+    kernelParams = [ "nvme_core.default_ps_max_latency_us=0" ];
     cleanTmpDir = true;
     loader.systemd-boot.enable = true;
     loader.timeout = 2;
@@ -67,8 +68,9 @@
   };
 
   services = {
+    fwupd.enable = true;
     dbus.packages = with pkgs; [ dconf ];
-    zfs.autoSnapshot.enable = true;
+    #zfs.autoSnapshot.enable = true;
     zfs.autoScrub.enable = true;
     openssh.enable = true;
     openssh.passwordAuthentication = false;

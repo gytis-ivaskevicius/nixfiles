@@ -30,5 +30,6 @@
     tmux
     usbutils
     yt-dlp
+    zellij
   ];
 }
