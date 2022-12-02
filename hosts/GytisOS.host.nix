@@ -35,13 +35,14 @@
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
     pulseaudio
     chromium
-    exodus
+    #exodus
     discord-for-poor-people
     element-for-poor-people
     rnix-lsp
     distrobox
     obs-studio
     tdesktop
+    prismlauncher
   ];
 
   services.tailscale.enable = true;

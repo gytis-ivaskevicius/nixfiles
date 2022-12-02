@@ -103,6 +103,8 @@
     extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
   };
 
+  programs.gnupg.agent.enable = true;
+
   hardware = {
     enableRedistributableFirmware = true;
     enableAllFirmware = true;

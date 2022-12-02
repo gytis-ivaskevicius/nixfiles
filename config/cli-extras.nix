@@ -1,10 +1,10 @@
 { pkgs, lib, ... }:
 {
 
-  programs.adb.enable = true;
+  #programs.adb.enable = true;
 
   environment.systemPackages = with pkgs; [
-    android-file-transfer
+    #android-file-transfer
     appimage-run
     binutils
     direnv

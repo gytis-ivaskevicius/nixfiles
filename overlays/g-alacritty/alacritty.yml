@@ -9,6 +9,10 @@ colors:
     background: '#171717'
     foreground: '#F8F8F8'
 
+  footer_bar:
+    background: '#D81765'
+    foreground: '#FFFFFF'
+
   search:
     matches:
       foreground: '#EBEBEB'
@@ -16,9 +20,6 @@ colors:
     focused_match:
       foreground: CellBackground
       background: CellForeground
-    bar:
-      background: '#D81765'
-      foreground: '#FFFFFF'
 
   normal:
     black:   '#171717'

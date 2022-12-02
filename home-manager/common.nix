@@ -20,6 +20,7 @@ let
     "application/xhtml+xml" = browser;
     "application/x-extension-xhtml" = browser;
     "application/x-extension-xht" = browser;
+    "image/*" = "org.gnome.eog.desktop";
 
     #"text/*" = [ "emacs.desktop" ];
     "audio/*" = [ "vlc.desktop" ];

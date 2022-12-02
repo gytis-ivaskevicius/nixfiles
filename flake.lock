@@ -10,11 +10,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1660811669,
-        "narHash": "sha256-V6lmsaLNFz41myppL0yxglta92ijkSvpZ+XVygAh+bU=",
+        "lastModified": 1667210711,
+        "narHash": "sha256-IoErjXZAkzYWHEpQqwu/DeRNJGFdR7X2OGbkhMqMrpw=",
         "owner": "numtide",
         "repo": "devshell",
-        "rev": "c2feacb46ee69949124c835419861143c4016fb5",
+        "rev": "96a9dd12b8a447840cc246e17a47b81a4268bba7",
         "type": "github"
       },
       "original": {
@@ -41,11 +41,11 @@
     "forgit-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1660668993,
-        "narHash": "sha256-TSF4Vr5uf/+MVU4yCdIHNnwB7kkp4mF+hkhKtLqQvmk=",
+        "lastModified": 1669465705,
+        "narHash": "sha256-qVZbirNoq87Ke2+YuiSYf45qlXmAVFfGRDgwzQOXebY=",
         "owner": "wfxr",
         "repo": "forgit",
-        "rev": "3f50933f047510020428114551da0ee5cdfb32a3",
+        "rev": "42c8e005fece723de68d78906bb3ba7b70ff65c7",
         "type": "github"
       },
       "original": {
@@ -59,14 +59,16 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils"
+        "utils": [
+          "utils"
+        ]
       },
       "locked": {
-        "lastModified": 1662759269,
-        "narHash": "sha256-lt8bAfEZudCQb+MxoNKmenhMTXhu3RCCyLYxU9t5FFk=",
+        "lastModified": 1669573161,
+        "narHash": "sha256-UAOXq+LIX+goAAY2MiC0+zCxdNPaO7NAPTvCQExpIBs=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "9f7fe353b613d0e45d7a5cdbd1f13c96c15803dd",
+        "rev": "50c9bccb6abc52811a59db620606e016fcde32bd",
         "type": "github"
       },
       "original": {
@@ -85,11 +87,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1660420875,
-        "narHash": "sha256-pDX/c1Rq/fr4oVNmwLs2cl0JGnxqX8X2tpuHcYc9aHs=",
+        "lastModified": 1666021730,
+        "narHash": "sha256-eXd9bqYleh+BZsUybKCj7rNhnwoV0tzsuGGXKmW/+NA=",
         "owner": "gytis-ivaskevicius",
         "repo": "nix2vim",
-        "rev": "b52f028f5d0d7aea646fbdd5389d887b81c025e6",
+        "rev": "f3b56da72278cd720fe7fb4b6d001047b7179669",
         "type": "github"
       },
       "original": {
@@ -100,16 +102,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1662821606,
-        "narHash": "sha256-Z9z9iSH+tgJ0iyRcBfEQRwELgjnhpVXsktiWiFe3SuY=",
+        "lastModified": 1669834992,
+        "narHash": "sha256-YnhZGHgb4C3Q7DSGisO/stc50jFb9F/MzHeKS4giotg=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "93a0067a9c85c17764f7755947e6ecf52dc47d8a",
+        "rev": "596a8e828c5dfa504f91918d0fa4152db3ab5502",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-unstable",
+        "ref": "nixos-22.11",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -124,25 +126,10 @@
         "unstable": [
           "nixpkgs"
         ],
-        "utils": "utils_2"
+        "utils": "utils"
       }
     },
     "utils": {
-      "locked": {
-        "lastModified": 1653893745,
-        "narHash": "sha256-0jntwV3Z8//YwuOjzhV2sgJJPt+HY6KhU7VZUL0fKZQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "1ed9fb1935d260de5fe1c2f7ee0ebaae17ed2fa1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_2": {
       "inputs": {
         "flake-utils": "flake-utils"
       },

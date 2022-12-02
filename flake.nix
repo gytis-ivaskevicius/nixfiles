@@ -2,7 +2,7 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
+    nixpkgs.url = github:nixos/nixpkgs/nixos-22.11;
     unstable.follows = "nixpkgs";
 
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
@@ -19,6 +19,7 @@
     home-manager = {
       url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "utils";
     };
 
     forgit-git = {

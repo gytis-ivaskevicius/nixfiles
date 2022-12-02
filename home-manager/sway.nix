@@ -107,6 +107,8 @@ in
       #  adaptive_sync on
       #}
 
+      #output HDMI-A-1 disable
+
       output DP-2 {
         mode 3840x1600@143.998001Hz
         #pos 2560 0

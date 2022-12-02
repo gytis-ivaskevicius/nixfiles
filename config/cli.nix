@@ -20,7 +20,7 @@
     syntaxHighlighting.enable = true;
     syntaxHighlighting.highlighters = [ "main" "brackets" "pattern" "root" "line" ];
     ohMyZsh.enable = true;
-    ohMyZsh.plugins = [ "sudo" "z" ];
+    ohMyZsh.plugins = [ "sudo" "z" "aws" ];
     shellInit = ''
       source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh
     '';

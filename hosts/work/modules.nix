@@ -27,7 +27,7 @@ in
     polybar
     feh
     networkmanagerapplet
-    pantheon.pantheon-agent-polkit
+    #pantheon.pantheon-agent-polkit
     numix-gtk-theme
     papirus-icon-theme
     qt5.qtbase
@@ -62,15 +62,15 @@ in
   fonts = {
     enableFontDir = true;
     fonts = with pkgs; [
-      dejavu_fonts
-      ubuntu_font_family
-      source-code-pro
+      #dejavu_fonts
+      #ubuntu_font_family
+      #source-code-pro
       noto-fonts
-      noto-fonts-extra
-      noto-fonts-cjk
-      twitter-color-emoji
-      fira-code
-      fira-code-symbols
+      #noto-fonts-extra
+      #noto-fonts-cjk
+      #twitter-color-emoji
+      #fira-code
+      #fira-code-symbols
       nerdfonts
     ];
 

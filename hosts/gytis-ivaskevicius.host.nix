@@ -16,15 +16,15 @@
 
   environment.systemPackages = with pkgs; [
     brave
-    cinnamon.nemo
+    #cinnamon.nemo
     discord
-    firefox
+    #firefox
     g-alacritty
-    gnome3.eog
+    #gnome3.eog
     pavucontrol
-    python
-    tdesktop
-    vlc
+    #python
+    #tdesktop
+    #vlc
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
   ];
 
