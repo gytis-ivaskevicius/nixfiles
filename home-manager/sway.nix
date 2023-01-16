@@ -64,6 +64,7 @@ in
 
   home.packages = with pkgs; [
     wl-clipboard
+    wlr-randr
   ];
 
   home.sessionVariables = {
@@ -71,33 +72,33 @@ in
     MOZ_USE_XINPUT2 = "1";
     XDG_SESSION_TYPE = "wayland";
     XDG_CURRENT_DESKTOP = "sway";
+    XKB_DEFAULT_OPTIONS = "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
+    SDL_VIDEODRIVER = "wayland";
+
+    # needs qt5.qtwayland in systemPackages
+    QT_QPA_PLATFORM="wayland";
+    QT_WAYLAND_DISABLE_WINDOWDECORATION="1";
+
+    # Fix for some Java AWT applications (e.g. Android Studio),
+    # use this if they aren't displayed properly:
+    _JAVA_AWT_WM_NONREPARENTING=1;
+
+    # gtk applications on wayland
+    # export GDK_BACKEND=wayland
   };
+
   wayland.windowManager.sway = {
 
     extraSessionCommands = ''
-
       unset __NIXOS_SET_ENVIRONMENT_DONE
-
-      export MOZ_ENABLE_WAYLAND=1;
-      export MOZ_USE_XINPUT2=1;
-      export XDG_SESSION_TYPE=wayland;
-      export XDG_CURRENT_DESKTOP=sway;
-
-      # Switch few keys around
-      export XKB_DEFAULT_OPTIONS=terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win
-
-      export SDL_VIDEODRIVER=wayland
-      # needs qt5.qtwayland in systemPackages
-      export QT_QPA_PLATFORM=wayland
-      export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      # Fix for some Java AWT applications (e.g. Android Studio),
-      # use this if they aren't displayed properly:
-      export _JAVA_AWT_WM_NONREPARENTING=1
-      # gtk applications on wayland
-      # export GDK_BACKEND=wayland
     '';
 
     extraConfig = ''
+
+      input "type:keyboard" {
+          xkb_layout us,de
+          xkb_options terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win
+      }
 
       #output HDMI-A-1 {
       #  mode 1920x1080@74.973Hz

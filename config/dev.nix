@@ -11,10 +11,12 @@
     #podman-compose
     nomad
     wander
+    terraform
+    terragrunt
+    awscli2
+    kubectl
+    kubernetes-helm
   ];
-  programs.zsh.promptInit = ''
-    complete -o nospace -C nomad nomad
-  '';
 
   ## Docker
   virtualisation.docker = {

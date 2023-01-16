@@ -1,8 +1,10 @@
 { lib
 , system
 , writeShellScript
+, runCommandNoCC
 , direnv
 , fd
+, gh
 , pure-prompt
 , sshuttle
 , dockerAliasEnabled ? true
@@ -108,13 +110,20 @@ let
       rm -rf ~/.java/.userPrefs/jetbrains/idea
     }
   '';
+  integrationGithub = runCommandNoCC "integrationGithub"{}''
+    ${lib.getExe gh} completion -s zsh > $out
+  '';
+  integrationDirenv = runCommandNoCC "integrationDirenv" {}''
+    ${lib.getExe direnv} hook zsh > $out
+  '';
 in
 writeShellScript "shellconfig.sh" ''
   if [ -n "''${commands[fzf-share]}" ]; then
     source "$(fzf-share)/key-bindings.zsh"
     source "$(fzf-share)/completion.zsh"
   fi
-  eval "$(${direnv}/bin/direnv hook zsh)"
+  source ${integrationGithub}
+  source ${integrationDirenv}
 
 
   ${optionalString dockerAliasEnabled docker}

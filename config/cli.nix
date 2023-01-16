@@ -27,6 +27,11 @@
     promptInit = ''
       ${builtins.readFile (pkgs.shell-config.override { dockerAliasEnabled = config.virtualisation.docker.enable; })}
       autoload -U promptinit && promptinit && prompt pure
+      complete -o nospace -C ${pkgs.nomad}/bin/nomad nomad
+      complete -o nospace -C ${pkgs.consul}/bin/consul consul
+      complete -o nospace -C ${pkgs.vault-bin}/bin/vault vault
+      complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
+      complete -o nospace -C ${pkgs.awscli}/bin/aws_completer aws
     '';
 
     setOptions = [

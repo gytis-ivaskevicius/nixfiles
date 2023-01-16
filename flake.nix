@@ -59,6 +59,13 @@
         ./hosts/GytisOS.host.nix
       ];
 
+      hosts.Monday.modules = suites.desktopModules ++ [
+        #aarch64Dev
+        dev
+        ./hosts/Monday.host.nix
+      ];
+
+
       hosts."gytis-ivaskevicius".modules = suites.desktopModules ++ [
         dev
         ./hosts/gytis-ivaskevicius.host.nix

@@ -33,7 +33,7 @@ let
   };
 in
 {
-  home.stateVersion = "22.05";
+  home.stateVersion = "22.11";
   home.keyboard.options = [ "terminate:ctrl_alt_bksp" "caps:escape" "altwin:swap_alt_win" ];
 
 
