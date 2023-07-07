@@ -2,7 +2,7 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-22.11;
+    nixpkgs.url = github:nixos/nixpkgs/;
     unstable.follows = "nixpkgs";
 
     utils.url = github:gytis-ivaskevicius/flake-utils-plus;
@@ -60,9 +60,10 @@
       ];
 
       hosts.Monday.modules = suites.desktopModules ++ [
-        #aarch64Dev
+        aarch64Dev
         dev
         ./hosts/Monday.host.nix
+        #./config/k3s.nix
       ];
 
 
