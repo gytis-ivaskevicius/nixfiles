@@ -33,12 +33,12 @@
 
   environment.systemPackages = [ pkgs.bluez ];
 
-  #services.resolved = {
-  #  enable = true;
-  #  extraConfig = ''
-  #    DNS=1.1.1.1 1.0.0.1 127.0.0.1:12299 127.0.0.1:12298
-  #  '';
-  #};
+  services.resolved = {
+    enable = true;
+    extraConfig = ''
+      DNS=1.1.1.1 1.0.0.1
+    '';
+  };
 
   programs.ssh.startAgent = true;
 
@@ -63,6 +63,7 @@
     kernelParams = [ "nvme_core.default_ps_max_latency_us=0" ];
     cleanTmpDir = true;
     loader.systemd-boot.enable = true;
+    initrd.systemd.enable = true;
     loader.timeout = 2;
     tmpOnTmpfs = true;
   };

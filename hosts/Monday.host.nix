@@ -13,19 +13,19 @@
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/6f49f9e7-cc58-4e7c-b49e-e5b4b6e0a01b";
       fsType = "btrfs";
-      options = [ "subvol=root" "compress=zstd" ];
+      options = [ "subvol=root" "compress=zstd" "discard=async" ];
     };
 
   fileSystems."/home" =
     { device = "/dev/disk/by-uuid/6f49f9e7-cc58-4e7c-b49e-e5b4b6e0a01b";
       fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" ];
+      options = [ "subvol=home" "compress=zstd" "discard=async" ];
     };
 
   fileSystems."/nix" =
     { device = "/dev/disk/by-uuid/6f49f9e7-cc58-4e7c-b49e-e5b4b6e0a01b";
       fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" ];
+      options = [ "subvol=nix" "compress=zstd" "discard=async" ];
     };
 
   fileSystems."/boot" =
@@ -36,9 +36,6 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.enableRedistributableFirmware = lib.mkDefault true;
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
-
 
   programs.ssh.startAgent = true;
   programs.dconf.enable = true;
@@ -69,6 +66,7 @@
     obs-studio
     tdesktop
     prismlauncher
+    helix
   ];
 
   services.tailscale.enable = true;

@@ -85,6 +85,13 @@ let
 
             [ -n "$cid" ] && docker container exec -it "$cid" /bin/bash
     }
+
+    docker-sh () {
+        local cid
+        cid=$(docker ps -a | sed 1d | fzf -q "$1" | awk '{print $1}')
+
+        [ -n "$cid" ] && docker container exec -it "$cid" /bin/sh
+    }
   '';
   zshPasteImprovements = ''
     pasteinit() {

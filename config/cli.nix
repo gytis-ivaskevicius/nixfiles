@@ -130,7 +130,6 @@
     pure-prompt
     ranger
     ripgrep
-    rustup
     unzip
     wget
     which

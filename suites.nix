@@ -40,8 +40,8 @@ let
       nix.linkInputs = true;
       #nix.generateNixPathFromInputs = true;
       home-manager.users.gytis = import ./home-manager/sway.nix;
-      boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_5_15;
-      #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+      #boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_5_15;
+      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
       #boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
       nixpkgs.config.allowBroken = false;
       hardware.bluetooth.enable = true;
