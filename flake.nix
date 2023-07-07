@@ -104,10 +104,10 @@
 
         packages = {
           inherit
+            nix2vimDemo
             g-alacritty
             g-firefox
             g-lf
-            g-neovim
             g-pistol
             g-polybar
             g-rofi
