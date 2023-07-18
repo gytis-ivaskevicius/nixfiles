@@ -9,7 +9,7 @@
   system.stateVersion = "22.11";
   time.timeZone = "Europe/Vilnius";
 
-  gytix.cachix.enable = true;
+  #gytix.cachix.enable = true;
   gytix.cleanHome.enable = true;
 
   systemd.tmpfiles.rules = [

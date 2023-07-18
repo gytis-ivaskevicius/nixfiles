@@ -17,7 +17,7 @@ let
     ./config/xorg.nix
   ];
   sharedModules = with nixosModules; [
-    cachix
+    #cachix
     clean-home
     runtimes
     nix-compose
