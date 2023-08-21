@@ -6,7 +6,7 @@
   fileSystems."/boot".label = "BOOT";
   i18n.defaultLocale = "en_US.UTF-8";
   nix.settings.auto-optimise-store = true;
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
   time.timeZone = "Europe/Vilnius";
 
   #gytix.cachix.enable = true;
@@ -60,11 +60,11 @@
     };
     #zfs.enableUnstable = true;
     #kernelParams = [ "quiet" "loglevel=3" ];
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
     loader.systemd-boot.enable = true;
     initrd.systemd.enable = true;
     loader.timeout = 2;
-    tmpOnTmpfs = true;
+    tmp.useTmpfs = true;
   };
 
   services = {
@@ -73,7 +73,7 @@
     #zfs.autoSnapshot.enable = true;
     zfs.autoScrub.enable = true;
     openssh.enable = true;
-    openssh.passwordAuthentication = false;
+    openssh.settings.PasswordAuthentication = false;
     printing.enable = true;
     tlp.enable = true;
   };
@@ -84,8 +84,8 @@
   zramSwap.enable = true;
 
   fonts = {
-    enableDefaultFonts = true;
-    fonts = [ pkgs.nerdfonts ];
+    enableDefaultPackages = true;
+    packages = [ pkgs.nerdfonts ];
   };
 
 
