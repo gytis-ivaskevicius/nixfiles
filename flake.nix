@@ -5,7 +5,7 @@
     nixpkgs.url = github:nixos/nixpkgs/;
     unstable.follows = "nixpkgs";
 
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus;
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus/v1.4.0;
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
     devshell.url = github:numtide/devshell;
     devshell.inputs.nixpkgs.follows = "nixpkgs";
@@ -42,6 +42,7 @@
 
       supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
       channelsConfig.allowUnfree = true;
+      channelsConfig.allowBroken = false;
 
       channels.nixpkgs.overlaysBuilder = channels: [
         (final: prev: {
@@ -103,6 +104,7 @@
         defaultPackage = g-neovim;
 
         packages = {
+          repl = pkgs.callPackage utils.blueprints.fup-repl {};
           inherit
             nix2vimDemo
             g-alacritty

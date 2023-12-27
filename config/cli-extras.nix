@@ -26,6 +26,7 @@
     sshpass
     sshuttle
     steam-run
+    tmate
     tmux
     usbutils
     yt-dlp

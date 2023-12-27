@@ -86,7 +86,7 @@
     cm = "xclip"; # Copy to middle click clipboard
     l = "ls -lF --time-style=long-iso";
     la = "l -a";
-    ls = "exa -h --git --color=auto --group-directories-first -s extension";
+    ls = "eza -h --git --color=auto --group-directories-first -s extension";
     lstree = "ls --tree";
     tree = "lstree";
 
@@ -101,7 +101,7 @@
     bat
     curl
     entr
-    exa
+    eza
     fd
     file
     fup-repl
