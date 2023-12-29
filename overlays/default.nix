@@ -8,7 +8,7 @@ final: prev: {
   g-rofi = prev.callPackage ./g-rofi { };
   g-termite = prev.callPackage ./g-termite { };
   shell-config = prev.callPackage ./shell-config { };
-  zsh-forgit = prev.callPackage ./zsh-forgit { };
+  #zsh-forgit = prev.callPackage ./zsh-forgit { };
 
   discord-for-poor-people = with prev; makeDesktopItem {
     name = "Discord";

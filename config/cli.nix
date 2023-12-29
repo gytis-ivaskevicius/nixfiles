@@ -22,7 +22,7 @@
     ohMyZsh.enable = true;
     ohMyZsh.plugins = [ "sudo" "z" "aws" ];
     shellInit = ''
-      source ${pkgs.zsh-forgit}/share/zsh-forgit/forgit.plugin.zsh
+      source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
     '';
     promptInit = ''
       ${builtins.readFile (pkgs.shell-config.override { dockerAliasEnabled = config.virtualisation.docker.enable; })}
