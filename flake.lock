@@ -85,11 +85,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1685980282,
-        "narHash": "sha256-uQyVaoqkiocA8bXKMfrgizuKmz0hUzHye5owFoUd2AQ=",
+        "lastModified": 1706310911,
+        "narHash": "sha256-5RJ4SmpI6/C2Qaw+uPr+LhCUAAt+wStVE5Rlf+8B3fY=",
         "owner": "gytis-ivaskevicius",
         "repo": "nix2vim",
-        "rev": "3836a348503ae27340c7f83f0bc7bcb907f3781d",
+        "rev": "cf3a360f0ca07248ade733d5e6ee372d964494e3",
         "type": "github"
       },
       "original": {
