@@ -51,6 +51,9 @@
     TERMINAL = "alacritty";
   };
 
+  nix.settings.max-jobs = 64;
+  nix.settings.cores = 64;
+
   environment.systemPackages = with pkgs; [
     brave
     discord
@@ -65,8 +68,6 @@
     #exodus
     discord-for-poor-people
     element-for-poor-people
-    rnix-lsp
-    distrobox
     obs-studio
     tdesktop
     prismlauncher

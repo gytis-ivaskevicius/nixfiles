@@ -9,7 +9,6 @@
 , sshuttle
 , dockerAliasEnabled ? true
 , nixArgsEnabled ? true
-, nixAutocompleteFixEnabled ? true
 , nixCdEnabled ? true
 , prettyManPagesEnabled ? true
 , promptEnabled ? true
@@ -138,7 +137,6 @@ writeShellScript "shellconfig.sh" ''
   ${optionalString sshuttleEnabled vpn}
   ${optionalString nixArgsEnabled (builtins.readFile ./nix-args.sh)}
   ${optionalString nixCdEnabled nix-cd}
-  ${optionalString nixAutocompleteFixEnabled (builtins.readFile ./nix-completions.sh)}
   ${optionalString zshPasteImprovementsEnabled zshPasteImprovements}
   ${optionalString exePathEnabled exe-path}
   ${optionalString superSecretScriptsEnabled superSecretScripts}
