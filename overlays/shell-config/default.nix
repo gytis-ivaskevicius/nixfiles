@@ -117,10 +117,10 @@ let
       rm -rf ~/.java/.userPrefs/jetbrains/idea
     }
   '';
-  integrationGithub = runCommandNoCC "integrationGithub"{}''
+  integrationGithub = runCommandNoCC "integrationGithub" { } ''
     ${lib.getExe gh} completion -s zsh > $out
   '';
-  integrationDirenv = runCommandNoCC "integrationDirenv" {}''
+  integrationDirenv = runCommandNoCC "integrationDirenv" { } ''
     ${lib.getExe direnv} hook zsh > $out
   '';
 in

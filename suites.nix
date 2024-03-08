@@ -41,7 +41,7 @@ let
       #nix.generateNixPathFromInputs = true;
       home-manager.users.gytis = import ./home-manager/sway.nix;
       #boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_5_15;
-      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
+      #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
       #boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
       hardware.bluetooth.enable = true;
       nix.extraOptions = ''

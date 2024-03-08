@@ -2,7 +2,7 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/;
+    nixpkgs.url = github:nixos/nixpkgs/nixos-23.11;
     unstable.follows = "nixpkgs";
 
     utils.url = github:gytis-ivaskevicius/flake-utils-plus/v1.4.0;
@@ -17,7 +17,7 @@
     nix2vim.inputs.flake-utils.follows = "utils";
 
     home-manager = {
-      url = github:nix-community/home-manager;
+      url = github:nix-community/home-manager/release-23.11;
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "utils";
     };
@@ -104,7 +104,7 @@
         defaultPackage = g-neovim;
 
         packages = {
-          repl = pkgs.callPackage utils.blueprints.fup-repl {};
+          repl = pkgs.callPackage utils.blueprints.fup-repl { };
           inherit
             nix2vimDemo
             g-alacritty

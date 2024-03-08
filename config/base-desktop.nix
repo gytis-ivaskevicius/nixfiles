@@ -50,7 +50,7 @@
 
   boot = {
     # Imporved networking
-    kernelModules = [ "tcp_bbr" ];
+    kernelModules = [ "tcp_bbr" "amdgpu" ];
     kernel.sysctl."net.ipv4.tcp_congestion_control" = "bbr";
     kernel.sysctl."net.core.default_qdisc" = "fq";
 
@@ -63,6 +63,8 @@
     tmp.cleanOnBoot = true;
     loader.systemd-boot.enable = true;
     initrd.systemd.enable = true;
+    initrd.availableKernelModules = [ "amdgpu" ];
+    initrd.kernelModules = [ "amdgpu" ];
     loader.timeout = 2;
     tmp.useTmpfs = true;
   };
@@ -77,6 +79,8 @@
     printing.enable = true;
     tlp.enable = true;
   };
+  #services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.deviceSection = ''
     Option "VariableRefresh" "true"
   '';
@@ -111,12 +115,12 @@
     opengl = {
       enable = lib.mkDefault true;
       driSupport32Bit = config.hardware.opengl.enable;
-      #extraPackages = with pkgs; [
-      #  rocm-opencl-icd
-      #  rocm-opencl-runtime
-      #  amdvlk
-      #];
-      #extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+      extraPackages = with pkgs; [
+        # rocm-opencl-icd
+        # rocm-opencl-runtime
+        amdvlk
+      ];
+      extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
     };
     cpu.amd.updateMicrocode = true;
     #cpu.intel.updateMicrocode = true;
