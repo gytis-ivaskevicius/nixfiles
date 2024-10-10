@@ -11,8 +11,8 @@
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     devshell.inputs.flake-utils.follows = "utils";
 
-    #nix2vim.url = "/home/gytis/Projects/nix2vim";
-    nix2vim.url = "github:gytis-ivaskevicius/nix2vim";
+    nix2vim.url = "/home/gytis/Projects/nix2vim";
+    #nix2vim.url = "github:gytis-ivaskevicius/nix2vim";
     nix2vim.inputs.nixpkgs.follows = "";
     nix2vim.inputs.flake-utils.follows = "utils";
 
@@ -29,7 +29,14 @@
 
   };
 
-  outputs = inputs@{ self, nix2vim, utils, home-manager, ... }:
+  outputs =
+    inputs@{
+      self,
+      nix2vim,
+      utils,
+      home-manager,
+      ...
+    }:
     let
       pkgs = self.pkgs.x86_64-linux.nixpkgs;
       mkApp = utils.lib.mkApp;
@@ -40,7 +47,10 @@
       inherit self inputs;
       inherit (suites) nixosModules;
 
-      supportedSystems = [ "aarch64-linux" "x86_64-linux" ];
+      supportedSystems = [
+        "aarch64-linux"
+        "x86_64-linux"
+      ];
       channelsConfig.allowUnfree = true;
       channelsConfig.allowBroken = false;
 

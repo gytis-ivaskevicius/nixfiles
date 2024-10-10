@@ -108,6 +108,10 @@ in
       #}
 
       #output HDMI-A-1 disable
+			set $soundbar 'Harris Corporation JBL Bar 2.x 0x01010101'
+			output $soundbar resolution 640x480@60Hz pos -10000 0
+			workspace "99999" output $soundbar
+			for_window [workspace="^99999$"] move container to output $monitor_center; focus output $monitor_center
 
       output DP-2 {
         mode 3840x1600@143.998001Hz
@@ -139,7 +143,7 @@ in
         names = [ "RobotoMono" ];
         size = 9.0;
       };
-      terminal = "${pkgs.alacritty}/bin/alacritty";
+      terminal = "${pkgs.g-alacritty}/bin/alacritty";
       startup = [
         #{ command = "waybar"; always = true; notification = false; }
       ];
