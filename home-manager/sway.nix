@@ -3,6 +3,10 @@
 with lib;
 with pkgs;
 let
+	rofi-menu = pkgs.writeShellScript "rofi-menu.sh" ''
+		monitor="$(swaymsg -t get_outputs | jq '.[] | select(.focused) | .name' -r)"
+		${pkgs.g-rofi}/bin/rofi -show drun -modi drun -monitor "$monitor" $@
+	'';
   left = "h";
   down = "j";
   up = "k";
@@ -177,7 +181,7 @@ in
         indicator = "#00ff00";
       };
 
-      menu = "${pkgs.g-rofi}/bin/rofi -show drun -modi drun";
+      menu = "${rofi-menu}";
       modes.resize = {
         Escape = "mode default";
         Return = "mode default";

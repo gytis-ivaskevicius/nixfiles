@@ -103,7 +103,12 @@ in
       indicator = "#00ff00";
     };
 
-    menu = "${pkgs.g-rofi}/bin/rofi -show drun -modi drun";
+		menu = pkgs.writeShellScript "rofi-menu.sh" ''
+			monitor="$(swaymsg -t get_outputs | jq '[.[].focused] | index(true)')"
+			${pkgs.g-rofi}/bin/rofi -show drun -modi drun -monitor "$monitor" $@
+		'';
+
+		#menu = "${pkgs.g-rofi}/bin/rofi -show drun -modi drun -m 1";
     modes.resize = {
       Escape = "mode default";
       Return = "mode default";
