@@ -16,11 +16,8 @@
 
     services.hello.image = pkgs.dockerTools.buildImage {
       name = "hello-docker";
-      config = {
-        Cmd = [ "${pkgs.hello}/bin/hello" ];
-      };
+      config = { Cmd = [ "${pkgs.hello}/bin/hello" ]; };
     };
-
 
     #services.nginx3 = {
     #  image = "nginx";

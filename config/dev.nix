@@ -4,15 +4,8 @@
   #virtualisation.podman.enable = true;
 
   environment.systemPackages = with pkgs; [
-    gradle
-    insomnia
     #jetbrains.idea-ultimate
-    maven
     #podman-compose
-    nomad
-    wander
-    terraform
-    terragrunt
     awscli2
     kubectl
     kubernetes-helm

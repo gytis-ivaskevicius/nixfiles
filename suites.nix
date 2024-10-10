@@ -54,6 +54,4 @@ let
     })
   ];
 in
-{
-  inherit nixosModules sharedModules desktopModules;
-}
+{ inherit nixosModules sharedModules desktopModules; }

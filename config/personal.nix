@@ -11,7 +11,19 @@
     shell = pkgs.zsh;
     isNormalUser = true;
     description = "Gytis Ivaskevicius";
-    extraGroups = [ "audio" "video" "dialout" "adbusers" "wheel" "networkmanager" "docker" "vboxusers" ];
+    extraGroups = [
+      "audio"
+      "video"
+      "dialout"
+      "adbusers"
+      "wheel"
+      "networkmanager"
+      "docker"
+      "vboxusers"
+      "libvirt"
+      "libvirtd"
+      "kvm"
+    ];
     initialPassword = "toor";
   };
 
@@ -23,8 +35,6 @@
     initialPassword = "toor";
   };
 
-  environment.systemPackages = with pkgs; [
-    slack
-  ];
+  environment.systemPackages = with pkgs; [ ];
 
 }

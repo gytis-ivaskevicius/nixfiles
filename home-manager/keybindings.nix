@@ -35,10 +35,9 @@ in
   #"${modifier}+t" = ''[class="scratchterm"] scratchpad show, move position center'';
   #"${modifier}+b" = ''[class="scratchbrowser"] scratchpad show, move position center '';
 
-  "${modifier}+Return" = "exec ${g-alacritty}/bin/alacritty";
+  #"${modifier}+Return" = "exec ${g-alacritty}/bin/alacritty";
   "${modifier}+q" = "kill";
   #"${modifier}+d" = "exec ${cfg.config.menu}";
-
 
   "${modifier}+${left}" = "focus left; exec $movemouse";
   "${modifier}+${down}" = "focus down; exec $movemouse";
@@ -49,7 +48,6 @@ in
   "${modifier}+Ctrl+${down}" = "move workspace to output down";
   "${modifier}+Ctrl+${up}" = "move workspace to output up";
   "${modifier}+Ctrl+${right}" = "move workspace to output right";
-
 
   "${modifier}+Shift+${left}" = "move left";
   "${modifier}+Shift+${down}" = "move down";

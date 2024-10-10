@@ -4,9 +4,7 @@
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  environment.systemPackages = with pkgs; [
-    tio
-  ];
+  environment.systemPackages = with pkgs; [ tio ];
 
   nix.settings = {
     substituters = [ "https://arm.cachix.org/" ];

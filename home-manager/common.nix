@@ -33,7 +33,7 @@ let
   };
 in
 {
-  home.stateVersion = "23.11";
+  home.stateVersion = "24.11";
   home.keyboard.options = [ "terminate:ctrl_alt_bksp" "caps:escape" "altwin:swap_alt_win" ];
 
 
@@ -78,7 +78,6 @@ in
     pavucontrol
     vlc
   ];
-
 
   systemd.user.services.polkit-gnome = {
     Unit = {

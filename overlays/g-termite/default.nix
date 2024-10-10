@@ -1,5 +1,3 @@
 { termite }:
 
-termite.override {
-  configFile = ./termite.conf;
-}
+termite.override { configFile = ./termite.conf; }

@@ -1,5 +1,3 @@
 { pkgs, rofi }:
 
-rofi.override {
-  theme = ./rofi.rasi;
-}
+rofi.override { theme = ./rofi.rasi; }

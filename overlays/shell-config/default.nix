@@ -19,7 +19,6 @@
 , enableMemeScript ? true
 }:
 
-
 with lib;
 let
   meme = ''

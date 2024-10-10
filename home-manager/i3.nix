@@ -39,12 +39,10 @@ in
   #  };
   #};
 
-
   services.flameshot.enable = true;
   services.polybar.enable = true;
   services.polybar.script = "polybar &";
   services.polybar.package = pkgs.g-polybar;
-
 
   services.random-background = {
     enable = true;

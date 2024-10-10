@@ -28,7 +28,6 @@ in
       type = with types; attrsOf package;
     };
 
-
     gytix.node.additionalPackages = mkOption {
       description = ''
         Node packages to install. Typical values are pkgs.nodejs-10_x or pkgs.nodejs-14_x. Example:
@@ -46,18 +45,25 @@ in
     };
   };
 
-
   config =
     let
       escapeDashes = it: replaceStrings [ "-" ] [ "_" ] it;
 
       javaPkgs = javaCfg.additionalPackages;
-      javaAliases = mapAttrs' (name: value: nameValuePair "java_${name}" "${value.home}/bin/java") javaPkgs;
-      javaTmpfiles = mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}") javaPkgs;
-      javaEnvVariables = mapAttrs' (name: value: nameValuePair "JAVA_HOME_${toUpper (escapeDashes name)}" "${value.home}") javaPkgs;
+      javaAliases = mapAttrs'
+        (name: value: nameValuePair "java_${name}" "${value.home}/bin/java")
+        javaPkgs;
+      javaTmpfiles =
+        mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}")
+          javaPkgs;
+      javaEnvVariables = mapAttrs'
+        (name: value:
+          nameValuePair "JAVA_HOME_${toUpper (escapeDashes name)}" "${value.home}")
+        javaPkgs;
 
       nodePkgs = nodeCfg.additionalPackages;
-      nodeAliases = mapAttrs' (name: value: nameValuePair name "${value}/bin/node") nodePkgs;
+      nodeAliases =
+        mapAttrs' (name: value: nameValuePair name "${value}/bin/node") nodePkgs;
     in
     {
       environment.variables = javaEnvVariables // defaultEnvVarialbes;

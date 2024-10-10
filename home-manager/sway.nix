@@ -51,7 +51,6 @@ let
   colorScheme = colorSchemeDark;
   font = "Roboto";
 
-
   bgColor = colorScheme.primary.normal.background;
   fgColor = colorScheme.primary.bright.foreground;
   acColor = colorScheme.normal.red;
@@ -122,7 +121,6 @@ in
       exec wl-paste -t text --watch ${pkgs.clipman} store
     '';
 
-
     enable = true;
     config = {
       #input = {
@@ -137,16 +135,43 @@ in
       window.border = 0;
       focus.forceWrapping = false;
       focus.followMouse = false;
-      fonts = { names = [ "RobotoMono" ]; size = 9.0; };
-      terminal = "${pkgs.alacritty}/bin/alacritty}";
+      fonts = {
+        names = [ "RobotoMono" ];
+        size = 9.0;
+      };
+      terminal = "${pkgs.alacritty}/bin/alacritty";
       startup = [
         #{ command = "waybar"; always = true; notification = false; }
       ];
 
-      colors.focused = { border = bg-color; childBorder = bg-color; background = bg-color; text = text-color; indicator = "#00ff00"; };
-      colors.unfocused = { border = inactive-bg-color; childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00"; };
-      colors.focusedInactive = { border = inactive-bg-color; childBorder = inactive-bg-color; background = inactive-bg-color; text = inactive-text-color; indicator = "#00ff00"; };
-      colors.urgent = { border = urgent-bg-color; childBorder = urgent-bg-color; background = urgent-bg-color; text = text-color; indicator = "#00ff00"; };
+      colors.focused = {
+        border = bg-color;
+        childBorder = bg-color;
+        background = bg-color;
+        text = text-color;
+        indicator = "#00ff00";
+      };
+      colors.unfocused = {
+        border = inactive-bg-color;
+        childBorder = inactive-bg-color;
+        background = inactive-bg-color;
+        text = inactive-text-color;
+        indicator = "#00ff00";
+      };
+      colors.focusedInactive = {
+        border = inactive-bg-color;
+        childBorder = inactive-bg-color;
+        background = inactive-bg-color;
+        text = inactive-text-color;
+        indicator = "#00ff00";
+      };
+      colors.urgent = {
+        border = urgent-bg-color;
+        childBorder = urgent-bg-color;
+        background = urgent-bg-color;
+        text = text-color;
+        indicator = "#00ff00";
+      };
 
       menu = "${pkgs.g-rofi}/bin/rofi -show drun -modi drun";
       modes.resize = {

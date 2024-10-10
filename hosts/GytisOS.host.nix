@@ -17,7 +17,6 @@
   programs.ssh.startAgent = true;
   programs.dconf.enable = true;
 
-
   hardware.bluetooth.enable = true;
   environment.variables = {
     BROWSER = "brave";
@@ -50,11 +49,8 @@
   programs.steam.enable = true;
   services.flatpak.enable = true;
 
-  environment.shellAliases = {
-    vv = "${pkgs.neovim-unwrapped}/bin/nvim";
-  };
+  environment.shellAliases = { vv = "${pkgs.neovim-unwrapped}/bin/nvim"; };
   #programs.noisetorch.enable = true;
-
 
   security.chromiumSuidSandbox.enable = true;
   programs.chromium = {

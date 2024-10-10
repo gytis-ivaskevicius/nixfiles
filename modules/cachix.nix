@@ -1,10 +1,8 @@
 { config, pkgs, lib, ... }:
 
 with lib;
-let
-  cfg = config.gytix.cachix;
-in
-{
+let cfg = config.gytix.cachix;
+in {
   options = {
     gytix.cachix.enable = mkEnableOption "Enable custom cachix configuration";
   };

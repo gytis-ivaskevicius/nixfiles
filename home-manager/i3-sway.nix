@@ -61,8 +61,16 @@ in
     fonts = [ "RobotoMono 9" ];
     terminal = lib.getExe pkgs.alacritty;
     startup = mkIf isI3 [
-      { command = "systemctl --user restart polybar"; always = true; notification = false; }
-      { command = "autorandr -c"; always = true; notification = false; }
+      {
+        command = "systemctl --user restart polybar";
+        always = true;
+        notification = false;
+      }
+      {
+        command = "autorandr -c";
+        always = true;
+        notification = false;
+      }
       #{ command = "waybar"; always = true; notification = false; }
     ];
 
@@ -106,10 +114,7 @@ in
     };
 
     #    bars = mkForce [ ];
-    bars =
-      if isSway then [{
-        "command" = "${waybar}/bin/waybar";
-      }] else [ ];
+    bars = if isSway then [{ "command" = "${waybar}/bin/waybar"; }] else [ ];
     keybindings = mkOptionDefault (import ./keybindings.nix { inherit pkgs; });
   };
 }

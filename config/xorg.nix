@@ -17,10 +17,7 @@
     };
 
     # Make auto-repeat on key hold work faster.
-    displayManager.xserverArgs = [
-      "-ardelay 300"
-      "-arinterval 20"
-    ];
+    displayManager.xserverArgs = [ "-ardelay 300" "-arinterval 20" ];
 
     displayManager.lightdm = {
       enable = true;

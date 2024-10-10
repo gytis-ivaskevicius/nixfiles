@@ -51,10 +51,11 @@
     TERMINAL = "alacritty";
   };
 
-  nix.settings.max-jobs = 64;
-  nix.settings.cores = 64;
+  nix.settings.max-jobs = 128;
+  nix.settings.cores = 128;
 
   environment.systemPackages = with pkgs; [
+    remmina
     brave
     discord
     firefox
@@ -91,7 +92,7 @@
     # defaultSearchProviderSearchURL = "https://encrypted.google.com/search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}{google:instantExtendedEnabledParameter}ie={inputEncoding}";
     # https://chromeenterprise.google/policies
     enable = true;
-    homepageLocation = "about:blank";
+    homepageLocation = "https://github.com/notifications";
 
     extensions = [
       "chklaanhfefbnpoihckbnefhakgolnmc" # JSONView
@@ -119,7 +120,7 @@
       EnableMediaRouter = false;
       HideWebStoreIcon = true;
       MetricsReportingEnabled = false;
-      NewTabPageLocation = "about:blank";
+      NewTabPageLocation = "https://github.com/notifications";
       PasswordManagerEnabled = false;
       RestoreOnStartup = 1; # 5 = Open New Tab Page 1 = Restore the last session 4 = Open a list of URLs
       SpellcheckEnabled = true;

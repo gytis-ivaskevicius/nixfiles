@@ -20,10 +20,7 @@
     };
 
     # Make auto-repeat on key hold work faster.
-    displayManager.xserverArgs = [
-      "-ardelay 300"
-      "-arinterval 20"
-    ];
+    displayManager.xserverArgs = [ "-ardelay 300" "-arinterval 20" ];
 
     displayManager.lightdm = {
       enable = true;
@@ -50,11 +47,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    wmctrl
-    xclip
-    xdotool
-  ];
+  environment.systemPackages = with pkgs; [ wmctrl xclip xdotool ];
 
   # TODO: Does not work well 20.09, needs to be fixed at some point
   # To make sure all local SSH sessions are closed after a laptop lid is shut.

@@ -1,5 +1,4 @@
-{ config, pkgs, lib, ... }:
-{
+{ config, pkgs, lib, ... }: {
   #powerManagement.powertop.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
   console.keyMap = "us";
@@ -25,7 +24,8 @@
     #firewall.enable = false;
     #firewall.allowedTCPPorts = [ 8080 9090 ];
     firewall.allowPing = false;
-    hostId = builtins.substring 0 8 (builtins.hashString "md5" config.networking.hostName);
+    hostId = builtins.substring 0 8
+      (builtins.hashString "md5" config.networking.hostName);
     nameservers = [ "192.168.30.11" "192.168.30.12" ];
     useDHCP = false;
     networkmanager.enable = true;
@@ -92,7 +92,6 @@
     packages = [ pkgs.nerdfonts ];
   };
 
-
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -115,11 +114,12 @@
     opengl = {
       enable = lib.mkDefault true;
       driSupport32Bit = config.hardware.opengl.enable;
-      extraPackages = with pkgs; [
-        # rocm-opencl-icd
-        # rocm-opencl-runtime
-        amdvlk
-      ];
+      extraPackages = with pkgs;
+        [
+          # rocm-opencl-icd
+          # rocm-opencl-runtime
+          amdvlk
+        ];
       extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
     };
     cpu.amd.updateMicrocode = true;

@@ -124,10 +124,7 @@ let
 in
 pkgs.symlinkJoin {
   name = "lf";
-  paths = [
-    wrapped
-    pkgs.lf
-  ];
+  paths = [ wrapped pkgs.lf ];
 }
 
 #  {

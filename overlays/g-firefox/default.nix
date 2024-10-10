@@ -67,7 +67,6 @@ let
     "experiments.supported" = false;
     "experiments.enabled" = false;
 
-
     # Disable some not so useful functionality.
     "media.videocontrols.picture-in-picture.video-toggle.enabled" = false;
     "extensions.shield-recipe-client.enabled" = false;
