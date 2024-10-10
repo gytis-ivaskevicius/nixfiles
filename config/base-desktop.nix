@@ -6,7 +6,7 @@
   fileSystems."/boot".label = "BOOT";
   i18n.defaultLocale = "en_US.UTF-8";
   nix.settings.auto-optimise-store = true;
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.11";
   time.timeZone = "Europe/Vilnius";
 
   #gytix.cachix.enable = true;

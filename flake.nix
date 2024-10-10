@@ -2,22 +2,22 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = github:nixos/nixpkgs/nixos-23.11;
+    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
     unstable.follows = "nixpkgs";
 
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus/v1.4.0;
-    #utils.url = "/home/gytis/Projects/flake-utils-plus";
+    #utils.url = github:gytis-ivaskevicius/flake-utils-plus;
+    utils.url = "/home/gytis/Projects/flake-utils-plus";
     devshell.url = github:numtide/devshell;
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     devshell.inputs.flake-utils.follows = "utils";
 
     #nix2vim.url = "/home/gytis/Projects/nix2vim";
     nix2vim.url = github:gytis-ivaskevicius/nix2vim;
-    nix2vim.inputs.nixpkgs.follows = "nixpkgs";
+    nix2vim.inputs.nixpkgs.follows = "";
     nix2vim.inputs.flake-utils.follows = "utils";
 
     home-manager = {
-      url = github:nix-community/home-manager/release-23.11;
+      url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "utils";
     };
