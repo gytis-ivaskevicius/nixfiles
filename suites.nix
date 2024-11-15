@@ -14,6 +14,7 @@ let
     ./config/dev.nix
     ./config/personal.nix
     ./config/sway.nix
+    ./config/winapps.nix
     ./config/xorg.nix
   ];
   sharedModules = with nixosModules; [
@@ -33,6 +34,7 @@ let
     base-desktop
     cli
     cli-extras
+    winapps
     #./hosts/work/i3
     sway
     ({ pkgs, lib, config, ... }: {
