@@ -30,6 +30,7 @@
       autoload -U promptinit && promptinit && prompt pure
       complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
       complete -o nospace -C ${pkgs.awscli}/bin/aws_completer aws
+      source ~/.zshrc
     '';
 
     setOptions = [

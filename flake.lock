@@ -85,17 +85,17 @@
         "nixpkgs": []
       },
       "locked": {
-        "lastModified": 1727867024,
-        "narHash": "sha256-yimXLupF3hG57imRMpqWho/Wstcj7P8Yh8t0SBiX+dQ=",
-        "owner": "gytis-ivaskevicius",
-        "repo": "nix2vim",
-        "rev": "da26caae6c7776eedbc6514a0f57f1ccd6a759ed",
-        "type": "github"
+        "lastModified": 1729025507,
+        "narHash": "sha256-TDt7lVGt5v6TFE2lLdL/Gh8afQn+yXz9z+7bVqwVDHU=",
+        "ref": "refs/heads/master",
+        "rev": "f30f90c2456c4b41837fd826bfc66630628c495e",
+        "revCount": 122,
+        "type": "git",
+        "url": "file:///home/gytis/Projects/nix2vim"
       },
       "original": {
-        "owner": "gytis-ivaskevicius",
-        "repo": "nix2vim",
-        "type": "github"
+        "type": "git",
+        "url": "file:///home/gytis/Projects/nix2vim"
       }
     },
     "nixpkgs": {
