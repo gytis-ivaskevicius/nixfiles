@@ -60,7 +60,7 @@
     discord
     firefox
     g-alacritty
-    gnome3.eog
+    gnome.eog
     pavucontrol
     vlc
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
