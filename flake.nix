@@ -5,6 +5,9 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
     unstable.follows = "nixpkgs";
 
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+
+
     #utils.url = github:gytis-ivaskevicius/flake-utils-plus;
     utils.url = "/home/gytis/Projects/flake-utils-plus";
     devshell.url = "github:numtide/devshell";
@@ -35,6 +38,7 @@
       nix2vim,
       utils,
       home-manager,
+      nixos-hardware,
       ...
     }:
     let
@@ -74,6 +78,12 @@
         aarch64Dev
         dev
         ./hosts/Monday.host.nix
+        nixos-hardware.nixosModules.common-pc
+        nixos-hardware.nixosModules.common-pc-ssd
+        nixos-hardware.nixosModules.common-hidpi
+        nixos-hardware.nixosModules.common-gpu-amd
+        nixos-hardware.nixosModules.common-cpu-amd-pstate
+        nixos-hardware.nixosModules.common-cpu-amd-zenpower
         #./config/k3s.nix
       ];
 
