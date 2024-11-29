@@ -85,31 +85,31 @@
         "nixpkgs": []
       },
       "locked": {
-        "lastModified": 1729025507,
-        "narHash": "sha256-TDt7lVGt5v6TFE2lLdL/Gh8afQn+yXz9z+7bVqwVDHU=",
-        "ref": "refs/heads/master",
-        "rev": "f30f90c2456c4b41837fd826bfc66630628c495e",
-        "revCount": 122,
-        "type": "git",
-        "url": "file:///home/gytis/Projects/nix2vim"
+        "lastModified": 1732820845,
+        "narHash": "sha256-YPXk41l4PzKb5rtcxkYhymwjHJG95fxl4iXIzXnftr8=",
+        "owner": "gytis-ivaskevicius",
+        "repo": "nix2vim",
+        "rev": "e2c511ea553418dd432005875c649b09d56b7e58",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/gytis/Projects/nix2vim"
+        "owner": "gytis-ivaskevicius",
+        "repo": "nix2vim",
+        "type": "github"
       }
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1731319897,
-        "narHash": "sha256-PbABj4tnbWFMfBp6OcUK5iGy1QY+/Z96ZcLpooIbuEI=",
+        "lastModified": 1732749044,
+        "narHash": "sha256-T38FQOg0BV5M8FN1712fovzNakSOENEYs+CSkg31C9Y=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "dc460ec76cbff0e66e269457d7b728432263166c",
+        "rev": "0c5b4ecbed5b155b705336aa96d878e55acd8685",
         "type": "github"
       },
       "original": {
         "owner": "nixos",
-        "ref": "nixos-unstable",
+        "ref": "nixos-24.05",
         "repo": "nixpkgs",
         "type": "github"
       }

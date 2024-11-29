@@ -56,7 +56,7 @@ in
     iconTheme.package = pkgs.papirus-icon-theme;
     iconTheme.name = "ePapirus";
     theme.package = pkgs.layan-gtk-theme;
-    theme.name = "Layan-light-solid";
+    theme.name = "Layan-Dark-Solid";
     font.name = "Roboto";
     font.package = pkgs.noto-fonts;
     gtk3.extraConfig = {
