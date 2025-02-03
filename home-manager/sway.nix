@@ -98,6 +98,7 @@ in
 
     extraConfig = ''
 
+      seat * xcursor_theme oreo_black_cursors 30
       input "type:keyboard" {
           xkb_layout us,de
           xkb_options terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win

@@ -67,14 +67,21 @@ in
     };
   };
 
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.oreo-cursors-plus;
+    name = "oreo_black_cursors";
+    size = 30;
+  };
+
   home.packages = with pkgs; [
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
     brave
-    gnome.nautilus
+    nautilus
     discord
     firefox
     g-alacritty
-    gnome.eog
+    eog
     pavucontrol
     vlc
   ];

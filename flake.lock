@@ -85,16 +85,17 @@
         "nixpkgs": []
       },
       "locked": {
-        "dirtyRev": "e2c511ea553418dd432005875c649b09d56b7e58-dirty",
-        "dirtyShortRev": "e2c511e-dirty",
         "lastModified": 1732820845,
-        "narHash": "sha256-++ksxw5CItU6Ab993zXmpLor7pgjAnXqUQY7Xd20QUw=",
-        "type": "git",
-        "url": "file:///home/gytis/Projects/nix2vim"
+        "narHash": "sha256-YPXk41l4PzKb5rtcxkYhymwjHJG95fxl4iXIzXnftr8=",
+        "owner": "gytis-ivaskevicius",
+        "repo": "nix2vim",
+        "rev": "e2c511ea553418dd432005875c649b09d56b7e58",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/gytis/Projects/nix2vim"
+        "owner": "gytis-ivaskevicius",
+        "repo": "nix2vim",
+        "type": "github"
       }
     },
     "nixos-hardware": {
@@ -115,11 +116,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1732350895,
-        "narHash": "sha256-GcOQbOgmwlsRhpLGSwZJwLbo3pu9ochMETuRSS1xpz4=",
+        "lastModified": 1735669367,
+        "narHash": "sha256-tfYRbFhMOnYaM4ippqqid3BaLOXoFNdImrfBfCp4zn0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "0c582677378f2d9ffcb01490af2f2c678dcb29d3",
+        "rev": "edf04b75c13c2ac0e54df5ec5c543e300f76f1c9",
         "type": "github"
       },
       "original": {
@@ -163,17 +164,17 @@
         "flake-utils": "flake-utils"
       },
       "locked": {
-        "lastModified": 1719955819,
-        "narHash": "sha256-QrvC5YG+EDr7kIM5KWPMc/mZeGEcxxrkjkaTDIigkgI=",
-        "ref": "refs/heads/master",
-        "rev": "e5f2a9feedc43834d80486e2ba8f6fd31a3a4f1f",
-        "revCount": 313,
-        "type": "git",
-        "url": "file:///home/gytis/Projects/flake-utils-plus"
+        "lastModified": 1722363685,
+        "narHash": "sha256-XCf2PIAT6lH7BwytgioPmVf/wkzXjSKScC4KzcZgb64=",
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "rev": "6b10f51ff73a66bb29f3bc8151a59d217713f496",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/gytis/Projects/flake-utils-plus"
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "type": "github"
       }
     }
   },

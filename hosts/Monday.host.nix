@@ -33,7 +33,7 @@
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/639F-0D71";
+      label = "BOOT";
       fsType = "vfat";
     };
 
@@ -44,6 +44,7 @@
   programs.ssh.startAgent = true;
   programs.dconf.enable = true;
 
+  gytix.cachix.enable = true;
 
   hardware.bluetooth.enable = true;
   environment.variables = {
@@ -60,7 +61,7 @@
     discord
     firefox
     g-alacritty
-    gnome.eog
+    eog
     pavucontrol
     vlc
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
@@ -100,7 +101,6 @@
       "ckkdlimhmcjmikdlpkmbgfkaikojcbjk" # Markdown Viewer
       "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium.
       #"eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
-      "fdjamakpfbbddfjaooikfcpapjohcfmg" # Dashlane
       "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
       #"gcbommkclmclpchllfjekcdonpmejbdp" # Https everywhere
       "gneobebnilffgkejpfhlgkmpkipgbcno" # Death To _blank

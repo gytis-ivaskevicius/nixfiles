@@ -5,7 +5,6 @@
   environment.systemPackages = with pkgs; [
     #android-file-transfer
     binutils
-    direnv
     dmidecode
     dnsutils
     ffmpeg

@@ -2,14 +2,14 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    unstable.follows = "nixpkgs";
+    nixpkgs.url = "/home/gytis/nixpkgs/";
+    unstable.url = "/home/gytis/nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
 
-    #utils.url = github:gytis-ivaskevicius/flake-utils-plus;
-    utils.url = "/home/gytis/Projects/flake-utils-plus";
+    utils.url = github:gytis-ivaskevicius/flake-utils-plus;
+    #utils.url = "/home/gytis/Projects/flake-utils-plus";
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     devshell.inputs.flake-utils.follows = "utils";

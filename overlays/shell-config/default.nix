@@ -2,7 +2,6 @@
 , system
 , writeShellScript
 , runCommandNoCC
-, direnv
 , fd
 , gh
 , pure-prompt
@@ -118,9 +117,6 @@ let
   integrationGithub = runCommandNoCC "integrationGithub" { } ''
     ${lib.getExe gh} completion -s zsh > $out
   '';
-  integrationDirenv = runCommandNoCC "integrationDirenv" { } ''
-    ${lib.getExe direnv} hook zsh > $out
-  '';
 in
 writeShellScript "shellconfig.sh" ''
   if [ -n "''${commands[fzf-share]}" ]; then
@@ -128,7 +124,6 @@ writeShellScript "shellconfig.sh" ''
     source "$(fzf-share)/completion.zsh"
   fi
   source ${integrationGithub}
-  source ${integrationDirenv}
 
 
   ${optionalString dockerAliasEnabled docker}

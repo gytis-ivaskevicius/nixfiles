@@ -31,7 +31,9 @@
     networkmanager.enable = true;
   };
 
-  environment.systemPackages = [ pkgs.bluez ];
+  environment.systemPackages = [
+ pkgs.vulkan-validation-layers
+    pkgs.bluez ];
 
   services.resolved = {
     enable = true;
@@ -89,7 +91,8 @@
 
   fonts = {
     enableDefaultPackages = true;
-    packages = [ pkgs.nerdfonts ];
+    packages = builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+    #packages = [pkgs.nerdfonts];
   };
 
   security.rtkit.enable = true;
@@ -108,19 +111,24 @@
 
   programs.gnupg.agent.enable = true;
 
+  hardware.amdgpu.amdvlk.enable = true;
+  hardware.amdgpu.amdvlk.support32Bit.enable = true;
+
   hardware = {
     enableRedistributableFirmware = true;
     enableAllFirmware = true;
-    opengl = {
+    graphics = {
       enable = lib.mkDefault true;
-      driSupport32Bit = config.hardware.opengl.enable;
+      enable32Bit = config.hardware.graphics.enable;
       extraPackages = with pkgs;
         [
           # rocm-opencl-icd
           # rocm-opencl-runtime
-          amdvlk
+          #amdvlk
+          vaapiVdpau
+          libvdpau-va-gl
         ];
-      extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+      #extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
     };
     cpu.amd.updateMicrocode = true;
     #cpu.intel.updateMicrocode = true;
