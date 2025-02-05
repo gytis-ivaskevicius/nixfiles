@@ -109,8 +109,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    nixfmt-rfc-style
-    statix
     bat
     curl
     entr
@@ -122,6 +120,7 @@
     gcc
     git
     git-lfs
+    github-cli
     htop
     inetutils
     iotop
@@ -134,6 +133,7 @@
     nix-top
     nix-tree
     nix2vimDemo
+    nixfmt-rfc-style
     nixpkgs-fmt
     nushell
     p7zip
@@ -143,6 +143,7 @@
     pure-prompt
     ranger
     ripgrep
+    statix
     unzip
     wget
     which

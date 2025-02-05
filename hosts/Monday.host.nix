@@ -2,40 +2,31 @@
 
 {
 
-  #boot.kernelParams = [ "idle=nomwait" "processor.max_cstate=5" ];
-
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-
   fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/6f49f9e7-cc58-4e7c-b49e-e5b4b6e0a01b";
-      fsType = "btrfs";
-      options = [ "subvol=root" "compress=zstd" "discard=async" ];
+    { device = "zroot/locker/os";
+      fsType = "zfs";
     };
 
   fileSystems."/home" =
-    {
-      device = "/dev/disk/by-uuid/6f49f9e7-cc58-4e7c-b49e-e5b4b6e0a01b";
-      fsType = "btrfs";
-      options = [ "subvol=home" "compress=zstd" "discard=async" ];
+    { device = "zroot/locker/home";
+      fsType = "zfs";
     };
 
   fileSystems."/nix" =
-    {
-      device = "/dev/disk/by-uuid/6f49f9e7-cc58-4e7c-b49e-e5b4b6e0a01b";
-      fsType = "btrfs";
-      options = [ "subvol=nix" "compress=zstd" "discard=async" ];
+    { device = "zroot/locker/nix";
+      fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    {
-      label = "BOOT";
+    { label = "BOOT";
       fsType = "vfat";
     };
+
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

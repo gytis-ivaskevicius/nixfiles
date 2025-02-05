@@ -1,4 +1,4 @@
-export DRIVE=nvme1n1
+export DRIVE=
 export BOOT_PARTITION="${DRIVE}p1"
 export ROOT_PARTITION="${DRIVE}p2"
 

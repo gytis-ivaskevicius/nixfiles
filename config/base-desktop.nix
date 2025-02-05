@@ -74,7 +74,7 @@
   services = {
     fwupd.enable = true;
     dbus.packages = with pkgs; [ dconf ];
-    #zfs.autoSnapshot.enable = true;
+    zfs.autoSnapshot.enable = true;
     zfs.autoScrub.enable = true;
     openssh.enable = true;
     openssh.settings.PasswordAuthentication = false;
