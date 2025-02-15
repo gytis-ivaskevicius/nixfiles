@@ -39,7 +39,7 @@
 
   hardware.bluetooth.enable = true;
   environment.variables = {
-    BROWSER = "brave";
+    BROWSER = "chromium";
     TERMINAL = "alacritty";
   };
 

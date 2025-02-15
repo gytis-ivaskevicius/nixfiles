@@ -5,7 +5,7 @@ with pkgs;
 let
   #browser = [ "firefox.desktop" ];
   #browser = [ "chromium-browser.desktop" ];
-  browser = [ "brave-browser.desktop" ];
+  browser = [ "chromium.desktop" ];
   associations = {
     "text/html" = browser;
     "x-scheme-handler/http" = browser;

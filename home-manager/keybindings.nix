@@ -28,8 +28,8 @@ in
   XF86MonBrightnessDown = "exec ${xorg.xbacklight} -dec 20";
 
   "${modifier}+o" = "exec ${ocrScript}";
-  "${modifier}+b" = "exec ${brave}/bin/brave";
-  "${modifier}+shift+b" = "exec ${brave}/bin/brave --incognito";
+  "${modifier}+b" = "exec chromium";
+  "${modifier}+shift+b" = "exec chromium --incognito";
   "${modifier}+z" = "exec ${autorandr}/bin/autorandr -c -f";
 
   #"${modifier}+t" = ''[class="scratchterm"] scratchpad show, move position center'';
