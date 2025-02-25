@@ -2,9 +2,8 @@
   #powerManagement.powertop.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
   console.keyMap = "us";
-  fileSystems."/boot".label = "BOOT";
   i18n.defaultLocale = "en_US.UTF-8";
-  nix.settings.auto-optimise-store = true;
+  nix.settings.auto-optimise-store = false;
   system.stateVersion = "24.11";
   time.timeZone = "Europe/Vilnius";
 

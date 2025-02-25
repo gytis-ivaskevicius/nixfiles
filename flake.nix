@@ -2,8 +2,11 @@
   description = "A highly awesome system configuration.";
 
   inputs = {
-    nixpkgs.url = "/home/gytis/nixpkgs/";
-    unstable.url = "/home/gytis/nixpkgs";
+    #nixpkgs.url = "/home/gytis/nixpkgs/";
+    #unstable.url = "/home/gytis/nixpkgs";
+
+    nixpkgs.url = "/home/gytis/nixpkgs";
+    unstable.url = "github:NixOS/nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -120,7 +123,6 @@
       #############################
 
       outputsBuilder = channels: with channels.nixpkgs;{
-        defaultPackage = g-neovim;
 
         packages = {
           repl = pkgs.callPackage utils.blueprints.fup-repl { };

@@ -8,22 +8,22 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "zroot/locker/os";
+    { device = "tank/locker/os";
       fsType = "zfs";
     };
 
   fileSystems."/home" =
-    { device = "zroot/locker/home";
+    { device = "tank/locker/home";
       fsType = "zfs";
     };
 
   fileSystems."/nix" =
-    { device = "zroot/locker/nix";
+    { device = "tank/locker/nix";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    { label = "BOOT";
+    { device = "/dev/disk/by-uuid/D90A-71C8";
       fsType = "vfat";
     };
 
@@ -62,7 +62,6 @@
     discord-for-poor-people
     element-for-poor-people
     obs-studio
-    tdesktop
     prismlauncher
     helix
   ];

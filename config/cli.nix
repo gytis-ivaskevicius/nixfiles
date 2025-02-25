@@ -34,6 +34,10 @@
     ohMyZsh.plugins = [ "sudo" "z" "aws" ];
     shellInit = ''
       source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
+      chat() {
+        echo
+        ${lib.getExe pkgs.chatgpt-cli} "$@" | ${lib.getExe pkgs.bat} --language=md --decorations=never
+      }
     '';
     promptInit = ''
       ${builtins.readFile (pkgs.shell-config.override {
@@ -70,7 +74,6 @@
     gcm = "git commit -m";
     gs = "git status";
     gsb = "git status -sb";
-
     grep = "grep --color=auto";
     diff = "diff --color=auto";
     nixos-rebuild = "sudo nixos-rebuild";
@@ -148,5 +151,6 @@
     wget
     which
     zip
+    chatgpt-cli
   ];
 }

@@ -113,17 +113,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1738589849,
-        "narHash": "sha256-YbBrqtYjo7HB+gA2WKN2jWxj0H2e5dBwYrbWeIyirAc=",
-        "ref": "refs/heads/master",
-        "rev": "e4a4b2cf12d2c4c15dd6387c74421999095c49ad",
-        "revCount": 747180,
-        "type": "git",
-        "url": "file:///home/gytis/nixpkgs"
+        "lastModified": 1739617548,
+        "narHash": "sha256-zy+H5dnl67YHon2dzTTjqb7sN3Q86lxe4nVqqK/h4i4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bc5f6735097505c1b201383b8393c03458632916",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/gytis/nixpkgs"
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "root": {
@@ -155,17 +155,17 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1738589849,
-        "narHash": "sha256-YbBrqtYjo7HB+gA2WKN2jWxj0H2e5dBwYrbWeIyirAc=",
-        "ref": "refs/heads/master",
-        "rev": "e4a4b2cf12d2c4c15dd6387c74421999095c49ad",
-        "revCount": 747180,
-        "type": "git",
-        "url": "file:///home/gytis/nixpkgs"
+        "lastModified": 1739617548,
+        "narHash": "sha256-zy+H5dnl67YHon2dzTTjqb7sN3Q86lxe4nVqqK/h4i4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "bc5f6735097505c1b201383b8393c03458632916",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/gytis/nixpkgs"
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "utils": {
