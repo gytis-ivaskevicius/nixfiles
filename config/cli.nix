@@ -37,7 +37,7 @@
       source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
       chat() {
         echo
-        ${lib.getExe pkgs.chatgpt-cli} "$@" | ${lib.getExe pkgs.bat} --language=md --decorations=never
+        ${lib.getExe pkgs.chatgpt-cli} "$@" | ${lib.getExe pkgs.bat} --language=md --decorations=never --paging=never
       }
     '';
     promptInit = ''
