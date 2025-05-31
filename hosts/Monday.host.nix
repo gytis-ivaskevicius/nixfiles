@@ -44,9 +44,12 @@
   };
 
   nix.settings.max-jobs = 128;
-  nix.settings.cores = 128;
+  nix.settings.cores = 32;
 
   environment.systemPackages = with pkgs; [
+    playerctl
+    alsa-utils
+    brightnessctl
     remmina
     brave
     discord

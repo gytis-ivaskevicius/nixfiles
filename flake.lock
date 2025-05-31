@@ -82,17 +82,14 @@
         "nixpkgs": []
       },
       "locked": {
-        "lastModified": 1740943170,
-        "narHash": "sha256-A0F7T/euSMen004cVQN/ZkMpLkgLXDs+mq/merhd+0Y=",
-        "ref": "refs/heads/master",
-        "rev": "a562f32ff2393d0ed198103c65a3035bcdf83d4d",
-        "revCount": 127,
-        "type": "git",
-        "url": "file:///home/gytis/Projects/nix2vim"
+        "lastModified": 1745846808,
+        "narHash": "sha256-HAUz75QU2js8zbp54xZIYqThUS4UMQG2fFUrfrp6Z0I=",
+        "path": "/home/gytis/Projects/nix2vim",
+        "type": "path"
       },
       "original": {
-        "type": "git",
-        "url": "file:///home/gytis/Projects/nix2vim"
+        "path": "/home/gytis/Projects/nix2vim",
+        "type": "path"
       }
     },
     "nixos-hardware": {
@@ -113,11 +110,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1741714968,
-        "narHash": "sha256-4mwcpwIjUWlwRlB4tK+RPmMPrJL3byZhGVbKKXhFH34=",
+        "lastModified": 1745837242,
+        "narHash": "sha256-J7uKAh/07UGV5nMKyXdtyw6jGeYfgZjxE6NZA64K88M=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5a59e705cc0f403253d2e663039e44a1512872b2",
+        "rev": "03f4f61409815900c231d1b240a565570d768578",
         "type": "github"
       },
       "original": {

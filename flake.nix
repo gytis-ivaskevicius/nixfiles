@@ -5,7 +5,7 @@
     #nixpkgs.url = "/home/gytis/nixpkgs/";
     #unstable.url = "/home/gytis/nixpkgs";
 
-    nixpkgs.url = "/home/gytis/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs";
     unstable.url = "github:NixOS/nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
