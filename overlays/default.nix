@@ -3,11 +3,8 @@ final: prev: {
   g-firefox = prev.callPackage ./g-firefox { };
   g-lf = prev.callPackage ./g-lf { };
   g-pistol = prev.callPackage ./g-pistol { };
-  g-polybar = prev.callPackage ./g-polybar { };
   g-rofi = prev.callPackage ./g-rofi { };
-  g-termite = prev.callPackage ./g-termite { };
   shell-config = prev.callPackage ./shell-config { };
-  #zsh-forgit = prev.callPackage ./zsh-forgit { };
 
   discord-for-poor-people = with prev; makeDesktopItem {
     name = "Discord";

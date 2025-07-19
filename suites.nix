@@ -3,7 +3,6 @@ let
   nixosModules = utils.lib.exportModules [
     ./modules/cachix.nix
     ./modules/clean-home.nix
-    ./modules/nix-compose.nix
     ./modules/runtimes.nix
 
     ./config/aarch64Dev.nix
@@ -21,7 +20,6 @@ let
     #cachix
     clean-home
     runtimes
-    nix-compose
     personal
 
     #utils.nixosModules.saneFlakeDefaults
@@ -36,7 +34,6 @@ let
     cli-extras
     winapps
     cachix
-    #./hosts/work/i3
     sway
     ({ pkgs, lib, config, ... }: {
       nix.generateRegistryFromInputs = true;

@@ -16,7 +16,7 @@
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
 
 
-    utils.url = github:gytis-ivaskevicius/flake-utils-plus;
+    utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
@@ -51,7 +51,7 @@
     }:
     let
       pkgs = self.pkgs.x86_64-linux.nixpkgs;
-      mkApp = utils.lib.mkApp;
+      inherit (utils.lib) mkApp;
       suites = import ./suites.nix { inherit utils; };
     in
     with suites.nixosModules;
@@ -137,12 +137,8 @@
             g-alacritty
             g-firefox
             g-lf
-            g-pistol
-            g-polybar
             g-rofi
-            g-termite
             shell-config
-            zsh-forgit
             ;
         };
 
