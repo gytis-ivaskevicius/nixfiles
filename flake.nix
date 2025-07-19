@@ -22,8 +22,8 @@
     devshell.inputs.nixpkgs.follows = "nixpkgs";
     devshell.inputs.flake-utils.follows = "utils";
 
-    nix2vim.url = "/home/gytis/Projects/nix2vim";
-    #nix2vim.url = "github:gytis-ivaskevicius/nix2vim";
+    #nix2vim.url = "/home/gytis/Projects/nix2vim";
+    nix2vim.url = "github:gytis-ivaskevicius/nix2vim";
     nix2vim.inputs.nixpkgs.follows = "";
     nix2vim.inputs.flake-utils.follows = "utils";
 

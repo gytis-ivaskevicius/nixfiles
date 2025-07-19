@@ -47,6 +47,8 @@
   nix.settings.cores = 32;
 
   environment.systemPackages = with pkgs; [
+    vscode
+    code-cursor
     playerctl
     alsa-utils
     brightnessctl
