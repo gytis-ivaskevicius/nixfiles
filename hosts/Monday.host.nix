@@ -8,22 +8,26 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "tank/locker/os";
+    {
+      device = "tank/locker/os";
       fsType = "zfs";
     };
 
   fileSystems."/home" =
-    { device = "tank/locker/home";
+    {
+      device = "tank/locker/home";
       fsType = "zfs";
     };
 
   fileSystems."/nix" =
-    { device = "tank/locker/nix";
+    {
+      device = "tank/locker/nix";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/D90A-71C8";
+    {
+      device = "/dev/disk/by-uuid/D90A-71C8";
       fsType = "vfat";
     };
 

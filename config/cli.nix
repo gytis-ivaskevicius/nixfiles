@@ -4,7 +4,7 @@
     EDITOR = "nvim";
     LC_ALL = "en_US.UTF-8";
     TERM = "xterm-256color";
-    NIXPKGS_ALLOW_UNFREE=1;
+    NIXPKGS_ALLOW_UNFREE = 1;
   };
 
   users.defaultUserShell = lib.getExe pkgs.zsh;

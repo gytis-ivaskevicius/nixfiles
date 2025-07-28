@@ -1,4 +1,4 @@
-{pkgs, lib, ...}:
+{ pkgs, lib, config, ... }:
 
 {
 
@@ -59,7 +59,7 @@
 
   programs.fish = {
     enable = true;
-    plugins = with pkgs.fishPlugins; map (it: {src = it.src; name = it.pname;}) [
+    plugins = with pkgs.fishPlugins; map (it: { src = it.src; name = it.pname; }) [
       pure
       z
       forgit
@@ -75,72 +75,72 @@
   };
 
 
-programs.zsh = {
-  enable = true;
-  enableCompletion = true;
-  autocd = true;  # Replaces AUTO_CD in setOptions
-
-  # History configuration - converted from individual options
-  history = {
-    size = 100000;  # Was histSize
-    save = 100000;  # Should match size
-    path = "$HOME/.cache/.zsh_history";  # Was histFile
-    extended = true;  # EXTENDED_HISTORY
-    ignoreDups = true;  # HIST_IGNORE_DUPS
-    ignoreAllDups = true;  # HIST_IGNORE_ALL_DUPS
-    ignoreSpace = true;  # HIST_IGNORE_SPACE
-    findNoDups = true;  # HIST_FIND_NO_DUPS
-    saveNoDups = true;  # HIST_SAVE_NO_DUPS
-    expireDuplicatesFirst = true;  # HIST_EXPIRE_DUPS_FIRST
-    share = true;  # SHARE_HISTORY
-    append = true;  # INC_APPEND_HISTORY
-  };
-  dotDir = ".config/zsh";
-
-  # Autosuggestions - structure changed
-  autosuggestion = {
-    enable = true;  # Was autosuggestions.enable
-  };
-
-  # Syntax highlighting - same structure
-  syntaxHighlighting = {
+  programs.zsh = {
     enable = true;
-    highlighters = [ "main" "brackets" "pattern" "root" "line" ];
+    enableCompletion = true;
+    autocd = true; # Replaces AUTO_CD in setOptions
+
+    # History configuration - converted from individual options
+    history = {
+      size = 100000; # Was histSize
+      save = 100000; # Should match size
+      path = "$HOME/.cache/.zsh_history"; # Was histFile
+      extended = true; # EXTENDED_HISTORY
+      ignoreDups = true; # HIST_IGNORE_DUPS
+      ignoreAllDups = true; # HIST_IGNORE_ALL_DUPS
+      ignoreSpace = true; # HIST_IGNORE_SPACE
+      findNoDups = true; # HIST_FIND_NO_DUPS
+      saveNoDups = true; # HIST_SAVE_NO_DUPS
+      expireDuplicatesFirst = true; # HIST_EXPIRE_DUPS_FIRST
+      share = true; # SHARE_HISTORY
+      append = true; # INC_APPEND_HISTORY
+    };
+    dotDir = "${config.xdg.configHome}/.config/zsh";
+
+    # Autosuggestions - structure changed
+    autosuggestion = {
+      enable = true; # Was autosuggestions.enable
+    };
+
+    # Syntax highlighting - same structure
+    syntaxHighlighting = {
+      enable = true;
+      highlighters = [ "main" "brackets" "pattern" "root" "line" ];
+    };
+
+    # Oh-My-Zsh - hyphenated name
+    oh-my-zsh = {
+      enable = true; # Was ohMyZsh.enable
+      plugins = [ "sudo" "z" "aws" ]; # Was ohMyZsh.plugins
+      theme = "";
+    };
+
+    # Shell initialization - combined into initExtra
+    initContent = ''
+      source ${pkgs.pure-prompt}/share/zsh/site-functions/async
+      source ${pkgs.pure-prompt}/share/zsh/site-functions/prompt_pure_setup
+      # From shellInit
+      source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
+      chat() {
+        echo
+        ${lib.getExe pkgs.chatgpt-cli} "$@" | ${lib.getExe pkgs.bat} --language=md --decorations=never --paging=never
+      }
+
+      # From promptInit
+      ${builtins.readFile (pkgs.shell-config.override {
+        dockerAliasEnabled = true;
+      })}
+      source ~/.zshrc
+
+      # Remaining setOptions that don't have dedicated options
+      setopt BANG_HIST
+      setopt HIST_REDUCE_BLANKS
+      setopt NOAUTOMENU
+      setopt NOMENUCOMPLETE
+
+      # ZSH_AUTOSUGGEST_USE_ASYNC from autosuggestions.extraConfig
+      export ZSH_AUTOSUGGEST_USE_ASYNC=y
+    '';
   };
-
-  # Oh-My-Zsh - hyphenated name
-  oh-my-zsh = {
-    enable = true;  # Was ohMyZsh.enable
-    plugins = [ "sudo" "z" "aws" ];  # Was ohMyZsh.plugins
-    theme="";
-  };
-
-  # Shell initialization - combined into initExtra
-  initContent = ''
-    source ${pkgs.pure-prompt}/share/zsh/site-functions/async
-    source ${pkgs.pure-prompt}/share/zsh/site-functions/prompt_pure_setup
-    # From shellInit
-    source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
-    chat() {
-      echo
-      ${lib.getExe pkgs.chatgpt-cli} "$@" | ${lib.getExe pkgs.bat} --language=md --decorations=never --paging=never
-    }
-
-    # From promptInit
-    ${builtins.readFile (pkgs.shell-config.override {
-      dockerAliasEnabled = true;
-    })}
-    source ~/.zshrc
-
-    # Remaining setOptions that don't have dedicated options
-    setopt BANG_HIST
-    setopt HIST_REDUCE_BLANKS
-    setopt NOAUTOMENU
-    setopt NOMENUCOMPLETE
-
-    # ZSH_AUTOSUGGEST_USE_ASYNC from autosuggestions.extraConfig
-    export ZSH_AUTOSUGGEST_USE_ASYNC=y
-  '';
-};
 
 }

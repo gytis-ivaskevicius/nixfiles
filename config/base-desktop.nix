@@ -31,8 +31,9 @@
   };
 
   environment.systemPackages = [
- pkgs.vulkan-validation-layers
-    pkgs.bluez ];
+    pkgs.vulkan-validation-layers
+    pkgs.bluez
+  ];
 
   services.resolved = {
     enable = true;
