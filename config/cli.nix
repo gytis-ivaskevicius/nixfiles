@@ -9,65 +9,6 @@
 
   users.defaultUserShell = lib.getExe pkgs.zsh;
 
-  programs.direnv = {
-    enable = true;
-    package = pkgs.direnv;
-    silent = false;
-    loadInNixShell = true;
-    direnvrcExtra = "";
-    nix-direnv = {
-      enable = true;
-      package = pkgs.nix-direnv;
-    };
-  };
-
-  programs.zsh = {
-    enableBashCompletion = true;
-    autosuggestions.enable = true;
-    autosuggestions.extraConfig.ZSH_AUTOSUGGEST_USE_ASYNC = "y";
-    enable = true;
-    enableCompletion = true;
-    histFile = "$HOME/.cache/.zsh_history";
-    histSize = 100000;
-    syntaxHighlighting.enable = true;
-    syntaxHighlighting.highlighters = [ "main" "brackets" "pattern" "root" "line" ];
-    ohMyZsh.enable = true;
-    ohMyZsh.plugins = [ "sudo" "z" "aws" ];
-    shellInit = ''
-      source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
-      chat() {
-        echo
-        ${lib.getExe pkgs.chatgpt-cli} "$@" | ${lib.getExe pkgs.bat} --language=md --decorations=never --paging=never
-      }
-    '';
-    promptInit = ''
-      ${builtins.readFile (pkgs.shell-config.override {
-        dockerAliasEnabled = config.virtualisation.docker.enable;
-      })}
-      autoload -U promptinit && promptinit && prompt pure
-      complete -o nospace -C ${pkgs.terraform}/bin/terraform terraform
-      complete -o nospace -C ${pkgs.awscli}/bin/aws_completer aws
-      source ~/.zshrc
-    '';
-
-    setOptions = [
-      "AUTO_CD"
-      "BANG_HIST"
-      "EXTENDED_HISTORY"
-      "HIST_EXPIRE_DUPS_FIRST"
-      "HIST_FIND_NO_DUPS"
-      "HIST_IGNORE_ALL_DUPS"
-      "HIST_IGNORE_DUPS"
-      "HIST_IGNORE_SPACE"
-      "HIST_REDUCE_BLANKS"
-      "HIST_SAVE_NO_DUPS"
-      "INC_APPEND_HISTORY"
-      "NOAUTOMENU"
-      "NOMENUCOMPLETE"
-      "SHARE_HISTORY"
-    ];
-
-  };
 
   environment.shellAliases = {
     ga = "git add";

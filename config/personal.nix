@@ -9,6 +9,7 @@
 
   users.extraUsers.gytis = {
     shell = pkgs.zsh;
+    ignoreShellProgramCheck = true;
     isNormalUser = true;
     description = "Gytis Ivaskevicius";
     extraGroups = [
@@ -30,6 +31,7 @@
   users.extraUsers.guest = {
     shell = pkgs.zsh;
     isNormalUser = true;
+    ignoreShellProgramCheck = true;
     description = "Guest user";
     extraGroups = [ "wheel" ];
     initialPassword = "toor";
