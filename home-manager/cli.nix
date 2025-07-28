@@ -170,44 +170,39 @@
   programs.zsh = {
     enable = true;
     enableCompletion = true;
-    autocd = true; # Replaces AUTO_CD in setOptions
+    autocd = true;
 
-    # History configuration - converted from individual options
     history = {
-      size = 100000; # Was histSize
-      save = 100000; # Should match size
-      path = "$HOME/.cache/.zsh_history"; # Was histFile
-      extended = true; # EXTENDED_HISTORY
-      ignoreDups = true; # HIST_IGNORE_DUPS
-      ignoreAllDups = true; # HIST_IGNORE_ALL_DUPS
-      ignoreSpace = true; # HIST_IGNORE_SPACE
-      findNoDups = true; # HIST_FIND_NO_DUPS
-      saveNoDups = true; # HIST_SAVE_NO_DUPS
-      expireDuplicatesFirst = true; # HIST_EXPIRE_DUPS_FIRST
-      share = true; # SHARE_HISTORY
-      append = true; # INC_APPEND_HISTORY
+      size = 100000;
+      save = 100000;
+      path = "$HOME/.cache/.zsh_history";
+      extended = true;
+      ignoreDups = true;
+      ignoreAllDups = true;
+      ignoreSpace = true;
+      findNoDups = true;
+      saveNoDups = true;
+      expireDuplicatesFirst = true;
+      share = true;
+      append = true;
     };
     dotDir = "${config.xdg.configHome}/zsh";
 
-    # Autosuggestions - structure changed
     autosuggestion = {
-      enable = true; # Was autosuggestions.enable
+      enable = true;
     };
 
-    # Syntax highlighting - same structure
     syntaxHighlighting = {
       enable = true;
       highlighters = [ "main" "brackets" "pattern" "root" "line" ];
     };
 
-    # Oh-My-Zsh - hyphenated name
     oh-my-zsh = {
-      enable = true; # Was ohMyZsh.enable
-      plugins = [ "sudo" "z" "aws" ]; # Was ohMyZsh.plugins
+      enable = true;
+      plugins = [ "sudo" "z" "aws" ];
       theme = "";
     };
 
-    # Shell initialization - combined into initExtra
     initContent = ''
       source ${pkgs.pure-prompt}/share/zsh/site-functions/async
       source ${pkgs.pure-prompt}/share/zsh/site-functions/prompt_pure_setup
