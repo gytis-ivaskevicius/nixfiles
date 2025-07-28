@@ -20,8 +20,21 @@
   };
 
 
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "TwoDark";
+      style = "plain";
+      paging = "never";
+    };
+
+    extraPackages = with pkgs.bat-extras; [
+      batdiff
+      batman
+    ];
+  };
+
   home.packages = with pkgs; [
-    bat
     curl
     entr
     eza
@@ -40,7 +53,6 @@
     lm_sensors
     lshw
     lsof
-    man
     nettools
     nix-top
     nix-tree
@@ -94,13 +106,14 @@
 
   #programs.zsh.enable = true;
   home.shellAliases = {
+    man = "batman --paging=auto";
     ga = "git add";
     gc = "git commit";
     gcm = "git commit -m";
     gs = "git status";
     gsb = "git status -sb";
     grep = "grep --color=auto";
-    diff = "diff --color=auto";
+    diff = "batdiff";
     nixos-rebuild = "sudo nixos-rebuild";
     auto-nix-rebuild = "ls /etc/nixos/**/*.nix | entr sudo bash -c 'nixos-rebuild switch && printf \"DONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n\"'";
     personal = "sudo $EDITOR /etc/nixos/personal.nix";
@@ -125,7 +138,7 @@
     cm = "xclip"; # Copy to middle click clipboard
     l = "ls -lF --time-style=long-iso";
     la = "l -a";
-    ls = "eza -h --git --color=auto --group-directories-first -s extension";
+    ls = "eza --icons --color=auto --group-directories-first -s name";
     lstree = "ls --tree";
     tree = "lstree";
 
