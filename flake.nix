@@ -20,7 +20,6 @@
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
-    devshell.inputs.flake-utils.follows = "utils";
 
     #nix2vim.url = "/home/gytis/Projects/nix2vim";
     nix2vim.url = "github:gytis-ivaskevicius/nix2vim";
@@ -30,7 +29,6 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "utils";
     };
 
     forgit-git = {
@@ -41,13 +39,12 @@
   };
 
   outputs =
-    inputs@{
-      self,
-      nix2vim,
-      utils,
-      home-manager,
-      nixos-hardware,
-      ...
+    inputs@{ self
+    , nix2vim
+    , utils
+    , home-manager
+    , nixos-hardware
+    , ...
     }:
     let
       pkgs = self.pkgs.x86_64-linux.nixpkgs;
