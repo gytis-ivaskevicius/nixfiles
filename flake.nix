@@ -31,11 +31,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    forgit-git = {
-      url = "github:wfxr/forgit";
-      flake = false;
-    };
-
   };
 
   outputs =

@@ -54,22 +54,6 @@
         "type": "github"
       }
     },
-    "forgit-git": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1753256377,
-        "narHash": "sha256-IvR8wifdHVnMiHh5BkbqqM+C8CBvn12mD+9F1ToODGo=",
-        "owner": "wfxr",
-        "repo": "forgit",
-        "rev": "9a4ff16829e7805210f63ff7b7a6d52b29d0d796",
-        "type": "github"
-      },
-      "original": {
-        "owner": "wfxr",
-        "repo": "forgit",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -198,7 +182,6 @@
     "root": {
       "inputs": {
         "devshell": "devshell",
-        "forgit-git": "forgit-git",
         "home-manager": "home-manager",
         "nix2vim": "nix2vim",
         "nixos-cosmic": "nixos-cosmic",
