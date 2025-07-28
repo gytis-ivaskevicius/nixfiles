@@ -15,7 +15,7 @@ let
   '';
 in
 {
-  "${modifier}+p" = ''exec /bin/sh -c "cat /home/gytis/notes | ${pkgs.g-rofi}/bin/rofi -dmenu | ${pkgs.findutils}/bin/xargs ${pkgs.wtype}/bin/wtype"'';
+  "${modifier}+p" = ''exec /bin/sh -c "cat /home/gytis/notes | rofi -dmenu | ${pkgs.findutils}/bin/xargs ${pkgs.wtype}/bin/wtype"'';
   Print = ''exec ${grim}/bin/grim -g "$(${slurp}/bin/slurp -d)" - | ${wl-clipboard}/bin/wl-copy -t image/png'';
   XF86AudioMute = "exec ${pulseaudio}/bin/pactl set-sink-mute @DEFAULT_SINK@ toggle";
   XF86AudioPlay = "exec ${playerctl}/bin/playerctl play";

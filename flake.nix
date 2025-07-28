@@ -128,7 +128,6 @@
             nix2vimDemo
             g-firefox
             g-lf
-            g-rofi
             shell-config
             ;
         };

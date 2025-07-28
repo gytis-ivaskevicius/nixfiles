@@ -5,7 +5,7 @@ with pkgs;
 let
   rofi-menu = pkgs.writeShellScript "rofi-menu.sh" ''
     		monitor="$(swaymsg -t get_outputs | jq '.[] | select(.focused) | .name' -r)"
-    		${pkgs.g-rofi}/bin/rofi -show drun -modi drun -monitor "$monitor" $@
+    		rofi -show drun -modi drun -monitor "$monitor" $@
     	'';
   left = "h";
   down = "j";
@@ -63,7 +63,7 @@ let
   monospaced = text: ''<span font_family="RobotoMono">'' + text + "</span>";
 in
 {
-  imports = [ ./git.nix ./common.nix ./dunst.nix ./cli.nix ./alacritty.nix ];
+  imports = [ ./git.nix ./common.nix ./dunst.nix ./cli.nix ./alacritty.nix ./rofi.nix ];
 
   home.packages = with pkgs; [
     wl-clipboard
