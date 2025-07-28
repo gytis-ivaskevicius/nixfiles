@@ -95,7 +95,7 @@
       share = true; # SHARE_HISTORY
       append = true; # INC_APPEND_HISTORY
     };
-    dotDir = "${config.xdg.configHome}/.config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
 
     # Autosuggestions - structure changed
     autosuggestion = {
