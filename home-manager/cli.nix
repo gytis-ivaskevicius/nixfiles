@@ -12,6 +12,85 @@
     };
   };
 
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    LC_ALL = "en_US.UTF-8";
+    TERM = "xterm-256color";
+    NIXPKGS_ALLOW_UNFREE = 1;
+  };
+
+
+  home.packages = with pkgs; [
+    bat
+    curl
+    entr
+    eza
+    fd
+    file
+    fup-repl
+    fzf
+    gcc
+    git
+    git-lfs
+    github-cli
+    htop
+    inetutils
+    iotop
+    jq
+    lm_sensors
+    lshw
+    lsof
+    man
+    nettools
+    nix-top
+    nix-tree
+    nix2vimDemo
+    nixfmt-rfc-style
+    nixpkgs-fmt
+    nushell
+    p7zip
+    parted
+    pciutils
+    psmisc
+    pure-prompt
+    ranger
+    ripgrep
+    statix
+    unzip
+    wget
+    which
+    zip
+    chatgpt-cli
+
+    # from cli-extras.nix
+    binutils
+    comma
+    dmidecode
+    dnsutils
+    ffmpeg
+    g-lf
+    ijq
+    manix
+    mediainfo
+    neofetch
+    nix-index
+    nmap
+    ntfs3g
+    openssl
+    patchelf
+    python3
+    rclone
+    sshfs
+    sshpass
+    sshuttle
+    steam-run
+    tmate
+    tmux
+    usbutils
+    yt-dlp
+    zellij
+  ];
+
 
   #programs.zsh.enable = true;
   home.shellAliases = {
