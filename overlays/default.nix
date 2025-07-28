@@ -1,5 +1,4 @@
 final: prev: {
-  g-alacritty = prev.callPackage ./g-alacritty { };
   g-firefox = prev.callPackage ./g-firefox { };
   g-lf = prev.callPackage ./g-lf { };
   g-pistol = prev.callPackage ./g-pistol { };

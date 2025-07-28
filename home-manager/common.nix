@@ -80,7 +80,6 @@ in
     nautilus
     discord
     firefox
-    g-alacritty
     eog
     pavucontrol
     vlc

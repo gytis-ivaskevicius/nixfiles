@@ -60,7 +60,6 @@
     brave
     discord
     firefox
-    g-alacritty
     eog
     pavucontrol
     vlc

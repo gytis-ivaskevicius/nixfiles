@@ -126,7 +126,6 @@
           repl = pkgs.callPackage utils.blueprints.fup-repl { };
           inherit
             nix2vimDemo
-            g-alacritty
             g-firefox
             g-lf
             g-rofi

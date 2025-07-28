@@ -63,7 +63,7 @@ let
   monospaced = text: ''<span font_family="RobotoMono">'' + text + "</span>";
 in
 {
-  imports = [ ./git.nix ./common.nix ./dunst.nix ./cli.nix ];
+  imports = [ ./git.nix ./common.nix ./dunst.nix ./cli.nix ./alacritty.nix ];
 
   home.packages = with pkgs; [
     wl-clipboard
@@ -148,7 +148,7 @@ in
         names = [ "RobotoMono" ];
         size = 9.0;
       };
-      terminal = "${pkgs.g-alacritty}/bin/alacritty";
+      terminal = "alacritty";
       startup = [
         #{ command = "waybar"; always = true; notification = false; }
       ];

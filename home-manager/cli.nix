@@ -138,7 +138,7 @@
     cm = "xclip"; # Copy to middle click clipboard
     l = "ls -lF --time-style=long-iso";
     la = "l -a";
-    ls = "eza --icons --color=auto --group-directories-first -s name";
+    ls = "eza --color=auto --group-directories-first -s name";
     lstree = "ls --tree";
     tree = "lstree";
 
@@ -151,7 +151,7 @@
 
   programs.fish = {
     enable = true;
-    plugins = with pkgs.fishPlugins; map (it: { src = it.src; name = it.pname; }) [
+    plugins = with pkgs.fishPlugins; map (it: { inherit (it) src; name = it.pname; }) [
       pure
       z
       forgit
