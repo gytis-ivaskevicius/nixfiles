@@ -45,6 +45,8 @@
   environment.variables = {
     BROWSER = "chromium";
     TERMINAL = "alacritty";
+    EDITOR = "nvim";
+    VISUAL = "nvim";
   };
 
   nix.settings.max-jobs = 128;
