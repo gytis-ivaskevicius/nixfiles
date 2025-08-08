@@ -35,6 +35,7 @@
   };
 
   home.packages = with pkgs; [
+    claude-code
     curl
     entr
     eza

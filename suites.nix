@@ -10,7 +10,7 @@ let
     ./config/containers.nix
     ./config/dev.nix
     ./config/personal.nix
-    ./config/sway.nix
+    #./config/sway.nix
     ./config/winapps.nix
     ./config/xorg.nix
   ];
@@ -30,7 +30,7 @@ let
     base-desktop
     winapps
     cachix
-    sway
+    #sway
     ({ pkgs, lib, config, ... }: {
       nix.generateRegistryFromInputs = true;
       nix.linkInputs = true;

@@ -151,6 +151,8 @@ in
       terminal = "alacritty";
       startup = [
         #{ command = "waybar"; always = true; notification = false; }
+        #{ command = "${pkgs.autotiling}/bin/autotiling"; }
+
       ];
 
       colors.focused = {

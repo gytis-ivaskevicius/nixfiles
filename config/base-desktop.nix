@@ -95,6 +95,7 @@
     #packages = [pkgs.nerdfonts];
   };
 
+  services.upower.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -105,8 +106,12 @@
 
   xdg.portal = {
     enable = true;
-    #gtkUsePortal = true;
-    extraPortals = with pkgs; [ xdg-desktop-portal-wlr xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+    config = {
+      common = {
+        default = "wlr";
+      };
+    };
   };
 
   programs.gnupg.agent.enable = true;

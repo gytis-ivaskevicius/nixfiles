@@ -43,6 +43,7 @@ in
     BROWSER = "chromium";
     TERMINAL = "alacritty";
     NIXPKGS_ALLOW_UNFREE = 1;
+    NIXPKGS_ALLOW_BROKEN = 1;
   };
 
   xdg.mimeApps.enable = true;

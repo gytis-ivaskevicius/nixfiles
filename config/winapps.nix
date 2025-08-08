@@ -25,7 +25,7 @@
     containers = {
       windows = {
         hostname = "winvm";
-        autoStart = true;
+        autoStart = false;
         image = "dockurr/windows";
         volumes = [
           "/mnt/shared:/shared"
