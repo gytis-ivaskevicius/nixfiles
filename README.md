@@ -1,4 +1,36 @@
 
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=id">Bahasa Indonesia</a>
+        | <a href="https://openaitx.github.io/view.html?user=gytis-ivaskevicius&project=nixfiles&lang=as">অসমীয়া</
+      </div>
+    </div>
+  </details>
+</div>
+
+
 # A highly awesome system configuration
 [![built with nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 
