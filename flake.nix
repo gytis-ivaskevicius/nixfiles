@@ -31,7 +31,7 @@
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix2vim.url = "/home/gytis/Projects/nix2vim";
+    nix2vim.url = "/home/gytis/Projects/NIX/nix2vim";
     #nix2vim.url = "github:gytis-ivaskevicius/nix2vim";
     nix2vim.inputs.nixpkgs.follows = "";
     nix2vim.inputs.flake-utils.follows = "utils";
@@ -50,8 +50,7 @@
     , home-manager
     , nixos-hardware
     , ...
-    }:
-    let
+    }: let
       pkgs = self.pkgs.x86_64-linux.nixpkgs;
       inherit (utils.lib) mkApp;
       suites = import ./suites.nix { inherit utils; };
@@ -77,15 +76,6 @@
         })
       ];
 
-      hosts.GytisOS.modules = suites.desktopModules ++ [
-        #aarch64Dev
-        dev
-        {
-          security.apparmor.enable = true;
-        }
-
-        ./hosts/GytisOS.host.nix
-      ];
 
       hosts.Monday.modules = suites.desktopModules ++ [
         aarch64Dev

@@ -80,9 +80,13 @@
     opencode
     bun
     spec-kit
+    gnumake
   ];
 
-  services.tailscale.enable = true;
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "both";
+  };
   networking.firewall.checkReversePath = "loose";
   programs.steam.enable = true;
 

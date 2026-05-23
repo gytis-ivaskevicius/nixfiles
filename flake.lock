@@ -112,11 +112,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1764177491,
-        "narHash": "sha256-dhX2abFWxeXab3Aad4Pg1xGtn9W84/qetNXfmYUwktw=",
+        "lastModified": 1775425411,
+        "narHash": "sha256-KY6HsebJHEe5nHOWP7ur09mb0drGxYSzE3rQxy62rJo=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2217780c39169a9c77915200137550c2ef0fa974",
+        "rev": "0d02ec1d0a05f88ef9e74b516842900c41f0f2fe",
         "type": "github"
       },
       "original": {
@@ -153,13 +153,13 @@
         "nixpkgs": []
       },
       "locked": {
-        "lastModified": 1764251585,
-        "narHash": "sha256-SnmBuIXMqpzlQO6a75WGUsMfdsgwN+nrASsm/TwhW1o=",
-        "path": "/home/gytis/Projects/nix2vim",
+        "lastModified": 1778245756,
+        "narHash": "sha256-lD3p05Y+tNzI0nacnf+vB+JrWBtfA1Z3ibW3mm9r4XY=",
+        "path": "/home/gytis/Projects/NIX/nix2vim",
         "type": "path"
       },
       "original": {
-        "path": "/home/gytis/Projects/nix2vim",
+        "path": "/home/gytis/Projects/NIX/nix2vim",
         "type": "path"
       }
     },
@@ -401,11 +401,11 @@
     },
     "unstable": {
       "locked": {
-        "lastModified": 1774722196,
-        "narHash": "sha256-R14DlnYMSkk0azjrExoxedm6MNb4T2lxu+I92tzDPgc=",
+        "lastModified": 1778869648,
+        "narHash": "sha256-J1gOcA/eN1xOW2dyvGicxKGqre+BnhO3HUabidrDO4w=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "8f926630d5c158c322000c61fc76b639056b8cd7",
+        "rev": "ff02da1b46c30c020738ac01eafb281a77025794",
         "type": "github"
       },
       "original": {

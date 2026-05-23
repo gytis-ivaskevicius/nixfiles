@@ -13,6 +13,7 @@
       graph = "log --graph --decorate --oneline";
       map = "!git graph --all";
       watch = "!watch -ct 'git -c color.status=always status -s && echo && git map --color'";
+      review = "log --format=\"%C(yellow)%h%Creset %Cblue%ar%Creset %ae %Cgreen%s%Creset%n%n%b\"";
     };
   };
 }

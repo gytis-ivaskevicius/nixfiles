@@ -7,12 +7,10 @@ let
 
     ./config/aarch64Dev.nix
     ./config/base-desktop.nix
-    ./config/containers.nix
     ./config/dev.nix
     ./config/personal.nix
     #./config/sway.nix
     ./config/winapps.nix
-    ./config/xorg.nix
   ];
   sharedModules = with nixosModules; [
     #cachix
