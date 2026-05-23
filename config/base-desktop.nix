@@ -1,4 +1,7 @@
 { config, pkgs, lib, ... }: {
+  imports = [
+    ./steam.nix
+  ];
   #powerManagement.powertop.enable = true;
   powerManagement.cpuFreqGovernor = "performance";
   console.keyMap = "us";
@@ -12,6 +15,7 @@
 
   systemd.tmpfiles.rules = [
     "L+ /lib64/ld-linux-x86-64.so.2 - - - - ${pkgs.glibc}/lib64/ld-linux-x86-64.so.2"
+    "L+    /opt/rocm   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
 
   # Limits start limit burst to 1sec instead of 5 since it was causing issues with rapid logout/login and units restart
@@ -30,9 +34,30 @@
     networkmanager.enable = true;
   };
 
-  environment.systemPackages = [
-    pkgs.vulkan-validation-layers
-    pkgs.bluez
+
+  environment.systemPackages = with pkgs; [
+
+    pkgs.lact
+    bluez
+    btop-rocm
+    clinfo
+    lact
+    libaom
+    libva-utils
+    libvmaf
+    mesa
+    nvtopPackages.amd
+    protonplus
+    protontricks
+    svt-av1
+    rocmPackages.clr.icd
+    vulkan-extension-layer
+    vulkan-tools
+    vulkan-validation-layers
+    (pkgs.writeShellScriptBin "amdvlk-run" ''
+      export VK_ICD_FILENAMES="/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json:/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json"
+      exec "$@"
+    '')
   ];
 
   services.resolved = {
@@ -49,6 +74,7 @@
     options = "--delete-older-than 40d";
     dates = "weekly";
   };
+
 
   boot = {
     # Imporved networking
@@ -81,7 +107,7 @@
     printing.enable = true;
     tlp.enable = true;
   };
-  #services.xserver.enable = true;
+  services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
   services.xserver.deviceSection = ''
     Option "VariableRefresh" "true"
@@ -104,36 +130,64 @@
     pulse.enable = true;
   };
 
-  xdg.portal = {
+  programs.sway = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
-    config = {
-      common = {
-        default = "wlr";
+    wrapperFeatures.gtk = true;
+  };
+  # kanshi systemd service
+  systemd.user.services.kanshi = {
+    description = "kanshi daemon";
+    environment = {
+      WAYLAND_DISPLAY = "wayland-1";
+      DISPLAY = ":0";
+    };
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
+    };
+  };
+
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        user = "greeter";
       };
     };
   };
 
+  xdg.portal = {
+    enable = true;
+    #extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
+    #config = {
+    #  common = {
+    #    default = "wlr";
+    #  };
+    #};
+  };
+
+  services.flatpak.enable = true;
+
   programs.gnupg.agent.enable = true;
 
-  hardware.amdgpu.amdvlk.enable = true;
-  hardware.amdgpu.amdvlk.support32Bit.enable = true;
+  #hardware.amdgpu.amdvlk.enable = true;
+  #hardware.amdgpu.amdvlk.support32Bit.enable = true;
 
   hardware = {
     enableRedistributableFirmware = true;
     enableAllFirmware = true;
+    amdgpu = {
+      initrd.enable = true;
+    };
     graphics = {
-      enable = lib.mkDefault true;
-      enable32Bit = config.hardware.graphics.enable;
-      extraPackages = with pkgs;
-        [
-          # rocm-opencl-icd
-          # rocm-opencl-runtime
-          #amdvlk
-          vaapiVdpau
-          libvdpau-va-gl
-        ];
-      #extraPackages32 = with pkgs; [ driversi686Linux.amdvlk ];
+      enable =  true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+      ];
+      extraPackages32 = with pkgs.pkgsi686Linux; [
+        mesa.drivers
+      ];
     };
     cpu.amd.updateMicrocode = true;
     #cpu.intel.updateMicrocode = true;

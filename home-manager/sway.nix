@@ -71,9 +71,11 @@ in
   ];
 
   home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    XDG_SESSION_TYPE = "wayland";
     MOZ_ENABLE_WAYLAND = "1";
     MOZ_USE_XINPUT2 = "1";
-    XDG_SESSION_TYPE = "wayland";
     XDG_CURRENT_DESKTOP = "sway";
     XKB_DEFAULT_OPTIONS = "terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win";
     SDL_VIDEODRIVER = "wayland";
@@ -94,31 +96,22 @@ in
 
     extraSessionCommands = ''
       unset __NIXOS_SET_ENVIRONMENT_DONE
+      export NIXOS_OZONE_WL="1";
     '';
 
     extraConfig = ''
 
+      xwayland enable
       seat * xcursor_theme oreo_black_cursors 30
       input "type:keyboard" {
           xkb_layout us,de
           xkb_options terminate:ctrl_alt_bksp,caps:escape,altwin:swap_alt_win
       }
+      input "1133:50501:Logitech_USB_Receiver" {
+        events disabled
+      }
 
-      #output HDMI-A-1 {
-      #  mode 1920x1080@74.973Hz
-      #  pos 0 0
-      #  scale 0.75
-      #  scale_filter nearest
-      #  adaptive_sync on
-      #}
-
-      #output HDMI-A-1 disable
-			set $soundbar 'Harris Corporation JBL Bar 2.x 0x01010101'
-			output $soundbar resolution 640x480@60Hz pos -10000 0
-			workspace "99999" output $soundbar
-			for_window [workspace="^99999$"] move container to output $monitor_center; focus output $monitor_center
-
-      output DP-2 {
+      output DP-3 {
         mode 3840x1600@143.998001Hz
         #pos 2560 0
       }
@@ -210,6 +203,7 @@ in
     {
       enable = config.wayland.windowManager.sway.enable || config.wayland.windowManager.hikari.enable;
       settings = [{
+        #output = [ "DP-3" ];
         layer = "top";
         position = "top";
         modules-left = if swayEnabled then [ "sway/workspaces" ] else [ ];

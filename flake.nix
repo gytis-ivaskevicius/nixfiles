@@ -2,15 +2,25 @@
   description = "A highly awesome system configuration.";
 
   nixConfig = {
-    extra-substituters = [ "https://cosmic.cachix.org" ];
-    extra-trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+    extra-substituters = [
+      "https://cosmic.cachix.org"
+      "https://nixpkgs-wayland.cachix.org"
+    ];
+    extra-trusted-public-keys = [
+      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
+      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
+    ];
   };
   inputs = {
     #nixpkgs.url = "/home/gytis/nixpkgs/";
     #unstable.url = "/home/gytis/nixpkgs";
 
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     unstable.url = "github:NixOS/nixpkgs";
+    nixgl.url = "github:nix-community/nixGL";
+    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
+    nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
+
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
@@ -21,13 +31,13 @@
     devshell.url = "github:numtide/devshell";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
 
-    #nix2vim.url = "/home/gytis/Projects/nix2vim";
-    nix2vim.url = "github:gytis-ivaskevicius/nix2vim";
+    nix2vim.url = "/home/gytis/Projects/nix2vim";
+    #nix2vim.url = "github:gytis-ivaskevicius/nix2vim";
     nix2vim.inputs.nixpkgs.follows = "";
     nix2vim.inputs.flake-utils.follows = "utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -59,7 +69,10 @@
       channelsConfig.allowBroken = false;
 
       channels.nixpkgs.overlaysBuilder = channels: [
+        inputs.nixgl.overlay
+        inputs.nixpkgs-wayland.overlay
         (final: prev: {
+          inherit (channels.unstable) claude-code code cursor bun opencode spec-kit vscode;
           #inherit (channels.unstable) pure-prompt neovim-unwrapped linuxPackages_latest gcc11Stdenv layan-gtk-theme;
         })
       ];
@@ -77,7 +90,7 @@
       hosts.Monday.modules = suites.desktopModules ++ [
         aarch64Dev
         dev
-        inputs.nixos-cosmic.nixosModules.default
+        #inputs.nixos-cosmic.nixosModules.default
         ./hosts/Monday.host.nix
         nixos-hardware.nixosModules.common-pc
         nixos-hardware.nixosModules.common-pc-ssd
@@ -86,6 +99,7 @@
         nixos-hardware.nixosModules.common-cpu-amd-pstate
         nixos-hardware.nixosModules.common-cpu-amd-zenpower
         #./config/k3s.nix
+
       ];
 
       hosts."gytis-ivaskevicius".modules = suites.desktopModules ++ [
@@ -113,6 +127,9 @@
 
       hostDefaults.modules = [
         home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+        }
       ] ++ suites.sharedModules;
 
 

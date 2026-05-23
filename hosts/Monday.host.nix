@@ -43,6 +43,7 @@
 
   hardware.bluetooth.enable = true;
   environment.variables = {
+    VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json:/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json";
     BROWSER = "chromium";
     TERMINAL = "alacritty";
     EDITOR = "nvim";
@@ -54,7 +55,6 @@
 
   environment.systemPackages = with pkgs; [
     vscode
-    code-cursor
     playerctl
     alsa-utils
     brightnessctl
@@ -74,6 +74,12 @@
     obs-studio
     prismlauncher
     helix
+    uv
+    rustup
+    deno
+    opencode
+    bun
+    spec-kit
   ];
 
   services.tailscale.enable = true;

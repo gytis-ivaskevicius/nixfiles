@@ -54,7 +54,7 @@ in
         (name: value: nameValuePair "java_${name}" "${value.home}/bin/java")
         javaPkgs;
       javaTmpfiles =
-        mapAttrsFlatten (name: value: "L+ /nix/java${name} - - - - ${value.home}")
+        mapAttrsToList (name: value: "L+ /nix/java${name} - - - - ${value.home}")
           javaPkgs;
       javaEnvVariables = mapAttrs'
         (name: value:

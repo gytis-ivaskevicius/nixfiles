@@ -20,11 +20,8 @@
   };
 
   environment.variables = {
-    SUDO_ASKPASS="${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-    SSH_ASKPASS="${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
-    ELECTRON_OZONE_PLATFORM_HINT = "auto";
-    XDG_SESSION_TYPE = "wayland";
-    XDG_CURRENT_DESKTOP = "sway";
+    SUDO_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
+    SSH_ASKPASS = "${pkgs.kdePackages.ksshaskpass}/bin/ksshaskpass";
   };
 
 }

@@ -187,7 +187,7 @@
       share = true;
       append = true;
     };
-    dotDir = "${config.xdg.configHome}/zsh";
+    dotDir = ".config/zsh";
 
     autosuggestion = {
       enable = true;
@@ -219,6 +219,8 @@
         dockerAliasEnabled = true;
       })}
       source ~/.zshrc
+      export GPG_TTY="$(tty)"
+      export PATH=$PATH:/home/gytis/.local/share/npm/bin
 
       # Remaining setOptions that don't have dedicated options
       setopt BANG_HIST

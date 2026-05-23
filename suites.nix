@@ -38,7 +38,7 @@ let
       home-manager.users.gytis = import ./home-manager/sway.nix;
       home-manager.backupFileExtension = "HMBackup";
       #boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_5_15;
-      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;
+      #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;
       #boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
       hardware.bluetooth.enable = true;
       nix.extraOptions = ''

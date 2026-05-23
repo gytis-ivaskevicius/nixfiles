@@ -1,5 +1,5 @@
 { pkgs, lib, ... }: {
-  environment.systemPackages = with pkgs; [ bc freerdp3 ];
+  environment.systemPackages = with pkgs; [ bc freerdp ];
 
   programs.virt-manager.enable = true;
   virtualisation = {
