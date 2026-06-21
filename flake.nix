@@ -71,7 +71,7 @@
         inputs.nixgl.overlay
         inputs.nixpkgs-wayland.overlay
         (final: prev: {
-          inherit (channels.unstable) claude-code code cursor bun opencode spec-kit vscode;
+          inherit (channels.unstable) claude-code code cursor bun opencode spec-kit vscode nixfmt;
           #inherit (channels.unstable) pure-prompt neovim-unwrapped linuxPackages_latest gcc11Stdenv layan-gtk-theme;
         })
       ];
