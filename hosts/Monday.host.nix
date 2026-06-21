@@ -36,10 +36,6 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   hardware.enableRedistributableFirmware = lib.mkDefault true;
 
-  programs.ssh.startAgent = true;
-  programs.dconf.enable = true;
-
-  hardware.bluetooth.enable = true;
   environment.variables = {
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json:/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json";
     BROWSER = "chromium";

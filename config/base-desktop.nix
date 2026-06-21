@@ -40,8 +40,6 @@
     settings.Resolve.DNS = "1.1.1.1 1.0.0.1";
   };
 
-  programs.ssh.startAgent = true;
-
   nix.gc = {
     automatic = true;
     options = "--delete-older-than 40d";
@@ -95,6 +93,9 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
 
   programs.gnupg.agent.enable = true;
 

@@ -61,7 +61,6 @@
       hosts.Monday.modules = suites.desktopModules ++ [
         aarch64Dev
         dev
-        #inputs.nixos-cosmic.nixosModules.default
         ./hosts/Monday.host.nix
         nixos-hardware.nixosModules.common-pc
         nixos-hardware.nixosModules.common-pc-ssd
