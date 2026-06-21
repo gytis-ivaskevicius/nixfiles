@@ -53,28 +53,6 @@
 
   environment.systemPackages = with pkgs; [
     steam-run
-    sgdboop # steamgriddb
     mangohud
-
-    # Roms Manager
-    steam-rom-manager
-
-    # PS
-    pcsx2
-
-    # Vulkan tools
-    vulkan-tools
-    mesa-demos
-
-    # Additional tools
-    libstrangle
-
-    # RetroArch
-    (retroarch.withCores (cores:
-      with cores; [
-        mesen
-        ppsspp
-        desmume
-      ]))
   ];
 }

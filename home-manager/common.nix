@@ -40,7 +40,7 @@ in
   services.network-manager-applet.enable = true;
 
   home.sessionVariables = {
-    BROWSER = "chromium";
+    BROWSER = "brave";
     TERMINAL = "alacritty";
     NIXPKGS_ALLOW_UNFREE = 1;
     NIXPKGS_ALLOW_BROKEN = 1;
@@ -79,7 +79,6 @@ in
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
     brave
     nautilus
-    discord
     firefox
     eog
     pavucontrol

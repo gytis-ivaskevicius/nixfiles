@@ -1,9 +1,7 @@
 { utils }:
 let
   nixosModules = utils.lib.exportModules [
-    ./modules/cachix.nix
     ./modules/clean-home.nix
-    ./modules/runtimes.nix
 
     ./config/aarch64Dev.nix
     ./config/base-desktop.nix
@@ -15,7 +13,6 @@ let
   sharedModules = with nixosModules; [
     #cachix
     clean-home
-    runtimes
     personal
 
     #utils.nixosModules.saneFlakeDefaults
@@ -27,7 +24,6 @@ let
   desktopModules = with nixosModules; [
     base-desktop
     winapps
-    cachix
     #sway
     ({ pkgs, lib, config, ... }: {
       nix.generateRegistryFromInputs = true;

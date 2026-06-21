@@ -35,36 +35,9 @@
   };
 
 
-  environment.systemPackages = with pkgs; [
-
-    pkgs.lact
-    bluez
-    btop-rocm
-    clinfo
-    lact
-    libaom
-    libva-utils
-    libvmaf
-    mesa
-    nvtopPackages.amd
-    protonplus
-    protontricks
-    svt-av1
-    rocmPackages.clr.icd
-    vulkan-extension-layer
-    vulkan-tools
-    vulkan-validation-layers
-    (pkgs.writeShellScriptBin "amdvlk-run" ''
-      export VK_ICD_FILENAMES="/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json:/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json"
-      exec "$@"
-    '')
-  ];
-
   services.resolved = {
     enable = true;
-    extraConfig = ''
-      DNS=1.1.1.1 1.0.0.1
-    '';
+    settings.Resolve.DNS = "1.1.1.1 1.0.0.1";
   };
 
   programs.ssh.startAgent = true;
@@ -167,8 +140,6 @@
     #  };
     #};
   };
-
-  services.flatpak.enable = true;
 
   programs.gnupg.agent.enable = true;
 

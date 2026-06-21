@@ -60,7 +60,6 @@
     nix2vimDemo
     nixfmt-rfc-style
     nixpkgs-fmt
-    nushell
     p7zip
     parted
     pciutils
@@ -73,7 +72,6 @@
     wget
     which
     zip
-    chatgpt-cli
 
     # from cli-extras.nix
     binutils
@@ -81,24 +79,13 @@
     dmidecode
     dnsutils
     ffmpeg
-    g-lf
-    ijq
-    manix
-    mediainfo
-    neofetch
+    fastfetch
     nix-index
     nmap
-    ntfs3g
     openssl
-    patchelf
     python3
     rclone
-    sshfs
-    sshpass
-    sshuttle
-    steam-run
     tmate
-    tmux
     usbutils
     yt-dlp
     zellij

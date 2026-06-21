@@ -1,14 +1,6 @@
 {
   description = "A highly awesome system configuration.";
 
-  nixConfig = {
-    extra-substituters = [
-      "https://cosmic.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
-    ];
-  };
   inputs = {
     #nixpkgs.url = "/home/gytis/nixpkgs/";
     #unstable.url = "/home/gytis/nixpkgs";
@@ -18,8 +10,6 @@
 
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-
 
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
