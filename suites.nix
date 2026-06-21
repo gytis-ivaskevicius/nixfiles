@@ -7,7 +7,6 @@ let
     ./config/base-desktop.nix
     ./config/dev.nix
     ./config/personal.nix
-    #./config/sway.nix
     ./config/winapps.nix
   ];
   sharedModules = with nixosModules; [
@@ -24,12 +23,18 @@ let
   desktopModules = with nixosModules; [
     base-desktop
     winapps
-    #sway
     ({ pkgs, lib, config, ... }: {
       nix.generateRegistryFromInputs = true;
       nix.linkInputs = true;
       #nix.generateNixPathFromInputs = true;
-      home-manager.users.gytis = import ./home-manager/sway.nix;
+      home-manager.users.gytis = {
+        imports = [
+          ./home-manager/common.nix
+          ./home-manager/git.nix
+          ./home-manager/cli.nix
+          ./home-manager/alacritty.nix
+        ];
+      };
       home-manager.backupFileExtension = "HMBackup";
       #boot.kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_5_15;
       #boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_12;

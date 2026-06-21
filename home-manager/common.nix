@@ -37,8 +37,6 @@ in
   home.keyboard.options = [ "terminate:ctrl_alt_bksp" "caps:escape" "altwin:swap_alt_win" ];
 
 
-  services.network-manager-applet.enable = true;
-
   home.sessionVariables = {
     BROWSER = "brave";
     TERMINAL = "alacritty";

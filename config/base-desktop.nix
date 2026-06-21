@@ -78,13 +78,7 @@
     openssh.enable = true;
     openssh.settings.PasswordAuthentication = false;
     printing.enable = true;
-    tlp.enable = true;
   };
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
-  services.xserver.deviceSection = ''
-    Option "VariableRefresh" "true"
-  '';
 
   zramSwap.enable = true;
 
@@ -94,51 +88,12 @@
     #packages = [pkgs.nerdfonts];
   };
 
-  services.upower.enable = true;
-  security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     wireplumber.enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  };
-
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
-  };
-  # kanshi systemd service
-  systemd.user.services.kanshi = {
-    description = "kanshi daemon";
-    environment = {
-      WAYLAND_DISPLAY = "wayland-1";
-      DISPLAY = ":0";
-    };
-    serviceConfig = {
-      Type = "simple";
-      ExecStart = ''${pkgs.kanshi}/bin/kanshi -c kanshi_config_file'';
-    };
-  };
-
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-        user = "greeter";
-      };
-    };
-  };
-
-  xdg.portal = {
-    enable = true;
-    #extraPortals = [ pkgs.xdg-desktop-portal-wlr ];
-    #config = {
-    #  common = {
-    #    default = "wlr";
-    #  };
-    #};
   };
 
   programs.gnupg.agent.enable = true;
