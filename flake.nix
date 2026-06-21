@@ -4,22 +4,17 @@
   nixConfig = {
     extra-substituters = [
       "https://cosmic.cachix.org"
-      "https://nixpkgs-wayland.cachix.org"
     ];
     extra-trusted-public-keys = [
       "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
-      "nixpkgs-wayland.cachix.org-1:3lwxaILxMRkVhehr5StQprHdEo4IrE8sRho9R9HOLYA="
     ];
   };
   inputs = {
     #nixpkgs.url = "/home/gytis/nixpkgs/";
     #unstable.url = "/home/gytis/nixpkgs";
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     unstable.url = "github:NixOS/nixpkgs";
-    nixgl.url = "github:nix-community/nixGL";
-    nixpkgs-wayland.url = "github:nix-community/nixpkgs-wayland";
-    nixpkgs-wayland.inputs.nixpkgs.follows = "nixpkgs";
 
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -28,8 +23,6 @@
 
     utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
     #utils.url = "/home/gytis/Projects/flake-utils-plus";
-    devshell.url = "github:numtide/devshell";
-    devshell.inputs.nixpkgs.follows = "nixpkgs";
 
     nix2vim.url = "/home/gytis/Projects/NIX/nix2vim";
     #nix2vim.url = "github:gytis-ivaskevicius/nix2vim";
@@ -37,7 +30,7 @@
     nix2vim.inputs.flake-utils.follows = "utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -68,8 +61,6 @@
       channelsConfig.allowBroken = false;
 
       channels.nixpkgs.overlaysBuilder = channels: [
-        inputs.nixgl.overlay
-        inputs.nixpkgs-wayland.overlay
         (final: prev: {
           inherit (channels.unstable) claude-code code cursor bun opencode spec-kit vscode nixfmt;
           #inherit (channels.unstable) pure-prompt neovim-unwrapped linuxPackages_latest gcc11Stdenv layan-gtk-theme;

@@ -7,7 +7,7 @@
   console.keyMap = "us";
   i18n.defaultLocale = "en_US.UTF-8";
   nix.settings.auto-optimise-store = false;
-  system.stateVersion = "24.11";
+  system.stateVersion = "26.05";
   time.timeZone = "Europe/Vilnius";
 
   #gytix.cachix.enable = true;
