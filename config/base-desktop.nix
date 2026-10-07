@@ -53,7 +53,7 @@
       "fs.inotify.max_user_watches" = 524288;
     };
     #zfs.enableUnstable = true;
-    zfs.forceImportRoot = false; # 26.11 default; avoids forced root-pool import
+    zfs.forceImportRoot = false;
     #kernelParams = [ "quiet" "loglevel=3" ];
     tmp.cleanOnBoot = true;
     loader.systemd-boot.enable = true;

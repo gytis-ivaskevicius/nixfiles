@@ -121,6 +121,26 @@
         "type": "github"
       }
     },
+    "paseo": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791382174,
+        "narHash": "sha256-w5mrLdJgkczKoj5jRpCte02nn5UHcTxkKHsJuGZHd10=",
+        "owner": "getpaseo",
+        "repo": "paseo",
+        "rev": "ee6deda07907254f346e827e5c9868d845112819",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getpaseo",
+        "repo": "paseo",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
@@ -128,6 +148,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nixpkgsLayan": "nixpkgsLayan",
+        "paseo": "paseo",
         "unstable": "unstable",
         "utils": "utils"
       }
