@@ -58,7 +58,7 @@
     nix-top
     nix-tree
     nix2vimDemo
-    nixfmt-rfc-style
+    nixfmt
     nixpkgs-fmt
     p7zip
     parted
@@ -85,7 +85,6 @@
     openssl
     python3
     rclone
-    tmate
     usbutils
     yt-dlp
     zellij
@@ -174,7 +173,7 @@
       share = true;
       append = true;
     };
-    dotDir = ".config/zsh";
+    dotDir = "${config.xdg.configHome}/zsh";
 
     autosuggestion = {
       enable = true;
@@ -192,6 +191,10 @@
     };
 
     initContent = ''
+      # oh-my-zsh switches to vi keymap because EDITOR=nvim matches its "*vi*" check,
+      # which leaves ^W (Ctrl+Backspace) unbound in viins and self-inserting instead of deleting a word.
+      bindkey -M viins '^W' backward-kill-word
+
       source ${pkgs.pure-prompt}/share/zsh/site-functions/async
       source ${pkgs.pure-prompt}/share/zsh/site-functions/prompt_pure_setup
       # From shellInit

@@ -56,7 +56,9 @@
 
       keyboard.bindings = [
         {
-          chars = "\\u0017";
+          # builtins.fromJSON gives us a real 0x17 (Ctrl+W) byte; the toml
+          # generator then emits it as a proper `chars = "\u0017"` basic string.
+          chars = builtins.fromJSON ''"\u0017"'';
           key = "Back";
           mods = "Control";
         }

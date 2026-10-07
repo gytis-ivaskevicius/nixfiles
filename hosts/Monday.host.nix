@@ -48,6 +48,7 @@
   nix.settings.cores = 32;
 
   environment.systemPackages = with pkgs; [
+    nodejs
     vscode
     playerctl
     alsa-utils

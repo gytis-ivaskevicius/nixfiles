@@ -1,5 +1,30 @@
-{ pkgs, lib, ... }: {
-  environment.systemPackages = with pkgs; [ bc freerdp ];
+{ pkgs, lib, ... }:
+let
+  windows-rdp = pkgs.makeDesktopItem {
+    name = "windows-rdp";
+    desktopName = "Windows VM";
+    comment = "Connect to the Windows VM over RDP";
+    icon = "preferences-system-windows";
+    exec = lib.concatStringsSep " " [
+      "${pkgs.freerdp}/bin/xfreerdp"
+      "/v:127.0.0.1"
+      "/port:3333"
+      "/u:gytis"
+      "/p:toor"
+      "/cert:ignore"
+      "/w:2560"
+      "/h:1067"
+      "/smart-sizing"
+      "+clipboard"
+      "/sound"
+      "/microphone"
+      "+auto-reconnect"
+    ];
+    categories = [ "Utility" "RemoteAccess" ];
+  };
+in
+{
+  environment.systemPackages = with pkgs; [ bc freerdp windows-rdp ];
 
 
 

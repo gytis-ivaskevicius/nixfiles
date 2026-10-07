@@ -18,11 +18,6 @@
     "L+    /opt/rocm   -    -    -     -    ${pkgs.rocmPackages.clr}"
   ];
 
-  # Limits start limit burst to 1sec instead of 5 since it was causing issues with rapid logout/login and units restart
-  systemd.user.extraConfig = ''
-    DefaultStartLimitBurst=1
-  '';
-
   networking = {
     #firewall.enable = false;
     #firewall.allowedTCPPorts = [ 8080 9090 ];
@@ -58,6 +53,7 @@
       "fs.inotify.max_user_watches" = 524288;
     };
     #zfs.enableUnstable = true;
+    zfs.forceImportRoot = false; # 26.11 default; avoids forced root-pool import
     #kernelParams = [ "quiet" "loglevel=3" ];
     tmp.cleanOnBoot = true;
     loader.systemd-boot.enable = true;
@@ -114,7 +110,7 @@
       extraPackages = with pkgs; [
       ];
       extraPackages32 = with pkgs.pkgsi686Linux; [
-        mesa.drivers
+        mesa
       ];
     };
     cpu.amd.updateMicrocode = true;

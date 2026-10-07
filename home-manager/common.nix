@@ -38,10 +38,13 @@ in
 
 
   home.sessionVariables = {
-    BROWSER = "brave";
+    BROWSER = "chromium";
     TERMINAL = "alacritty";
     NIXPKGS_ALLOW_UNFREE = 1;
     NIXPKGS_ALLOW_BROKEN = 1;
+    # Keep bun's global root aligned with the active pi install
+    # (~/.cache/.bun) so `pi update --self` can detect and update it.
+    BUN_INSTALL = "${config.home.homeDirectory}/.cache/.bun";
   };
 
   xdg.mimeApps.enable = true;
@@ -67,6 +70,7 @@ in
   };
 
   home.pointerCursor = {
+    enable = true;
     gtk.enable = true;
     package = pkgs.oreo-cursors-plus;
     name = "oreo_black_cursors";

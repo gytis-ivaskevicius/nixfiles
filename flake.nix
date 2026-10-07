@@ -5,8 +5,11 @@
     #nixpkgs.url = "/home/gytis/nixpkgs/";
     #unstable.url = "/home/gytis/nixpkgs";
 
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    unstable.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # Last nixpkgs that still shipped layan-gtk-theme + gtk-engine-murrine
+    # (both removed 2026-07-22 once the dead murrine engine was dropped).
+    nixpkgsLayan.url = "github:NixOS/nixpkgs/7fb43cc4bec0d7635316114b07aebb0d0f610d03";
 
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -20,7 +23,7 @@
     nix2vim.inputs.flake-utils.follows = "utils";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-26.05";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -54,6 +57,14 @@
         (final: prev: {
           inherit (channels.unstable) claude-code code cursor bun opencode spec-kit vscode nixfmt;
           #inherit (channels.unstable) pure-prompt neovim-unwrapped linuxPackages_latest gcc11Stdenv layan-gtk-theme;
+
+          # layan-gtk-theme + its murrine engine were dropped from nixpkgs on
+          # 2026-07-22. Rebuild the last surviving recipes from the pinned
+          # nixpkgsLayan input against the current unstable gtk2.
+          gtk-engine-murrine =
+            final.callPackage "${inputs.nixpkgsLayan.outPath}/pkgs/by-name/gt/gtk-engine-murrine/package.nix" { };
+          layan-gtk-theme =
+            final.callPackage "${inputs.nixpkgsLayan.outPath}/pkgs/by-name/la/layan-gtk-theme/package.nix" { };
         })
       ];
 
@@ -62,6 +73,7 @@
         aarch64Dev
         dev
         ./hosts/Monday.host.nix
+        ./config/syncthing.nix
         nixos-hardware.nixosModules.common-pc
         nixos-hardware.nixosModules.common-pc-ssd
         nixos-hardware.nixosModules.common-hidpi

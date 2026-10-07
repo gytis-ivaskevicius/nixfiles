@@ -1,7 +1,7 @@
 { lib
-, system
+, stdenv
 , writeShellScript
-, runCommandNoCC
+, runCommand
 , fd
 , gh
 , pure-prompt
@@ -50,7 +50,7 @@ let
   '';
   nix-cd = ''
     function nix-cd() {
-      cd $(nix eval --expr "(builtins.getFlake "flake:self").outputs.pkgs.${system}.nixpkgs.$1.outPath" --impure --raw)
+      cd $(nix eval --expr "(builtins.getFlake "flake:self").outputs.pkgs.${stdenv.hostPlatform.system}.nixpkgs.$1.outPath" --impure --raw)
     }
   '';
   exe-path = ''
@@ -114,7 +114,7 @@ let
       rm -rf ~/.java/.userPrefs/jetbrains/idea
     }
   '';
-  integrationGithub = runCommandNoCC "integrationGithub" { } ''
+  integrationGithub = runCommand "integrationGithub" { } ''
     ${lib.getExe gh} completion -s zsh > $out
   '';
 in
