@@ -34,6 +34,14 @@
     ];
   };
 
+  programs.gh = {
+    enable = true;
+    # Credential helper is on by default; explicit for clarity. It wires up
+    # `programs.git` credentials for https://github.com and https://gist.github.com.
+    gitCredentialHelper.enable = true;
+    settings.git_protocol = "https";
+  };
+
   home.packages = with pkgs; [
     claude-code
     curl
@@ -46,7 +54,6 @@
     gcc
     git
     git-lfs
-    github-cli
     htop
     inetutils
     iotop
