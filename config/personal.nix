@@ -2,8 +2,6 @@
 
 {
   #services.tailscale.enable = true;
-  services.zerotierone.enable = false;
-  services.zerotierone.joinNetworks = [ "9bee8941b5c7428a" "12ac4a1e710088c5" ];
 
   nix.settings.trusted-users = [ "gytis" ];
 

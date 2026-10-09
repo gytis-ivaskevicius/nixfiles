@@ -53,7 +53,6 @@
     playerctl
     alsa-utils
     brightnessctl
-    remmina
     brave
     discord
     firefox
@@ -61,12 +60,10 @@
     pavucontrol
     vlc
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
-    pulseaudio
     chromium
     #exodus
     discord-for-poor-people
     element-for-poor-people
-    obs-studio
     prismlauncher
     helix
     uv
@@ -74,7 +71,6 @@
     deno
     opencode
     bun
-    spec-kit
     gnumake
   ];
 

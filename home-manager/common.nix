@@ -24,7 +24,7 @@ let
 
     #"text/*" = [ "emacs.desktop" ];
     "audio/*" = [ "vlc.desktop" ];
-    "video/*" = [ "vlc.dekstop" ];
+    "video/*" = [ "vlc.desktop" ];
     #"image/*" = [ "ahoviewer.desktop" ];
     #"text/calendar" = [ "thunderbird.desktop" ]; # ".ics"  iCalendar format
     "application/json" = browser; # ".json"  JSON format
@@ -80,7 +80,6 @@ in
   home.packages = with pkgs; [
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
     brave
-    nautilus
     firefox
     eog
     pavucontrol

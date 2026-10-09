@@ -144,7 +144,6 @@
       forgit
       nvm
       fzf
-      forgit
       fish-you-should-use
       autopair
     ];
@@ -199,11 +198,6 @@
       source ${pkgs.pure-prompt}/share/zsh/site-functions/prompt_pure_setup
       # From shellInit
       source ${pkgs.zsh-forgit}/share/zsh/zsh-forgit/forgit.plugin.zsh
-      chat() {
-        echo
-        ${lib.getExe pkgs.chatgpt-cli} "$@" | ${lib.getExe pkgs.bat} --language=md --decorations=never --paging=never
-      }
-
       # From promptInit
       ${builtins.readFile (pkgs.shell-config.override {
         dockerAliasEnabled = true;

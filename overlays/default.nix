@@ -1,7 +1,5 @@
 final: prev: {
   g-firefox = prev.callPackage ./g-firefox { };
-  g-lf = prev.callPackage ./g-lf { };
-  g-pistol = prev.callPackage ./g-pistol { };
   shell-config = prev.callPackage ./shell-config { };
 
   discord-for-poor-people = with prev; makeDesktopItem {
