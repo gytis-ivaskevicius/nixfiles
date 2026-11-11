@@ -48,30 +48,37 @@
   nix.settings.cores = 32;
 
   environment.systemPackages = with pkgs; [
-    nodejs
-    vscode
-    playerctl
-    alsa-utils
-    brightnessctl
-    brave
-    discord
-    firefox
-    eog
-    pavucontrol
-    vlc
-    xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
-    chromium
     #exodus
-    discord-for-poor-people
-    element-for-poor-people
-    prismlauncher
-    helix
-    uv
-    rustup
-    deno
-    opencode
+    alsa-utils
+    brave
+    brightnessctl
     bun
+    cargo-llvm-cov
+    cargo-mutants
+    chromium
+    deno
+    discord
+    discord-for-poor-people
+    dotnet-sdk_8
+    element-for-poor-people
+    eog
+    firefox
     gnumake
+    helix
+    just
+    maki
+    mono
+    nodejs
+    opencode
+    paseo-desktop
+    pavucontrol
+    playerctl
+    prismlauncher
+    rustup
+    uv
+    vlc
+    vscode
+    xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
   ];
 
   services.tailscale = {

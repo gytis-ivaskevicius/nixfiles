@@ -17,6 +17,10 @@
     LC_ALL = "en_US.UTF-8";
     TERM = "xterm-256color";
     NIXPKGS_ALLOW_UNFREE = 1;
+
+    # Foreign prebuilds (pi-voice, @handy-computer/recorder) link libasound.so.2
+    # and libpulse.so.0 by bare soname, and NixOS has no /etc/ld.so.cache.
+    LD_LIBRARY_PATH = "${pkgs.libpulseaudio}/lib:${pkgs.alsa-lib}/lib";
   };
 
 
@@ -213,6 +217,16 @@
       export GPG_TTY="$(tty)"
       export PATH=$PATH:/home/gytis/.local/share/npm/bin
 
+      # `pi`/`sg` live in bun's global bin. home.sessionPath covers this, but its
+      # hm-session-vars.sh is one-shot-guarded by __HM_SESS_VARS_SOURCED, and a
+      # desktop session started before a session-vars change leaks that var into
+      # every new shell, silently skipping the whole file (PATH included). Add it
+      # here too so interactive shells always see bun's bin, guard or not.
+      case ":$PATH:" in
+        *":$HOME/.cache/.bun/bin:"*) ;;
+        *) export PATH="$HOME/.cache/.bun/bin:$PATH" ;;
+      esac
+
       # Remaining setOptions that don't have dedicated options
       setopt BANG_HIST
       setopt HIST_REDUCE_BLANKS
@@ -223,5 +237,16 @@
       export ZSH_AUTOSUGGEST_USE_ASYNC=y
     '';
   };
+
+  # maki gets its Opencode key from the wrapper's OPENCODE_API_KEY (see
+  # flake.nix). The only other thing it needs is a default model: it starts on
+  # an Anthropic one, and the Opencode Go plan is what we have.
+  xdg.configFile."maki/init.lua".text = ''
+    maki.setup({
+      provider = {
+        default_model = "opencode-go/deepseek-v4.1-flash",
+      },
+    })
+  '';
 
 }

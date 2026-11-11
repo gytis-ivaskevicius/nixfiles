@@ -47,6 +47,10 @@ in
     BUN_INSTALL = "${config.home.homeDirectory}/.cache/.bun";
   };
 
+  # bun's global bin (pi, sg) lives here; without this it is only on the PATH of
+  # an interactive zsh (~/.zshrc), so bash, scripts and login sessions miss it.
+  home.sessionPath = [ "${config.home.homeDirectory}/.cache/.bun/bin" ];
+
   xdg.mimeApps.enable = true;
   xdg.mimeApps.associations.added = associations;
   xdg.mimeApps.defaultApplications = associations;
@@ -84,6 +88,7 @@ in
     eog
     pavucontrol
     vlc
+    wl-clipboard
   ];
 
 }
