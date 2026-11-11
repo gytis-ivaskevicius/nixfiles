@@ -3,9 +3,7 @@
 with lib;
 with pkgs;
 let
-  #browser = [ "firefox.desktop" ];
-  #browser = [ "chromium-browser.desktop" ];
-  browser = [ "chromium-browser.desktop" ];
+  browser = [ "brave-browser.desktop" ];
   associations = {
     "text/html" = browser;
     "x-scheme-handler/http" = browser;
@@ -38,7 +36,7 @@ in
 
 
   home.sessionVariables = {
-    BROWSER = "chromium";
+    BROWSER = "brave";
     TERMINAL = "alacritty";
     NIXPKGS_ALLOW_UNFREE = 1;
     NIXPKGS_ALLOW_BROKEN = 1;
@@ -84,7 +82,6 @@ in
   home.packages = with pkgs; [
     xdg-utils # Multiple packages depend on xdg-open at runtime. This includes Discord and JetBrains
     brave
-    firefox
     eog
     pavucontrol
     vlc

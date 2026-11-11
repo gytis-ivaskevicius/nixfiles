@@ -38,7 +38,7 @@
 
   environment.variables = {
     VK_ICD_FILENAMES = "/run/opengl-driver/share/vulkan/icd.d/radeon_icd.x86_64.json:/run/opengl-driver-32/share/vulkan/icd.d/radeon_icd.i686.json";
-    BROWSER = "chromium";
+    BROWSER = "brave";
     TERMINAL = "alacritty";
     EDITOR = "nvim";
     VISUAL = "nvim";
@@ -55,14 +55,12 @@
     bun
     cargo-llvm-cov
     cargo-mutants
-    chromium
     deno
     discord
     discord-for-poor-people
     dotnet-sdk_8
     element-for-poor-people
     eog
-    firefox
     gnumake
     helix
     just

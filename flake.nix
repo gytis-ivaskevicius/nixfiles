@@ -128,10 +128,6 @@
       sharedOverlays = [
         self.overlay
         nix2vim.overlay
-        (final: prev: {
-          #nix2vimDemo = prev.g-neovim;
-          firefox = prev.g-firefox;
-        })
       ];
 
       hostDefaults.modules = [
@@ -152,7 +148,6 @@
           repl = pkgs.callPackage utils.blueprints.fup-repl { };
           inherit
             nix2vimDemo
-            g-firefox
             shell-config
             ;
         };

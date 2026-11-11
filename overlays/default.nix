@@ -1,12 +1,11 @@
 final: prev: {
-  g-firefox = prev.callPackage ./g-firefox { };
   shell-config = prev.callPackage ./shell-config { };
 
   discord-for-poor-people = with prev; makeDesktopItem {
     name = "Discord";
     desktopName = "Discord new";
     genericName = "All-in-one cross-platform voice and text chat for gamers";
-    exec = "${chromium}/bin/chromium --app=\"https://discord.com/channels/@me\"";
+    exec = "${brave}/bin/brave --app=\"https://discord.com/channels/@me\"";
     icon = "discord";
     type = "Application";
     categories = [ "Network" "InstantMessaging" ];
@@ -18,7 +17,7 @@ final: prev: {
     name = "Element";
     desktopName = "Element";
     genericName = "Secure and independent communication, connected via Matrix";
-    exec = "${chromium}/bin/chromium --app=\"https://app.element.io/#/home\"";
+    exec = "${brave}/bin/brave --app=\"https://app.element.io/#/home\"";
     icon = "element";
     type = "Application";
     categories = [ "Network" "InstantMessaging" ];
