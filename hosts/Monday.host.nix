@@ -102,26 +102,6 @@
     enable = true;
     homepageLocation = "https://github.com/notifications";
 
-    extensions = [
-      "chklaanhfefbnpoihckbnefhakgolnmc" # JSONView
-      "cjpalhdlnbpafiamejdnhcphjbkeiagm" # uBlock Origin
-      "ckkdlimhmcjmikdlpkmbgfkaikojcbjk" # Markdown Viewer
-      "dbepggeogbaibhgnhhndojpepiihcmeb" # Vimium.
-      #"eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
-      "fihnjjcciajhdojfnbdddfaoknhalnja" # I don't care about cookies
-      #"gcbommkclmclpchllfjekcdonpmejbdp" # Https everywhere
-      "gneobebnilffgkejpfhlgkmpkipgbcno" # Death To _blank
-      "hokcepcfcicnhalinladgknhaljndhpc" # Witchcraft
-      #"iipjdmnoigaobkamfhnojmglcdbnfaaf" # Clutter Free - Prevent duplicate tabs
-      "jfnifeihccihocjbfcfhicmmgpjicaec" # https://chrome.google.com/webstore/detail/gsconnect/jfnifeihccihocjbfcfhicmmgpjicaec
-      "kbfnbcaeplbcioakkpcpgfkobkghlhen" # Grammarly
-      "kljmejbpilkadikecejccebmccagifhl" # Image search options
-      "lckanjgmijmafbedllaakclkaicjfmnk" # ClearURLs
-      "lifgeihcfpkmmlfjbailfpfhbahhibba" # Smart TOC
-      "mgijmajocgfcbeboacabfgobmjgjcoja" # Google Dictionary (by Google)
-      "opokoaglpekkimldnlggpoagmjegichg" # ViolentMonkey
-    ];
-
     extraOpts = {
       CloudPrintSubmitEnabled = false;
       EnableMediaRouter = false;
